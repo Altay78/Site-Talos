@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarifs — Talos</title>
+<meta name="description" content="Tarifs Talos : Artisan seul, Atelier, Entreprise. Sans engagement après la période pilote de 30 jours.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<div class="preloader" id="preloader">
+  <svg width="60" height="76" viewBox="0 0 60 90">
+    <rect class="pl-bar" x="0" y="0" width="60" height="12"/>
+    <path class="pl-bolt" d="M 22 12 L 12 38 L 26 38 L 18 80 L 50 36 L 34 36 L 44 12 Z"/>
+  </svg>
+  <div class="pl-track"><div class="pl-fill"></div></div>
+  <div class="pl-status">FORGE EN COURS · TALOS</div>
+</div>
+
+<nav class="top" id="mainNav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-mark" data-cursor>
+      <svg width="78" height="22" viewBox="0 0 380 120">
+        <g fill="#F5EDDC"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g>
+        <text x="66" y="100" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="100" fill="#F5EDDC" font-weight="700" letter-spacing="-4">ALOS</text>
+      </svg>
+    </a>
+    <div class="live-tag"><span class="dot"></span>EN ACTIVITÉ</div>
+  </div>
+  <div class="links">
+    <a href="automatisations.html" data-cursor>Automatisations</a>
+    <a href="methode.html" data-cursor>Méthode</a>
+    <a href="tarifs.html" class="active" data-cursor>Tarifs</a>
+  </div>
+  <a href="reserver.html" class="cta" data-cursor>Réserver une démo<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+</nav>
+
+<header class="page-head reveal">
+  <div class="breadcrumb"><a href="index.html" data-cursor>Talos</a> <span class="sep">/</span> <span>Tarifs</span></div>
+  <h1>Un abonnement.<br>Pas de <span class="italic">frais cachés</span>.</h1>
+  <p class="lede">Sans engagement après la période pilote de 30 jours. Vous gardez vos données. <strong>Setup, modèles et formation inclus</strong>. Tarifs hors taxes.</p>
+</header>
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="price-grid reveal">
+    <div class="price-card">
+      <div class="price-name">Artisan seul</div>
+      <div class="price-detail">Pour les indépendants. 3 process inclus.</div>
+      <div class="price-num"><span class="currency">€</span>149<span class="period">/ mois</span></div>
+      <div class="price-meta">SETUP OFFERT · 30 J PILOTE</div>
+      <ul class="price-feat">
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Devis express illimités</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Relances automatiques</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Facturation déclenchée</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Support 5j/7</li>
+      </ul>
+      <a href="reserver.html" class="price-cta" data-cursor>Démarrer le pilote</a>
+    </div>
+
+    <div class="price-card featured">
+      <div class="price-tag">★ POPULAIRE</div>
+      <div class="price-name">Atelier</div>
+      <div class="price-detail">2 à 6 compagnons. Tous les process Talos.</div>
+      <div class="price-num"><span class="currency">€</span>349<span class="period">/ mois</span></div>
+      <div class="price-meta">SETUP OFFERT · 30 J PILOTE</div>
+      <ul class="price-feat">
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Les 6 automatisations</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Réponse client 24/7</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Tri inbox + résumé matinal</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Suivi paiements bancaire</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Support 7j/7 prioritaire</li>
+      </ul>
+      <a href="reserver.html" class="price-cta" data-cursor>Démarrer le pilote</a>
+    </div>
+
+    <div class="price-card">
+      <div class="price-name">Entreprise</div>
+      <div class="price-detail">+ de 6 compagnons. Sur mesure.</div>
+      <div class="price-num">Sur devis</div>
+      <div class="price-meta">INTÉGRATION DÉDIÉE</div>
+      <ul class="price-feat">
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Tout Atelier inclus</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Connecteurs sur mesure</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Site motion design inclus</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Single Sign-On & SLA</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Account manager dédié</li>
+      </ul>
+      <a href="reserver.html" class="price-cta" data-cursor>Parler à Altay</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="reveal">
+    <div class="section-label">QUESTIONS FRÉQUENTES</div>
+    <h2 class="section-title">Les réponses qu'on nous pose chaque jour.</h2>
+  </div>
+  <div class="faq-list reveal">
+    <div class="faq-item">
+      <button class="faq-q" data-cursor>
+        <span>Combien de temps pour démarrer Talos ?</span>
+        <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-content">Neuf jours en moyenne, sans formation requise. On se branche sur votre catalogue tarifs, vos modèles de devis, votre carnet d'adresses et votre boîte mail. Vous validez chaque automatisation avant qu'elle ne soit activée. Aucune migration brutale — on installe en douceur, process par process.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" data-cursor>
+        <span>Est-ce que ça remplace mon comptable ?</span>
+        <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-content">Non. Talos automatise l'émission des devis et factures et le suivi des paiements — votre comptable continue à valider, déclarer, conseiller. La plupart de nos clients gagnent un demi-jour de travail comptable par mois grâce aux exports clean que Talos génère.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" data-cursor>
+        <span>Que se passe-t-il si l'IA fait une erreur sur un devis ?</span>
+        <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-content">Aucun devis ne part sans votre validation finale d'un clic. Talos vous présente le devis chiffré, vous voyez chaque ligne, vous corrigez d'un mot ou validez. On garde aussi une trace de chaque décision pour pouvoir améliorer le modèle sur votre métier au fil du temps.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" data-cursor>
+        <span>Où sont stockées mes données clients ?</span>
+        <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-content">Tout est hébergé en France, sur serveurs OVH à Roubaix. Vos données ne sont jamais utilisées pour entraîner un modèle public. Vous restez propriétaire de tout — export complet en un clic, suppression définitive en un autre. Conforme RGPD, sans cookie tiers.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" data-cursor>
+        <span>Et si je veux arrêter ?</span>
+        <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-content">Aucun engagement après les 30 premiers jours de pilote. Vous repartez avec vos données (export PDF + JSON), vos templates de devis générés et un guide pour reprendre en manuel si vous voulez. On préfère un client convaincu qu'un client retenu.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" data-cursor>
+        <span>Vous faites aussi les sites internet ?</span>
+        <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-content">Oui. Côté création, Talos forge aussi des sites en motion design pour les entreprises qui veulent un coup de pied dans leur identité numérique. Inclus dans l'offre Entreprise, ou facturé séparément à partir de 4 500 €. Demandez à voir nos derniers travaux pendant la démo.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" data-cursor>
+        <span>Talos remplace-t-il un compagnon ?</span>
+        <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-content">Jamais. Talos prend la partie administrative que personne n'aime faire le soir. Vos compagnons restent sur le chantier — et grâce au temps que Talos vous rend, vous pouvez en signer plus, donc en embaucher plus si vous le voulez.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-strip">
+  <h2>Le pilote 30 jours est offert.</h2>
+  <p>Si Talos ne vous convient pas, on se quitte sur une bonne poignée de main.</p>
+  <div class="cta-row">
+    <a href="reserver.html" class="cta-bronze" data-cursor>Réserver une démo<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    <a href="automatisations.html" class="cta-ghost" data-cursor>Voir ce qu'on automatise</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <svg width="100" height="28" viewBox="0 0 380 120">
+        <g fill="#F5EDDC"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g>
+        <text x="66" y="100" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="100" fill="#F5EDDC" font-weight="700" letter-spacing="-4">ALOS</text>
+      </svg>
+      <p class="footer-tagline">« Notre temps, pour votre savoir-faire. »<br>L'automate de ceux qui ont mieux à faire.</p>
+    </div>
+    <div>
+      <h5>PRODUIT</h5>
+      <ul>
+        <li><a href="automatisations.html" data-cursor>Automatisations</a></li>
+        <li><a href="methode.html" data-cursor>Méthode</a></li>
+        <li><a href="tarifs.html" data-cursor>Tarifs</a></li>
+        <li><a href="reserver.html" data-cursor>Réserver une démo</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>ENTREPRISE</h5>
+      <ul>
+        <li><a href="#" data-cursor>Manifeste</a></li>
+        <li><a href="#" data-cursor>L'équipe</a></li>
+        <li><a href="#" data-cursor>Presse</a></li>
+        <li><a href="#" data-cursor>Recrutement</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>CONTACT</h5>
+      <ul>
+        <li><a href="mailto:altay@talos.ai" data-cursor>altay@talos.ai</a></li>
+        <li><a href="tel:+33600000000" data-cursor>+33 6 ·· ·· ·· ··</a></li>
+        <li><a href="#" data-cursor>Paris 11e</a></li>
+        <li><a href="#" data-cursor>LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© TALOS · 2026 · FORGÉ MAIN</span>
+    <span>RCS PARIS · SIREN ···</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

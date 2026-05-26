@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Méthode — Talos</title>
+<meta name="description" content="Trois gestes côté chantier. Talos s'occupe du reste. Découvrez la méthode et l'activité en temps réel.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<div class="preloader" id="preloader">
+  <svg width="60" height="76" viewBox="0 0 60 90">
+    <rect class="pl-bar" x="0" y="0" width="60" height="12"/>
+    <path class="pl-bolt" d="M 22 12 L 12 38 L 26 38 L 18 80 L 50 36 L 34 36 L 44 12 Z"/>
+  </svg>
+  <div class="pl-track"><div class="pl-fill"></div></div>
+  <div class="pl-status">FORGE EN COURS · TALOS</div>
+</div>
+
+<nav class="top" id="mainNav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-mark" data-cursor>
+      <svg width="78" height="22" viewBox="0 0 380 120">
+        <g fill="#F5EDDC"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g>
+        <text x="66" y="100" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="100" fill="#F5EDDC" font-weight="700" letter-spacing="-4">ALOS</text>
+      </svg>
+    </a>
+    <div class="live-tag"><span class="dot"></span>EN ACTIVITÉ</div>
+  </div>
+  <div class="links">
+    <a href="automatisations.html" data-cursor>Automatisations</a>
+    <a href="methode.html" class="active" data-cursor>Méthode</a>
+    <a href="tarifs.html" data-cursor>Tarifs</a>
+  </div>
+  <a href="reserver.html" class="cta" data-cursor>Réserver une démo<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+</nav>
+
+<header class="page-head reveal">
+  <div class="breadcrumb"><a href="index.html" data-cursor>Talos</a> <span class="sep">/</span> <span>Méthode</span></div>
+  <h1>Trois gestes côté chantier.<br>Le reste, <span class="italic">Talos s'en charge</span>.</h1>
+  <p class="lede">Vous gardez votre téléphone. Pas de nouvelle app à apprendre. Vous photographiez, vous parlez, Talos écrit, envoie, facture, relance — <strong>dans l'ordre, dans le ton, dans les délais</strong>.</p>
+</header>
+
+<!-- STEPS -->
+<section class="process">
+  <div class="reveal">
+    <div class="section-label">COMMENT ÇA TOURNE</div>
+    <h2 class="section-title">De la photo du chantier à la signature du devis : 12 minutes.</h2>
+  </div>
+  <div class="steps">
+    <div class="conn-line conn-1"></div>
+    <div class="conn-line conn-2"></div>
+    <div class="step reveal" data-cursor>
+      <div class="step-num">01 — SUR PLACE</div>
+      <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3l2-3h8l2 3h3a2 2 0 012 2v10a2 2 0 01-2 2H3a2 2 0 01-2-2V9a2 2 0 012-2z"/><circle cx="12" cy="13" r="4"/></svg>
+      <h4>Vous photographiez</h4>
+      <p>Une photo du chantier, du compteur, du devis à modifier. Talos lit, mesure, calcule.</p>
+      <div class="step-time"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>30 SECONDES</div>
+    </div>
+    <div class="step reveal" data-cursor>
+      <div class="step-num">02 — DANS LA CAMIONNETTE</div>
+      <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 11v1a7 7 0 0014 0v-1"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+      <h4>Vous dictez deux phrases</h4>
+      <p>« Plomberie totale salle de bain, ardoises moyennes, livraison sous trois semaines. » Suffit.</p>
+      <div class="step-time"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>1 MINUTE</div>
+    </div>
+    <div class="step reveal" data-cursor>
+      <div class="step-num">03 — DANS L'HEURE</div>
+      <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20L21 4"/><path d="M3 20l8-2 2-8L21 4"/></svg>
+      <h4>Le devis part</h4>
+      <p>Validé d'un clic. Envoyé au client. Relancé sans vous. Facturé sans douleur.</p>
+      <div class="step-time"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>12 MIN APRÈS LA VISITE</div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE BOARD -->
+<section class="live">
+  <div class="reveal">
+    <div class="section-label">ACTIVITÉ TEMPS RÉEL · PARC CLIENT</div>
+    <h2 class="section-title">Pendant que vous lisez, Talos travaille.</h2>
+    <p class="section-lede">Aperçu en direct des automatisations en cours sur le parc client. Anonymisé, mis à jour à chaque seconde.</p>
+  </div>
+  <div class="live-board reveal">
+    <div class="live-card">
+      <div class="live-head">
+        <div class="live-title"><span class="live-dot"></span>FLUX D'ACTIVITÉ · PROD</div>
+        <div class="live-meta">CONNECTÉ · 14 ATELIERS</div>
+      </div>
+      <div class="live-log" id="liveLog"></div>
+    </div>
+    <div class="live-stats">
+      <div class="mini-stat">
+        <div class="mini-label">FACTURES ÉMISES · 7 J</div>
+        <div class="mini-val"><span id="weekCount">0</span></div>
+        <svg class="mini-bar" width="100%" height="32" viewBox="0 0 200 32" preserveAspectRatio="none">
+          <polyline fill="rgba(201,150,63,0.15)" stroke="none" points="0,32 0,24 25,20 50,22 75,14 100,16 125,8 150,12 175,4 200,8 200,32"/>
+          <polyline fill="none" stroke="#C9963F" stroke-width="1.5" points="0,24 25,20 50,22 75,14 100,16 125,8 150,12 175,4 200,8"/>
+        </svg>
+      </div>
+      <div class="mini-stat">
+        <div class="mini-label">TAUX RELANCE RÉUSSIE</div>
+        <div class="mini-val"><span id="rateCount">0</span><span class="pct">%</span></div>
+        <svg class="mini-bar" width="100%" height="32" viewBox="0 0 200 32" preserveAspectRatio="none">
+          <polyline fill="rgba(126,149,135,0.22)" stroke="none" points="0,32 0,28 25,22 50,18 75,20 100,14 125,16 150,10 175,12 200,6 200,32"/>
+          <polyline fill="none" stroke="#7E9587" stroke-width="1.5" points="0,28 25,22 50,18 75,20 100,14 125,16 150,10 175,12 200,6"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ONBOARDING TIMELINE -->
+<section class="auto-section">
+  <div class="reveal">
+    <div class="section-label">SETUP · NEUF JOURS · ZÉRO FORMATION</div>
+    <h2 class="section-title">De la signature à la première facture auto : 9 jours.</h2>
+    <p class="section-lede">On se branche sur <strong>votre catalogue tarifs, vos modèles de devis, votre carnet d'adresses et votre boîte mail</strong>. Aucun changement d'outil. Vous gardez tout votre existant.</p>
+  </div>
+
+  <div class="auto-grid" style="margin-top: 50px;">
+    <div class="auto-card" data-cursor>
+      <div class="auto-head">
+        <div class="auto-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h18M3 12h18M3 17h12"/></svg></div>
+        <div class="auto-num">J+1 · CONNEXION</div>
+      </div>
+      <h3 class="auto-title">Vos données arrivent</h3>
+      <p class="auto-desc">On importe vos modèles de devis, votre catalogue tarifs, votre historique client. Talos apprend votre vocabulaire métier en quelques heures.</p>
+      <div class="auto-data">
+        <div class="auto-data-main">
+          <div class="auto-data-val">2<span class="unit">h</span></div>
+          <div class="auto-data-label">DE VOTRE TEMPS</div>
+        </div>
+      </div>
+    </div>
+    <div class="auto-card" data-cursor>
+      <div class="auto-head">
+        <div class="auto-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9l6 6M15 9l-6 6"/></svg></div>
+        <div class="auto-num">J+3 · CALIBRAGE</div>
+      </div>
+      <h3 class="auto-title">On rejoue vos derniers devis</h3>
+      <p class="auto-desc">Talos reproduit vos 10 derniers devis en aveugle. Vous comparez. On ajuste le ton, les marges, les conditions jusqu'à ce que ce soit indistinguable du vôtre.</p>
+      <div class="auto-data">
+        <div class="auto-data-main">
+          <div class="auto-data-val">96<span class="unit">%</span></div>
+          <div class="auto-data-label">SIMILARITÉ ATTEINTE</div>
+        </div>
+      </div>
+    </div>
+    <div class="auto-card" data-cursor>
+      <div class="auto-head">
+        <div class="auto-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="auto-num">J+9 · MISE EN PROD</div>
+      </div>
+      <h3 class="auto-title">Première automatisation active</h3>
+      <p class="auto-desc">On commence par le devis express. Une semaine plus tard, on active les relances. Puis les factures. Chaque automate déclenché quand vous êtes prêt.</p>
+      <div class="auto-data">
+        <div class="auto-data-main">
+          <div class="auto-data-val olivier" style="color:var(--olivier);">LIVE</div>
+          <div class="auto-data-label" style="color:var(--olivier);">PILOTE 30 JOURS</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-strip">
+  <h2>Voir Talos tourner en direct.</h2>
+  <p>On amène votre dernier devis. On l'automatise devant vous en 15 minutes.</p>
+  <div class="cta-row">
+    <a href="reserver.html" class="cta-bronze" data-cursor>Réserver maintenant<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    <a href="tarifs.html" class="cta-ghost" data-cursor>Voir les tarifs</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <svg width="100" height="28" viewBox="0 0 380 120">
+        <g fill="#F5EDDC"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g>
+        <text x="66" y="100" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="100" fill="#F5EDDC" font-weight="700" letter-spacing="-4">ALOS</text>
+      </svg>
+      <p class="footer-tagline">« Notre temps, pour votre savoir-faire. »<br>L'automate de ceux qui ont mieux à faire.</p>
+    </div>
+    <div>
+      <h5>PRODUIT</h5>
+      <ul>
+        <li><a href="automatisations.html" data-cursor>Automatisations</a></li>
+        <li><a href="methode.html" data-cursor>Méthode</a></li>
+        <li><a href="tarifs.html" data-cursor>Tarifs</a></li>
+        <li><a href="reserver.html" data-cursor>Réserver une démo</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>ENTREPRISE</h5>
+      <ul>
+        <li><a href="#" data-cursor>Manifeste</a></li>
+        <li><a href="#" data-cursor>L'équipe</a></li>
+        <li><a href="#" data-cursor>Presse</a></li>
+        <li><a href="#" data-cursor>Recrutement</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>CONTACT</h5>
+      <ul>
+        <li><a href="mailto:altay@talos.ai" data-cursor>altay@talos.ai</a></li>
+        <li><a href="tel:+33600000000" data-cursor>+33 6 ·· ·· ·· ··</a></li>
+        <li><a href="#" data-cursor>Paris 11e</a></li>
+        <li><a href="#" data-cursor>LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© TALOS · 2026 · FORGÉ MAIN</span>
+    <span>RCS PARIS · SIREN ···</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

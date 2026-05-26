@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talos — récupérez vos soirées · IA pour tous les professionnels</title>
+<meta name="description" content="Talos automatise vos devis, relances, factures et réponses clients. BTP, cuisine, services, digital — l'automate qui récupère vos heures perdues. Zéro formation.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<div class="preloader" id="preloader">
+  <svg width="60" height="76" viewBox="0 0 60 90">
+    <rect class="pl-bar" x="0" y="0" width="60" height="12"/>
+    <path class="pl-bolt" d="M 22 12 L 12 38 L 26 38 L 18 80 L 50 36 L 34 36 L 44 12 Z"/>
+  </svg>
+  <div class="pl-track"><div class="pl-fill"></div></div>
+  <div class="pl-status">FORGE EN COURS · TALOS</div>
+</div>
+
+<!-- NAV -->
+<nav class="top" id="mainNav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-mark" data-cursor aria-label="Talos">
+      <svg width="78" height="22" viewBox="0 0 380 120">
+        <g fill="#F5EDDC">
+          <rect x="0" y="18" width="62" height="14"/>
+          <path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/>
+        </g>
+        <text x="66" y="100" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="100" fill="#F5EDDC" font-weight="700" letter-spacing="-4">ALOS</text>
+      </svg>
+    </a>
+    <div class="live-tag"><span class="dot"></span>EN ACTIVITÉ</div>
+  </div>
+  <div class="links">
+    <a href="automatisations.html" data-cursor>Automatisations</a>
+    <a href="methode.html" data-cursor>Méthode</a>
+    <a href="tarifs.html" data-cursor>Tarifs</a>
+  </div>
+  <a href="reserver.html" class="cta" data-cursor>
+    Réserver une démo
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Floating chronophage tasks that fade out -->
+  <div class="ghost-tasks" aria-hidden="true">
+    <span class="ghost-task" style="--x:6%;--y:6%;--delay:0s;">DEVIS · 4 JOURS</span>
+    <span class="ghost-task" style="--x:30%;--y:90%;--delay:2.4s;">RELANCE OUBLIÉE</span>
+    <span class="ghost-task" style="--x:2%;--y:55%;--delay:4.8s;">FACTURE EN RETARD</span>
+    <span class="ghost-task" style="--x:42%;--y:11%;--delay:1.2s;">RÉPONSE À 23H</span>
+    <span class="ghost-task" style="--x:14%;--y:80%;--delay:3.6s;">COMPTA DU DIMANCHE</span>
+    <span class="ghost-task" style="--x:36%;--y:48%;--delay:6s;">INBOX SATURÉE</span>
+  </div>
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span class="pulse"></span>AUTOMATISATION IA · TOUS SECTEURS · VOS SOIRÉES VOUS APPARTIENNENT</div>
+    <h1 class="hero-h1">
+      Les tâches <span class="italic">chronophages</span><br>
+      <span class="underline">disparaissent.</span>
+    </h1>
+    <p class="hero-lede">
+      Devis, relances, factures — <strong>automatisés</strong>. Et un site qui vend pendant que vous dormez.
+    </p>
+    <div class="hero-ctas">
+      <a href="reserver.html" class="cta-bronze" data-cursor>
+        Réserver une démo · 15 min
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="automatisations.html" class="cta-ghost" data-cursor>Voir les automatisations</a>
+    </div>
+    <div class="hero-trust">
+      <div class="hero-trust-item">
+        <div class="hero-trust-num"><span class="counter" data-target="14">0</span></div>
+        <div class="hero-trust-label">PROFESSIONNELS PILOTES · IDF</div>
+      </div>
+      <div class="hero-trust-item">
+        <div class="hero-trust-num"><span class="counter" data-target="28">0</span><span class="suffix">%</span></div>
+        <div class="hero-trust-label">MISSIONS / DEVIS SIGNÉS EN PLUS</div>
+      </div>
+      <div class="hero-trust-item">
+        <div class="hero-trust-num"><span class="counter" data-target="6">0</span><span class="suffix">h</span></div>
+        <div class="hero-trust-label">RÉCUPÉRÉES / SEMAINE</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="console" id="console">
+    <div class="cn-head">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div class="cn-dots"><span class="live"></span><span></span><span></span></div>
+        <div class="cn-id">TALOS·CONSOLE · ATELIER #284</div>
+      </div>
+      <div class="cn-time" id="cnTime">—</div>
+    </div>
+
+    <div class="cn-grid">
+      <div class="cn-kpis">
+        <div class="cn-kpi">
+          <div class="cn-kpi-label">TEMPS RÉCUPÉRÉ · 30 J</div>
+          <div class="cn-kpi-row">
+            <div class="cn-kpi-val"><span id="cnTimeVal">0</span><span class="unit">h</span></div>
+            <span class="cn-delta">▲ +18%</span>
+          </div>
+          <svg class="spark" viewBox="0 0 200 28" preserveAspectRatio="none">
+            <polyline class="spark-fill" points="0,28 0,22 25,20 50,16 75,18 100,14 125,12 150,8 175,10 200,5 200,28"/>
+            <polyline points="0,22 25,20 50,16 75,18 100,14 125,12 150,8 175,10 200,5"/>
+          </svg>
+        </div>
+        <div class="cn-kpi">
+          <div class="cn-kpi-label">CA SIGNÉ · CETTE SEMAINE</div>
+          <div class="cn-kpi-row">
+            <div class="cn-kpi-val"><span id="cnCaVal">0</span><span class="unit">€</span></div>
+            <span class="cn-delta">▲ +28%</span>
+          </div>
+          <svg class="spark olivier" viewBox="0 0 200 28" preserveAspectRatio="none">
+            <polyline class="spark-fill" points="0,28 0,18 25,20 50,14 75,16 100,10 125,12 150,6 175,8 200,3 200,28"/>
+            <polyline points="0,18 25,20 50,14 75,16 100,10 125,12 150,6 175,8 200,3"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="cn-positions">
+        <div class="cn-positions-head">
+          <div class="cn-positions-title">AUTOMATISATIONS ACTIVES</div>
+          <div class="cn-positions-tab">06 / 06</div>
+        </div>
+        <div class="cn-pos">
+          <span class="cn-pos-status run"></span>
+          <div class="cn-pos-name">Devis express<span class="desc">#4221 · Bagnolet</span></div>
+          <span class="cn-pos-val">12 min</span>
+        </div>
+        <div class="cn-pos">
+          <span class="cn-pos-status"></span>
+          <div class="cn-pos-name">Relances email<span class="desc">J+3 · 4 envois auto</span></div>
+          <span class="cn-pos-val olivier">+ 2 sign.</span>
+        </div>
+        <div class="cn-pos">
+          <span class="cn-pos-status"></span>
+          <div class="cn-pos-name">Réponse client 24/7<span class="desc">3 tickets traités</span></div>
+          <span class="cn-pos-val">9 s</span>
+        </div>
+        <div class="cn-pos">
+          <span class="cn-pos-status run"></span>
+          <div class="cn-pos-name">Facturation auto<span class="desc">#3098 · en cours</span></div>
+          <span class="cn-pos-val">8 s</span>
+        </div>
+        <div class="cn-pos">
+          <span class="cn-pos-status wait"></span>
+          <div class="cn-pos-name">Tri inbox matin<span class="desc">Programmé · 07:00</span></div>
+          <span class="cn-pos-val">42 min</span>
+        </div>
+        <div class="cn-pos">
+          <span class="cn-pos-status"></span>
+          <div class="cn-pos-name">Suivi paiements<span class="desc">2 acomptes reçus</span></div>
+          <span class="cn-pos-val olivier">+ 2.1k€</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cn-foot">
+      <div class="cn-foot-left">
+        <span class="cn-foot-flash"></span>
+        <span id="cnFlash">Devis #4221 envoyé à Maxime · Bagnolet</span>
+      </div>
+      <div class="cn-foot-right">UPTIME 99.97%</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="tk"><span class="tdot"></span>TÂCHES CHRONOPHAGES <span class="tnum">SUPPRIMÉES</span></span>
+    <span class="tk"><span class="tdot"></span>FACTURE EN <span class="tnum">8 SECONDES</span></span>
+    <span class="tk"><span class="tdot"></span>RELANCE AUTO <span class="tnum">J+3 · J+7 · J+14</span></span>
+    <span class="tk"><span class="tdot"></span>RÉPONSE CLIENT <span class="tnum">24/7</span></span>
+    <span class="tk"><span class="tdot"></span>DEVIS EN <span class="tnum">12 MIN</span></span>
+    <span class="tk"><span class="tdot"></span><span class="tnum">+28%</span> DE MISSIONS SIGNÉES</span>
+    <span class="tk"><span class="tdot"></span>SITE WEB <span class="tnum">QUI VEND POUR VOUS</span></span>
+    <span class="tk"><span class="tdot"></span>MOTION DESIGN <span class="tnum">QUI MARQUE</span></span>
+    <span class="tk"><span class="tdot"></span>TRI INBOX <span class="tnum">AUTO</span></span>
+    <span class="tk"><span class="tdot"></span>SOIRÉES <span class="tnum">LIBRES À NOUVEAU</span></span>
+    <span class="tk"><span class="tdot"></span>TÂCHES CHRONOPHAGES <span class="tnum">SUPPRIMÉES</span></span>
+    <span class="tk"><span class="tdot"></span>FACTURE EN <span class="tnum">8 SECONDES</span></span>
+    <span class="tk"><span class="tdot"></span>RELANCE AUTO <span class="tnum">J+3 · J+7 · J+14</span></span>
+    <span class="tk"><span class="tdot"></span>RÉPONSE CLIENT <span class="tnum">24/7</span></span>
+    <span class="tk"><span class="tdot"></span>DEVIS EN <span class="tnum">12 MIN</span></span>
+    <span class="tk"><span class="tdot"></span>SITE WEB <span class="tnum">QUI VEND POUR VOUS</span></span>
+  </div>
+</div>
+
+<!-- SECTORS STRIP -->
+<div class="sectors-strip">
+  <div class="sector-pill">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V7l9-4 9 4v14"/><path d="M3 21h18"/><path d="M9 21V11h6v10"/></svg>
+    BTP & ARTISANAT
+  </div>
+  <div class="sector-pill">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+    CUISINE & RESTO
+  </div>
+  <div class="sector-pill">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    SERVICES À LA PERSONNE
+  </div>
+  <div class="sector-pill">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+    DIGITAL & CRÉATIF
+  </div>
+  <div class="sector-pill">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    COMMERCE & RETAIL
+  </div>
+  <div class="sector-pill">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    BIEN-ÊTRE & SANTÉ
+  </div>
+  <div class="sectors-divider"></div>
+  <span class="sectors-all-label">TOUS SECTEURS COUVERTS</span>
+</div>
+
+<!-- KPI STRIP -->
+<section class="kpi-strip">
+  <div class="reveal">
+    <div class="kpi-strip-head">
+      <div>
+        <div class="section-label">VOTRE INTÉRÊT, EN CHIFFRES</div>
+        <h2 class="kpi-strip-title">Ce que Talos vous rend, mesuré sur 14 professionnels pilotes.</h2>
+      </div>
+      <div class="kpi-strip-meta">DONNÉES 30 JOURS GLISSANTS<br>MISE À JOUR HEBDO</div>
+    </div>
+  </div>
+  <div class="kpi-grid reveal">
+    <div class="kpi-cell">
+      <div class="kpi-cell-label"><span>TEMPS RÉCUPÉRÉ</span><span class="badge">▲ +18%</span></div>
+      <div class="kpi-cell-val"><span class="counter" data-target="26">0</span><span class="unit">h/mois</span></div>
+      <div class="kpi-cell-sub">Soit ~6h par semaine. Une journée par mois.</div>
+      <svg class="kpi-cell-spark" viewBox="0 0 200 36" preserveAspectRatio="none">
+        <polyline fill="rgba(201,150,63,0.15)" points="0,36 0,28 22,26 44,22 66,24 88,18 110,16 132,12 154,14 176,8 200,4 200,36"/>
+        <polyline fill="none" stroke="#C9963F" stroke-width="1.5" points="0,28 22,26 44,22 66,24 88,18 110,16 132,12 154,14 176,8 200,4"/>
+      </svg>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-cell-label"><span>DEVIS SIGNÉS</span><span class="badge">▲ +28%</span></div>
+      <div class="kpi-cell-val"><span class="counter" data-target="28">0</span><span class="unit">%</span></div>
+      <div class="kpi-cell-sub">Devis envoyés sous 12 min après la visite.</div>
+      <svg class="kpi-cell-spark" viewBox="0 0 200 36" preserveAspectRatio="none">
+        <polyline fill="rgba(126,149,135,0.22)" points="0,36 0,30 22,28 44,24 66,22 88,18 110,20 132,14 154,12 176,10 200,6 200,36"/>
+        <polyline fill="none" stroke="#7E9587" stroke-width="1.5" points="0,30 22,28 44,24 66,22 88,18 110,20 132,14 154,12 176,10 200,6"/>
+      </svg>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-cell-label"><span>IMPAYÉS &gt; 60 J</span><span class="badge down">▼ −42%</span></div>
+      <div class="kpi-cell-val"><span class="counter" data-target="42">0</span><span class="unit">%</span></div>
+      <div class="kpi-cell-sub">Relances déclenchées au bon moment.</div>
+      <svg class="kpi-cell-spark" viewBox="0 0 200 36" preserveAspectRatio="none">
+        <polyline fill="rgba(216,117,84,0.14)" points="0,36 0,8 22,10 44,12 66,14 88,16 110,20 132,22 154,26 176,28 200,32 200,36"/>
+        <polyline fill="none" stroke="#D87554" stroke-width="1.5" points="0,8 22,10 44,12 66,14 88,16 110,20 132,22 154,26 176,28 200,32"/>
+      </svg>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-cell-label"><span>SETUP MOYEN</span><span class="badge">SANS FORMATION</span></div>
+      <div class="kpi-cell-val"><span class="counter" data-target="9">0</span><span class="unit">jours</span></div>
+      <div class="kpi-cell-sub">Connecté à vos modèles, vos clients, vos prix.</div>
+      <svg class="kpi-cell-spark" viewBox="0 0 200 36" preserveAspectRatio="none">
+        <polyline fill="rgba(201,150,63,0.15)" points="0,36 0,12 22,14 44,18 66,16 88,20 110,22 132,24 154,28 176,30 200,32 200,36"/>
+        <polyline fill="none" stroke="#C9963F" stroke-width="1.5" points="0,12 22,14 44,18 66,16 88,20 110,22 132,24 154,28 176,30 200,32"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW MOTION · AVANT / APRÈS -->
+<section class="flow-section">
+  <div class="reveal">
+    <div class="section-label">VOTRE FLUX · AVANT / APRÈS</div>
+    <h2 class="section-title">Avant, six étapes manuelles.<br>Après, <span class="italic">une seule</span>.</h2>
+  </div>
+
+  <div class="flow-wrap reveal">
+    <!-- AVANT -->
+    <div class="flow-row flow-before">
+      <div class="flow-side">
+        <span class="flow-side-label">AVANT</span>
+        <span class="flow-side-time">4 JOURS</span>
+      </div>
+      <div class="flow-rail">
+        <div class="flow-step jitter" style="--i:0">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+          <span>Visite</span>
+        </div>
+        <span class="flow-link dashed"></span>
+        <div class="flow-step jitter" style="--i:1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 3v6h-6M3 21v-6h6"/><path d="M21 3l-9 9M3 21l9-9"/></svg>
+          <span>Mesure</span>
+        </div>
+        <span class="flow-link dashed"></span>
+        <div class="flow-step jitter" style="--i:2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/></svg>
+          <span>Devis</span>
+        </div>
+        <span class="flow-link dashed"></span>
+        <div class="flow-step jitter" style="--i:3">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 7 9-7"/></svg>
+          <span>Envoi</span>
+        </div>
+        <span class="flow-link dashed"></span>
+        <div class="flow-step jitter" style="--i:4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <span>Relance</span>
+        </div>
+        <span class="flow-link dashed"></span>
+        <div class="flow-step jitter" style="--i:5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Facture</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Talos transition arrow -->
+    <div class="flow-arrow-vert" aria-hidden="true">
+      <div class="flow-arrow-line"></div>
+      <div class="flow-arrow-pill">
+        <svg width="13" height="13" viewBox="0 0 60 90"><rect fill="#0A0908" x="0" y="0" width="60" height="12"/><path fill="#0A0908" d="M 22 12 L 12 38 L 26 38 L 18 80 L 50 36 L 34 36 L 44 12 Z"/></svg>
+        AVEC TALOS
+      </div>
+    </div>
+
+    <!-- APRÈS -->
+    <div class="flow-row flow-after">
+      <div class="flow-side">
+        <span class="flow-side-label after">APRÈS</span>
+        <span class="flow-side-time after">12 MIN</span>
+      </div>
+      <div class="flow-rail">
+        <div class="flow-step clean">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span>Photo + voix</span>
+        </div>
+        <span class="flow-link bronze">
+          <span class="flow-pulse"></span>
+        </span>
+        <div class="flow-step talos">
+          <svg viewBox="0 0 60 90"><rect fill="#0A0908" x="0" y="0" width="60" height="12"/><path fill="#0A0908" d="M 22 12 L 12 38 L 26 38 L 18 80 L 50 36 L 34 36 L 44 12 Z"/></svg>
+          <span>Talos</span>
+        </div>
+        <span class="flow-link bronze">
+          <span class="flow-pulse" style="animation-delay:1.5s"></span>
+        </span>
+        <div class="flow-step clean done">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Signé</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:40px;">
+    <a href="methode.html" class="cta-ghost" data-cursor>
+      Voir la méthode complète
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- TEASER 3 AUTOMATISATIONS -->
+<section class="auto-section">
+  <div class="reveal">
+    <div class="section-label">UN APERÇU · BTP · DIGITAL · CUISINE · SERVICES</div>
+    <h2 class="section-title">Six process internes accélérés.<br>Tous secteurs, même résultat.</h2>
+    <p class="section-lede">Votre catalogue, vos modèles, votre ton. Talos apprend tout.</p>
+  </div>
+
+  <div class="auto-grid">
+    <a href="automatisations.html#devis" class="auto-card" data-cursor>
+      <div class="auto-head">
+        <div class="auto-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><line x1="9" y1="13" x2="16" y2="13"/><line x1="9" y1="17" x2="14" y2="17"/></svg></div>
+        <div class="auto-num">01 · DEVIS EXPRESS</div>
+      </div>
+      <h3 class="auto-title">Une photo. Deux phrases. Un devis.</h3>
+      <p class="auto-desc">Talos calcule, rédige, envoie.</p>
+      <div class="auto-data">
+        <div class="auto-data-main">
+          <div class="auto-data-val">12<span class="unit">min</span></div>
+          <div class="auto-data-label">VS 4 JOURS</div>
+        </div>
+        <svg class="auto-spark" viewBox="0 0 80 30" preserveAspectRatio="none"><polyline fill="none" stroke="#C9963F" stroke-width="1.5" points="0,24 12,22 24,18 36,16 48,12 60,10 72,8 80,5"/></svg>
+      </div>
+      <div class="auto-link">Voir le process <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <a href="automatisations.html#relances" class="auto-card" data-cursor>
+      <div class="auto-head">
+        <div class="auto-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 7 9-7"/></svg></div>
+        <div class="auto-num">02 · RELANCES</div>
+      </div>
+      <h3 class="auto-title">Relances au ton humain. Jamais d'oubli.</h3>
+      <p class="auto-desc">J+3, J+7, J+14. Signature à votre nom.</p>
+      <div class="auto-data">
+        <div class="auto-data-main">
+          <div class="auto-data-val">100<span class="unit">%</span></div>
+          <div class="auto-data-label">JAMAIS D'OUBLI</div>
+        </div>
+        <svg class="auto-spark" viewBox="0 0 80 30" preserveAspectRatio="none"><polyline fill="none" stroke="#7E9587" stroke-width="1.5" points="0,20 12,16 24,18 36,12 48,14 60,8 72,10 80,4"/></svg>
+      </div>
+      <div class="auto-link">Voir le process <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <a href="automatisations.html#facturation" class="auto-card" data-cursor>
+      <div class="auto-head">
+        <div class="auto-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="7" y1="14" x2="11" y2="14"/></svg></div>
+        <div class="auto-num">04 · FACTURATION</div>
+      </div>
+      <h3 class="auto-title">Facture émise dès la signature.</h3>
+      <p class="auto-desc">TVA calculée. Pièces jointes. Zéro saisie.</p>
+      <div class="auto-data">
+        <div class="auto-data-main">
+          <div class="auto-data-val">8<span class="unit">sec</span></div>
+          <div class="auto-data-label">ZÉRO SAISIE</div>
+        </div>
+        <svg class="auto-spark" viewBox="0 0 80 30" preserveAspectRatio="none"><polyline fill="none" stroke="#C9963F" stroke-width="1.5" points="0,22 12,18 24,20 36,14 48,16 60,10 72,12 80,6"/></svg>
+      </div>
+      <div class="auto-link">Voir le process <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+    </a>
+  </div>
+
+  <div style="text-align:center; margin-top: 40px;">
+    <a href="automatisations.html" class="cta-ghost" data-cursor>
+      Les six automatisations
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- WEB & INTERFACES -->
+<div class="web-section-wrap">
+  <div class="web-section-inner">
+    <div class="reveal">
+      <div class="section-label">PRÉSENCE EN LIGNE & MOTION DESIGN</div>
+      <h2 class="section-title">Votre site travaille aussi à votre place.</h2>
+      <p class="section-lede">Une vitrine qui vend. Une interface qui guide. <strong>Motion design, UX, sur-mesure</strong>.</p>
+    </div>
+    <div class="auto-grid" style="margin-top:50px;">
+      <a href="reserver.html" class="auto-card" data-cursor>
+        <div class="auto-head">
+          <div class="auto-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="auto-num">SITE VITRINE · 24/7</div>
+        </div>
+        <h3 class="auto-title">Un commercial qui ne dort jamais.</h3>
+        <p class="auto-desc">Agenda, devis, avis, réponses. Sans vous.</p>
+        <div class="auto-data">
+          <div class="auto-data-main">
+            <div class="auto-data-val" style="color:var(--olivier);">24<span class="unit" style="color:var(--olivier);">h</span></div>
+            <div class="auto-data-label">DISPONIBLE</div>
+          </div>
+          <svg class="auto-spark" viewBox="0 0 80 30" preserveAspectRatio="none"><polyline fill="none" stroke="#7E9587" stroke-width="1.5" points="0,24 12,20 24,18 36,14 48,12 60,8 72,10 80,4"/></svg>
+        </div>
+        <div class="auto-link">En parler en démo <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+      </a>
+      <a href="reserver.html" class="auto-card" data-cursor>
+        <div class="auto-head">
+          <div class="auto-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <div class="auto-num">MOTION · IDENTITÉ</div>
+        </div>
+        <h3 class="auto-title">Du mouvement qui marque.</h3>
+        <p class="auto-desc">Transitions qui guident. Clients qui reviennent.</p>
+        <div class="auto-data">
+          <div class="auto-data-main">
+            <div class="auto-data-val">×3<span class="unit"></span></div>
+            <div class="auto-data-label">MÉMORISATION</div>
+          </div>
+          <svg class="auto-spark" viewBox="0 0 80 30" preserveAspectRatio="none"><polyline fill="none" stroke="#C9963F" stroke-width="1.5" points="0,26 12,22 24,20 36,16 48,14 60,10 72,8 80,4"/></svg>
+        </div>
+        <div class="auto-link">En parler en démo <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+      </a>
+      <a href="reserver.html" class="auto-card" data-cursor>
+        <div class="auto-head">
+          <div class="auto-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div class="auto-num">INTERFACE · SUR-MESURE</div>
+        </div>
+        <h3 class="auto-title">Un tableau de bord, pas dix outils.</h3>
+        <p class="auto-desc">Vos KPIs, vos automatisations, en temps réel.</p>
+        <div class="auto-data">
+          <div class="auto-data-main">
+            <div class="auto-data-val" style="color:var(--olivier);">SUR<span class="unit" style="color:var(--olivier);">-MESURE</span></div>
+            <div class="auto-data-label">PENSÉ POUR VOUS</div>
+          </div>
+          <svg class="auto-spark" viewBox="0 0 80 30" preserveAspectRatio="none"><polyline fill="none" stroke="#7E9587" stroke-width="1.5" points="0,28 12,24 24,20 36,18 48,14 60,12 72,8 80,6"/></svg>
+        </div>
+        <div class="auto-link">En parler en démo <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- PROOF SHORT -->
+<section class="proof">
+  <div class="reveal">
+    <div class="section-label">RÉSULTATS · 14 PROFESSIONNELS PILOTES IDF</div>
+    <h2 class="section-title">Des chiffres frappés, pas des promesses.</h2>
+  </div>
+  <div class="stats reveal">
+    <div>
+      <div class="stat-num"><span class="counter" data-target="28">0</span><span class="suffix">%</span></div>
+      <div class="stat-label">DEVIS SIGNÉS EN PLUS<br>EN 6 SEMAINES</div>
+    </div>
+    <div>
+      <div class="stat-num"><span class="counter" data-target="6">0</span><span class="suffix">h</span></div>
+      <div class="stat-label">RÉCUPÉRÉES PAR SEMAINE<br>EN MOYENNE</div>
+    </div>
+    <div>
+      <div class="stat-num"><span class="counter" data-target="12">0</span><span class="suffix">min</span></div>
+      <div class="stat-label">ENTRE LA VISITE<br>ET L'ENVOI DU DEVIS</div>
+    </div>
+  </div>
+  <div class="case-card reveal">
+    <div class="case-avatar">M</div>
+    <div>
+      <div class="case-label">ÉTUDE DE CAS · MARC, PLOMBIER · ARGENTEUIL (95)</div>
+      <p class="case-quote">« J'envoyais mes devis quatre jours après la visite. Maintenant c'est douze minutes. J'ai signé trois chantiers que j'aurais perdus. »</p>
+      <p class="case-detail">Marc travaille seul depuis 11 ans. Installation Talos en 9 jours, sans formation. <span class="case-badge">+28% devis signés</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section class="cta-strip">
+  <h2>Réservez votre démo de 15 minutes.</h2>
+  <p>Repartez avec un devis automatisé forgé sur votre métier.</p>
+  <div class="cta-row">
+    <a href="reserver.html" class="cta-bronze" data-cursor>
+      Réserver maintenant
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    <a href="tarifs.html" class="cta-ghost" data-cursor>Voir les tarifs</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <svg width="100" height="28" viewBox="0 0 380 120">
+        <g fill="#F5EDDC">
+          <rect x="0" y="18" width="62" height="14"/>
+          <path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/>
+        </g>
+        <text x="66" y="100" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="100" fill="#F5EDDC" font-weight="700" letter-spacing="-4">ALOS</text>
+      </svg>
+      <p class="footer-tagline">« Notre temps, pour votre savoir-faire. »<br>L'automate de ceux qui ont mieux à faire.</p>
+    </div>
+    <div>
+      <h5>PRODUIT</h5>
+      <ul>
+        <li><a href="automatisations.html" data-cursor>Automatisations</a></li>
+        <li><a href="methode.html" data-cursor>Méthode</a></li>
+        <li><a href="tarifs.html" data-cursor>Tarifs</a></li>
+        <li><a href="reserver.html" data-cursor>Réserver une démo</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>ENTREPRISE</h5>
+      <ul>
+        <li><a href="#" data-cursor>Manifeste</a></li>
+        <li><a href="#" data-cursor>L'équipe</a></li>
+        <li><a href="#" data-cursor>Presse</a></li>
+        <li><a href="#" data-cursor>Recrutement</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>CONTACT</h5>
+      <ul>
+        <li><a href="mailto:altay@talos.ai" data-cursor>altay@talos.ai</a></li>
+        <li><a href="tel:+33600000000" data-cursor>+33 6 ·· ·· ·· ··</a></li>
+        <li><a href="#" data-cursor>Paris 11e</a></li>
+        <li><a href="#" data-cursor>LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© TALOS · 2026 · FORGÉ MAIN</span>
+    <span>RCS PARIS · SIREN ···</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automatisations — Talos</title>
+<meta name="description" content="Les six process internes que Talos automatise pour les artisans du BTP : devis, relances, réponse client, facturation, tri inbox, suivi paiements.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<div class="preloader" id="preloader">
+  <svg width="60" height="76" viewBox="0 0 60 90">
+    <rect class="pl-bar" x="0" y="0" width="60" height="12"/>
+    <path class="pl-bolt" d="M 22 12 L 12 38 L 26 38 L 18 80 L 50 36 L 34 36 L 44 12 Z"/>
+  </svg>
+  <div class="pl-track"><div class="pl-fill"></div></div>
+  <div class="pl-status">FORGE EN COURS · TALOS</div>
+</div>
+
+<nav class="top" id="mainNav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-mark" data-cursor>
+      <svg width="78" height="22" viewBox="0 0 380 120">
+        <g fill="#F5EDDC"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g>
+        <text x="66" y="100" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="100" fill="#F5EDDC" font-weight="700" letter-spacing="-4">ALOS</text>
+      </svg>
+    </a>
+    <div class="live-tag"><span class="dot"></span>EN ACTIVITÉ</div>
+  </div>
+  <div class="links">
+    <a href="automatisations.html" class="active" data-cursor>Automatisations</a>
+    <a href="methode.html" data-cursor>Méthode</a>
+    <a href="tarifs.html" data-cursor>Tarifs</a>
+  </div>
+  <a href="reserver.html" class="cta" data-cursor>Réserver une démo<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+</nav>
+
+<!-- PAGE HEAD -->
+<header class="page-head reveal">
+  <div class="breadcrumb"><a href="index.html" data-cursor>Talos</a> <span class="sep">/</span> <span>Automatisations</span></div>
+  <h1>Six process internes.<br>Six soirées par mois <span class="italic">récupérées</span>.</h1>
+  <p class="lede">Chaque automate s'adapte à <strong>votre catalogue tarifs, vos modèles, votre ton et vos clients</strong>. Aucun n'est obligatoire. Vous gardez la main sur chaque envoi.</p>
+</header>
+
+<!-- 01 — DEVIS -->
+<section class="auto-detail" id="devis">
+  <div class="auto-detail-grid reveal">
+    <div>
+      <div class="auto-detail-num">01 · DEVIS EXPRESS</div>
+      <h2>Devis générés depuis vos infos internes.</h2>
+      <p>Vous prenez une photo du chantier, vous dictez deux phrases. Talos puise dans <strong>votre grille tarifaire, vos coefficients de marge et vos fournisseurs</strong>. Il rédige le devis, le met en page à votre charte, et vous le présente prêt à signer.</p>
+      <ul class="feats">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Reconnaissance visuelle du chantier (compteur, métrés, plans)</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Dictée vocale en français, prise en compte des particularités</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Validation finale par vous d'un seul clic avant envoi</li>
+      </ul>
+      <a href="reserver.html" class="cta-bronze" data-cursor>Voir une démo en direct<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="auto-mock">
+      <div class="mock-head">
+        <div class="mock-title"><span style="width:5px;height:5px;border-radius:50%;background:var(--bronze);display:inline-block;"></span>DEVIS #4221 · BAGNOLET</div>
+        <div class="mock-dots"><span class="live"></span><span></span><span></span></div>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="1"/><circle cx="12" cy="13" r="3"/></svg></div>
+        <div class="mline-text"><span class="mline-main">Photo chantier reçue</span><span class="mline-sub">SDB · 4.2 m² · WC suspendu</span></div>
+        <span class="mline-val">8 s</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 11v1a7 7 0 0014 0v-1"/></svg></div>
+        <div class="mline-text"><span class="mline-main">Dictée vocale traitée</span><span class="mline-sub">« ardoises moyennes, 3 sem. »</span></div>
+        <span class="mline-val">11 s</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h9l4 4v14H6z"/><line x1="9" y1="13" x2="16" y2="13"/></svg></div>
+        <div class="mline-text"><span class="mline-main">Devis rédigé · 8 lignes</span><span class="mline-sub">TVA 10% · marge auto · CGV</span></div>
+        <span class="mline-val">3 488 €</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon" style="background:rgba(126,149,135,0.18);border-color:rgba(126,149,135,0.35);color:var(--olivier);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="mline-text"><span class="mline-main" style="color:var(--olivier);">Envoyé à Maxime · 12 min après la visite</span><span class="mline-sub">Notifications activées</span></div>
+        <span class="mline-val olivier">OK</span>
+      </div>
+      <div class="mock-foot">
+        <span>↑ DURÉE TOTALE</span>
+        <span>12 MIN VS 4 JOURS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 — RELANCES -->
+<section class="auto-detail reverse" id="relances">
+  <div class="auto-detail-grid reveal">
+    <div>
+      <div class="auto-detail-num">02 · RELANCES EMAIL</div>
+      <h2>Relances automatiques au ton humain.</h2>
+      <p>J+3, J+7, J+14 — Talos relance vos devis non signés et vos factures en retard. <strong>Vouvoiement, ton respectueux, signature à votre nom</strong>. Trois variantes de message, jamais le même. Vous décidez quand stopper.</p>
+      <ul class="feats">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Messages adaptés au métier et à la relation client</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Stop immédiat si le client répond ou signe</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Notification vous prévient si une réponse demande votre attention</li>
+      </ul>
+      <a href="reserver.html" class="cta-bronze" data-cursor>Voir une démo en direct<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="auto-mock">
+      <div class="mock-head">
+        <div class="mock-title">RELANCES · CHANTIERS EN ATTENTE</div>
+        <div class="mock-dots"><span class="live"></span><span></span><span></span></div>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 7 9-7"/></svg></div>
+        <div class="mline-text"><span class="mline-main">J+3 · Mme Roux</span><span class="mline-sub">Devis #4198 · 4 380 €</span></div>
+        <span class="mline-val">PARTI</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 7 9-7"/></svg></div>
+        <div class="mline-text"><span class="mline-main">J+7 · M. Karim Benali</span><span class="mline-sub">Devis #4187 · 2 100 €</span></div>
+        <span class="mline-val">PARTI</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon" style="background:rgba(126,149,135,0.18);border-color:rgba(126,149,135,0.35);color:var(--olivier);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="mline-text"><span class="mline-main" style="color:var(--olivier);">Signé après J+3 · Mme Lucas</span><span class="mline-sub">Devis #4203 · 8 920 €</span></div>
+        <span class="mline-val olivier">+ 8 920 €</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <div class="mline-text"><span class="mline-main">J+14 · M. Bachelier</span><span class="mline-sub">Demain · 09:00</span></div>
+        <span class="mline-val">PROG.</span>
+      </div>
+      <div class="mock-foot">
+        <span>SEMAINE EN COURS</span>
+        <span>↑ +28% DE SIGNATURES</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 — REPONSE 24/7 -->
+<section class="auto-detail" id="reponse">
+  <div class="auto-detail-grid reveal">
+    <div>
+      <div class="auto-detail-num">03 · RÉPONSE CLIENT 24/7</div>
+      <h2>Vos clients ont une réponse même la nuit.</h2>
+      <p>Disponibilité, tarif indicatif, planning, modalités — Talos répond aux questions courantes <strong>sans vous déranger</strong>. Il filtre les urgences réelles et vous transmet seulement ce qui mérite votre attention.</p>
+      <ul class="feats">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Email, SMS et WhatsApp pris en charge</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Réponse en moins de 9 secondes en moyenne</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Escalade automatique en cas d'urgence réelle (fuite, panne)</li>
+      </ul>
+      <a href="reserver.html" class="cta-bronze" data-cursor>Voir une démo en direct<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="auto-mock">
+      <div class="mock-head">
+        <div class="mock-title">TICKETS NUIT · 21H → 07H</div>
+        <div class="mock-dots"><span class="live"></span><span></span><span></span></div>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.93.36 1.84.7 2.7a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.38-1.38a2 2 0 012.11-.45c.86.34 1.77.58 2.7.7A2 2 0 0122 16.92z"/></svg></div>
+        <div class="mline-text"><span class="mline-main">22:14 · Karim B.</span><span class="mline-sub">« Vous êtes dispo jeudi ? »</span></div>
+        <span class="mline-val">9 s</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 7 9-7"/></svg></div>
+        <div class="mline-text"><span class="mline-main">23:48 · Mme Picard</span><span class="mline-sub">« Tarif moyen ravalement ? »</span></div>
+        <span class="mline-val">12 s</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon" style="background:rgba(216,117,84,0.18);border-color:rgba(216,117,84,0.35);color:var(--terracotta);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div class="mline-text"><span class="mline-main" style="color:var(--terracotta);">02:03 · URGENCE · fuite</span><span class="mline-sub">Transféré sur votre tél. immédiatement</span></div>
+        <span class="mline-val" style="color:var(--terracotta);">VOUS</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.93.36 1.84.7 2.7a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.38-1.38a2 2 0 012.11-.45c.86.34 1.77.58 2.7.7A2 2 0 0122 16.92z"/></svg></div>
+        <div class="mline-text"><span class="mline-main">06:50 · Sandrine T.</span><span class="mline-sub">« Devis prêt cette semaine ? »</span></div>
+        <span class="mline-val">7 s</span>
+      </div>
+      <div class="mock-foot">
+        <span>NUIT TRAITÉE</span>
+        <span>1 URGENCE TRANSFÉRÉE · 11 RÉSOLUES</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 — FACTURATION -->
+<section class="auto-detail reverse" id="facturation">
+  <div class="auto-detail-grid reveal">
+    <div>
+      <div class="auto-detail-num">04 · FACTURATION AUTO</div>
+      <h2>Facture émise dès la signature du devis.</h2>
+      <p>Acompte, situation, solde — Talos déclenche chaque facture <strong>au bon moment</strong>, calcule la TVA, joint les pièces justificatives, et l'envoie. Vous validez d'un clic. La compta vous remerciera.</p>
+      <ul class="feats">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Export Sage, EBP, Cegid, Pennylane, Quickbooks, Excel</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Facturation électronique conforme (PDP) en 2026</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Acomptes, situations, soldes : automatique selon votre planning</li>
+      </ul>
+      <a href="reserver.html" class="cta-bronze" data-cursor>Voir une démo en direct<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="auto-mock">
+      <div class="mock-head">
+        <div class="mock-title">FACTURATION · CETTE SEMAINE</div>
+        <div class="mock-dots"><span class="live"></span><span></span><span></span></div>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div class="mline-text"><span class="mline-main">#3098 · Plomberie Dupont</span><span class="mline-sub">Acompte 30% · à la signature</span></div>
+        <span class="mline-val">1 044 €</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div class="mline-text"><span class="mline-main">#3099 · Mme Lucas</span><span class="mline-sub">Situation mi-chantier</span></div>
+        <span class="mline-val">4 200 €</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon" style="background:rgba(126,149,135,0.18);border-color:rgba(126,149,135,0.35);color:var(--olivier);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="mline-text"><span class="mline-main" style="color:var(--olivier);">#3100 · M. Benali · Solde</span><span class="mline-sub">Payée 24h après émission</span></div>
+        <span class="mline-val olivier">+ 1 470 €</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="mline-text"><span class="mline-main">Export Pennylane</span><span class="mline-sub">14 factures · prêt pour compta</span></div>
+        <span class="mline-val">.csv</span>
+      </div>
+      <div class="mock-foot">
+        <span>HEBDO</span>
+        <span>14 FACTURES · 8 SECONDES CHACUNE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 — TRI INBOX -->
+<section class="auto-detail" id="inbox">
+  <div class="auto-detail-grid reveal">
+    <div>
+      <div class="auto-detail-num">05 · TRI INBOX MATIN</div>
+      <h2>Vos emails et SMS triés, résumés, hiérarchisés.</h2>
+      <p>Talos lit, regroupe, hiérarchise. Chaque matin à 07h, un résumé de 4 lignes : <strong>ce qui a bougé, ce qui attend votre validation, ce qui peut être ignoré</strong>. Vous n'ouvrez plus jamais une boîte mail de 80 mails.</p>
+      <ul class="feats">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>4 lignes au lieu de 80 emails</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Détection automatique des urgences et opportunités</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Push notification au moment où vous attaquez votre journée</li>
+      </ul>
+      <a href="reserver.html" class="cta-bronze" data-cursor>Voir une démo en direct<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="auto-mock">
+      <div class="mock-head">
+        <div class="mock-title">RÉSUMÉ DU 25/05 · 07:00</div>
+        <div class="mock-dots"><span class="live"></span><span></span><span></span></div>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon" style="background:rgba(216,117,84,0.18);border-color:rgba(216,117,84,0.35);color:var(--terracotta);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg></div>
+        <div class="mline-text"><span class="mline-main" style="color:var(--terracotta);">3 urgences à traiter</span><span class="mline-sub">Fuite Argenteuil · livraison ardoises · RDV Bachelier</span></div>
+        <span class="mline-val" style="color:var(--terracotta);">URGENT</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <div class="mline-text"><span class="mline-main">7 messages traités auto</span><span class="mline-sub">Réponses standard envoyées</span></div>
+        <span class="mline-val">OK</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon" style="background:rgba(126,149,135,0.18);border-color:rgba(126,149,135,0.35);color:var(--olivier);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="mline-text"><span class="mline-main" style="color:var(--olivier);">2 nouvelles opportunités</span><span class="mline-sub">Devis demandés par M. Lambert & Mme Petit</span></div>
+        <span class="mline-val olivier">À FAIRE</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/></svg></div>
+        <div class="mline-text"><span class="mline-main">68 newsletters et spams</span><span class="mline-sub">Archivés automatiquement</span></div>
+        <span class="mline-val">68</span>
+      </div>
+      <div class="mock-foot">
+        <span>TEMPS DE LECTURE</span>
+        <span>4 MIN VS 45 MIN</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 — PAIEMENTS -->
+<section class="auto-detail reverse" id="paiements">
+  <div class="auto-detail-grid reveal">
+    <div>
+      <div class="auto-detail-num">06 · SUIVI PAIEMENTS</div>
+      <h2>Trésorerie suivie en temps réel.</h2>
+      <p>Acomptes reçus, factures en attente, retards de paiement : Talos <strong>rapproche vos relevés bancaires</strong>, identifie les impayés et déclenche les relances au bon moment. Vous savez toujours où vous en êtes.</p>
+      <ul class="feats">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Connexion bancaire sécurisée (DSP2 · agrément ACPR)</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Rapprochement auto facture ↔ virement</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Mise en demeure générée à J+45 si silence client</li>
+      </ul>
+      <a href="reserver.html" class="cta-bronze" data-cursor>Voir une démo en direct<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="auto-mock">
+      <div class="mock-head">
+        <div class="mock-title">TRÉSO · LIVE</div>
+        <div class="mock-dots"><span class="live"></span><span></span><span></span></div>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon" style="background:rgba(126,149,135,0.18);border-color:rgba(126,149,135,0.35);color:var(--olivier);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg></div>
+        <div class="mline-text"><span class="mline-main" style="color:var(--olivier);">Acompte reçu · Dupont</span><span class="mline-sub">Rapproché auto · Facture #3098</span></div>
+        <span class="mline-val olivier">+ 1 044 €</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <div class="mline-text"><span class="mline-main">En attente · Mme Lucas</span><span class="mline-sub">J+12 · échéance dans 18 j</span></div>
+        <span class="mline-val">4 200 €</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon" style="background:rgba(216,117,84,0.18);border-color:rgba(216,117,84,0.35);color:var(--terracotta);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/></svg></div>
+        <div class="mline-text"><span class="mline-main" style="color:var(--terracotta);">En retard · M. Vasseur</span><span class="mline-sub">J+38 · relance auto envoyée</span></div>
+        <span class="mline-val" style="color:var(--terracotta);">2 880 €</span>
+      </div>
+      <div class="mock-line">
+        <div class="mline-icon" style="background:rgba(126,149,135,0.18);border-color:rgba(126,149,135,0.35);color:var(--olivier);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="mline-text"><span class="mline-main" style="color:var(--olivier);">Solde Benali payé</span><span class="mline-sub">24h après émission</span></div>
+        <span class="mline-val olivier">+ 1 470 €</span>
+      </div>
+      <div class="mock-foot">
+        <span>IMPAYÉS &gt; 60 J</span>
+        <span>↓ −42% DEPUIS TALOS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN COMPARE -->
+<section class="pain">
+  <div class="pain-inner reveal">
+    <div class="section-label">AVANT / APRÈS</div>
+    <h2 class="section-title">Vos soirées sur la paperasse.<br>Vos chantiers qui attendent.</h2>
+    <p class="section-lede"><strong>87 % des artisans du BTP</strong> perdent plus de 6 heures par semaine sur l'administratif. C'est une journée par mois. C'est un chantier en moins.</p>
+    <div class="pain-grid">
+      <div class="pain-col before">
+        <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>Avant Talos</h3>
+        <ul class="pain-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>Devis rédigés à 22h sur un coin de table</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>4 à 7 jours entre la visite et l'envoi</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>Relances oubliées, factures impayées</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>Réponses clients à 23h, perte de marché</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>Comptabilité repoussée au week-end</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>Inbox saturée, urgences noyées</li>
+        </ul>
+      </div>
+      <div class="pain-col after">
+        <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8 12 11 15 16 9"/></svg>Avec Talos</h3>
+        <ul class="pain-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Devis envoyés <strong>12 minutes</strong> après la visite</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Relances auto J+3, J+7, J+14</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Facture générée dès la signature</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Réponse client 24/7 sans astreinte</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Inbox triée, résumé matinal de 4 lignes</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Soirées rendues à votre famille</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-strip">
+  <h2>Prêt à voir les six automatisations en direct ?</h2>
+  <p>15 minutes. Votre métier. Votre dernier devis.</p>
+  <div class="cta-row">
+    <a href="reserver.html" class="cta-bronze" data-cursor>Réserver une démo<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    <a href="methode.html" class="cta-ghost" data-cursor>Comprendre la méthode</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <svg width="100" height="28" viewBox="0 0 380 120">
+        <g fill="#F5EDDC"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g>
+        <text x="66" y="100" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="100" fill="#F5EDDC" font-weight="700" letter-spacing="-4">ALOS</text>
+      </svg>
+      <p class="footer-tagline">« Notre temps, pour votre savoir-faire. »<br>L'automate de ceux qui ont mieux à faire.</p>
+    </div>
+    <div>
+      <h5>PRODUIT</h5>
+      <ul>
+        <li><a href="automatisations.html" data-cursor>Automatisations</a></li>
+        <li><a href="methode.html" data-cursor>Méthode</a></li>
+        <li><a href="tarifs.html" data-cursor>Tarifs</a></li>
+        <li><a href="reserver.html" data-cursor>Réserver une démo</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>ENTREPRISE</h5>
+      <ul>
+        <li><a href="#" data-cursor>Manifeste</a></li>
+        <li><a href="#" data-cursor>L'équipe</a></li>
+        <li><a href="#" data-cursor>Presse</a></li>
+        <li><a href="#" data-cursor>Recrutement</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>CONTACT</h5>
+      <ul>
+        <li><a href="mailto:altay@talos.ai" data-cursor>altay@talos.ai</a></li>
+        <li><a href="tel:+33600000000" data-cursor>+33 6 ·· ·· ·· ··</a></li>
+        <li><a href="#" data-cursor>Paris 11e</a></li>
+        <li><a href="#" data-cursor>LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© TALOS · 2026 · FORGÉ MAIN</span>
+    <span>RCS PARIS · SIREN ···</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
