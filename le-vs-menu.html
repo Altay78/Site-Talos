@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La carte — Le VS · Commander en ligne</title>
+<meta name="description" content="La carte complète Le VS : pizzas, kebabs, burgers, tacos et spécialités américaines. Commandez en ligne, à emporter ou en livraison.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Pinyon+Script&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
 /* =========================================================
    LE VS — RESTAURANT SITE
    Palette: cream paper · coffee brown · bronze accent · script
@@ -2092,3 +2103,799 @@ body::after {
   opacity: 1;
   transform: translate(-50%, 0);
 }
+
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT STRIP -->
+<div class="vs-strip">
+  <div class="vs-strip-track">
+    <span>Click &amp; Collect</span><span class="dot">·</span>
+    <span>Livraison 7j/7</span><span class="dot">·</span>
+    <span>Viande halal certifiée</span><span class="dot">·</span>
+    <span>Ouvert jusqu'à 23h30</span><span class="dot">·</span>
+    <span>Click &amp; Collect</span><span class="dot">·</span>
+    <span>Livraison 7j/7</span><span class="dot">·</span>
+    <span>Viande halal certifiée</span><span class="dot">·</span>
+    <span>Ouvert jusqu'à 23h30</span><span class="dot">·</span>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="vs-nav" id="vsNav">
+  <a href="le-vs.html" class="vs-logo" aria-label="Le VS, accueil">
+    <svg viewBox="0 0 240 130" aria-hidden="true">
+      <ellipse cx="120" cy="65" rx="110" ry="52" fill="#1F1108" stroke="#C8995A" stroke-width="2"/>
+      <ellipse cx="120" cy="65" rx="102" ry="46" fill="none" stroke="#C8995A" stroke-width="0.6" opacity="0.7"/>
+      <text x="120" y="82" text-anchor="middle" font-family="Pinyon Script, serif" font-size="68" fill="#F4E9D2">Le VS</text>
+    </svg>
+  </a>
+  <ul class="vs-nav-links">
+    <li><a href="le-vs.html">Accueil</a></li>
+    <li><a href="le-vs-menu.html" class="active">La carte</a></li>
+    <li><a href="le-vs.html#histoire">Notre histoire</a></li>
+    <li><a href="le-vs.html#contact">Nous trouver</a></li>
+  </ul>
+  <div class="vs-nav-cta">
+    <a href="tel:+33100000000" class="vs-phone" aria-label="Appeler Le VS">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span>01 00 00 00 00</span>
+    </a>
+    <a href="le-vs.html#contact" class="vs-cta-primary">
+      Réserver
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    <button class="vs-burger" id="vsBurger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="vs-mobile-menu" id="vsMobile">
+  <a href="le-vs.html">Accueil</a>
+  <a href="le-vs-menu.html">La carte</a>
+  <a href="le-vs.html#histoire">Notre histoire</a>
+  <a href="le-vs.html#contact">Nous trouver</a>
+  <a href="le-vs.html#contact" class="vs-cta-primary">Réserver</a>
+</div>
+
+<!-- HERO -->
+<header class="vs-menu-hero">
+  <div class="vs-grain"></div>
+  <div class="vs-eyebrow centered">
+    <span class="vs-dot"></span>
+    <span>La carte complète</span>
+  </div>
+  <h1>Choisissez<br>votre <em class="vs-script">envie.</em></h1>
+  <p>43 plats faits maison, préparés à la commande. Sélectionnez vos articles, ajoutez-les au panier — on s'occupe du reste.</p>
+</header>
+
+<!-- STICKY CATEGORY NAV -->
+<nav class="vs-menu-cats" id="vsMenuCats">
+  <button class="vs-menu-cat-btn active" data-cat="all">Toutes</button>
+  <button class="vs-menu-cat-btn" data-cat="pizza">Pizza</button>
+  <button class="vs-menu-cat-btn" data-cat="kebab">Kebab</button>
+  <button class="vs-menu-cat-btn" data-cat="burger">Burger</button>
+  <button class="vs-menu-cat-btn" data-cat="tacos">Tacos</button>
+  <button class="vs-menu-cat-btn" data-cat="americain">Américain</button>
+  <button class="vs-menu-cat-btn" data-cat="boissons">Boissons</button>
+</nav>
+
+<!-- PIZZA -->
+<section class="vs-menu-section" id="pizza" data-cat="pizza">
+  <div class="vs-menu-section-head">
+    <h2>Pizza <em>au feu de bois</em></h2>
+    <div class="vs-menu-section-count">8 recettes</div>
+  </div>
+  <div class="vs-menu-grid">
+    <article class="vs-item" data-name="Margherita" data-price="9.00">
+      <div class="vs-item-head"><h3>Margherita</h3><div class="vs-item-price">9,00 €</div></div>
+      <p class="vs-item-desc">Tomate San Marzano, fior di latte, basilic frais, huile d'olive.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">🌱 Végé</span><span class="vs-item-tag">31 cm</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Reine" data-price="11.00">
+      <div class="vs-item-head"><h3>Reine</h3><div class="vs-item-price">11,00 €</div></div>
+      <p class="vs-item-desc">Tomate, mozzarella, jambon supérieur, champignons frais.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">31 cm</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="4 Fromages" data-price="12.50">
+      <div class="vs-item-head"><h3>4 Fromages</h3><div class="vs-item-price">12,50 €</div></div>
+      <p class="vs-item-desc">Mozzarella, gorgonzola, chèvre, parmesan affiné 24 mois.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">🌱 Végé</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Diavola" data-price="12.00">
+      <div class="vs-item-head"><h3>Diavola</h3><div class="vs-item-price">12,00 €</div></div>
+      <p class="vs-item-desc">Tomate, mozzarella, chorizo piquant, piment, origan.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">🌶️ Piquant</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Végétarienne" data-price="11.50">
+      <div class="vs-item-head"><h3>Végétarienne</h3><div class="vs-item-price">11,50 €</div></div>
+      <p class="vs-item-desc">Légumes grillés du marché, mozzarella, basilic, huile aromatique.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">🌱 Végé</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Carbonara" data-price="12.50">
+      <div class="vs-item-head"><h3>Carbonara</h3><div class="vs-item-price">12,50 €</div></div>
+      <p class="vs-item-desc">Crème fraîche, lardons fumés, œuf, parmesan, poivre noir.</p>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item featured" data-name="Pizza La Maison" data-price="14.50">
+      <div class="vs-item-badge">★ SIGNATURE</div>
+      <div class="vs-item-head"><h3>La Maison</h3><div class="vs-item-price">14,50 €</div></div>
+      <p class="vs-item-desc">San Marzano, fior di latte, jambon truffé, roquette, copeaux de parmesan, huile basilic.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">🔥 Feu de bois</span><span class="vs-item-tag">31 cm</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Burrata Truffe" data-price="16.00">
+      <div class="vs-item-badge">★ NOUVEAU</div>
+      <div class="vs-item-head"><h3>Burrata Truffe</h3><div class="vs-item-price">16,00 €</div></div>
+      <p class="vs-item-desc">Burrata des Pouilles, jambon truffé, roquette, huile de truffe.</p>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+  </div>
+</section>
+
+<!-- KEBAB -->
+<section class="vs-menu-section" id="kebab" data-cat="kebab">
+  <div class="vs-menu-section-head">
+    <h2>Kebab <em>marinade 24 h</em></h2>
+    <div class="vs-menu-section-count">6 formats</div>
+  </div>
+  <div class="vs-menu-grid">
+    <article class="vs-item" data-name="Kebab Classique" data-price="8.00">
+      <div class="vs-item-head"><h3>Classique</h3><div class="vs-item-price">8,00 €</div></div>
+      <p class="vs-item-desc">Galette grillée, viande marinée 24 h, salade, tomate, oignon rouge, sauces au choix.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">Halal</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Kebab Naan" data-price="9.50">
+      <div class="vs-item-head"><h3>Naan</h3><div class="vs-item-price">9,50 €</div></div>
+      <p class="vs-item-desc">Pain naan moelleux toasté, viande marinée, crudités du jour, sauces.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">Halal</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Kebab Cheese" data-price="10.00">
+      <div class="vs-item-head"><h3>Cheese</h3><div class="vs-item-price">10,00 €</div></div>
+      <p class="vs-item-desc">Galette, viande, double cheddar fondu, salade, oignons frits, sauce burger.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">Halal</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Assiette Kebab" data-price="12.00">
+      <div class="vs-item-head"><h3>Assiette</h3><div class="vs-item-price">12,00 €</div></div>
+      <p class="vs-item-desc">Viande, frites maison, salade composée, sauces et pain pita à part.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">Halal</span><span class="vs-item-tag">Copieux</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item featured" data-name="Kebab du Patron" data-price="11.00">
+      <div class="vs-item-badge">★ SIGNATURE</div>
+      <div class="vs-item-head"><h3>Du Patron</h3><div class="vs-item-price">11,00 €</div></div>
+      <p class="vs-item-desc">Naan toasté, viande marinée 24 h, sauce yaourt menthe maison, oignon rouge, persil frais.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">Halal</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Kebab XL" data-price="13.00">
+      <div class="vs-item-head"><h3>XL</h3><div class="vs-item-price">13,00 €</div></div>
+      <p class="vs-item-desc">Triple ration de viande, naan, cheddar, frites incluses, sauces au choix.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">Halal</span><span class="vs-item-tag">XL</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+  </div>
+</section>
+
+<!-- BURGER -->
+<section class="vs-menu-section" id="burger" data-cat="burger">
+  <div class="vs-menu-section-head">
+    <h2>Burger <em>smashé minute</em></h2>
+    <div class="vs-menu-section-count">8 recettes</div>
+  </div>
+  <div class="vs-menu-grid">
+    <article class="vs-item" data-name="Le Classic" data-price="10.00">
+      <div class="vs-item-head"><h3>Le Classic</h3><div class="vs-item-price">10,00 €</div></div>
+      <p class="vs-item-desc">Pain brioché beurré, steak haché 150 g, cheddar, salade, oignon, sauce maison.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">Halal</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Le Bacon" data-price="12.00">
+      <div class="vs-item-head"><h3>Le Bacon</h3><div class="vs-item-price">12,00 €</div></div>
+      <p class="vs-item-desc">Steak, double bacon grillé, cheddar fondu, oignons crispy, sauce BBQ maison.</p>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Cheese Smash" data-price="11.50">
+      <div class="vs-item-head"><h3>Cheese Smash</h3><div class="vs-item-price">11,50 €</div></div>
+      <p class="vs-item-desc">Double steak smashé à la plaque, double cheddar fondu, oignon, cornichons.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">Halal</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Le Texan" data-price="13.00">
+      <div class="vs-item-head"><h3>Le Texan</h3><div class="vs-item-price">13,00 €</div></div>
+      <p class="vs-item-desc">Steak, bacon, oignons frits, cheddar, sauce BBQ fumée, salade.</p>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Le Chicken" data-price="11.00">
+      <div class="vs-item-head"><h3>Le Chicken</h3><div class="vs-item-price">11,00 €</div></div>
+      <p class="vs-item-desc">Filet de poulet pané croustillant, cheddar, salade, tomate, sauce miel-moutarde.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">Halal</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Le Veggie" data-price="11.00">
+      <div class="vs-item-head"><h3>Le Veggie</h3><div class="vs-item-price">11,00 €</div></div>
+      <p class="vs-item-desc">Galette de légumes maison, cheddar, salade, tomate, sauce au yaourt.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">🌱 Végé</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Le Truffe" data-price="16.00">
+      <div class="vs-item-badge">★ NOUVEAU</div>
+      <div class="vs-item-head"><h3>Le Truffe</h3><div class="vs-item-price">16,00 €</div></div>
+      <p class="vs-item-desc">Steak 180 g, mayo truffe noire, roquette, copeaux de parmesan, oignons rouges.</p>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item featured" data-name="Smash Le VS" data-price="13.90">
+      <div class="vs-item-badge">★ SIGNATURE</div>
+      <div class="vs-item-head"><h3>Smash Le VS</h3><div class="vs-item-price">13,90 €</div></div>
+      <p class="vs-item-desc">Double steak smashé, cheddar fondu, bacon croustillant, oignons caramélisés, sauce BBQ maison.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">🥩 200 g</span><span class="vs-item-tag">Halal</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+  </div>
+</section>
+
+<!-- TACOS -->
+<section class="vs-menu-section" id="tacos" data-cat="tacos">
+  <div class="vs-menu-section-head">
+    <h2>Tacos <em>plancha minute</em></h2>
+    <div class="vs-menu-section-count">5 tailles</div>
+  </div>
+  <div class="vs-menu-grid">
+    <article class="vs-item" data-name="Tacos M" data-price="7.50">
+      <div class="vs-item-head"><h3>Tacos M</h3><div class="vs-item-price">7,50 €</div></div>
+      <p class="vs-item-desc">1 viande au choix, frites maison à l'intérieur, sauce fromagère du chef.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">Halal</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Tacos L" data-price="9.50">
+      <div class="vs-item-head"><h3>Tacos L</h3><div class="vs-item-price">9,50 €</div></div>
+      <p class="vs-item-desc">2 viandes au choix, frites maison incluses, sauce fromagère onctueuse.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">Halal</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Tacos XL" data-price="11.50">
+      <div class="vs-item-head"><h3>Tacos XL</h3><div class="vs-item-price">11,50 €</div></div>
+      <p class="vs-item-desc">3 viandes au choix, frites maison, double sauce fromagère, oignons confits.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">Halal</span><span class="vs-item-tag">XL</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Tacos Cheesy" data-price="10.50">
+      <div class="vs-item-head"><h3>Cheesy</h3><div class="vs-item-price">10,50 €</div></div>
+      <p class="vs-item-desc">Triple cheddar fondu, 1 viande, sauce fromagère, oignons frits croustillants.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">Halal</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item featured" data-name="Le VS Tacos" data-price="12.90">
+      <div class="vs-item-badge">★ TOP VENTE</div>
+      <div class="vs-item-head"><h3>Le VS Tacos</h3><div class="vs-item-price">12,90 €</div></div>
+      <p class="vs-item-desc">Triple viande, sauce fromagère du chef, oignons confits, frites maison à l'intérieur. Le tacos signature.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">🌶️ Doux à fort</span><span class="vs-item-tag">Halal</span><span class="vs-item-tag">850 g</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+  </div>
+</section>
+
+<!-- AMÉRICAIN -->
+<section class="vs-menu-section" id="americain" data-cat="americain">
+  <div class="vs-menu-section-head">
+    <h2>Américain <em>crispy &amp; juicy</em></h2>
+    <div class="vs-menu-section-count">9 plats</div>
+  </div>
+  <div class="vs-menu-grid">
+    <article class="vs-item" data-name="Tenders × 5" data-price="8.00">
+      <div class="vs-item-head"><h3>Tenders × 5</h3><div class="vs-item-price">8,00 €</div></div>
+      <p class="vs-item-desc">5 aiguillettes de poulet panées maison, croustillantes. Sauces au choix.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">Halal</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Wings × 6" data-price="9.00">
+      <div class="vs-item-head"><h3>Wings × 6</h3><div class="vs-item-price">9,00 €</div></div>
+      <p class="vs-item-desc">6 ailes de poulet glacées, sauce buffalo ou BBQ. Servies bien chaudes.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">🌶️ Spicy</span><span class="vs-item-tag">Halal</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Nuggets × 10" data-price="9.00">
+      <div class="vs-item-head"><h3>Nuggets × 10</h3><div class="vs-item-price">9,00 €</div></div>
+      <p class="vs-item-desc">10 nuggets de poulet panés maison, dorés à la friteuse. Sauces au choix.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">Halal</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Ribs marinés" data-price="14.00">
+      <div class="vs-item-head"><h3>Ribs</h3><div class="vs-item-price">14,00 €</div></div>
+      <p class="vs-item-desc">Travers marinés 12 h, cuisson lente, sauce BBQ caramélisée, salade coleslaw.</p>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Frites maison" data-price="4.50">
+      <div class="vs-item-head"><h3>Frites maison</h3><div class="vs-item-price">4,50 €</div></div>
+      <p class="vs-item-desc">Pommes de terre fraîches coupées sur place, double cuisson, fleur de sel.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">🌱 Végé</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Onion Rings" data-price="5.00">
+      <div class="vs-item-head"><h3>Onion Rings</h3><div class="vs-item-price">5,00 €</div></div>
+      <p class="vs-item-desc">Anneaux d'oignon panés croustillants, sauce ranch maison.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">🌱 Végé</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Patate douce" data-price="5.50">
+      <div class="vs-item-head"><h3>Patate douce</h3><div class="vs-item-price">5,50 €</div></div>
+      <p class="vs-item-desc">Frites de patate douce, paprika fumé, sauce miel-moutarde.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">🌱 Végé</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Mozzarella sticks" data-price="6.50">
+      <div class="vs-item-head"><h3>Mozza sticks</h3><div class="vs-item-price">6,50 €</div></div>
+      <p class="vs-item-desc">Bâtonnets de mozzarella panés, sauce marinara tomate-basilic.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">🌱 Végé</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item featured" data-name="Bucket Le VS" data-price="18.00">
+      <div class="vs-item-badge">★ À PARTAGER</div>
+      <div class="vs-item-head"><h3>Bucket Le VS</h3><div class="vs-item-price">18,00 €</div></div>
+      <p class="vs-item-desc">5 tenders + 6 wings + frites maison XL + 4 sauces au choix. Idéal à partager.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">Halal</span><span class="vs-item-tag">2-3 pers.</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+  </div>
+</section>
+
+<!-- BOISSONS -->
+<section class="vs-menu-section" id="boissons" data-cat="boissons">
+  <div class="vs-menu-section-head">
+    <h2>Boissons <em>&amp; desserts</em></h2>
+    <div class="vs-menu-section-count">7 articles</div>
+  </div>
+  <div class="vs-menu-grid">
+    <article class="vs-item" data-name="Coca 33cl" data-price="2.50">
+      <div class="vs-item-head"><h3>Coca-Cola 33 cl</h3><div class="vs-item-price">2,50 €</div></div>
+      <p class="vs-item-desc">Canette bien fraîche. Classique, Zéro ou Cherry au choix.</p>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Eau 50cl" data-price="1.50">
+      <div class="vs-item-head"><h3>Eau 50 cl</h3><div class="vs-item-price">1,50 €</div></div>
+      <p class="vs-item-desc">Eau plate ou gazeuse, bouteille fraîche.</p>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Limonade artisanale" data-price="3.50">
+      <div class="vs-item-head"><h3>Limonade artisanale</h3><div class="vs-item-price">3,50 €</div></div>
+      <p class="vs-item-desc">Limonade fermière au citron jaune, sans colorant, sans conservateur.</p>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Milkshake" data-price="5.00">
+      <div class="vs-item-head"><h3>Milkshake</h3><div class="vs-item-price">5,00 €</div></div>
+      <p class="vs-item-desc">Lait entier, crème glacée vanille, parfum au choix : fraise, choco, oreo, caramel.</p>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Tiramisu" data-price="5.00">
+      <div class="vs-item-head"><h3>Tiramisu</h3><div class="vs-item-price">5,00 €</div></div>
+      <p class="vs-item-desc">Mascarpone, café espresso, biscuits, cacao amer. Préparé maison.</p>
+      <div class="vs-item-tags"><span class="vs-item-tag">🌱 Végé</span></div>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Brownie" data-price="4.50">
+      <div class="vs-item-head"><h3>Brownie</h3><div class="vs-item-price">4,50 €</div></div>
+      <p class="vs-item-desc">Brownie fondant au chocolat noir, éclats de noix de pécan. Tiède sur demande.</p>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+    <article class="vs-item" data-name="Café espresso" data-price="2.00">
+      <div class="vs-item-head"><h3>Café espresso</h3><div class="vs-item-price">2,00 €</div></div>
+      <p class="vs-item-desc">Café espresso italien torréfié artisanalement, intensité 8/10.</p>
+      <button class="vs-add-btn" data-add>Ajouter <span>+</span></button>
+    </article>
+  </div>
+</section>
+
+<!-- CART FAB -->
+<button class="vs-cart-fab empty" id="vsCartFab" aria-label="Voir le panier">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+    <line x1="3" y1="6" x2="21" y2="6"/>
+    <path d="M16 10a4 4 0 0 1-8 0"/>
+  </svg>
+  <span>Panier</span>
+  <span class="vs-cart-fab-count" id="vsCartCount">0</span>
+  <span class="vs-cart-fab-total" id="vsCartTotal">0,00 €</span>
+</button>
+
+<!-- CART OVERLAY + DRAWER -->
+<div class="vs-cart-overlay" id="vsCartOverlay"></div>
+<aside class="vs-cart-drawer" id="vsCartDrawer" aria-label="Panier">
+  <div class="vs-cart-head">
+    <h3>Votre panier</h3>
+    <button class="vs-cart-close" id="vsCartClose" aria-label="Fermer">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="vs-cart-list" id="vsCartList">
+    <!-- filled by JS -->
+  </div>
+  <div class="vs-cart-foot" id="vsCartFoot" style="display:none;">
+    <div class="vs-cart-options">
+      <button class="vs-cart-opt active" data-opt="collect">À emporter</button>
+      <button class="vs-cart-opt" data-opt="delivery">Livraison</button>
+    </div>
+    <div class="vs-cart-total">
+      <span class="vs-cart-total-label">Total</span>
+      <span class="vs-cart-total-val" id="vsCartTotalBig">0,00 €</span>
+    </div>
+    <a href="tel:+33100000000" class="vs-cta-primary">
+      Commander · 01 00 00 00 00
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</aside>
+
+<!-- TOAST -->
+<div class="vs-toast" id="vsToast">Ajouté au panier ✓</div>
+
+<!-- FOOTER -->
+<footer class="vs-footer">
+  <div class="vs-footer-inner">
+    <div class="vs-footer-brand">
+      <svg viewBox="0 0 240 130" class="vs-footer-logo" aria-hidden="true">
+        <ellipse cx="120" cy="65" rx="110" ry="52" fill="none" stroke="#C8995A" stroke-width="2"/>
+        <ellipse cx="120" cy="65" rx="102" ry="46" fill="none" stroke="#C8995A" stroke-width="0.6" opacity="0.7"/>
+        <text x="120" y="82" text-anchor="middle" font-family="Pinyon Script, serif" font-size="68" fill="#F4E9D2">Le VS</text>
+      </svg>
+      <p class="vs-footer-tag">Pizza &mdash; Kebab &mdash; Burger &mdash; Tacos &mdash; Américain</p>
+      <p class="vs-footer-desc">L'authentique street food, faite maison chaque jour depuis 2014.</p>
+    </div>
+
+    <div class="vs-footer-col">
+      <h5>La carte</h5>
+      <a href="#pizza">Pizza</a>
+      <a href="#kebab">Kebab</a>
+      <a href="#burger">Burger</a>
+      <a href="#tacos">Tacos</a>
+      <a href="#americain">Américain</a>
+    </div>
+
+    <div class="vs-footer-col">
+      <h5>Maison</h5>
+      <a href="le-vs.html#histoire">Notre histoire</a>
+      <a href="le-vs.html#contact">Nous trouver</a>
+      <a href="le-vs.html#contact">Réserver</a>
+      <a href="tel:+33100000000">Téléphone</a>
+    </div>
+
+    <div class="vs-footer-col">
+      <h5>Suivez-nous</h5>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">TikTok</a>
+      <a href="mailto:bonjour@levs.fr">bonjour@levs.fr</a>
+    </div>
+  </div>
+
+  <div class="vs-footer-bottom">
+    <span>© 2025 Le VS &mdash; Tous droits réservés.</span>
+    <span><a href="#">Mentions légales</a> · <a href="#">Confidentialité</a> · <a href="#">Allergènes</a></span>
+  </div>
+</footer>
+
+<script>
+/* LE VS — interactions */
+
+(function () {
+  'use strict';
+
+  // ------- PRELOADER -------
+  const preloader = document.getElementById('preloader');
+  window.addEventListener('load', () => {
+    setTimeout(() => preloader && preloader.classList.add('done'), 600);
+  });
+
+  // ------- NAV scroll state -------
+  const nav = document.getElementById('vsNav');
+  const onScroll = () => {
+    if (window.scrollY > 30) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ------- MOBILE MENU -------
+  const burger = document.getElementById('vsBurger');
+  const mobile = document.getElementById('vsMobile');
+  if (burger && mobile) {
+    burger.addEventListener('click', () => {
+      const open = burger.classList.toggle('active');
+      mobile.classList.toggle('active', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobile.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        burger.classList.remove('active');
+        mobile.classList.remove('active');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  // ------- SCROLL REVEAL -------
+  const revealTargets = document.querySelectorAll(
+    '.vs-section-head, .vs-cat, .vs-sig, .vs-story-visual, .vs-story-copy, ' +
+    '.vs-info-card, .vs-reserve, .vs-cta-band-inner, .vs-hero-copy, .vs-hero-visual'
+  );
+  revealTargets.forEach(el => el.classList.add('vs-reveal'));
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // staggered reveal for siblings in same grid
+          const parent = entry.target.parentElement;
+          const idx = Array.from(parent.children).indexOf(entry.target);
+          entry.target.style.transitionDelay = `${Math.min(idx * 80, 400)}ms`;
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    revealTargets.forEach(el => io.observe(el));
+  } else {
+    revealTargets.forEach(el => el.classList.add('visible'));
+  }
+
+  // ------- COUNTERS -------
+  const counters = document.querySelectorAll('.vs-counter');
+  const animateCount = (el) => {
+    const target = parseInt(el.dataset.target, 10) || 0;
+    const duration = 1400;
+    const start = performance.now();
+    const tick = (t) => {
+      const p = Math.min(1, (t - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * target);
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  if ('IntersectionObserver' in window) {
+    const cio = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCount(e.target);
+          cio.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => cio.observe(c));
+  } else {
+    counters.forEach(animateCount);
+  }
+
+  // ------- SMOOTH SCROLL with sticky nav offset -------
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id.length <= 1) return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      const navH = nav.offsetHeight + 12;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - navH;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+  // ------- MENU PAGE: filter & cart -------
+  const cats = document.getElementById('vsMenuCats');
+  if (cats) {
+    const buttons = cats.querySelectorAll('.vs-menu-cat-btn');
+    const sections = document.querySelectorAll('.vs-menu-section');
+
+    // category filter
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.dataset.cat;
+        buttons.forEach(b => b.classList.toggle('active', b === btn));
+        if (cat === 'all') {
+          sections.forEach(s => s.style.display = '');
+          return;
+        }
+        // jump to the section anchor smoothly
+        const target = document.getElementById(cat);
+        if (target) {
+          sections.forEach(s => s.style.display = '');
+          const navH = (nav.offsetHeight || 60) + cats.offsetHeight + 12;
+          const top = target.getBoundingClientRect().top + window.pageYOffset - navH;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // mark active category while scrolling
+    if ('IntersectionObserver' in window) {
+      const sio = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const id = e.target.id;
+            buttons.forEach(b => {
+              b.classList.toggle('active', b.dataset.cat === id);
+            });
+          }
+        });
+      }, { rootMargin: '-40% 0px -50% 0px' });
+      sections.forEach(s => sio.observe(s));
+    }
+  }
+
+  // ------- CART -------
+  const CART_KEY = 'levs_cart_v1';
+  const cartFab = document.getElementById('vsCartFab');
+  const cartCount = document.getElementById('vsCartCount');
+  const cartTotal = document.getElementById('vsCartTotal');
+  const cartTotalBig = document.getElementById('vsCartTotalBig');
+  const cartDrawer = document.getElementById('vsCartDrawer');
+  const cartOverlay = document.getElementById('vsCartOverlay');
+  const cartClose = document.getElementById('vsCartClose');
+  const cartList = document.getElementById('vsCartList');
+  const cartFoot = document.getElementById('vsCartFoot');
+  const toast = document.getElementById('vsToast');
+
+  const loadCart = () => {
+    try {
+      return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    } catch (_) { return []; }
+  };
+  const saveCart = (c) => {
+    try { localStorage.setItem(CART_KEY, JSON.stringify(c)); } catch (_) {}
+  };
+  const formatPrice = (n) => n.toFixed(2).replace('.', ',') + ' €';
+
+  let cart = loadCart();
+
+  const renderCart = () => {
+    if (!cartFab) return;
+    const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+    const totalAmt = cart.reduce((s, i) => s + i.qty * i.price, 0);
+
+    if (cartCount) cartCount.textContent = totalQty;
+    if (cartTotal) cartTotal.textContent = formatPrice(totalAmt);
+    if (cartTotalBig) cartTotalBig.textContent = formatPrice(totalAmt);
+    cartFab.classList.toggle('empty', totalQty === 0);
+
+    if (cartList) {
+      if (cart.length === 0) {
+        cartList.innerHTML = `
+          <div class="vs-cart-empty">
+            <div class="vs-cart-empty-icon">🛒</div>
+            <p>Votre panier est vide.<br>Sélectionnez vos plats favoris.</p>
+          </div>`;
+        if (cartFoot) cartFoot.style.display = 'none';
+      } else {
+        cartList.innerHTML = cart.map((item, idx) => `
+          <div class="vs-cart-item">
+            <div>
+              <div class="vs-cart-item-name">${item.name}</div>
+              <div class="vs-cart-item-unit">${formatPrice(item.price)} l'unité</div>
+              <div class="vs-cart-item-controls">
+                <button class="vs-qty-btn" data-act="dec" data-i="${idx}" aria-label="Retirer un">−</button>
+                <span class="vs-qty-val">${item.qty}</span>
+                <button class="vs-qty-btn" data-act="inc" data-i="${idx}" aria-label="Ajouter un">+</button>
+              </div>
+            </div>
+            <div>
+              <div class="vs-cart-item-price">${formatPrice(item.price * item.qty)}</div>
+              <button class="vs-cart-item-remove" data-act="rm" data-i="${idx}">Retirer</button>
+            </div>
+          </div>
+        `).join('');
+        if (cartFoot) cartFoot.style.display = 'block';
+      }
+    }
+  };
+
+  const showToast = (msg) => {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => toast.classList.remove('show'), 1800);
+  };
+
+  // add buttons
+  document.querySelectorAll('[data-add]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.vs-item');
+      const name = card.dataset.name;
+      const price = parseFloat(card.dataset.price);
+      const existing = cart.find(i => i.name === name);
+      if (existing) existing.qty += 1;
+      else cart.push({ name, price, qty: 1 });
+      saveCart(cart);
+      renderCart();
+      btn.classList.add('adding');
+      setTimeout(() => btn.classList.remove('adding'), 350);
+      cartFab.classList.add('bump');
+      setTimeout(() => cartFab.classList.remove('bump'), 400);
+      showToast(`${name} · ajouté ✓`);
+    });
+  });
+
+  // qty controls (delegated)
+  if (cartList) {
+    cartList.addEventListener('click', (e) => {
+      const t = e.target.closest('[data-act]');
+      if (!t) return;
+      const i = parseInt(t.dataset.i, 10);
+      const act = t.dataset.act;
+      if (act === 'inc') cart[i].qty += 1;
+      else if (act === 'dec') {
+        cart[i].qty -= 1;
+        if (cart[i].qty <= 0) cart.splice(i, 1);
+      } else if (act === 'rm') {
+        cart.splice(i, 1);
+      }
+      saveCart(cart);
+      renderCart();
+    });
+  }
+
+  // open / close drawer
+  const openCart = () => {
+    if (!cartDrawer) return;
+    cartDrawer.classList.add('open');
+    cartOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  const closeCart = () => {
+    if (!cartDrawer) return;
+    cartDrawer.classList.remove('open');
+    cartOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+  if (cartFab) cartFab.addEventListener('click', openCart);
+  if (cartClose) cartClose.addEventListener('click', closeCart);
+  if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeCart();
+  });
+
+  // collect / delivery toggle
+  document.querySelectorAll('.vs-cart-opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.vs-cart-opt').forEach(o => o.classList.toggle('active', o === opt));
+    });
+  });
+
+  renderCart();
+
+  // ------- PARALLAX on hero plate -------
+  const plate = document.querySelector('.vs-plate-img');
+  const hero = document.querySelector('.vs-hero');
+  if (plate && hero && !matchMedia('(max-width: 768px)').matches) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const y = window.scrollY;
+          if (y < window.innerHeight) {
+            plate.style.transform = `translateY(${y * 0.06}px) rotate(${y * 0.04}deg)`;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
+})();
+
+</script>
+</body>
+</html>

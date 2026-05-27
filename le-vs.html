@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le VS — Pizza · Kebab · Burger · Tacos · Américain</title>
+<meta name="description" content="Le VS, votre street food authentique. Pizzas au feu de bois, kebabs maison, burgers généreux, tacos fondants et spécialités américaines. Sur place, à emporter ou en livraison.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Pinyon+Script&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
 /* =========================================================
    LE VS — RESTAURANT SITE
    Palette: cream paper · coffee brown · bronze accent · script
@@ -2092,3 +2103,934 @@ body::after {
   opacity: 1;
   transform: translate(-50%, 0);
 }
+
+</style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div class="vs-preloader" id="preloader">
+  <div class="vs-preloader-inner">
+    <svg class="vs-mark-pre" viewBox="0 0 240 130" aria-hidden="true">
+      <ellipse cx="120" cy="65" rx="110" ry="52" fill="#1F1108" stroke="#C8995A" stroke-width="2"/>
+      <ellipse cx="120" cy="65" rx="102" ry="46" fill="none" stroke="#C8995A" stroke-width="0.6" opacity="0.7"/>
+      <text x="120" y="82" text-anchor="middle" font-family="Pinyon Script, serif" font-size="68" fill="#F4E9D2">Le VS</text>
+    </svg>
+    <div class="vs-pre-bar"><span></span></div>
+    <div class="vs-pre-status">PRÉPARATION DU SERVICE</div>
+  </div>
+</div>
+
+<!-- ANNOUNCEMENT STRIP -->
+<div class="vs-strip">
+  <div class="vs-strip-track">
+    <span>Click &amp; Collect</span><span class="dot">·</span>
+    <span>Livraison 7j/7</span><span class="dot">·</span>
+    <span>Viande halal certifiée</span><span class="dot">·</span>
+    <span>Ouvert jusqu'à 23h30</span><span class="dot">·</span>
+    <span>Click &amp; Collect</span><span class="dot">·</span>
+    <span>Livraison 7j/7</span><span class="dot">·</span>
+    <span>Viande halal certifiée</span><span class="dot">·</span>
+    <span>Ouvert jusqu'à 23h30</span><span class="dot">·</span>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="vs-nav" id="vsNav">
+  <a href="#top" class="vs-logo" aria-label="Le VS, accueil">
+    <svg viewBox="0 0 240 130" aria-hidden="true">
+      <ellipse cx="120" cy="65" rx="110" ry="52" fill="#1F1108" stroke="#C8995A" stroke-width="2"/>
+      <ellipse cx="120" cy="65" rx="102" ry="46" fill="none" stroke="#C8995A" stroke-width="0.6" opacity="0.7"/>
+      <text x="120" y="82" text-anchor="middle" font-family="Pinyon Script, serif" font-size="68" fill="#F4E9D2">Le VS</text>
+    </svg>
+  </a>
+  <ul class="vs-nav-links">
+    <li><a href="le-vs-menu.html">La carte</a></li>
+    <li><a href="#signatures">Signatures</a></li>
+    <li><a href="#histoire">Notre histoire</a></li>
+    <li><a href="#contact">Nous trouver</a></li>
+  </ul>
+  <div class="vs-nav-cta">
+    <a href="tel:+33100000000" class="vs-phone" aria-label="Appeler Le VS">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span>01 00 00 00 00</span>
+    </a>
+    <a href="le-vs-menu.html" class="vs-cta-primary">
+      Commander
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    <button class="vs-burger" id="vsBurger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="vs-mobile-menu" id="vsMobile">
+  <a href="le-vs-menu.html">La carte</a>
+  <a href="#signatures">Signatures</a>
+  <a href="#histoire">Notre histoire</a>
+  <a href="#contact">Nous trouver</a>
+  <a href="le-vs-menu.html" class="vs-cta-primary">Commander</a>
+</div>
+
+<!-- HERO -->
+<header class="vs-hero" id="top">
+  <div class="vs-grain"></div>
+  <div class="vs-hero-inner">
+    <div class="vs-hero-copy">
+      <div class="vs-eyebrow">
+        <span class="vs-dot"></span>
+        <span>Maison fondée &mdash; Service depuis 2014</span>
+      </div>
+      <h1 class="vs-h1">
+        L'authentique<br>
+        <span class="vs-h1-display">street food</span><br>
+        <span class="vs-h1-script">à la maison.</span>
+      </h1>
+      <p class="vs-lede">
+        Pizzas au feu de bois, kebabs marinés 24 h, burgers smashés à la commande,
+        tacos fondants et spécialités américaines. <strong>Tout est fait maison, chaque jour.</strong>
+      </p>
+
+      <div class="vs-tags">
+        <span class="vs-tag">Pizza</span>
+        <span class="vs-tag-sep">—</span>
+        <span class="vs-tag">Kebab</span>
+        <span class="vs-tag-sep">—</span>
+        <span class="vs-tag">Burger</span>
+        <span class="vs-tag-sep">—</span>
+        <span class="vs-tag">Tacos</span>
+        <span class="vs-tag-sep">—</span>
+        <span class="vs-tag">Américain</span>
+      </div>
+
+      <div class="vs-hero-ctas">
+        <a href="le-vs-menu.html" class="vs-cta-primary vs-cta-lg">
+          Voir la carte
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contact" class="vs-cta-ghost vs-cta-lg">Réserver une table</a>
+      </div>
+
+      <div class="vs-hero-meta">
+        <div class="vs-meta-item">
+          <div class="vs-meta-num"><span class="vs-counter" data-target="12">0</span><span>+</span></div>
+          <div class="vs-meta-label">années de service</div>
+        </div>
+        <div class="vs-meta-divider"></div>
+        <div class="vs-meta-item">
+          <div class="vs-meta-num"><span class="vs-counter" data-target="48">0</span></div>
+          <div class="vs-meta-label">recettes à la carte</div>
+        </div>
+        <div class="vs-meta-divider"></div>
+        <div class="vs-meta-item">
+          <div class="vs-meta-num vs-stars">★★★★★</div>
+          <div class="vs-meta-label">4,8 / 5 — 1 200 avis</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vs-hero-visual">
+      <div class="vs-plate">
+        <div class="vs-plate-glow"></div>
+        <img class="vs-plate-img"
+             src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=900&auto=format&fit=crop&q=80"
+             alt="Burger gourmand garni"
+             loading="eager">
+        <div class="vs-badge-vintage">
+          <svg viewBox="0 0 180 180" aria-hidden="true">
+            <defs>
+              <path id="circle" d="M 90, 90 m -64, 0 a 64,64 0 1,1 128,0 a 64,64 0 1,1 -128,0"/>
+            </defs>
+            <circle cx="90" cy="90" r="78" fill="#1F1108" stroke="#C8995A" stroke-width="2"/>
+            <circle cx="90" cy="90" r="72" fill="none" stroke="#C8995A" stroke-width="0.5" stroke-dasharray="2 3"/>
+            <text fill="#C8995A" font-size="11" font-family="Inter, sans-serif" letter-spacing="3" font-weight="600">
+              <textPath href="#circle" startOffset="0">
+                ★ FAIT MAISON ★ DEPUIS 2014 ★ LE VS ★ FAIT MAISON ★
+              </textPath>
+            </text>
+            <text x="90" y="80" text-anchor="middle" fill="#F4E9D2" font-family="Playfair Display, serif" font-weight="900" font-size="22">MAISON</text>
+            <text x="90" y="105" text-anchor="middle" fill="#F4E9D2" font-family="Pinyon Script, serif" font-size="26">Le VS</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="vs-floating-card">
+        <div class="vs-fc-pin">📍</div>
+        <div>
+          <div class="vs-fc-label">Aujourd'hui</div>
+          <div class="vs-fc-value">Ouvert · 11h – 23h30</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vs-hero-scroll" aria-hidden="true">
+    <span>Faites défiler</span>
+    <svg width="14" height="32" viewBox="0 0 14 32" fill="none" stroke="currentColor" stroke-width="1.4">
+      <path d="M7 2v26M2 23l5 5 5-5"/>
+    </svg>
+  </div>
+</header>
+
+<!-- CATÉGORIES -->
+<section class="vs-section vs-categories" id="categories">
+  <div class="vs-section-head">
+    <div class="vs-eyebrow centered">
+      <span class="vs-dot"></span>
+      <span>Notre carte</span>
+    </div>
+    <h2 class="vs-h2">
+      Cinq familles,<br>
+      <em class="vs-script">une seule maison.</em>
+    </h2>
+    <p class="vs-section-lede">
+      Chaque famille a son rituel : sa pâte, sa marinade, sa cuisson.
+      Choisissez votre univers — on s'occupe du reste.
+    </p>
+  </div>
+
+  <div class="vs-cat-grid">
+
+    <article class="vs-cat" data-cat="pizza">
+      <div class="vs-cat-img">
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&auto=format&fit=crop&q=80" alt="Pizza artisanale" loading="lazy">
+      </div>
+      <div class="vs-cat-body">
+        <div class="vs-cat-num">01</div>
+        <h3>Pizza</h3>
+        <p>Pâte affinée 48 h, cuisson au feu de bois. Tomate San Marzano, mozzarella fior di latte.</p>
+        <div class="vs-cat-meta">
+          <span>14 recettes</span>
+          <span class="vs-cat-from">à partir de <strong>9 €</strong></span>
+        </div>
+      </div>
+    </article>
+
+    <article class="vs-cat" data-cat="kebab">
+      <div class="vs-cat-img">
+        <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=800&auto=format&fit=crop&q=80" alt="Kebab fait maison" loading="lazy">
+      </div>
+      <div class="vs-cat-body">
+        <div class="vs-cat-num">02</div>
+        <h3>Kebab</h3>
+        <p>Viande marinée 24 h, broche tournée à la main. Pain naan ou galette, sauces maison.</p>
+        <div class="vs-cat-meta">
+          <span>8 formats</span>
+          <span class="vs-cat-from">à partir de <strong>8 €</strong></span>
+        </div>
+      </div>
+    </article>
+
+    <article class="vs-cat" data-cat="burger">
+      <div class="vs-cat-img">
+        <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=800&auto=format&fit=crop&q=80" alt="Burger maison" loading="lazy">
+      </div>
+      <div class="vs-cat-body">
+        <div class="vs-cat-num">03</div>
+        <h3>Burger</h3>
+        <p>Steak haché du jour, pain brioché beurré, cheddar affiné. Smashé à la commande.</p>
+        <div class="vs-cat-meta">
+          <span>12 recettes</span>
+          <span class="vs-cat-from">à partir de <strong>10 €</strong></span>
+        </div>
+      </div>
+    </article>
+
+    <article class="vs-cat" data-cat="tacos">
+      <div class="vs-cat-img">
+        <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=800&auto=format&fit=crop&q=80" alt="Tacos français" loading="lazy">
+      </div>
+      <div class="vs-cat-body">
+        <div class="vs-cat-num">04</div>
+        <h3>Tacos</h3>
+        <p>Galette grillée à la plancha, sauce fromagère onctueuse. 1, 2 ou 3 viandes au choix.</p>
+        <div class="vs-cat-meta">
+          <span>3 tailles</span>
+          <span class="vs-cat-from">à partir de <strong>7,50 €</strong></span>
+        </div>
+      </div>
+    </article>
+
+    <article class="vs-cat" data-cat="americain">
+      <div class="vs-cat-img">
+        <img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=800&auto=format&fit=crop&q=80" alt="Tenders et frites" loading="lazy">
+      </div>
+      <div class="vs-cat-body">
+        <div class="vs-cat-num">05</div>
+        <h3>Américain</h3>
+        <p>Tenders croustillants, wings glacées, ribs marinées, ailes buffalo. Le grand classique.</p>
+        <div class="vs-cat-meta">
+          <span>9 plats</span>
+          <span class="vs-cat-from">à partir de <strong>8 €</strong></span>
+        </div>
+      </div>
+    </article>
+
+    <article class="vs-cat vs-cat-cta">
+      <div class="vs-cat-num">+</div>
+      <h3>Voir la<br>carte<br>complète</h3>
+      <p>48 plats, desserts et boissons.</p>
+      <a href="le-vs-menu.html" class="vs-cta-ghost vs-cta-on-dark">Découvrir</a>
+    </article>
+
+  </div>
+</section>
+
+<!-- SIGNATURES -->
+<section class="vs-section vs-signatures" id="signatures">
+  <div class="vs-section-head">
+    <div class="vs-eyebrow centered light">
+      <span class="vs-dot"></span>
+      <span>Les plats du patron</span>
+    </div>
+    <h2 class="vs-h2 light">
+      Signatures<br>
+      <em class="vs-script">de la maison.</em>
+    </h2>
+  </div>
+
+  <div class="vs-sig-grid">
+
+    <article class="vs-sig">
+      <div class="vs-sig-img">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=900&auto=format&fit=crop&q=80" alt="Tacos signature Le VS" loading="lazy">
+        <div class="vs-sig-ribbon">★ TOP VENTE</div>
+      </div>
+      <div class="vs-sig-body">
+        <div class="vs-sig-row">
+          <h3>Le VS Tacos</h3>
+          <div class="vs-price">12,90 €</div>
+        </div>
+        <p>Triple viande, sauce fromagère du chef, oignons confits, frites maison à l'intérieur.</p>
+        <div class="vs-sig-meta">
+          <span>🌶️ Doux à fort</span>
+          <span>· Halal</span>
+          <span>· 850 g</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="vs-sig">
+      <div class="vs-sig-img">
+        <img src="https://images.unsplash.com/photo-1606131731446-5568d87113aa?w=900&auto=format&fit=crop&q=80" alt="Pizza signature" loading="lazy">
+      </div>
+      <div class="vs-sig-body">
+        <div class="vs-sig-row">
+          <h3>Pizza La Maison</h3>
+          <div class="vs-price">14,50 €</div>
+        </div>
+        <p>San Marzano, fior di latte, jambon truffé, roquette, copeaux de parmesan, huile basilic.</p>
+        <div class="vs-sig-meta">
+          <span>🔥 Feu de bois</span>
+          <span>· 31 cm</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="vs-sig">
+      <div class="vs-sig-img">
+        <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=900&auto=format&fit=crop&q=80" alt="Smash burger signature" loading="lazy">
+        <div class="vs-sig-ribbon">★ NOUVEAU</div>
+      </div>
+      <div class="vs-sig-body">
+        <div class="vs-sig-row">
+          <h3>Smash Le VS</h3>
+          <div class="vs-price">13,90 €</div>
+        </div>
+        <p>Double steak smashé, cheddar fondu, bacon, oignons caramélisés, sauce barbecue maison.</p>
+        <div class="vs-sig-meta">
+          <span>🥩 200 g</span>
+          <span>· Halal</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="vs-sig">
+      <div class="vs-sig-img">
+        <img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=900&auto=format&fit=crop&q=80" alt="Kebab maison" loading="lazy">
+      </div>
+      <div class="vs-sig-body">
+        <div class="vs-sig-row">
+          <h3>Kebab du Patron</h3>
+          <div class="vs-price">11,00 €</div>
+        </div>
+        <p>Viande marinée 24 h, naan toasté, salade, tomate, oignon rouge, sauce yaourt menthe.</p>
+        <div class="vs-sig-meta">
+          <span>🥙 Galette ou Naan</span>
+          <span>· Halal</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- NOTRE HISTOIRE -->
+<section class="vs-section vs-story" id="histoire">
+  <div class="vs-story-inner">
+
+    <div class="vs-story-visual">
+      <div class="vs-story-img main">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&auto=format&fit=crop&q=80" alt="L'équipe en cuisine" loading="lazy">
+      </div>
+      <div class="vs-story-img inset">
+        <img src="https://images.unsplash.com/photo-1542528180-a1208c5169a5?w=600&auto=format&fit=crop&q=80" alt="Pizza dans le four à bois" loading="lazy">
+      </div>
+      <div class="vs-story-stamp">
+        <div class="vs-stamp-year">2014</div>
+        <div class="vs-stamp-line">— OUVERTURE —</div>
+      </div>
+    </div>
+
+    <div class="vs-story-copy">
+      <div class="vs-eyebrow">
+        <span class="vs-dot"></span>
+        <span>Notre histoire</span>
+      </div>
+      <h2 class="vs-h2">
+        Une cuisine,<br>
+        <em class="vs-script">cinq passions.</em>
+      </h2>
+      <p class="vs-story-text">
+        Le VS, c'est d'abord une histoire de famille. En 2014, on a ouvert un comptoir
+        de quartier avec une idée simple&nbsp;: réunir sous le même toit les plats qu'on
+        aime vraiment manger — sans compromis sur les produits, sans recettes industrielles,
+        sans raccourcis.
+      </p>
+      <p class="vs-story-text">
+        Aujourd'hui, dix ans plus tard, on est toujours en cuisine chaque jour, à pétrir
+        la pâte le matin et à mariner la viande la veille. <strong>Tout est fait maison.</strong>
+      </p>
+
+      <div class="vs-pillars">
+        <div class="vs-pillar">
+          <div class="vs-pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          </div>
+          <div>
+            <h4>Fait maison</h4>
+            <p>Pâtes, sauces et marinades préparées chaque matin.</p>
+          </div>
+        </div>
+        <div class="vs-pillar">
+          <div class="vs-pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 7l-8 10-4-5M3 17l5-5"/></svg>
+          </div>
+          <div>
+            <h4>Produits frais</h4>
+            <p>Boucher de quartier, primeur local, fromages français.</p>
+          </div>
+        </div>
+        <div class="vs-pillar">
+          <div class="vs-pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </div>
+          <div>
+            <h4>Rapide</h4>
+            <p>Préparé à la commande, prêt en 12 minutes.</p>
+          </div>
+        </div>
+        <div class="vs-pillar">
+          <div class="vs-pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l2.39 4.84L20 7.62l-3.91 3.81.92 5.4L12 14.27 6.99 16.83l.92-5.4L4 7.62l5.61-.78L12 2z"/></svg>
+          </div>
+          <div>
+            <h4>Certifié halal</h4>
+            <p>Viandes halal certifiées, traçabilité sur demande.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA BANDEAU -->
+<section class="vs-cta-band" id="commander">
+  <div class="vs-grain"></div>
+  <div class="vs-cta-band-inner">
+    <div class="vs-cta-band-mark">
+      <svg viewBox="0 0 240 130" aria-hidden="true">
+        <ellipse cx="120" cy="65" rx="110" ry="52" fill="none" stroke="#C8995A" stroke-width="2"/>
+        <ellipse cx="120" cy="65" rx="102" ry="46" fill="none" stroke="#C8995A" stroke-width="0.6" opacity="0.7"/>
+        <text x="120" y="82" text-anchor="middle" font-family="Pinyon Script, serif" font-size="68" fill="#F4E9D2">Le VS</text>
+      </svg>
+    </div>
+    <h2 class="vs-h2 light huge">
+      Une envie&nbsp;? <em class="vs-script">on prépare.</em>
+    </h2>
+    <p class="vs-cta-band-lede">
+      Sur place, à emporter ou en livraison. Prêt en 12 minutes.
+    </p>
+    <div class="vs-cta-band-ctas">
+      <a href="tel:+33100000000" class="vs-cta-primary vs-cta-lg">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Commander par téléphone
+      </a>
+      <a href="#contact" class="vs-cta-ghost vs-cta-lg vs-cta-on-dark">Réserver une table</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / HORAIRES -->
+<section class="vs-section vs-contact" id="contact">
+  <div class="vs-section-head">
+    <div class="vs-eyebrow centered">
+      <span class="vs-dot"></span>
+      <span>Nous trouver</span>
+    </div>
+    <h2 class="vs-h2">
+      Passez nous voir<br>
+      <em class="vs-script">on vous attend.</em>
+    </h2>
+  </div>
+
+  <div class="vs-contact-grid">
+
+    <div class="vs-info-card">
+      <div class="vs-info-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <h3>Adresse</h3>
+      <p>12 rue de la République<br>75011 Paris</p>
+      <a href="https://maps.google.com" target="_blank" rel="noopener" class="vs-info-link">
+        Itinéraire
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l10-10M7 7h10v10"/></svg>
+      </a>
+    </div>
+
+    <div class="vs-info-card">
+      <div class="vs-info-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      </div>
+      <h3>Horaires</h3>
+      <ul class="vs-hours">
+        <li><span>Lun &mdash; Jeu</span><strong>11h &mdash; 23h</strong></li>
+        <li><span>Vendredi</span><strong>11h &mdash; 00h</strong></li>
+        <li><span>Samedi</span><strong>11h &mdash; 00h</strong></li>
+        <li class="closed"><span>Dimanche</span><strong>Fermé</strong></li>
+      </ul>
+    </div>
+
+    <div class="vs-info-card">
+      <div class="vs-info-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <h3>Contact</h3>
+      <p>
+        <a href="tel:+33100000000">01 00 00 00 00</a><br>
+        <a href="mailto:bonjour@levs.fr">bonjour@levs.fr</a>
+      </p>
+      <div class="vs-socials">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RESERVATION FORM -->
+  <div class="vs-reserve">
+    <div class="vs-reserve-copy">
+      <h3 class="vs-h3">Réservez votre table</h3>
+      <p>Réponse confirmée sous 1 h. Pour les groupes de + de 8, appelez-nous directement.</p>
+    </div>
+    <form class="vs-reserve-form" onsubmit="event.preventDefault(); document.getElementById('vsReserveOk').style.display='flex';">
+      <div class="vs-field">
+        <label>Date</label>
+        <input type="date" required>
+      </div>
+      <div class="vs-field">
+        <label>Heure</label>
+        <input type="time" required>
+      </div>
+      <div class="vs-field">
+        <label>Couverts</label>
+        <select required>
+          <option>2 personnes</option>
+          <option>3 personnes</option>
+          <option>4 personnes</option>
+          <option>5 personnes</option>
+          <option>6 personnes</option>
+          <option>7 personnes</option>
+          <option>8 personnes</option>
+        </select>
+      </div>
+      <div class="vs-field">
+        <label>Téléphone</label>
+        <input type="tel" placeholder="06 12 34 56 78" required>
+      </div>
+      <button type="submit" class="vs-cta-primary vs-cta-lg">
+        Réserver
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+      <div class="vs-reserve-ok" id="vsReserveOk">
+        ✓ Demande envoyée — nous vous confirmons sous 1 h.
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="vs-footer">
+  <div class="vs-footer-inner">
+    <div class="vs-footer-brand">
+      <svg viewBox="0 0 240 130" class="vs-footer-logo" aria-hidden="true">
+        <ellipse cx="120" cy="65" rx="110" ry="52" fill="none" stroke="#C8995A" stroke-width="2"/>
+        <ellipse cx="120" cy="65" rx="102" ry="46" fill="none" stroke="#C8995A" stroke-width="0.6" opacity="0.7"/>
+        <text x="120" y="82" text-anchor="middle" font-family="Pinyon Script, serif" font-size="68" fill="#F4E9D2">Le VS</text>
+      </svg>
+      <p class="vs-footer-tag">Pizza &mdash; Kebab &mdash; Burger &mdash; Tacos &mdash; Américain</p>
+      <p class="vs-footer-desc">L'authentique street food, faite maison chaque jour depuis 2014.</p>
+    </div>
+
+    <div class="vs-footer-col">
+      <h5>La carte</h5>
+      <a href="le-vs-menu.html#pizza">Pizza</a>
+      <a href="le-vs-menu.html#kebab">Kebab</a>
+      <a href="le-vs-menu.html#burger">Burger</a>
+      <a href="le-vs-menu.html#tacos">Tacos</a>
+      <a href="le-vs-menu.html#americain">Américain</a>
+    </div>
+
+    <div class="vs-footer-col">
+      <h5>Maison</h5>
+      <a href="#histoire">Notre histoire</a>
+      <a href="#contact">Nous trouver</a>
+      <a href="le-vs-menu.html">Commander</a>
+      <a href="#contact">Réserver</a>
+    </div>
+
+    <div class="vs-footer-col">
+      <h5>Suivez-nous</h5>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">TikTok</a>
+      <a href="mailto:bonjour@levs.fr">bonjour@levs.fr</a>
+    </div>
+  </div>
+
+  <div class="vs-footer-bottom">
+    <span>© 2025 Le VS &mdash; Tous droits réservés.</span>
+    <span><a href="#">Mentions légales</a> · <a href="#">Confidentialité</a> · <a href="#">Allergènes</a></span>
+  </div>
+</footer>
+
+<script>
+/* LE VS — interactions */
+
+(function () {
+  'use strict';
+
+  // ------- PRELOADER -------
+  const preloader = document.getElementById('preloader');
+  window.addEventListener('load', () => {
+    setTimeout(() => preloader && preloader.classList.add('done'), 600);
+  });
+
+  // ------- NAV scroll state -------
+  const nav = document.getElementById('vsNav');
+  const onScroll = () => {
+    if (window.scrollY > 30) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ------- MOBILE MENU -------
+  const burger = document.getElementById('vsBurger');
+  const mobile = document.getElementById('vsMobile');
+  if (burger && mobile) {
+    burger.addEventListener('click', () => {
+      const open = burger.classList.toggle('active');
+      mobile.classList.toggle('active', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobile.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        burger.classList.remove('active');
+        mobile.classList.remove('active');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  // ------- SCROLL REVEAL -------
+  const revealTargets = document.querySelectorAll(
+    '.vs-section-head, .vs-cat, .vs-sig, .vs-story-visual, .vs-story-copy, ' +
+    '.vs-info-card, .vs-reserve, .vs-cta-band-inner, .vs-hero-copy, .vs-hero-visual'
+  );
+  revealTargets.forEach(el => el.classList.add('vs-reveal'));
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // staggered reveal for siblings in same grid
+          const parent = entry.target.parentElement;
+          const idx = Array.from(parent.children).indexOf(entry.target);
+          entry.target.style.transitionDelay = `${Math.min(idx * 80, 400)}ms`;
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    revealTargets.forEach(el => io.observe(el));
+  } else {
+    revealTargets.forEach(el => el.classList.add('visible'));
+  }
+
+  // ------- COUNTERS -------
+  const counters = document.querySelectorAll('.vs-counter');
+  const animateCount = (el) => {
+    const target = parseInt(el.dataset.target, 10) || 0;
+    const duration = 1400;
+    const start = performance.now();
+    const tick = (t) => {
+      const p = Math.min(1, (t - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * target);
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  if ('IntersectionObserver' in window) {
+    const cio = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCount(e.target);
+          cio.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => cio.observe(c));
+  } else {
+    counters.forEach(animateCount);
+  }
+
+  // ------- SMOOTH SCROLL with sticky nav offset -------
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id.length <= 1) return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      const navH = nav.offsetHeight + 12;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - navH;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+  // ------- MENU PAGE: filter & cart -------
+  const cats = document.getElementById('vsMenuCats');
+  if (cats) {
+    const buttons = cats.querySelectorAll('.vs-menu-cat-btn');
+    const sections = document.querySelectorAll('.vs-menu-section');
+
+    // category filter
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.dataset.cat;
+        buttons.forEach(b => b.classList.toggle('active', b === btn));
+        if (cat === 'all') {
+          sections.forEach(s => s.style.display = '');
+          return;
+        }
+        // jump to the section anchor smoothly
+        const target = document.getElementById(cat);
+        if (target) {
+          sections.forEach(s => s.style.display = '');
+          const navH = (nav.offsetHeight || 60) + cats.offsetHeight + 12;
+          const top = target.getBoundingClientRect().top + window.pageYOffset - navH;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // mark active category while scrolling
+    if ('IntersectionObserver' in window) {
+      const sio = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const id = e.target.id;
+            buttons.forEach(b => {
+              b.classList.toggle('active', b.dataset.cat === id);
+            });
+          }
+        });
+      }, { rootMargin: '-40% 0px -50% 0px' });
+      sections.forEach(s => sio.observe(s));
+    }
+  }
+
+  // ------- CART -------
+  const CART_KEY = 'levs_cart_v1';
+  const cartFab = document.getElementById('vsCartFab');
+  const cartCount = document.getElementById('vsCartCount');
+  const cartTotal = document.getElementById('vsCartTotal');
+  const cartTotalBig = document.getElementById('vsCartTotalBig');
+  const cartDrawer = document.getElementById('vsCartDrawer');
+  const cartOverlay = document.getElementById('vsCartOverlay');
+  const cartClose = document.getElementById('vsCartClose');
+  const cartList = document.getElementById('vsCartList');
+  const cartFoot = document.getElementById('vsCartFoot');
+  const toast = document.getElementById('vsToast');
+
+  const loadCart = () => {
+    try {
+      return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    } catch (_) { return []; }
+  };
+  const saveCart = (c) => {
+    try { localStorage.setItem(CART_KEY, JSON.stringify(c)); } catch (_) {}
+  };
+  const formatPrice = (n) => n.toFixed(2).replace('.', ',') + ' €';
+
+  let cart = loadCart();
+
+  const renderCart = () => {
+    if (!cartFab) return;
+    const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+    const totalAmt = cart.reduce((s, i) => s + i.qty * i.price, 0);
+
+    if (cartCount) cartCount.textContent = totalQty;
+    if (cartTotal) cartTotal.textContent = formatPrice(totalAmt);
+    if (cartTotalBig) cartTotalBig.textContent = formatPrice(totalAmt);
+    cartFab.classList.toggle('empty', totalQty === 0);
+
+    if (cartList) {
+      if (cart.length === 0) {
+        cartList.innerHTML = `
+          <div class="vs-cart-empty">
+            <div class="vs-cart-empty-icon">🛒</div>
+            <p>Votre panier est vide.<br>Sélectionnez vos plats favoris.</p>
+          </div>`;
+        if (cartFoot) cartFoot.style.display = 'none';
+      } else {
+        cartList.innerHTML = cart.map((item, idx) => `
+          <div class="vs-cart-item">
+            <div>
+              <div class="vs-cart-item-name">${item.name}</div>
+              <div class="vs-cart-item-unit">${formatPrice(item.price)} l'unité</div>
+              <div class="vs-cart-item-controls">
+                <button class="vs-qty-btn" data-act="dec" data-i="${idx}" aria-label="Retirer un">−</button>
+                <span class="vs-qty-val">${item.qty}</span>
+                <button class="vs-qty-btn" data-act="inc" data-i="${idx}" aria-label="Ajouter un">+</button>
+              </div>
+            </div>
+            <div>
+              <div class="vs-cart-item-price">${formatPrice(item.price * item.qty)}</div>
+              <button class="vs-cart-item-remove" data-act="rm" data-i="${idx}">Retirer</button>
+            </div>
+          </div>
+        `).join('');
+        if (cartFoot) cartFoot.style.display = 'block';
+      }
+    }
+  };
+
+  const showToast = (msg) => {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => toast.classList.remove('show'), 1800);
+  };
+
+  // add buttons
+  document.querySelectorAll('[data-add]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.vs-item');
+      const name = card.dataset.name;
+      const price = parseFloat(card.dataset.price);
+      const existing = cart.find(i => i.name === name);
+      if (existing) existing.qty += 1;
+      else cart.push({ name, price, qty: 1 });
+      saveCart(cart);
+      renderCart();
+      btn.classList.add('adding');
+      setTimeout(() => btn.classList.remove('adding'), 350);
+      cartFab.classList.add('bump');
+      setTimeout(() => cartFab.classList.remove('bump'), 400);
+      showToast(`${name} · ajouté ✓`);
+    });
+  });
+
+  // qty controls (delegated)
+  if (cartList) {
+    cartList.addEventListener('click', (e) => {
+      const t = e.target.closest('[data-act]');
+      if (!t) return;
+      const i = parseInt(t.dataset.i, 10);
+      const act = t.dataset.act;
+      if (act === 'inc') cart[i].qty += 1;
+      else if (act === 'dec') {
+        cart[i].qty -= 1;
+        if (cart[i].qty <= 0) cart.splice(i, 1);
+      } else if (act === 'rm') {
+        cart.splice(i, 1);
+      }
+      saveCart(cart);
+      renderCart();
+    });
+  }
+
+  // open / close drawer
+  const openCart = () => {
+    if (!cartDrawer) return;
+    cartDrawer.classList.add('open');
+    cartOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  const closeCart = () => {
+    if (!cartDrawer) return;
+    cartDrawer.classList.remove('open');
+    cartOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+  if (cartFab) cartFab.addEventListener('click', openCart);
+  if (cartClose) cartClose.addEventListener('click', closeCart);
+  if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeCart();
+  });
+
+  // collect / delivery toggle
+  document.querySelectorAll('.vs-cart-opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.vs-cart-opt').forEach(o => o.classList.toggle('active', o === opt));
+    });
+  });
+
+  renderCart();
+
+  // ------- PARALLAX on hero plate -------
+  const plate = document.querySelector('.vs-plate-img');
+  const hero = document.querySelector('.vs-hero');
+  if (plate && hero && !matchMedia('(max-width: 768px)').matches) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const y = window.scrollY;
+          if (y < window.innerHeight) {
+            plate.style.transform = `translateY(${y * 0.06}px) rotate(${y * 0.04}deg)`;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
+})();
+
+</script>
+</body>
+</html>
