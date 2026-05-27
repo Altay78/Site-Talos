@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Automatisations — Talos</title>
-<meta name="description" content="Les six process internes que Talos automatise pour les artisans du BTP : devis, relances, réponse client, facturation, tri inbox, suivi paiements.">
+<meta name="description" content="Les six process internes que Talos automatise pour tout professionnel : devis, relances, réponse client, facturation, tri inbox, suivi paiements.">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -37,7 +37,7 @@
     <a href="methode.html" data-cursor>Méthode</a>
     <a href="tarifs.html" data-cursor>Tarifs</a>
   </div>
-  <a href="reserver.html" class="cta" data-cursor>Réserver une démo<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+  <a href="reserver.html" class="cta" data-cursor><span class="cta-full">Réserver une démo</span><span class="cta-short">Démo</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
 </nav>
 
 <!-- PAGE HEAD -->
@@ -53,9 +53,9 @@
     <div>
       <div class="auto-detail-num">01 · DEVIS EXPRESS</div>
       <h2>Devis générés depuis vos infos internes.</h2>
-      <p>Vous prenez une photo du chantier, vous dictez deux phrases. Talos puise dans <strong>votre grille tarifaire, vos coefficients de marge et vos fournisseurs</strong>. Il rédige le devis, le met en page à votre charte, et vous le présente prêt à signer.</p>
+      <p>Vous prenez une photo du dossier, vous dictez deux phrases. Talos puise dans <strong>votre grille tarifaire, vos coefficients et vos fournisseurs</strong>. Il rédige le devis, le met en page à votre charte, et vous le présente prêt à signer.</p>
       <ul class="feats">
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Reconnaissance visuelle du chantier (compteur, métrés, plans)</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Reconnaissance visuelle du dossier (photos, plans, documents)</li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Dictée vocale en français, prise en compte des particularités</li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Validation finale par vous d'un seul clic avant envoi</li>
       </ul>
@@ -63,17 +63,34 @@
     </div>
     <div class="auto-mock">
       <div class="mock-head">
-        <div class="mock-title"><span style="width:5px;height:5px;border-radius:50%;background:var(--bronze);display:inline-block;"></span>DEVIS #4221 · BAGNOLET</div>
+        <div class="mock-title"><span style="width:5px;height:5px;border-radius:50%;background:var(--bronze);display:inline-block;"></span>DEVIS #4221 · CLIENT MAXIME</div>
         <div class="mock-dots"><span class="live"></span><span></span><span></span></div>
+      </div>
+      <!-- MOTION : photo → flux → devis -->
+      <div class="mock-motion motion-devis">
+        <div class="mm-phone">
+          <div class="mm-phone-screen"></div>
+        </div>
+        <span class="mm-mic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 11v1a7 7 0 0014 0v-1"/></svg>
+          DICTÉE
+        </span>
+        <div class="mm-flow"></div>
+        <div class="mm-doc">
+          <div class="mm-doc-line"></div>
+          <div class="mm-doc-line"></div>
+          <div class="mm-doc-line short"></div>
+          <div class="mm-doc-total">3 488 €</div>
+        </div>
       </div>
       <div class="mock-line">
         <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="1"/><circle cx="12" cy="13" r="3"/></svg></div>
-        <div class="mline-text"><span class="mline-main">Photo chantier reçue</span><span class="mline-sub">SDB · 4.2 m² · WC suspendu</span></div>
+        <div class="mline-text"><span class="mline-main">Photo dossier reçue</span><span class="mline-sub">12 éléments à chiffrer</span></div>
         <span class="mline-val">8 s</span>
       </div>
       <div class="mock-line">
         <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 11v1a7 7 0 0014 0v-1"/></svg></div>
-        <div class="mline-text"><span class="mline-main">Dictée vocale traitée</span><span class="mline-sub">« ardoises moyennes, 3 sem. »</span></div>
+        <div class="mline-text"><span class="mline-main">Dictée vocale traitée</span><span class="mline-sub">« gamme moyenne, 3 sem. »</span></div>
         <span class="mline-val">11 s</span>
       </div>
       <div class="mock-line">
@@ -83,7 +100,7 @@
       </div>
       <div class="mock-line">
         <div class="mline-icon" style="background:rgba(126,149,135,0.18);border-color:rgba(126,149,135,0.35);color:var(--olivier);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="mline-text"><span class="mline-main" style="color:var(--olivier);">Envoyé à Maxime · 12 min après la visite</span><span class="mline-sub">Notifications activées</span></div>
+        <div class="mline-text"><span class="mline-main" style="color:var(--olivier);">Envoyé à Maxime · 12 min après le rdv</span><span class="mline-sub">Notifications activées</span></div>
         <span class="mline-val olivier">OK</span>
       </div>
       <div class="mock-foot">
@@ -102,7 +119,7 @@
       <h2>Relances automatiques au ton humain.</h2>
       <p>J+3, J+7, J+14 — Talos relance vos devis non signés et vos factures en retard. <strong>Vouvoiement, ton respectueux, signature à votre nom</strong>. Trois variantes de message, jamais le même. Vous décidez quand stopper.</p>
       <ul class="feats">
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Messages adaptés au métier et à la relation client</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Messages adaptés à votre métier et à votre relation client</li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Stop immédiat si le client répond ou signe</li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Notification vous prévient si une réponse demande votre attention</li>
       </ul>
@@ -110,8 +127,30 @@
     </div>
     <div class="auto-mock">
       <div class="mock-head">
-        <div class="mock-title">RELANCES · CHANTIERS EN ATTENTE</div>
+        <div class="mock-title">RELANCES · DEVIS EN ATTENTE</div>
         <div class="mock-dots"><span class="live"></span><span></span><span></span></div>
+      </div>
+      <!-- MOTION : timeline J+3 / J+7 / J+14 + avions papier -->
+      <div class="mock-motion motion-relances">
+        <div class="mm-timeline">
+          <div class="mm-rail"></div>
+          <div class="mm-day day-3">
+            <span class="mm-day-label">J+3</span>
+            <span class="mm-marker"></span>
+            <svg class="mm-plane" viewBox="0 0 24 24" fill="currentColor"><path d="M22 2L2 11l8 2 2 8 10-19z"/></svg>
+          </div>
+          <div class="mm-day day-7">
+            <span class="mm-day-label">J+7</span>
+            <span class="mm-marker"></span>
+            <svg class="mm-plane" viewBox="0 0 24 24" fill="currentColor"><path d="M22 2L2 11l8 2 2 8 10-19z"/></svg>
+          </div>
+          <div class="mm-day day-14">
+            <span class="mm-day-label">J+14</span>
+            <span class="mm-marker"></span>
+            <svg class="mm-plane" viewBox="0 0 24 24" fill="currentColor"><path d="M22 2L2 11l8 2 2 8 10-19z"/></svg>
+          </div>
+        </div>
+        <div class="mm-counter">+28% SIGNÉS</div>
       </div>
       <div class="mock-line">
         <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 7 9-7"/></svg></div>
@@ -151,7 +190,7 @@
       <ul class="feats">
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Email, SMS et WhatsApp pris en charge</li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Réponse en moins de 9 secondes en moyenne</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Escalade automatique en cas d'urgence réelle (fuite, panne)</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Escalade automatique en cas d'urgence réelle</li>
       </ul>
       <a href="reserver.html" class="cta-bronze" data-cursor>Voir une démo en direct<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
     </div>
@@ -160,6 +199,15 @@
         <div class="mock-title">TICKETS NUIT · 21H → 07H</div>
         <div class="mock-dots"><span class="live"></span><span></span><span></span></div>
       </div>
+      <!-- MOTION : cycle jour/nuit + bulles de conversation -->
+      <div class="mock-motion motion-response">
+        <div class="mm-clock"></div>
+        <div class="mm-bubbles">
+          <div class="mm-bubble in">« Vous êtes dispo jeudi ? »</div>
+          <div class="mm-bubble typing"><span></span><span></span><span></span></div>
+          <div class="mm-bubble out">Jeudi 14h ✓</div>
+        </div>
+      </div>
       <div class="mock-line">
         <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.93.36 1.84.7 2.7a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.38-1.38a2 2 0 012.11-.45c.86.34 1.77.58 2.7.7A2 2 0 0122 16.92z"/></svg></div>
         <div class="mline-text"><span class="mline-main">22:14 · Karim B.</span><span class="mline-sub">« Vous êtes dispo jeudi ? »</span></div>
@@ -167,12 +215,12 @@
       </div>
       <div class="mock-line">
         <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 7 9-7"/></svg></div>
-        <div class="mline-text"><span class="mline-main">23:48 · Mme Picard</span><span class="mline-sub">« Tarif moyen ravalement ? »</span></div>
+        <div class="mline-text"><span class="mline-main">23:48 · Mme Picard</span><span class="mline-sub">« Tarif moyen prestation ? »</span></div>
         <span class="mline-val">12 s</span>
       </div>
       <div class="mock-line">
         <div class="mline-icon" style="background:rgba(216,117,84,0.18);border-color:rgba(216,117,84,0.35);color:var(--terracotta);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-        <div class="mline-text"><span class="mline-main" style="color:var(--terracotta);">02:03 · URGENCE · fuite</span><span class="mline-sub">Transféré sur votre tél. immédiatement</span></div>
+        <div class="mline-text"><span class="mline-main" style="color:var(--terracotta);">02:03 · URGENCE PRIORITAIRE</span><span class="mline-sub">Transférée sur votre tél. immédiatement</span></div>
         <span class="mline-val" style="color:var(--terracotta);">VOUS</span>
       </div>
       <div class="mock-line">
@@ -207,14 +255,38 @@
         <div class="mock-title">FACTURATION · CETTE SEMAINE</div>
         <div class="mock-dots"><span class="live"></span><span></span><span></span></div>
       </div>
+      <!-- MOTION : facture émise · tampon · export -->
+      <div class="mock-motion motion-billing">
+        <div class="mm-bill">
+          <div class="mm-bill-paper">
+            <div class="mm-bill-line"></div>
+            <div class="mm-bill-line short"></div>
+            <div class="mm-bill-line"></div>
+            <div class="mm-bill-total">1 044 €</div>
+          </div>
+          <div class="mm-stamp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+        </div>
+        <div class="mm-arrow">→</div>
+        <div class="mm-export">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="12" y1="18" x2="12" y2="12"/>
+            <polyline points="9 15 12 12 15 15"/>
+          </svg>
+          <span>EXPORT</span>
+        </div>
+      </div>
       <div class="mock-line">
         <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-        <div class="mline-text"><span class="mline-main">#3098 · Plomberie Dupont</span><span class="mline-sub">Acompte 30% · à la signature</span></div>
+        <div class="mline-text"><span class="mline-main">#3098 · M. Dupont</span><span class="mline-sub">Acompte 30% · à la signature</span></div>
         <span class="mline-val">1 044 €</span>
       </div>
       <div class="mock-line">
         <div class="mline-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-        <div class="mline-text"><span class="mline-main">#3099 · Mme Lucas</span><span class="mline-sub">Situation mi-chantier</span></div>
+        <div class="mline-text"><span class="mline-main">#3099 · Mme Lucas</span><span class="mline-sub">Acompte intermédiaire</span></div>
         <span class="mline-val">4 200 €</span>
       </div>
       <div class="mock-line">
@@ -254,9 +326,28 @@
         <div class="mock-title">RÉSUMÉ DU 25/05 · 07:00</div>
         <div class="mock-dots"><span class="live"></span><span></span><span></span></div>
       </div>
+      <!-- MOTION : cloud d'emails → entonnoir → 4 catégories -->
+      <div class="mock-motion motion-inbox">
+        <div class="mm-cloud">
+          <span class="mm-mail-dot"></span><span class="mm-mail-dot"></span><span class="mm-mail-dot"></span>
+          <span class="mm-mail-dot"></span><span class="mm-mail-dot"></span><span class="mm-mail-dot"></span>
+          <span class="mm-mail-dot"></span><span class="mm-mail-dot"></span><span class="mm-mail-dot"></span>
+          <span class="mm-mail-dot"></span><span class="mm-mail-dot"></span><span class="mm-mail-dot"></span>
+        </div>
+        <svg class="mm-funnel" viewBox="0 0 40 60" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 6 L20 30 L37 6"/>
+          <path d="M16 30 v22 h8 v-22"/>
+        </svg>
+        <div class="mm-categories">
+          <div class="mm-cat urgent"><span>URGENT</span><span>3</span></div>
+          <div class="mm-cat opp"><span>OPPORTUNITÉS</span><span>2</span></div>
+          <div class="mm-cat ok"><span>TRAITÉS AUTO</span><span>7</span></div>
+          <div class="mm-cat archive"><span>ARCHIVÉS</span><span>68</span></div>
+        </div>
+      </div>
       <div class="mock-line">
         <div class="mline-icon" style="background:rgba(216,117,84,0.18);border-color:rgba(216,117,84,0.35);color:var(--terracotta);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg></div>
-        <div class="mline-text"><span class="mline-main" style="color:var(--terracotta);">3 urgences à traiter</span><span class="mline-sub">Fuite Argenteuil · livraison ardoises · RDV Bachelier</span></div>
+        <div class="mline-text"><span class="mline-main" style="color:var(--terracotta);">3 urgences à traiter</span><span class="mline-sub">3 dossiers prioritaires repérés</span></div>
         <span class="mline-val" style="color:var(--terracotta);">URGENT</span>
       </div>
       <div class="mock-line">
@@ -266,7 +357,7 @@
       </div>
       <div class="mock-line">
         <div class="mline-icon" style="background:rgba(126,149,135,0.18);border-color:rgba(126,149,135,0.35);color:var(--olivier);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="mline-text"><span class="mline-main" style="color:var(--olivier);">2 nouvelles opportunités</span><span class="mline-sub">Devis demandés par M. Lambert & Mme Petit</span></div>
+        <div class="mline-text"><span class="mline-main" style="color:var(--olivier);">2 nouvelles opportunités</span><span class="mline-sub">Demandes entrantes · M. Lambert & Mme Petit</span></div>
         <span class="mline-val olivier">À FAIRE</span>
       </div>
       <div class="mock-line">
@@ -301,6 +392,23 @@
         <div class="mock-title">TRÉSO · LIVE</div>
         <div class="mock-dots"><span class="live"></span><span></span><span></span></div>
       </div>
+      <!-- MOTION : € qui montent + jauge qui se remplit -->
+      <div class="mock-motion motion-pay">
+        <div class="mm-coins">
+          <span class="mm-euro">€</span>
+          <span class="mm-euro">€</span>
+          <span class="mm-euro">€</span>
+          <span class="mm-euro">€</span>
+          <span class="mm-euro">€</span>
+        </div>
+        <div class="mm-meter">
+          <div class="mm-meter-label">RAPPROCHEMENT EN COURS</div>
+          <div class="mm-meter-bar">
+            <div class="mm-meter-fill"></div>
+          </div>
+          <div class="mm-meter-counter">+ 2 514</div>
+        </div>
+      </div>
       <div class="mock-line">
         <div class="mline-icon" style="background:rgba(126,149,135,0.18);border-color:rgba(126,149,135,0.35);color:var(--olivier);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg></div>
         <div class="mline-text"><span class="mline-main" style="color:var(--olivier);">Acompte reçu · Dupont</span><span class="mline-sub">Rapproché auto · Facture #3098</span></div>
@@ -333,14 +441,14 @@
 <section class="pain">
   <div class="pain-inner reveal">
     <div class="section-label">AVANT / APRÈS</div>
-    <h2 class="section-title">Vos soirées sur la paperasse.<br>Vos chantiers qui attendent.</h2>
-    <p class="section-lede"><strong>87 % des artisans du BTP</strong> perdent plus de 6 heures par semaine sur l'administratif. C'est une journée par mois. C'est un chantier en moins.</p>
+    <h2 class="section-title">Vos soirées sur la paperasse.<br>Vos clients qui attendent.</h2>
+    <p class="section-lede"><strong>87 % des indépendants et TPE</strong> perdent plus de 6 heures par semaine sur l'administratif. C'est une journée par mois. C'est une mission en moins.</p>
     <div class="pain-grid">
       <div class="pain-col before">
         <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>Avant Talos</h3>
         <ul class="pain-list">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>Devis rédigés à 22h sur un coin de table</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>4 à 7 jours entre la visite et l'envoi</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>4 à 7 jours entre le brief et l'envoi</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>Relances oubliées, factures impayées</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>Réponses clients à 23h, perte de marché</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>Comptabilité repoussée au week-end</li>
@@ -350,7 +458,7 @@
       <div class="pain-col after">
         <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8 12 11 15 16 9"/></svg>Avec Talos</h3>
         <ul class="pain-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Devis envoyés <strong>12 minutes</strong> après la visite</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Devis envoyés <strong>12 minutes</strong> après le brief</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Relances auto J+3, J+7, J+14</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Facture générée dès la signature</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Réponse client 24/7 sans astreinte</li>

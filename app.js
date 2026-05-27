@@ -195,6 +195,17 @@ function animateMini(id, target, dur) {
   }
 })();
 
+/* MOTION SHOWCASE · live counter that ticks up */
+(function() {
+  const el = document.getElementById('msCounter');
+  if (!el) return;
+  let n = 1247;
+  setInterval(() => {
+    n += Math.floor(Math.random() * 3) + 1;
+    el.textContent = n.toLocaleString('fr-FR');
+  }, 1800);
+})();
+
 /* MAGNETIC CTA — buttons drift slightly toward cursor */
 (function() {
   const targets = document.querySelectorAll('.cta-bronze, .cta');
