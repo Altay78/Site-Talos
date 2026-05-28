@@ -8,6 +8,43 @@ window.addEventListener('load', () => {
   if (pl) setTimeout(() => pl.classList.add('done'), 1500);
 });
 
+/* MOBILE MENU BURGER */
+(function() {
+  const burger = document.getElementById('navBurger');
+  const menu = document.getElementById('mobileMenu');
+  if (!burger || !menu) return;
+
+  function close() {
+    burger.classList.remove('active');
+    menu.classList.remove('open');
+    menu.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('menu-open');
+  }
+  function open() {
+    burger.classList.add('active');
+    menu.classList.add('open');
+    menu.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('menu-open');
+  }
+
+  burger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    burger.classList.contains('active') ? close() : open();
+  });
+
+  // Ferme quand on clique sur un lien
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+
+  // Ferme en tapant ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('open')) close();
+  });
+
+  // Ferme si on passe en desktop
+  const mq = window.matchMedia('(min-width: 701px)');
+  mq.addEventListener('change', (e) => { if (e.matches) close(); });
+})();
+
 /* CURSOR */
 (function() {
   const dot = document.getElementById('cursorDot');
