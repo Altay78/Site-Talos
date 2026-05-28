@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-dot" id="cursorDot"><svg viewBox="0 0 60 90" width="100%" height="100%" fill="currentColor" aria-hidden="true"><path d="M 22 0 L 12 38 L 26 38 L 18 90 L 50 36 L 34 36 L 44 0 Z"/></svg></div>
 <div class="cursor-ring" id="cursorRing"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -49,10 +49,10 @@
   <p class="lede">Sans engagement après la période pilote de 30 jours. Vous gardez vos données. <strong>Setup, modèles et intégration inclus</strong>. Tarifs hors taxes.</p>
 </header>
 
-<!-- PRICING — fond animé + icônes par feature -->
+<!-- PRICING — toggle mensuel/annuel + fond animé + icônes par feature -->
 <section class="pricing">
 
-  <!-- Fond animé : 2 orbes dorés + grid + particules -->
+  <!-- Fond animé : 3 orbes dorés + grid + particules -->
   <div class="pricing-bg" aria-hidden="true">
     <div class="pricing-orb pricing-orb-1"></div>
     <div class="pricing-orb pricing-orb-2"></div>
@@ -70,13 +70,33 @@
     </div>
   </div>
 
+  <!-- ── TOGGLE MENSUEL / ANNUEL ── -->
+  <div class="billing-toggle-wrap reveal">
+    <div class="billing-toggle" role="tablist" aria-label="Choix de facturation">
+      <button class="billing-tab active" data-billing="monthly" role="tab" aria-selected="true" data-cursor>
+        Mensuel
+      </button>
+      <button class="billing-tab" data-billing="annual" role="tab" aria-selected="false" data-cursor>
+        Annuel
+        <span class="billing-tab-bonus">−31% sur Pro</span>
+      </button>
+    </div>
+  </div>
+
   <div class="price-grid reveal">
 
     <!-- ── STARTER ── -->
     <div class="price-card">
       <div class="price-name">Starter</div>
       <div class="price-detail">L'indépendant qui veut récupérer ses soirées.</div>
-      <div class="price-num"><span class="currency">€</span>149<span class="period">/ mois</span></div>
+      <div class="price-num" data-monthly="149" data-annual="129">
+        <span class="currency">€</span><span class="price-amount">149</span><span class="period">/ mois</span>
+      </div>
+      <div class="price-billing-note">Facturé mensuellement</div>
+      <div class="price-savings" data-savings="240">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>
+        <span><strong>240€</strong> économisés /an</span>
+      </div>
       <div class="price-meta">SETUP OFFERT · 30 J PILOTE</div>
       <ul class="price-feat">
         <li>
@@ -108,7 +128,14 @@
       <div class="price-tag">★ LE PLUS CHOISI</div>
       <div class="price-name">Team</div>
       <div class="price-detail">2 à 8 personnes. Toutes les automatisations Talos.</div>
-      <div class="price-num"><span class="currency">€</span>449<span class="period">/ mois</span></div>
+      <div class="price-num" data-monthly="449" data-annual="359">
+        <span class="currency">€</span><span class="price-amount">449</span><span class="period">/ mois</span>
+      </div>
+      <div class="price-billing-note">Facturé mensuellement</div>
+      <div class="price-savings" data-savings="1080">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>
+        <span><strong>1 080€</strong> économisés /an</span>
+      </div>
       <div class="price-meta">SETUP OFFERT · 30 J PILOTE</div>
       <ul class="price-feat">
         <li>
@@ -139,7 +166,14 @@
     <div class="price-card">
       <div class="price-name">Pro</div>
       <div class="price-detail">Structure ambitieuse. Tout l'arsenal Talos.</div>
-      <div class="price-num"><span class="currency">€</span>649<span class="period">/ mois</span></div>
+      <div class="price-num" data-monthly="649" data-annual="449">
+        <span class="currency">€</span><span class="price-amount">649</span><span class="period">/ mois</span>
+      </div>
+      <div class="price-billing-note">Facturé mensuellement</div>
+      <div class="price-savings price-savings-pro" data-savings="2400">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>
+        <span><strong>2 400€</strong> économisés /an · meilleure remise</span>
+      </div>
       <div class="price-meta">INTÉGRATION DÉDIÉE · 30 J PILOTE</div>
       <ul class="price-feat">
         <li>
@@ -324,10 +358,9 @@
     <div>
       <h5>CONTACT</h5>
       <ul>
-        <li><a href="mailto:contact@talos.ai" data-cursor>contact@talos.ai</a></li>
-        <li><a href="tel:+33600000000" data-cursor>+33 6 ·· ·· ·· ··</a></li>
-        <li><a href="#" data-cursor>Paris 11e</a></li>
-        <li><a href="#" data-cursor>LinkedIn</a></li>
+        <li><a href="mailto:Matthieu.V@talos-ai.tech" data-cursor>Matthieu.V@talos-ai.tech</a></li>
+        <li><a href="#" data-cursor>Zoom</a></li>
+        <li><a href="https://www.linkedin.com/in/altay-sakalli/" target="_blank" rel="noopener" data-cursor>LinkedIn</a></li>
       </ul>
     </div>
   </div>
@@ -337,6 +370,62 @@
   </div>
 </footer>
 
+<!-- Script toggle mensuel/annuel -->
+<script>
+(function() {
+  const tabs = document.querySelectorAll('.billing-tab');
+  if (!tabs.length) return;
+  const cards = document.querySelectorAll('.price-card');
+
+  function switchBilling(mode) {
+    tabs.forEach(t => {
+      const active = t.dataset.billing === mode;
+      t.classList.toggle('active', active);
+      t.setAttribute('aria-selected', active);
+    });
+    document.querySelector('.billing-toggle').dataset.active = mode;
+
+    cards.forEach(card => {
+      const num = card.querySelector('.price-num');
+      if (!num) return;
+      const amount = num.querySelector('.price-amount');
+      const note = card.querySelector('.price-billing-note');
+      const savings = card.querySelector('.price-savings');
+
+      const monthly = parseInt(num.dataset.monthly, 10);
+      const annual = parseInt(num.dataset.annual, 10);
+      const target = mode === 'annual' ? annual : monthly;
+      const current = parseInt(amount.textContent.replace(/\s/g, ''), 10) || 0;
+
+      // Animation du chiffre
+      const duration = 500;
+      const start = performance.now();
+      function step(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        const val = Math.round(current + (target - current) * eased);
+        amount.textContent = val;
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+
+      // Note + savings
+      if (note) note.textContent = mode === 'annual' ? 'Facturé annuellement' : 'Facturé mensuellement';
+      if (savings) {
+        if (mode === 'annual') {
+          savings.classList.add('active');
+        } else {
+          savings.classList.remove('active');
+        }
+      }
+    });
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => switchBilling(tab.dataset.billing));
+  });
+})();
+</script>
 <script src="app.js"></script>
 </body>
 </html>

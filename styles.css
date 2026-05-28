@@ -37,6 +37,380 @@ body {
 }
 
 /* ════════════════════════════════════════════
+   HOME — Réordre des sections (parcours logique)
+   ════════════════════════════════════════════ */
+
+body { display: flex; flex-direction: column; }
+body > .hero            { order: 1; }
+body > .flow-section    { order: 2; }
+body > .adapt-section   { order: 3; }
+body > .auto-section    { order: 4; }
+body > .proof           { order: 5; }   /* ← témoignage après les 6 process */
+body > .web-section-wrap{ order: 6; }
+body > .cta-strip       { order: 7; }
+body > .kpi-strip       { order: 8; }   /* ← résultats tout en bas */
+body > footer           { order: 9; }
+/* le reste (nav fixed, cursor, preloader) reste hors flex via position */
+
+/* ════════════════════════════════════════════
+   FONDS VARIÉS PAR SECTION (subtils, animés)
+   ════════════════════════════════════════════ */
+
+/* Wrapper position-relative + isolation pour chaque section */
+.flow-section,
+.proof,
+.adapt-section,
+.kpi-strip,
+.auto-section,
+.web-section-wrap {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* ── FLOW (avant/après) : blueprint vertical animé ── */
+.flow-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(20,17,15,.6) 0%, rgba(10,9,8,1) 100%),
+    repeating-linear-gradient(90deg, transparent 0 60px, rgba(245,237,220,.025) 60px 61px);
+  pointer-events: none;
+}
+.flow-section::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,150,63,.06) 0%, transparent 60%);
+  transform: translateX(-50%);
+  filter: blur(60px);
+  z-index: -1;
+  pointer-events: none;
+  animation: flowBgPulse 8s ease-in-out infinite;
+}
+@keyframes flowBgPulse {
+  0%, 100% { opacity: .5; transform: translateX(-50%) scale(1); }
+  50%       { opacity: 1;  transform: translateX(-50%) scale(1.15); }
+}
+
+/* ── PROOF (témoignage) : spot doré centré ── */
+.proof::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(31,27,23,.8) 0%, rgba(10,9,8,1) 70%);
+  pointer-events: none;
+}
+.proof::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,150,63,.1) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  filter: blur(70px);
+  z-index: -1;
+  pointer-events: none;
+  animation: proofGlow 6s ease-in-out infinite;
+}
+@keyframes proofGlow {
+  0%, 100% { opacity: .6; }
+  50%       { opacity: 1; }
+}
+
+/* ── ADAPTATION : 2 orbes qui dérivent (bronze + olivier) ── */
+.adapt-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(10,9,8,1) 0%, rgba(20,17,15,.7) 50%, rgba(10,9,8,1) 100%);
+  pointer-events: none;
+}
+.adapt-section::after {
+  content: '';
+  position: absolute;
+  top: 30%;
+  left: 15%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,150,63,.1) 0%, transparent 70%);
+  filter: blur(80px);
+  z-index: -1;
+  pointer-events: none;
+  animation: adaptOrbDrift 18s ease-in-out infinite;
+}
+@keyframes adaptOrbDrift {
+  0%, 100% { transform: translate(0, 0)        scale(1); }
+  50%       { transform: translate(60vw, 20%) scale(1.2); opacity: .7; }
+}
+
+/* ── KPI STRIP (données pilotes) : grille animée ── */
+.kpi-strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(245,237,220,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,237,220,.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  animation: kpiGridDrift 40s linear infinite;
+  pointer-events: none;
+}
+@keyframes kpiGridDrift {
+  from { background-position: 0 0; }
+  to   { background-position: 60px 60px; }
+}
+.kpi-strip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, rgba(126,149,135,.04) 0%, transparent 50%, rgba(201,150,63,.04) 100%);
+  pointer-events: none;
+}
+
+/* ── AUTO SECTION (6 process) : pattern de points subtil ── */
+.auto-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(rgba(245,237,220,.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 90%);
+  pointer-events: none;
+  animation: autoDotDrift 50s linear infinite;
+}
+@keyframes autoDotDrift {
+  from { background-position: 0 0; }
+  to   { background-position: 24px 24px; }
+}
+
+/* ── WEB SECTION (site qui bouge) : scanline + radial bronze ── */
+.web-section-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 3px, rgba(245,237,220,.015) 3px 4px),
+    linear-gradient(180deg, rgba(20,17,15,.6) 0%, rgba(10,9,8,1) 100%);
+  pointer-events: none;
+}
+.web-section-wrap::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,150,63,.07) 0%, transparent 60%);
+  filter: blur(80px);
+  z-index: -1;
+  pointer-events: none;
+  animation: webBgFloat 12s ease-in-out infinite;
+}
+@keyframes webBgFloat {
+  0%, 100% { transform: translate(0, 0); opacity: .7; }
+  50%       { transform: translate(-30vw, 20%); opacity: 1; }
+}
+
+/* ════════════════════════════════════════════
+   MINI MOTIONS — 3 NOUVELLES CARTES (réponse, inbox, paiements)
+   ════════════════════════════════════════════ */
+
+/* MINI-RESPONSE (réponse 24/7) */
+.mini-response {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(126,149,135,.04) 0%, rgba(201,150,63,.04) 100%);
+}
+.mini-resp-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+}
+.mini-resp-in { animation: respIn 4s 0s ease-out infinite; }
+.mini-resp-out {
+  flex-direction: row-reverse;
+  animation: respIn 4s 1.2s ease-out infinite;
+}
+@keyframes respIn {
+  0%, 100% { opacity: 0; transform: translateY(8px); }
+  15%, 85%  { opacity: 1; transform: translateY(0); }
+}
+.mini-resp-bubble {
+  font-size: 10px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: rgba(245,237,220,.07);
+  color: rgba(245,237,220,.75);
+  border: 1px solid rgba(245,237,220,.1);
+}
+.mini-resp-bubble.talos {
+  background: rgba(126,149,135,.18);
+  color: var(--olivier);
+  border-color: rgba(126,149,135,.3);
+}
+.mini-resp-time {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: rgba(245,237,220,.35);
+}
+.mini-resp-status {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--olivier);
+  text-align: center;
+  margin-top: auto;
+  padding: 6px;
+  background: rgba(126,149,135,.08);
+  border: 1px solid rgba(126,149,135,.2);
+  border-radius: 6px;
+}
+.mini-resp-status strong { color: var(--parchemin); }
+
+/* MINI-INBOX (tri inbox) */
+.mini-inbox-tile {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.mini-inbox-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.mini-inbox-cell {
+  padding: 8px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border: 1px solid;
+  opacity: 0;
+  animation: inboxCellIn .6s ease-out forwards;
+}
+.mini-inbox-cell:nth-child(1) { animation-delay: .2s; }
+.mini-inbox-cell:nth-child(2) { animation-delay: .4s; }
+.mini-inbox-cell:nth-child(3) { animation-delay: .6s; }
+.mini-inbox-cell:nth-child(4) { animation-delay: .8s; }
+@keyframes inboxCellIn {
+  from { opacity: 0; transform: scale(.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.mini-inbox-cell.urgent   { background: rgba(216,117,84,.12); border-color: rgba(216,117,84,.3);   color: #D87554; }
+.mini-inbox-cell.prospect { background: rgba(201,150,63,.12); border-color: rgba(201,150,63,.3);   color: var(--bronze); }
+.mini-inbox-cell.pub      { background: rgba(245,237,220,.04); border-color: rgba(245,237,220,.1); color: rgba(245,237,220,.4); }
+.mini-inbox-cell.admin    { background: rgba(126,149,135,.12); border-color: rgba(126,149,135,.3); color: var(--olivier); }
+.mini-inbox-num { font-size: 18px; font-weight: 800; line-height: 1; }
+.mini-inbox-lbl { font-family: var(--font-mono); font-size: 8px; letter-spacing: 1px; opacity: .85; }
+.mini-inbox-status {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: rgba(245,237,220,.5);
+  text-align: center;
+  padding: 6px;
+  background: rgba(245,237,220,.03);
+  border: 1px solid rgba(245,237,220,.06);
+  border-radius: 6px;
+}
+.mini-inbox-status strong { color: var(--bronze); }
+
+/* MINI-PAYMENTS (suivi paiements) */
+.mini-payments {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mini-pay-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: rgba(245,237,220,.03);
+  border-radius: 6px;
+  opacity: 0;
+  animation: payRowIn .5s ease-out forwards;
+}
+.mini-pay-row:nth-child(1) { animation-delay: .2s; }
+.mini-pay-row:nth-child(2) { animation-delay: .4s; }
+.mini-pay-row:nth-child(3) { animation-delay: .6s; }
+@keyframes payRowIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.mini-pay-status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.mini-pay-status.mini-pay-ok {
+  background: var(--olivier);
+  box-shadow: 0 0 6px rgba(126,149,135,.5);
+}
+.mini-pay-status.mini-pay-pending {
+  background: var(--bronze);
+  animation: payPendingPulse 1.5s ease-in-out infinite;
+}
+@keyframes payPendingPulse {
+  0%, 100% { opacity: .5; transform: scale(.85); }
+  50%       { opacity: 1;  transform: scale(1.15); }
+}
+.mini-pay-name {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(245,237,220,.7);
+  flex: 1;
+}
+.mini-pay-amount {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--olivier);
+}
+.mini-pay-row:has(.mini-pay-pending) .mini-pay-amount { color: var(--bronze); }
+.mini-pay-status-bar {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--olivier);
+  text-align: center;
+  padding: 4px;
+  margin-top: 4px;
+  background: rgba(126,149,135,.1);
+  border-radius: 4px;
+  border: 1px solid rgba(126,149,135,.2);
+}
+
+/* ════════════════════════════════════════════
    FONT SYSTEM — Helvetica partout, Georgia pour l'impact
    ════════════════════════════════════════════ */
 h1, h2, h3, h4, h5, h6,
@@ -79,12 +453,19 @@ button { font: inherit; }
 /* ─────── CURSOR ─────── */
 .cursor-dot, .cursor-ring {
   position: fixed; top: 0; left: 0; pointer-events: none;
-  z-index: 9999; border-radius: 50%;
+  z-index: 9999;
 }
+.cursor-ring { border-radius: 50%; }
+
+/* Curseur : petit éclair Talos */
 .cursor-dot {
-  width: 5px; height: 5px; background: var(--parchemin);
+  width: 11px; height: 16px;
   transform: translate(-50%, -50%);
+  color: var(--bronze);
+  filter: drop-shadow(0 0 6px rgba(201, 150, 63, 0.55));
+  transition: color 0.25s, transform 0.25s, filter 0.25s;
 }
+.cursor-dot svg { display: block; width: 100%; height: 100%; }
 .cursor-ring {
   width: 30px; height: 30px;
   border: 0.5px solid var(--parchemin);
@@ -95,6 +476,83 @@ button { font: inherit; }
   width: 56px; height: 56px;
   border-color: var(--bronze);
   background: rgba(201, 150, 63, 0.08);
+}
+/* Quand on survole un élément interactif, l'éclair s'agrandit */
+.cursor-ring.hover ~ .cursor-dot,
+body:has(.cursor-ring.hover) .cursor-dot {
+  transform: translate(-50%, -50%) scale(1.3);
+  filter: drop-shadow(0 0 10px rgba(201, 150, 63, 0.8));
+}
+
+/* ════════════════════════════════════════════
+   THUNDER STRIKE — au clic
+   ════════════════════════════════════════════ */
+
+/* 1. Éclair central qui flashe */
+.thunder-bolt {
+  position: fixed;
+  width: 32px;
+  height: 48px;
+  transform: translate(-50%, -50%) scale(0.3) rotate(-12deg);
+  pointer-events: none;
+  z-index: 9998;
+  color: var(--bronze);
+  opacity: 0;
+  filter: drop-shadow(0 0 16px rgba(201, 150, 63, 0.9));
+  animation: thunderBoltFlash .55s cubic-bezier(.2,1,.3,1) forwards;
+}
+.thunder-bolt svg { width: 100%; height: 100%; display: block; }
+@keyframes thunderBoltFlash {
+  0%   { opacity: 0;   transform: translate(-50%, -50%) scale(0.3) rotate(-12deg); }
+  20%  { opacity: 1;   transform: translate(-50%, -50%) scale(1.5) rotate(0deg); }
+  60%  { opacity: 0.7; transform: translate(-50%, -50%) scale(1.8) rotate(8deg); }
+  100% { opacity: 0;   transform: translate(-50%, -50%) scale(2.4) rotate(15deg); }
+}
+
+/* 2. Onde de choc bronze qui s'étend */
+.thunder-ring {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--bronze);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 1;
+  box-shadow: 0 0 12px rgba(201, 150, 63, 0.5),
+              inset 0 0 8px rgba(201, 150, 63, 0.3);
+  animation: thunderRingExpand .65s cubic-bezier(.16, .85, .3, 1) forwards;
+}
+@keyframes thunderRingExpand {
+  0%   { transform: translate(-50%, -50%) scale(0.5); opacity: 1;  border-width: 2px; }
+  60%  { opacity: 0.6; border-width: 1.5px; }
+  100% { transform: translate(-50%, -50%) scale(5.5); opacity: 0; border-width: 0.5px; }
+}
+
+/* 3. Étincelles qui s'envolent */
+.thunder-spark {
+  position: fixed;
+  width: 3px;
+  height: 3px;
+  background: var(--bronze);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9996;
+  box-shadow: 0 0 6px rgba(201, 150, 63, 0.9),
+              0 0 12px rgba(201, 150, 63, 0.5);
+  animation: thunderSparkFly .65s cubic-bezier(.2,.7,.4,1) forwards;
+}
+@keyframes thunderSparkFly {
+  0%   { transform: translate(-50%, -50%) translate(0, 0)             scale(1.2); opacity: 1; }
+  60%  { opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) translate(var(--sx), var(--sy)) scale(0.2); opacity: 0; }
+}
+
+/* Désactivé sur mobile */
+@media (pointer: coarse) {
+  .thunder-bolt, .thunder-ring, .thunder-spark { display: none; }
 }
 @media (pointer: coarse) {
   body { cursor: auto; }
@@ -2823,33 +3281,174 @@ section.live { padding: 100px 40px; max-width: 1320px; margin: 0 auto; }
   z-index: 2;
 }
 
-/* Variante olivier pour le CA */
-.cn-flow-olivier .cn-flow-rail {
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(126,149,135,.25) 15%,
-    rgba(126,149,135,.25) 85%,
-    transparent 100%);
+/* ── TÂCHES qui s'éliminent (TEMPS RÉCUPÉRÉ) ── */
+.cn-flow-tasks {
+  padding: 0;
 }
-.cn-flow-olivier .cn-flow-blip {
-  background: radial-gradient(ellipse at center, var(--olivier) 0%, rgba(126,149,135,.4) 35%, transparent 70%);
+.cn-task {
+  position: absolute;
+  left: -10%;
+  top: 50%;
+  transform: translateY(-50%) scale(.7);
+  padding: 3px 7px;
+  border-radius: 10px;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 1.3px;
+  font-weight: 700;
+  background: rgba(245,237,220,.08);
+  border: 1px solid rgba(245,237,220,.15);
+  color: rgba(245,237,220,.7);
+  white-space: nowrap;
+  opacity: 0;
+  animation: cnTaskEliminate 7s var(--d, 0s) cubic-bezier(.4,0,.55,1) infinite;
+  pointer-events: none;
 }
-.cn-flow-olivier .cn-flow-pulse-dot {
-  background: var(--olivier);
-  box-shadow: 0 0 8px rgba(126,149,135,.6);
-  animation: cnPulseDotOlivier 1.6s ease-in-out infinite;
+.cn-task::after {
+  content: '';
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 50%;
+  height: 1.5px;
+  background: var(--bronze);
+  transform: translateY(-50%) scaleX(0);
+  transform-origin: left;
+  border-radius: 1px;
+  animation: cnTaskStrike 7s var(--d, 0s) cubic-bezier(.4,0,.55,1) infinite;
 }
-@keyframes cnPulseDotOlivier {
-  0%, 100% { opacity: 1; transform: translateY(-50%) scale(1);   box-shadow: 0 0 0 0 rgba(126,149,135,.5); }
-  50%       { opacity: .8; transform: translateY(-50%) scale(1.3); box-shadow: 0 0 0 8px rgba(126,149,135,0); }
+@keyframes cnTaskEliminate {
+  0%   { left: -10%; opacity: 0; transform: translateY(-50%) scale(.6); color: rgba(245,237,220,.7); }
+  8%   { opacity: 1; transform: translateY(-50%) scale(1); }
+  50%  { left: 55%;  opacity: 1; color: rgba(245,237,220,.7); }
+  62%  { left: 65%;  opacity: 1; color: var(--bronze); background: rgba(201,150,63,.12); border-color: rgba(201,150,63,.35); }
+  75%  { left: 78%;  opacity: .6; color: var(--bronze); }
+  88%  { left: 92%;  opacity: 0; transform: translateY(-50%) scale(.4); }
+  100% { opacity: 0; }
 }
-.cn-flow-olivier .cn-flow-tag {
-  color: var(--olivier);
-  background: rgba(126,149,135,.1);
+@keyframes cnTaskStrike {
+  0%, 55% { transform: translateY(-50%) scaleX(0); opacity: 0; }
+  62%      { transform: translateY(-50%) scaleX(1); opacity: 1; }
+  88%      { transform: translateY(-50%) scaleX(1); opacity: .5; }
+  100%     { transform: translateY(-50%) scaleX(1); opacity: 0; }
+}
+.cn-flow-tag-time {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 9px;
+  letter-spacing: .5px;
+  font-weight: 800;
+  color: var(--bronze);
+  background: rgba(201,150,63,.15);
+  border: 1px solid rgba(201,150,63,.3);
+  padding: 3px 8px;
+  border-radius: 4px;
+  z-index: 3;
+  animation: cnTagPulse 3s ease-in-out infinite;
+}
+@keyframes cnTagPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,150,63,.4); }
+  50%       { box-shadow: 0 0 0 6px rgba(201,150,63,0); }
 }
 
+/* ── CONTRATS qui s'enchaînent (CA SIGNÉ) ── */
+.cn-flow-contracts {
+  padding: 0;
+}
+.cn-flow-contracts .cn-flow-rail {
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(126,149,135,.2) 15%,
+    rgba(126,149,135,.2) 80%,
+    transparent 100%);
+}
+.cn-contract {
+  position: absolute;
+  left: 25%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(.5);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 7px;
+  border-radius: 10px;
+  background: rgba(126,149,135,.1);
+  border: 1px solid rgba(126,149,135,.3);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .3px;
+  color: var(--olivier);
+  white-space: nowrap;
+  opacity: 0;
+  animation: cnContractSign 4.5s var(--d, 0s) cubic-bezier(.16,1,.3,1) infinite;
+  pointer-events: none;
+}
+.cn-contract svg { flex-shrink: 0; }
+.cn-contract-amt {
+  font-family: var(--font-mono);
+  letter-spacing: .5px;
+}
+.cn-contract-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--olivier);
+  color: var(--ink);
+  flex-shrink: 0;
+  opacity: 0;
+  transform: scale(0);
+}
+@keyframes cnContractSign {
+  0%   { left: 25%; opacity: 0; transform: translate(-50%, -50%) scale(.4); }
+  10%  { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+  18%  { transform: translate(-50%, -50%) scale(1); }
+  40%  { left: 50%; opacity: 1; }
+  100% { left: 100%; opacity: 0; transform: translate(-50%, -50%) scale(.7); }
+}
+/* La coche apparaît après que le contrat est posé (40% du cycle) */
+.cn-contract .cn-contract-check {
+  animation: cnContractCheck 4.5s var(--d, 0s) cubic-bezier(.16,1,.3,1) infinite;
+}
+@keyframes cnContractCheck {
+  0%, 30% { opacity: 0; transform: scale(0) rotate(-90deg); }
+  35%      { opacity: 1; transform: scale(1.4) rotate(0deg); }
+  42%      { transform: scale(1) rotate(0deg); }
+  90%      { opacity: 1; transform: scale(1); }
+  100%     { opacity: 0; transform: scale(.7); }
+}
+
+.cn-flow-tag-ca {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+  color: var(--olivier);
+  background: rgba(126,149,135,.15);
+  border: 1px solid rgba(126,149,135,.3);
+  padding: 3px 8px;
+  border-radius: 4px;
+  z-index: 3;
+  animation: cnTagPulseOlivier 3s ease-in-out infinite;
+}
+@keyframes cnTagPulseOlivier {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(126,149,135,.4); }
+  50%       { box-shadow: 0 0 0 6px rgba(126,149,135,0); }
+}
+
+/* ── Hauteur dashboard agrandie pour les nouveaux motions ── */
+.cn-flow { height: 36px; margin-top: 12px; padding: 0; }
+
 /* ════════════════════════════════════════════
-   IMPACT CARDS — Tendances colorées + arrow pulsantes
+   IMPACT CARDS — Motion + couleurs (perte évitée)
    ════════════════════════════════════════════ */
 
 .impact-trend {
@@ -2871,24 +3470,20 @@ section.live { padding: 100px 40px; max-width: 1320px; margin: 0 auto; }
 }
 @keyframes impactArrowPulse {
   0%, 100% { transform: translateY(0); opacity: 1; }
-  50%       { transform: translateY(-2px); opacity: .6; }
+  50%       { transform: translateY(-3px); opacity: .55; }
 }
-
-/* Variantes par tendance */
 .impact-card[data-trend="down"] .impact-trend svg {
   animation: impactArrowPulseDown 1.8s ease-in-out infinite;
 }
 @keyframes impactArrowPulseDown {
   0%, 100% { transform: translateY(0); opacity: 1; }
-  50%       { transform: translateY(2px); opacity: .6; }
+  50%       { transform: translateY(3px); opacity: .55; }
 }
 
-/* Couleurs par type de carte */
+/* Couleurs par type */
 .impact-card[data-type="time"] .impact-value,
 .impact-card[data-type="time"] .impact-sign,
-.impact-card[data-type="time"] .impact-suffix {
-  color: var(--olivier);
-}
+.impact-card[data-type="time"] .impact-suffix { color: var(--olivier); }
 .impact-card[data-type="time"] .impact-trend {
   background: rgba(126,149,135,.12);
   color: var(--olivier);
@@ -2904,9 +3499,7 @@ section.live { padding: 100px 40px; max-width: 1320px; margin: 0 auto; }
 
 .impact-card[data-type="reduce"] .impact-value,
 .impact-card[data-type="reduce"] .impact-sign,
-.impact-card[data-type="reduce"] .impact-suffix {
-  color: #D87554;
-}
+.impact-card[data-type="reduce"] .impact-suffix { color: #D87554; }
 .impact-card[data-type="reduce"] .impact-trend {
   background: rgba(216,117,84,.12);
   color: #D87554;
@@ -2915,24 +3508,131 @@ section.live { padding: 100px 40px; max-width: 1320px; margin: 0 auto; }
   background: linear-gradient(90deg, #D87554 0%, rgba(216,117,84,.4) 60%, transparent 100%);
 }
 
-/* Glow subtil derrière le chiffre */
-.impact-value {
-  position: relative;
+/* ─── MOTION ─── */
+
+/* 1. ENTRÉE de carte : fade + slide stagger */
+.impact-grid.in .impact-card {
+  animation: impactCardEnter .8s var(--ce, 0s) cubic-bezier(.16,1,.3,1) both;
 }
+@keyframes impactCardEnter {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.impact-grid.in .impact-card:nth-child(1) { --ce: .05s; }
+.impact-grid.in .impact-card:nth-child(2) { --ce: .18s; }
+.impact-grid.in .impact-card:nth-child(3) { --ce: .31s; }
+.impact-grid.in .impact-card:nth-child(4) { --ce: .44s; }
+
+/* 2. BADGE de tendance : pop-in avec spring */
+.impact-grid.in .impact-trend {
+  animation: impactTrendPop .7s calc(var(--ce, 0s) + .15s) cubic-bezier(.34,1.6,.64,1) backwards;
+}
+@keyframes impactTrendPop {
+  0%   { opacity: 0; transform: scale(.6); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* 3. ACCENT line se dessine */
+.impact-hero::after {
+  width: 0;
+  transition: width 1.4s cubic-bezier(.16,1,.3,1);
+}
+.impact-grid.in .impact-hero::after {
+  width: 50%;
+  transition-delay: calc(var(--ce, 0s) + .5s);
+}
+
+/* 4. GLOW perpetuel derrière la valeur (couleur courante) */
+.impact-value { position: relative; }
 .impact-value::before {
   content: '';
   position: absolute;
-  inset: -20%;
+  inset: -25%;
   background: radial-gradient(ellipse at center, currentColor 0%, transparent 60%);
-  opacity: .08;
+  opacity: .1;
   pointer-events: none;
   z-index: -1;
-  filter: blur(20px);
-  animation: impactValueBreathe 3.5s ease-in-out infinite;
+  filter: blur(24px);
+  animation: impactValueBreathe 4s ease-in-out infinite;
 }
 @keyframes impactValueBreathe {
   0%, 100% { opacity: .08; transform: scale(1); }
-  50%       { opacity: .15; transform: scale(1.05); }
+  50%       { opacity: .22; transform: scale(1.12); }
+}
+
+/* 5. PERTE ÉVITÉE — cards data-type="reduce" : value bascule rouge → bronze → rouge */
+.impact-card[data-type="reduce"] .impact-value,
+.impact-card[data-type="reduce"] .impact-sign,
+.impact-card[data-type="reduce"] .impact-suffix {
+  animation: impactReduceMorph 4.5s ease-in-out infinite;
+}
+@keyframes impactReduceMorph {
+  0%, 100% {
+    color: #D87554;
+    text-shadow: 0 0 20px rgba(216,117,84,.35);
+  }
+  50% {
+    color: var(--bronze);
+    text-shadow: 0 0 28px rgba(201,150,63,.5);
+  }
+}
+
+/* Petit badge "ÉVITÉ" en bronze pulsant sur les cards reduce */
+.impact-card[data-type="reduce"] .impact-hero {
+  position: relative;
+}
+.impact-card[data-type="reduce"] .impact-hero::before {
+  content: '✓ ÉVITÉ';
+  position: absolute;
+  top: 30px;
+  right: 0;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+  padding: 3px 7px;
+  border-radius: 10px;
+  background: rgba(201,150,63,.15);
+  color: var(--bronze);
+  border: 1px solid rgba(201,150,63,.3);
+  animation: impactEvitedPulse 2.5s ease-in-out infinite;
+  z-index: 1;
+  font-family: var(--font-mono);
+}
+@keyframes impactEvitedPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,150,63,.5); transform: scale(1); }
+  50%       { box-shadow: 0 0 0 6px rgba(201,150,63,0); transform: scale(1.06); }
+}
+
+/* 6. GAIN — cards data-type="time" et "gain" : value avec subtle pulse vert/bronze */
+.impact-card[data-type="time"] .impact-value,
+.impact-card[data-type="time"] .impact-sign,
+.impact-card[data-type="time"] .impact-suffix {
+  animation: impactGainPulse 4s ease-in-out infinite;
+}
+.impact-card[data-type="gain"] .impact-value,
+.impact-card[data-type="gain"] .impact-sign,
+.impact-card[data-type="gain"] .impact-suffix {
+  animation: impactGainPulseBronze 4s ease-in-out infinite;
+}
+@keyframes impactGainPulse {
+  0%, 100% {
+    color: var(--olivier);
+    text-shadow: 0 0 18px rgba(126,149,135,.3);
+  }
+  50% {
+    color: #a8c0b0;
+    text-shadow: 0 0 30px rgba(168,192,176,.5);
+  }
+}
+@keyframes impactGainPulseBronze {
+  0%, 100% {
+    color: var(--bronze);
+    text-shadow: 0 0 18px rgba(201,150,63,.35);
+  }
+  50% {
+    color: var(--bronze-2);
+    text-shadow: 0 0 30px rgba(217,166,88,.5);
+  }
 }
 
 /* ════════════════════════════════════════════
@@ -3884,6 +4584,146 @@ section.live { padding: 100px 40px; max-width: 1320px; margin: 0 auto; }
 .pricing > .price-custom {
   position: relative;
   z-index: 1;
+}
+
+/* ── TOGGLE MENSUEL / ANNUEL ── */
+.billing-toggle-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 36px;
+  position: relative;
+  z-index: 2;
+}
+.billing-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(245,237,220,.1);
+  border-radius: 14px;
+  gap: 0;
+}
+.billing-tab {
+  padding: 12px 22px;
+  background: transparent;
+  border: none;
+  color: rgba(245,237,220,.55);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .3px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: color .35s, background .35s, box-shadow .35s, transform .35s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.billing-tab:hover:not(.active) { color: var(--parchemin); }
+.billing-tab.active {
+  color: var(--ink);
+  background: linear-gradient(135deg, var(--bronze) 0%, var(--bronze-2) 100%);
+  box-shadow: 0 4px 14px rgba(201,150,63,.3);
+}
+
+.billing-tab-bonus {
+  font-size: 9px;
+  letter-spacing: 1.3px;
+  font-weight: 800;
+  padding: 3px 7px;
+  border-radius: 12px;
+  background: var(--bronze);
+  color: var(--ink);
+  transition: background .35s, color .35s, box-shadow .35s, transform .35s;
+}
+.billing-tab.active .billing-tab-bonus {
+  background: rgba(10,9,8,.18);
+  color: var(--ink);
+  animation: none;
+}
+.billing-tab:not(.active) .billing-tab-bonus {
+  animation: billingBonusPulse 2s ease-in-out infinite;
+}
+@keyframes billingBonusPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,150,63,.6); transform: scale(1); }
+  50%       { box-shadow: 0 0 0 6px rgba(201,150,63,0); transform: scale(1.04); }
+}
+
+/* ── PRIX DYNAMIQUE + NOTES BILLING ── */
+.price-amount {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  transition: color .3s;
+}
+.price-card .price-num[data-monthly] {
+  transition: color .3s;
+}
+.price-billing-note {
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  font-weight: 600;
+  color: rgba(245,237,220,.35);
+  margin-top: -4px;
+  margin-bottom: 8px;
+  transition: color .3s;
+}
+
+/* Bandeau économies (visible uniquement en annuel) */
+.price-savings {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  margin-bottom: 12px;
+  background: rgba(126,149,135,.1);
+  border: 1px solid rgba(126,149,135,.3);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--olivier);
+  letter-spacing: .2px;
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+  transition: opacity .35s ease, max-height .35s ease, padding .35s ease, margin .35s ease;
+}
+.price-savings.active {
+  opacity: 1;
+  max-height: 40px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+.price-savings svg { color: var(--olivier); flex-shrink: 0; }
+.price-savings strong { color: var(--parchemin); font-weight: 800; }
+
+/* Pro savings : version premium dorée */
+.price-savings-pro {
+  background: linear-gradient(135deg, rgba(201,150,63,.15) 0%, rgba(201,150,63,.06) 100%);
+  border-color: rgba(201,150,63,.4);
+  color: var(--bronze);
+}
+.price-savings-pro svg { color: var(--bronze); }
+.price-savings-pro strong { color: var(--bronze); }
+.price-savings-pro.active {
+  animation: proSavingsGlow 2.4s ease-in-out infinite;
+}
+@keyframes proSavingsGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,150,63,.4), inset 0 0 0 rgba(201,150,63,0); }
+  50%       { box-shadow: 0 0 0 6px rgba(201,150,63,0), inset 0 0 20px rgba(201,150,63,.08); }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+  .billing-toggle { margin-bottom: 28px; }
+  .billing-tab { padding: 10px 16px; font-size: 12px; gap: 6px; }
+  .billing-tab-bonus { font-size: 8px; padding: 2px 6px; letter-spacing: 1px; }
+  .price-savings { font-size: 10px; padding: 5px 10px; }
 }
 
 /* ── ICÔNES DEVANT CHAQUE FEATURE ── */
@@ -5967,9 +6807,19 @@ section.live { padding: 100px 40px; max-width: 1320px; margin: 0 auto; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .hero-h1, .page-head h1 { font-size: 48px; }
   .section-title { font-size: 34px; }
-  .auto-detail-grid { grid-template-columns: 1fr; gap: 30px; }
+  .auto-detail-grid { grid-template-columns: 1fr; gap: 24px; }
   .auto-detail.reverse .auto-detail-grid > div:first-child { order: 0; }
   .auto-detail h2 { font-size: 30px; }
+
+  /* ── RÉORDRE MOBILE : titre → explication → motion → checks → CTA ── */
+  .auto-detail-grid { display: flex; flex-direction: column; }
+  .auto-detail-grid > div:not(.auto-mock) { display: contents; }
+  .auto-detail-grid .auto-detail-num { order: 1; }
+  .auto-detail-grid h2                { order: 2; }
+  .auto-detail-grid > div > p         { order: 3; }
+  .auto-mock                          { order: 4; margin: 8px 0 4px; }
+  .auto-detail-grid .feats            { order: 5; margin-top: 4px; }
+  .auto-detail-grid > div > .cta-bronze { order: 6; align-self: flex-start; }
 }
 @media (max-width: 1100px) {
   .sector-tabs { gap: 4px; }

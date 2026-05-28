@@ -34,6 +34,50 @@ window.addEventListener('load', () => {
   });
 })();
 
+/* THUNDER STRIKE — petit coup de tonnerre au clic */
+(function() {
+  // Skip si pas de curseur (mobile/tactile)
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  const BOLT_SVG = '<svg viewBox="0 0 60 90" fill="currentColor"><path d="M 22 0 L 12 38 L 26 38 L 18 90 L 50 36 L 34 36 L 44 0 Z"/></svg>';
+
+  document.addEventListener('click', (e) => {
+    const x = e.clientX, y = e.clientY;
+
+    // 1. Éclair central qui flashe
+    const bolt = document.createElement('div');
+    bolt.className = 'thunder-bolt';
+    bolt.style.left = x + 'px';
+    bolt.style.top  = y + 'px';
+    bolt.innerHTML = BOLT_SVG;
+    document.body.appendChild(bolt);
+
+    // 2. Onde de choc bronze
+    const ring = document.createElement('div');
+    ring.className = 'thunder-ring';
+    ring.style.left = x + 'px';
+    ring.style.top  = y + 'px';
+    document.body.appendChild(ring);
+
+    // 3. Petites étincelles (6) qui partent dans toutes les directions
+    for (let i = 0; i < 6; i++) {
+      const angle = (Math.PI * 2 * i) / 6 + Math.random() * 0.4;
+      const dist  = 30 + Math.random() * 30;
+      const spark = document.createElement('div');
+      spark.className = 'thunder-spark';
+      spark.style.left = x + 'px';
+      spark.style.top  = y + 'px';
+      spark.style.setProperty('--sx', Math.cos(angle) * dist + 'px');
+      spark.style.setProperty('--sy', Math.sin(angle) * dist + 'px');
+      document.body.appendChild(spark);
+      setTimeout(() => spark.remove(), 700);
+    }
+
+    // Cleanup
+    setTimeout(() => { bolt.remove(); ring.remove(); }, 700);
+  });
+})();
+
 /* SCROLL UI */
 (function() {
   const progress = document.getElementById('scrollProgress');
