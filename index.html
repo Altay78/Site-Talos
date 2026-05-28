@@ -6,6 +6,8 @@
 <title>Talos — récupérez vos soirées · IA pour tous les professionnels</title>
 <meta name="description" content="Talos automatise vos devis, relances, factures et réponses clients. BTP, cuisine, services, digital — l'automate qui récupère vos heures perdues. Zéro formation.">
 <link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
 </head>
 <body>
 
@@ -40,6 +42,7 @@
     <a href="automatisations.html" data-cursor>Automatisations</a>
     <a href="methode.html" data-cursor>Méthode</a>
     <a href="tarifs.html" data-cursor>Tarifs</a>
+    <a href="histoire.html" data-cursor>Histoire</a>
   </div>
   <a href="reserver.html" class="cta" data-cursor>
     <span class="cta-full">Réserver une démo</span>
@@ -108,10 +111,16 @@
             <div class="cn-kpi-val"><span id="cnTimeVal">0</span><span class="unit">h</span></div>
             <span class="cn-delta">▲ +18%</span>
           </div>
-          <svg class="spark" viewBox="0 0 200 28" preserveAspectRatio="none">
-            <polyline class="spark-fill" points="0,28 0,22 25,20 50,16 75,18 100,14 125,12 150,8 175,10 200,5 200,28"/>
-            <polyline points="0,22 25,20 50,16 75,18 100,14 125,12 150,8 175,10 200,5"/>
-          </svg>
+          <div class="mini-bars" aria-hidden="true">
+            <span style="--h:28;--d:0s"></span>
+            <span style="--h:36;--d:.05s"></span>
+            <span style="--h:48;--d:.1s"></span>
+            <span style="--h:42;--d:.15s"></span>
+            <span style="--h:55;--d:.2s"></span>
+            <span style="--h:62;--d:.25s"></span>
+            <span style="--h:78;--d:.3s"></span>
+            <span style="--h:88;--d:.35s"></span>
+          </div>
         </div>
         <div class="cn-kpi">
           <div class="cn-kpi-label">CA SIGNÉ · CETTE SEMAINE</div>
@@ -119,10 +128,16 @@
             <div class="cn-kpi-val"><span id="cnCaVal">0</span><span class="unit">€</span></div>
             <span class="cn-delta">▲ +28%</span>
           </div>
-          <svg class="spark olivier" viewBox="0 0 200 28" preserveAspectRatio="none">
-            <polyline class="spark-fill" points="0,28 0,18 25,20 50,14 75,16 100,10 125,12 150,6 175,8 200,3 200,28"/>
-            <polyline points="0,18 25,20 50,14 75,16 100,10 125,12 150,6 175,8 200,3"/>
-          </svg>
+          <div class="mini-bars mini-bars-olivier" aria-hidden="true">
+            <span style="--h:35;--d:0s"></span>
+            <span style="--h:42;--d:.05s"></span>
+            <span style="--h:38;--d:.1s"></span>
+            <span style="--h:55;--d:.15s"></span>
+            <span style="--h:65;--d:.2s"></span>
+            <span style="--h:72;--d:.25s"></span>
+            <span style="--h:85;--d:.3s"></span>
+            <span style="--h:95;--d:.35s"></span>
+          </div>
         </div>
       </div>
 
@@ -226,54 +241,96 @@
   <span class="sectors-all-label">TOUS SECTEURS COUVERTS</span>
 </div>
 
-<!-- KPI STRIP -->
+<!-- KPI STRIP — AVANT / APRÈS -->
 <section class="kpi-strip">
   <div class="reveal">
     <div class="kpi-strip-head">
       <div>
-        <div class="section-label">VOTRE INTÉRÊT, EN CHIFFRES</div>
-        <h2 class="kpi-strip-title">Ce que Talos vous rend, mesuré sur 14 professionnels pilotes.</h2>
+        <div class="section-label">AVANT / APRÈS · DONNÉES PILOTE</div>
+        <h2 class="kpi-strip-title">Ce que Talos change concrètement.</h2>
       </div>
-      <div class="kpi-strip-meta">DONNÉES 30 JOURS GLISSANTS<br>MISE À JOUR HEBDO</div>
+      <div class="kpi-strip-meta">14 PROFESSIONNELS PILOTES<br>30 JOURS GLISSANTS</div>
     </div>
   </div>
-  <div class="kpi-grid reveal">
-    <div class="kpi-cell">
-      <div class="kpi-cell-label"><span>TEMPS RÉCUPÉRÉ</span><span class="badge">▲ +18%</span></div>
-      <div class="kpi-cell-val"><span class="counter" data-target="26">0</span><span class="unit">h/mois</span></div>
-      <div class="kpi-cell-sub">Soit ~6h par semaine. Une journée par mois.</div>
-      <svg class="kpi-cell-spark" viewBox="0 0 200 36" preserveAspectRatio="none">
-        <polyline fill="rgba(201,150,63,0.15)" points="0,36 0,28 22,26 44,22 66,24 88,18 110,16 132,12 154,14 176,8 200,4 200,36"/>
-        <polyline fill="none" stroke="#C9963F" stroke-width="1.5" points="0,28 22,26 44,22 66,24 88,18 110,16 132,12 154,14 176,8 200,4"/>
-      </svg>
+
+  <div class="impact-grid reveal">
+
+    <!-- CARD 1 : TEMPS -->
+    <div class="impact-card" data-cursor>
+      <div class="impact-name">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        TEMPS PASSÉ EN ADMIN
+      </div>
+      <div class="impact-hero">
+        <div class="impact-value">
+          <span class="impact-sign">+</span>
+          <span class="counter" data-target="26">0</span>
+          <span class="impact-suffix">h</span>
+        </div>
+        <div class="impact-caption">libérées <strong>chaque mois</strong></div>
+      </div>
+      <div class="impact-footer">
+        Une journée libre par semaine — gagnée sur 32h passées avant en admin.
+      </div>
     </div>
-    <div class="kpi-cell">
-      <div class="kpi-cell-label"><span>DEVIS SIGNÉS</span><span class="badge">▲ +28%</span></div>
-      <div class="kpi-cell-val"><span class="counter" data-target="28">0</span><span class="unit">%</span></div>
-      <div class="kpi-cell-sub">Devis envoyés sous 12 min après la visite.</div>
-      <svg class="kpi-cell-spark" viewBox="0 0 200 36" preserveAspectRatio="none">
-        <polyline fill="rgba(126,149,135,0.22)" points="0,36 0,30 22,28 44,24 66,22 88,18 110,20 132,14 154,12 176,10 200,6 200,36"/>
-        <polyline fill="none" stroke="#7E9587" stroke-width="1.5" points="0,30 22,28 44,24 66,22 88,18 110,20 132,14 154,12 176,10 200,6"/>
-      </svg>
+
+    <!-- CARD 2 : DEVIS SIGNÉS -->
+    <div class="impact-card" data-cursor>
+      <div class="impact-name">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg>
+        DEVIS PERDUS AU FIL DU TEMPS
+      </div>
+      <div class="impact-hero">
+        <div class="impact-value">
+          <span class="impact-sign">+</span>
+          <span class="counter" data-target="28">0</span>
+          <span class="impact-suffix">pts</span>
+        </div>
+        <div class="impact-caption">de devis <strong>signés en plus</strong></div>
+      </div>
+      <div class="impact-footer">
+        1 prospect sur 3 en plus qui signe — au lieu de partir à la concurrence pendant que vous mettiez 4 jours à envoyer.
+      </div>
     </div>
-    <div class="kpi-cell">
-      <div class="kpi-cell-label"><span>IMPAYÉS &gt; 60 J</span><span class="badge down">▼ −42%</span></div>
-      <div class="kpi-cell-val"><span class="counter" data-target="42">0</span><span class="unit">%</span></div>
-      <div class="kpi-cell-sub">Relances déclenchées au bon moment.</div>
-      <svg class="kpi-cell-spark" viewBox="0 0 200 36" preserveAspectRatio="none">
-        <polyline fill="rgba(216,117,84,0.14)" points="0,36 0,8 22,10 44,12 66,14 88,16 110,20 132,22 154,26 176,28 200,32 200,36"/>
-        <polyline fill="none" stroke="#D87554" stroke-width="1.5" points="0,8 22,10 44,12 66,14 88,16 110,20 132,22 154,26 176,28 200,32"/>
-      </svg>
+
+    <!-- CARD 3 : RÉPONSE CLIENT -->
+    <div class="impact-card" data-cursor>
+      <div class="impact-name">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        DÉLAI DE RÉPONSE CLIENT
+      </div>
+      <div class="impact-hero">
+        <div class="impact-value">
+          <span class="impact-sign">−</span>
+          <span class="counter" data-target="6">0</span>
+          <span class="impact-suffix">h</span>
+        </div>
+        <div class="impact-caption">d'attente client <strong>économisées</strong></div>
+      </div>
+      <div class="impact-footer">
+        Réponse en 8 secondes au lieu de 6 heures. Plus de client qui change d'avis pendant qu'il attendait.
+      </div>
     </div>
-    <div class="kpi-cell">
-      <div class="kpi-cell-label"><span>SETUP MOYEN</span><span class="badge">SANS FORMATION</span></div>
-      <div class="kpi-cell-val"><span class="counter" data-target="9">0</span><span class="unit">jours</span></div>
-      <div class="kpi-cell-sub">Connecté à vos modèles, vos clients, vos prix.</div>
-      <svg class="kpi-cell-spark" viewBox="0 0 200 36" preserveAspectRatio="none">
-        <polyline fill="rgba(201,150,63,0.15)" points="0,36 0,12 22,14 44,18 66,16 88,20 110,22 132,24 154,28 176,30 200,32 200,36"/>
-        <polyline fill="none" stroke="#C9963F" stroke-width="1.5" points="0,12 22,14 44,18 66,16 88,20 110,22 132,24 154,28 176,30 200,32"/>
-      </svg>
+
+    <!-- CARD 4 : IMPAYÉS -->
+    <div class="impact-card" data-cursor>
+      <div class="impact-name">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+        FACTURES IMPAYÉES &gt; 60 J
+      </div>
+      <div class="impact-hero">
+        <div class="impact-value">
+          <span class="impact-sign">−</span>
+          <span class="counter" data-target="42">0</span>
+          <span class="impact-suffix">%</span>
+        </div>
+        <div class="impact-caption">d'<strong>impayés évités</strong></div>
+      </div>
+      <div class="impact-footer">
+        Trésorerie protégée. Relances déclenchées au bon moment, jamais oubliées — moins de cash bloqué chez vos clients.
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -845,7 +902,7 @@
     <div>
       <h5>ENTREPRISE</h5>
       <ul>
-        <li><a href="#" data-cursor>Manifeste</a></li>
+        <li><a href="histoire.html" data-cursor>Notre histoire</a></li>
         <li><a href="#" data-cursor>L'équipe</a></li>
         <li><a href="#" data-cursor>Presse</a></li>
         <li><a href="#" data-cursor>Recrutement</a></li>

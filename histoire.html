@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notre Histoire — Talos</title>
+<meta name="description" content="Pourquoi Talos s'appelle Talos. L'histoire d'un automate né de la mythologie grecque, forgé à Paris 11e pour rendre le temps aux professionnels.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- NAV -->
+<nav class="top" id="mainNav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-mark" data-cursor aria-label="Talos">
+      <svg width="78" height="22" viewBox="0 0 380 120">
+        <g fill="#F5EDDC">
+          <rect x="0" y="18" width="62" height="14"/>
+          <path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/>
+        </g>
+        <text x="66" y="100" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="100" fill="#F5EDDC" font-weight="700" letter-spacing="-4">ALOS</text>
+      </svg>
+    </a>
+    <div class="live-tag"><span class="dot"></span>EN ACTIVITÉ</div>
+  </div>
+  <div class="links">
+    <a href="automatisations.html" data-cursor>Automatisations</a>
+    <a href="methode.html" data-cursor>Méthode</a>
+    <a href="tarifs.html" data-cursor>Tarifs</a>
+    <a href="histoire.html" data-cursor class="active">Histoire</a>
+  </div>
+  <a href="reserver.html" class="cta" data-cursor>
+    <span class="cta-full">Réserver une démo</span>
+    <span class="cta-short">Démo</span>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+  </a>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════ -->
+<section class="hist-hero">
+  <!-- Fond : grand T pulsant -->
+  <div class="hist-hero-bg" aria-hidden="true">
+    <svg class="hist-bg-mark" viewBox="0 0 380 120" preserveAspectRatio="xMidYMid meet">
+      <g fill="#F5EDDC" opacity="0.04">
+        <rect x="0" y="18" width="62" height="14"/>
+        <path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/>
+      </g>
+    </svg>
+  </div>
+  <!-- Particules flottantes -->
+  <div class="hist-particles" aria-hidden="true">
+    <span style="--hpx:12%;--hpy:70%;--hpd:0s;--hps:2.8s"></span>
+    <span style="--hpx:28%;--hpy:85%;--hpd:0.6s;--hps:3.4s"></span>
+    <span style="--hpx:45%;--hpy:75%;--hpd:1.1s;--hps:2.6s"></span>
+    <span style="--hpx:60%;--hpy:90%;--hpd:0.3s;--hps:3.1s"></span>
+    <span style="--hpx:75%;--hpy:80%;--hpd:1.5s;--hps:2.9s"></span>
+    <span style="--hpx:88%;--hpy:68%;--hpd:0.8s;--hps:3.6s"></span>
+    <span style="--hpx:20%;--hpy:95%;--hpd:2.0s;--hps:2.7s"></span>
+    <span style="--hpx:55%;--hpy:92%;--hpd:1.8s;--hps:3.2s"></span>
+    <span style="--hpx:70%;--hpy:88%;--hpd:0.4s;--hps:2.5s"></span>
+    <span style="--hpx:38%;--hpy:78%;--hpd:2.3s;--hps:3.8s"></span>
+  </div>
+  <!-- Contenu hero -->
+  <div class="hist-hero-inner">
+    <div class="hist-eyebrow hist-word-reveal">NOTRE HISTOIRE · TALOS · FONDÉ EN 2024</div>
+    <h1 class="hist-h1">
+      <span class="hist-line-reveal" style="--hlr-d:0.1s">Le premier robot</span>
+      <span class="hist-line-reveal" style="--hlr-d:0.25s">de l'histoire</span>
+      <span class="hist-line-reveal" style="--hlr-d:0.4s"><em>s'appelait Talos.</em></span>
+    </h1>
+    <p class="hist-hero-sub hist-word-reveal" style="animation-delay:.6s">
+      3 000 ans plus tard, on lui a donné<br>quelque chose à automatiser.
+    </p>
+  </div>
+  <div class="hist-hero-scroll" aria-hidden="true">
+    <span>DÉFILER</span>
+    <div class="hist-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CHAPITRE 1 — LE NOM
+     ═══════════════════════════════════════ -->
+<section class="hist-chapter reveal" id="nom">
+  <div class="hist-chapter-inner">
+    <div class="hist-chapter-aside">
+      <div class="hist-num">01</div>
+      <div class="hist-chapter-label">LE NOM</div>
+    </div>
+    <div class="hist-chapter-body">
+      <h2 class="hist-chapter-h2">
+        Τάλως.<br>Le géant de bronze.
+      </h2>
+      <p class="hist-p">
+        Dans la mythologie grecque, <strong>Talos</strong> était l'automate originel.
+        Un géant entièrement forgé dans le bronze par Héphaistos — dieu du feu, de la forge,
+        et de tout ce qui est construit avec les mains — à la demande de Zeus.
+        Sa mission : protéger l'île de Crète des envahisseurs.
+      </p>
+      <p class="hist-p">
+        Trois fois par jour, il parcourait les côtes à grands pas.
+        Implacable. Infatigable. Sans jamais se plaindre, sans jamais faillir,
+        sans jamais oublier une ronde. Il ne dormait pas. Il ne se reposait pas.
+        Il <em>protégeait</em>.
+      </p>
+      <!-- Illustration mythologique animée -->
+      <div class="hist-myth-visual" aria-hidden="true">
+        <div class="hist-myth-island">
+          <div class="hist-myth-sun"></div>
+          <!-- Étoiles -->
+          <div class="hist-myth-stars">
+            <span style="--sx:15%;--sy:18%;--sd:0s"></span>
+            <span style="--sx:70%;--sy:12%;--sd:0.5s"></span>
+            <span style="--sx:85%;--sy:30%;--sd:1.1s"></span>
+            <span style="--sx:40%;--sy:8%;--sd:0.8s"></span>
+          </div>
+          <div class="hist-myth-sea"></div>
+          <div class="hist-myth-figure">
+            <svg viewBox="0 0 60 90" width="56" height="84">
+              <rect x="0" y="0" width="60" height="12" fill="#C9963F" opacity="0.9"/>
+              <path d="M 22 12 L 12 38 L 26 38 L 18 80 L 50 36 L 34 36 L 44 12 Z" fill="#C9963F" opacity="0.9"/>
+            </svg>
+            <!-- Halo autour du géant -->
+            <div class="hist-myth-halo"></div>
+          </div>
+          <div class="hist-myth-waves">
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        <div class="hist-myth-caption">Talos, gardien de Crète · Mythologie grecque · ~3000 av. J.‑C.</div>
+      </div>
+      <blockquote class="hist-pull hist-pull-reveal">
+        « Il n'avait qu'une seule mission :<br>protéger ceux qu'il servait. »
+      </blockquote>
+      <p class="hist-p">
+        On a choisi ce nom parce qu'il dit tout.
+        Talos ne remplace pas les humains — il protège leur <strong>temps</strong>.
+        Le bronze du logo, c'est sa matière.
+        L'éclair, c'est l'énergie qu'il vous rend.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CHAPITRE 2 — LE DÉCLIC
+     ═══════════════════════════════════════ -->
+<section class="hist-chapter hist-chapter-alt reveal" id="declic">
+  <div class="hist-chapter-inner">
+    <div class="hist-chapter-aside">
+      <div class="hist-num">02</div>
+      <div class="hist-chapter-label">LE DÉCLIC</div>
+    </div>
+    <div class="hist-chapter-body">
+      <div class="hist-timestamp">PARIS · NOVEMBRE 2024 · 23H17</div>
+      <h2 class="hist-chapter-h2">
+        Un soir de trop.
+      </h2>
+      <p class="hist-p">
+        On finissait notre quatrième devis de la semaine.
+        Pas parce qu'on aimait ça. Parce qu'il le fallait.
+      </p>
+      <p class="hist-p">
+        Une facture en retard. Trois relances non envoyées. Une inbox à 47 non-lus.
+        Et ce sentiment douloureux que la moitié de notre semaine passait à <em>gérer</em>
+        plutôt qu'à <em>créer</em>.
+      </p>
+      <!-- Terminal avec typewriter -->
+      <div class="hist-terminal" id="histTerminal">
+        <div class="hist-term-bar">
+          <span class="ht-dot" style="background:#ff5f57"></span>
+          <span class="ht-dot" style="background:#febc2e"></span>
+          <span class="ht-dot" style="background:#28c840"></span>
+          <span class="ht-title">journal · 14 nov 2024</span>
+        </div>
+        <div class="hist-term-body">
+          <div class="ht-line" data-delay="0">
+            <span class="ht-time">23:17</span>
+            <span class="ht-text">Devis Projet Martin — <span class="ht-tag ht-tag-warn">brouillon</span></span>
+          </div>
+          <div class="ht-line" data-delay="600">
+            <span class="ht-time">23:31</span>
+            <span class="ht-text">Relance Facture #038 — <span class="ht-tag ht-tag-err">encore en attente</span></span>
+          </div>
+          <div class="ht-line" data-delay="1200">
+            <span class="ht-time">23:44</span>
+            <span class="ht-text">Réponse email Sophie D. — <span class="ht-tag ht-tag-err">retard 3 jours</span></span>
+          </div>
+          <div class="ht-line ht-line-break" data-delay="2000">
+            <span class="ht-time">23:52</span>
+            <span class="ht-text ht-spark">Et si on n'avait plus jamais à faire ça ?<span class="ht-cursor">|</span></span>
+          </div>
+        </div>
+      </div>
+      <p class="hist-p">
+        Pas une question rhétorique. Une vraie décision collective.
+      </p>
+      <blockquote class="hist-pull hist-pull-reveal">
+        « Le prochain devis, on ne le fera pas.<br>Une IA le fera. »
+      </blockquote>
+      <p class="hist-p">
+        Deux mois plus tard, Talos existait. Six semaines après, les premiers clients
+        récupéraient leurs soirées. On est à votre écoute pour que vous soyez les prochains.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CHAPITRE 3 — COMMENT C'EST FAIT
+     ═══════════════════════════════════════ -->
+<section class="hist-chapter reveal" id="comment">
+  <div class="hist-chapter-inner">
+    <div class="hist-chapter-aside">
+      <div class="hist-num">03</div>
+      <div class="hist-chapter-label">LA FORGE</div>
+    </div>
+    <div class="hist-chapter-body">
+      <h2 class="hist-chapter-h2">
+        Pas de magie.<br>De la forge.
+      </h2>
+      <p class="hist-p">
+        Talos connecte ce que vous utilisez déjà — votre boîte mail, vos documents,
+        vos contacts, votre agenda. Il observe comment vous travaillez : votre ton,
+        vos tarifs, vos habitudes, vos formules de politesse.
+      </p>
+      <p class="hist-p">
+        En 6 jours, il est opérationnel. Pas de formation de 40 heures.
+        Pas de logiciel à réapprendre. Pas de changement d'habitude.
+        Vous nous montrez comment vous travaillez. On s'occupe du reste.
+      </p>
+      <!-- Flow animé -->
+      <div class="hist-stack">
+        <div class="hist-stack-row">
+          <div class="hist-stack-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 9v11"/></svg>
+            <span>Vos outils existants</span>
+          </div>
+          <div class="hist-stack-arrow">
+            <svg class="hist-arrow-anim" width="24" height="12" viewBox="0 0 24 12">
+              <path d="M0 6h20M16 2l6 4-6 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="hist-stack-item hist-stack-talos">
+            <svg width="20" height="20" viewBox="0 0 60 90">
+              <rect x="0" y="0" width="60" height="12" fill="currentColor"/>
+              <path d="M 22 12 L 12 38 L 26 38 L 18 80 L 50 36 L 34 36 L 44 12 Z" fill="currentColor"/>
+            </svg>
+            <span>Talos apprend</span>
+          </div>
+          <div class="hist-stack-arrow">
+            <svg class="hist-arrow-anim" style="animation-delay:.4s" width="24" height="12" viewBox="0 0 24 12">
+              <path d="M0 6h20M16 2l6 4-6 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="hist-stack-item hist-stack-free">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            <span>Vous vivez</span>
+          </div>
+        </div>
+        <div class="hist-stack-sub">LLMs de dernière génération · Architecture événementielle · Intégrations natives</div>
+      </div>
+      <p class="hist-p">
+        On s'occupe de tout — soit en <strong>se branchant sur ce qui existe</strong> déjà chez vous,
+        soit en construisant un <strong>système sur mesure</strong> si vous repartez de zéro.
+        Dans tous les cas, opérationnel en moins d'une semaine.
+      </p>
+      <p class="hist-p">
+        Rien à installer. Rien à configurer vous-même.
+        On est là, on vous écoute, on adapte. C'est ça, Talos.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CHAPITRE 4 — NOTRE BUT
+     ═══════════════════════════════════════ -->
+<section class="hist-chapter hist-chapter-alt reveal" id="but">
+  <div class="hist-chapter-inner">
+    <div class="hist-chapter-aside">
+      <div class="hist-num">04</div>
+      <div class="hist-chapter-label">NOTRE BUT</div>
+    </div>
+    <div class="hist-chapter-body">
+      <h2 class="hist-chapter-h2">
+        <span class="hist-counter" id="histCounter">0</span> soirées libérées<br>d'ici 2027.
+      </h2>
+      <p class="hist-p">
+        Pas les grandes entreprises. Elles ont déjà des équipes entières pour gérer leur admin.
+      </p>
+      <p class="hist-p">
+        Les <strong>indépendants</strong>. Les <strong>TPE</strong>. Les gens qui font vraiment
+        quelque chose — de leurs mains, de leur tête — et qui passent trop de temps dans
+        leur messagerie.
+      </p>
+      <!-- Portraits types -->
+      <div class="hist-portraits">
+        <div class="hist-portrait reveal">
+          <div class="hist-portrait-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="hist-portrait-text">
+            <strong>L'artisan brillant</strong> qui passe 3h par semaine sur des devis que personne ne lui avait demandé d'écrire à la main.
+          </div>
+        </div>
+        <div class="hist-portrait reveal">
+          <div class="hist-portrait-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2M18 2h3M15 2h3"/><path d="M21 15a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
+          </div>
+          <div class="hist-portrait-text">
+            <strong>La restauratrice passionnée</strong> qui répond aux demandes de résa le dimanche soir par peur de perdre un client.
+          </div>
+        </div>
+        <div class="hist-portrait reveal">
+          <div class="hist-portrait-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+          </div>
+          <div class="hist-portrait-text">
+            <strong>Le consultant freelance</strong> qui relance ses clients à 22h par peur d'oublier, compta le dimanche matin.
+          </div>
+        </div>
+        <div class="hist-portrait reveal">
+          <div class="hist-portrait-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="hist-portrait-text">
+            <strong>Le kiné, le coach, le thérapeute</strong> qui confirme des rendez-vous manuellement que son agenda devrait gérer.
+          </div>
+        </div>
+      </div>
+      <blockquote class="hist-pull hist-pull-reveal">
+        « Leur temps mérite mieux<br>qu'une boîte mail. »
+      </blockquote>
+      <p class="hist-p">
+        On est à l'écoute. Chaque client qu'on accompagne nous dit la même chose après :
+        <em>"Je me demande pourquoi j'ai attendu si longtemps."</em>
+        On se pose la même question.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     MANIFESTE
+     ═══════════════════════════════════════ -->
+<section class="hist-manifeste reveal">
+  <div class="hist-manifeste-inner">
+    <div class="hist-manifeste-label">MANIFESTE</div>
+    <h2 class="hist-manifeste-h2">Ce en quoi on croit.</h2>
+    <ol class="hist-manifeste-list">
+      <li class="reveal" style="--stagger:.05s">
+        <span class="hm-num">I</span>
+        <span class="hm-text">Le temps est la seule ressource qu'on ne peut pas racheter.</span>
+      </li>
+      <li class="reveal" style="--stagger:.15s">
+        <span class="hm-num">II</span>
+        <span class="hm-text">Les tâches administratives ne méritent pas votre cerveau.</span>
+      </li>
+      <li class="reveal" style="--stagger:.25s">
+        <span class="hm-num">III</span>
+        <span class="hm-text">Un automate ne juge pas, ne fatigue pas, n'oublie pas.</span>
+      </li>
+      <li class="reveal" style="--stagger:.35s">
+        <span class="hm-num">IV</span>
+        <span class="hm-text">On ne remplace pas les gens. On les libère.</span>
+      </li>
+      <li class="reveal" style="--stagger:.45s">
+        <span class="hm-num">V</span>
+        <span class="hm-text">Forgé main. Pour que vous puissiez l'être aussi.</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     L'ÉQUIPE
+     ═══════════════════════════════════════ -->
+<section class="hist-team reveal">
+  <div class="hist-team-inner">
+    <div class="hist-chapter-aside">
+      <div class="hist-num">05</div>
+      <div class="hist-chapter-label">L'ÉQUIPE</div>
+    </div>
+    <div class="hist-chapter-body">
+      <h2 class="hist-chapter-h2">
+        Petite équipe.<br>Grande conviction.
+      </h2>
+      <p class="hist-p">
+        Talos est né à Paris, dans le 11e arrondissement.
+        On est une équipe resserrée — des gens qui ont vécu la douleur de l'admin excessive
+        dans leurs propres projets, et qui ont décidé d'en faire quelque chose d'utile.
+        On est là, on vous écoute, et on s'adapte à votre métier.
+      </p>
+      <p class="hist-p">
+        Pas de levée de fonds spectaculaire. Pas de slideshow de 40 slides.
+        Un produit qui marche, des clients qui récupèrent leurs soirées, et l'obsession
+        de ne jamais construire quelque chose de complexe quand le simple suffit.
+      </p>
+      <div class="hist-team-values">
+        <div class="htv-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/></svg>
+          <span>Paris · IDF · Remote</span>
+        </div>
+        <div class="htv-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Fondé en 2024</span>
+        </div>
+        <div class="htv-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span>Zéro bullshit</span>
+        </div>
+        <div class="htv-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <span>À votre écoute</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CTA FINAL
+     ═══════════════════════════════════════ -->
+<section class="hist-cta reveal">
+  <div class="hist-cta-inner">
+    <div class="hist-cta-mark" aria-hidden="true">
+      <svg viewBox="0 0 380 120" width="260">
+        <g fill="#F5EDDC" opacity="0.08">
+          <rect x="0" y="18" width="62" height="14"/>
+          <path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/>
+        </g>
+        <text x="66" y="100" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="100" fill="#F5EDDC" opacity="0.08" font-weight="700" letter-spacing="-4">ALOS</text>
+      </svg>
+    </div>
+    <p class="hist-cta-label">ON EST LÀ</p>
+    <h2 class="hist-cta-h2">Votre prochaine soirée<br>vous appartient.</h2>
+    <p class="hist-cta-sub">15 minutes. Zéro engagement. On vous écoute et on vous montre ce que Talos peut faire pour votre métier, dès cette semaine.</p>
+    <a href="reserver.html" class="cta-bronze" data-cursor>
+      Réserver une démo · 15 min
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <svg width="100" height="28" viewBox="0 0 380 120">
+        <g fill="#F5EDDC">
+          <rect x="0" y="18" width="62" height="14"/>
+          <path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/>
+        </g>
+        <text x="66" y="100" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="100" fill="#F5EDDC" font-weight="700" letter-spacing="-4">ALOS</text>
+      </svg>
+      <p class="footer-tagline">« Notre temps, pour votre savoir-faire. »<br>L'automate de ceux qui ont mieux à faire.</p>
+    </div>
+    <div>
+      <h5>PRODUIT</h5>
+      <ul>
+        <li><a href="automatisations.html" data-cursor>Automatisations</a></li>
+        <li><a href="methode.html" data-cursor>Méthode</a></li>
+        <li><a href="tarifs.html" data-cursor>Tarifs</a></li>
+        <li><a href="reserver.html" data-cursor>Réserver une démo</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>ENTREPRISE</h5>
+      <ul>
+        <li><a href="histoire.html" data-cursor>Notre histoire</a></li>
+        <li><a href="#" data-cursor>Manifeste</a></li>
+        <li><a href="#" data-cursor>L'équipe</a></li>
+        <li><a href="#" data-cursor>Recrutement</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>CONTACT</h5>
+      <ul>
+        <li><a href="mailto:contact@talos.ai" data-cursor>contact@talos.ai</a></li>
+        <li><a href="tel:+33600000000" data-cursor>+33 6 ·· ·· ·· ··</a></li>
+        <li><a href="#" data-cursor>Paris 11e</a></li>
+        <li><a href="#" data-cursor>LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© TALOS · 2026 · FORGÉ MAIN</span>
+    <span>RCS PARIS · SIREN ···</span>
+  </div>
+</footer>
+
+<!-- Scripts histoire spécifiques -->
+<script>
+(function() {
+  /* ── Typewriter terminal ── */
+  const terminal = document.getElementById('histTerminal');
+  if (terminal) {
+    const lines = terminal.querySelectorAll('.ht-line');
+    lines.forEach(l => { l.style.opacity = '0'; l.style.transform = 'translateY(6px)'; });
+    const obs = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      obs.disconnect();
+      lines.forEach(line => {
+        const delay = parseInt(line.dataset.delay || 0);
+        setTimeout(() => {
+          line.style.transition = 'opacity .4s ease, transform .4s ease';
+          line.style.opacity = '1';
+          line.style.transform = 'translateY(0)';
+        }, delay);
+      });
+    }, { threshold: 0.5 });
+    obs.observe(terminal);
+  }
+
+  /* ── Compteur soirées ── */
+  const counter = document.getElementById('histCounter');
+  if (counter) {
+    const target = 1000;
+    let started = false;
+    const obs2 = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting || started) return;
+      started = true;
+      obs2.disconnect();
+      const duration = 1800;
+      const start = performance.now();
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // ease out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        counter.textContent = Math.round(eased * target).toLocaleString('fr-FR');
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }, { threshold: 0.4 });
+    obs2.observe(counter);
+  }
+
+  /* ── Pull quote border reveal ── */
+  const pulls = document.querySelectorAll('.hist-pull-reveal');
+  const obsP = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('hist-pull-in'); obsP.unobserve(e.target); }
+    });
+  }, { threshold: 0.5 });
+  pulls.forEach(p => obsP.observe(p));
+})();
+</script>
+<script src="app.js"></script>
+</body>
+</html>
