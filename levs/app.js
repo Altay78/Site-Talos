@@ -23,19 +23,23 @@
   const burger = document.getElementById('vsBurger');
   const mobile = document.getElementById('vsMobile');
   if (burger && mobile) {
+    const closeMenu = () => {
+      burger.classList.remove('active');
+      mobile.classList.remove('active');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('vs-menu-open');
+      document.body.style.overflow = '';
+    };
     burger.addEventListener('click', () => {
       const open = burger.classList.toggle('active');
       mobile.classList.toggle('active', open);
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.classList.toggle('vs-menu-open', open);
       document.body.style.overflow = open ? 'hidden' : '';
     });
-    mobile.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        burger.classList.remove('active');
-        mobile.classList.remove('active');
-        burger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      });
+    mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobile.classList.contains('active')) closeMenu();
     });
   }
 

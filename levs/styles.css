@@ -355,15 +355,18 @@ body::after {
   top: 70px;
   left: 0;
   right: 0;
+  bottom: 0;
   background: var(--cream);
   border-bottom: 1px solid var(--paper-edge);
   padding: 24px var(--pad-x) 40px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  z-index: 45;
+  z-index: 55;
   transform: translateY(-110%);
   transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .vs-mobile-menu.active { transform: translateY(0); }
 .vs-mobile-menu a {
@@ -1770,20 +1773,21 @@ body::after {
 /* sticky category bar */
 .vs-menu-cats {
   position: sticky;
-  top: 60px;
-  z-index: 30;
-  background: rgba(244, 233, 210, 0.95);
+  top: 78px;
+  z-index: 40;
+  background: rgba(244, 233, 210, 0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-top: 1px solid var(--paper-edge);
   border-bottom: 1px solid var(--paper-edge);
-  padding: 16px var(--pad-x);
+  padding: 14px var(--pad-x);
   display: flex;
   gap: 8px;
   justify-content: center;
   flex-wrap: wrap;
   overflow-x: auto;
   scrollbar-width: none;
+  box-shadow: 0 6px 18px rgba(42, 24, 16, 0.06);
 }
 .vs-menu-cats::-webkit-scrollbar { display: none; }
 
@@ -2635,7 +2639,7 @@ body::after {
   .vs-menu-hero h1 { font-size: 38px; margin: 8px 0 8px; line-height: 1; }
   .vs-menu-hero p { font-size: 13px; margin-bottom: 8px; line-height: 1.5; }
   .vs-menu-cats {
-    top: 62px;
+    top: 64px;
     padding: 10px 12px;
     gap: 6px;
     flex-wrap: nowrap;
@@ -2798,12 +2802,16 @@ textarea {
   /* mobile menu: scrollable & full-height feel */
   .vs-mobile-menu {
     top: 64px;
+    bottom: 0;
     max-height: calc(100dvh - 64px);
     overflow-y: auto;
     padding-bottom: calc(40px + env(safe-area-inset-bottom, 0));
   }
   /* sticky menu cats sits right under nav on menu page */
   .vs-menu-cats { top: 64px; }
+  /* hide bottom action bar + cart fab while mobile menu is open */
+  body.vs-menu-open .vs-mobile-action,
+  body.vs-menu-open .vs-cart-fab { display: none; }
 
   /* hero: cap visual better, hide floating card cleanly */
   .vs-hero { padding-top: 18px; }
@@ -2979,3 +2987,154 @@ textarea {
     scroll-behavior: auto !important;
   }
 }
+
+/* =========================================================
+   DRINKS GRID — dense, label-only cards
+   ========================================================= */
+.vs-drinks-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.vs-drink { padding: 14px 14px 14px; gap: 4px; }
+.vs-drink h3 { font-size: 16px; line-height: 1.1; }
+.vs-drink .vs-item-price { font-size: 16px; margin-top: 0; }
+.vs-drink .vs-item-desc { font-size: 12.5px; color: var(--coffee-mid); }
+@media (max-width: 1024px) { .vs-drinks-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px)  { .vs-drinks-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .vs-drink { padding: 11px 12px; }
+  .vs-drink h3 { font-size: 14px; }
+  .vs-drink .vs-item-price { font-size: 14px; }
+  .vs-drink .vs-item-desc { font-size: 11.5px; }
+}
+@media (max-width: 360px)  { .vs-drinks-grid { grid-template-columns: 1fr 1fr; } }
+
+/* =========================================================
+   LANDING PAGE MOBILE POLISH — subtle motion + delight
+   ========================================================= */
+@media (max-width: 768px) {
+  /* softer reveal: slide-up + a touch of scale */
+  .vs-reveal {
+    transform: translateY(22px) scale(0.985);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .vs-reveal.visible { transform: translateY(0) scale(1); }
+
+  /* hero copy fades in with a tiny rise */
+  .vs-hero-copy { animation: vsHeroIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  @keyframes vsHeroIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* hero tags slide in one after the other */
+  .vs-tags .vs-tag {
+    animation: vsTagIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .vs-tags .vs-tag:nth-of-type(1) { animation-delay: 0.20s; }
+  .vs-tags .vs-tag:nth-of-type(2) { animation-delay: 0.30s; }
+  .vs-tags .vs-tag:nth-of-type(3) { animation-delay: 0.40s; }
+  .vs-tags .vs-tag:nth-of-type(4) { animation-delay: 0.50s; }
+  .vs-tags .vs-tag:nth-of-type(5) { animation-delay: 0.60s; }
+  @keyframes vsTagIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* H1 letterspacing reset on phones for tighter look */
+  .vs-h1 { letter-spacing: -0.025em; }
+
+  /* H2 script line breathes a bit */
+  .vs-script {
+    background: linear-gradient(110deg, var(--bronze), var(--coffee-mid) 60%, var(--bronze));
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: vsScriptShine 6s ease-in-out infinite;
+  }
+  @keyframes vsScriptShine {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+  }
+
+  /* CTA buttons get a touch of life on tap */
+  .vs-cta-primary,
+  .vs-cta-ghost,
+  .vs-menu-cat-btn,
+  .vs-yaller-btn {
+    transition: transform 0.18s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .vs-cta-primary:active,
+  .vs-cta-ghost:active,
+  .vs-menu-cat-btn:active,
+  .vs-yaller-btn:active { transform: scale(0.97); }
+
+  /* category cards: gentler hover (transform on tap) */
+  .vs-cat:active { transform: translateY(-3px) scale(0.99); }
+  .vs-cat-img img { transition: transform 0.5s ease; }
+
+  /* signatures: subtle press feedback */
+  .vs-sig:active { transform: translateY(-2px) scale(0.99); }
+
+  /* category number gets a tiny float on phones */
+  .vs-cat-num,
+  .vs-tacos-badge { animation: vsBobble 4s ease-in-out infinite; }
+  @keyframes vsBobble {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-2px); }
+  }
+
+  /* card lift while scrolling into view (re-uses .visible from JS) */
+  .vs-cat.visible,
+  .vs-sig.visible,
+  .vs-item.visible {
+    will-change: transform, opacity;
+  }
+
+  /* nav: very subtle slide in from top on first load */
+  .vs-nav {
+    animation: vsNavIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes vsNavIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* meta numbers: tiny pulse cue on the dot */
+  .vs-dot {
+    animation-duration: 2s;
+  }
+
+  /* mobile bottom action bar: slide up from below on first load */
+  .vs-mobile-action {
+    animation: vsBarIn 0.6s 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes vsBarIn {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .vs-mobile-action a:active { background: rgba(200, 153, 90, 0.22); }
+
+  /* hero plate: gentle float (replaces parallax disabled on mobile) */
+  .vs-plate-img {
+    animation: vsPlateFloat 6s ease-in-out infinite;
+  }
+  @keyframes vsPlateFloat {
+    0%, 100% { transform: translateY(0) rotate(-0.4deg); }
+    50%      { transform: translateY(-6px) rotate(0.4deg); }
+  }
+
+  /* hero meta: bottom border for nicer look */
+  .vs-hero-meta {
+    border-top: 1px solid var(--paper-edge);
+    padding-top: 16px;
+  }
+
+  /* tighter spacing where the eye most lingers */
+  .vs-section-head { margin-bottom: 26px; }
+
+  /* section dividers feel softer */
+  .vs-categories { border-top: none; }
+}
+
+/* ============== motion polish — desktop too ============== */
+.vs-h1-display { transition: filter 0.4s ease; }
+.vs-h1-display:hover { filter: brightness(1.06); }
