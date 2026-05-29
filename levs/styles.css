@@ -1099,6 +1099,112 @@ body::after {
   transform: rotate(-4deg);
   box-shadow: 0 12px 30px rgba(42, 24, 16, 0.25);
 }
+
+/* =========================================================
+   STORY SEAL — replaces kitchen photos with a brand seal
+   ========================================================= */
+.vs-story-seal-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.vs-story-seal {
+  position: relative;
+  width: clamp(260px, 38vw, 420px);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vs-story-seal::before {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(200, 153, 90, 0.28) 0%, transparent 60%);
+  filter: blur(20px);
+  animation: vsSealGlow 4.5s ease-in-out infinite;
+}
+@keyframes vsSealGlow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.04); }
+}
+
+.vs-story-seal-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: vsSealRotate 30s linear infinite;
+  z-index: 1;
+}
+@keyframes vsSealRotate {
+  to { transform: rotate(360deg); }
+}
+
+.vs-story-seal-core {
+  position: relative;
+  width: 70%;
+  height: 70%;
+  z-index: 2;
+  filter: drop-shadow(0 18px 32px rgba(42, 24, 16, 0.35));
+  animation: vsSealFloat 4.5s ease-in-out infinite;
+}
+@keyframes vsSealFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+/* orbiting food emojis around the seal */
+.vs-story-seal-orbit {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  animation: vsSealRotate 24s linear infinite reverse;
+  pointer-events: none;
+}
+.vs-story-seal-emoji {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 26px;
+  margin: -13px 0 0 -13px;
+  filter: drop-shadow(0 6px 10px rgba(42, 24, 16, 0.25));
+}
+.vs-story-seal-emoji--1 { transform: rotate(0deg)   translateX(140px) rotate(0deg);   }
+.vs-story-seal-emoji--2 { transform: rotate(72deg)  translateX(140px) rotate(-72deg); }
+.vs-story-seal-emoji--3 { transform: rotate(144deg) translateX(140px) rotate(-144deg); }
+.vs-story-seal-emoji--4 { transform: rotate(216deg) translateX(140px) rotate(-216deg); }
+.vs-story-seal-emoji--5 { transform: rotate(288deg) translateX(140px) rotate(-288deg); }
+
+@media (max-width: 768px) {
+  .vs-story-seal { width: 240px; }
+  .vs-story-seal-emoji { font-size: 20px; }
+  .vs-story-seal-emoji--1 { transform: rotate(0deg)   translateX(108px) rotate(0deg);   }
+  .vs-story-seal-emoji--2 { transform: rotate(72deg)  translateX(108px) rotate(-72deg); }
+  .vs-story-seal-emoji--3 { transform: rotate(144deg) translateX(108px) rotate(-144deg); }
+  .vs-story-seal-emoji--4 { transform: rotate(216deg) translateX(108px) rotate(-216deg); }
+  .vs-story-seal-emoji--5 { transform: rotate(288deg) translateX(108px) rotate(-288deg); }
+}
+@media (max-width: 420px) {
+  .vs-story-seal { width: 200px; }
+  .vs-story-seal-emoji { font-size: 18px; }
+  .vs-story-seal-emoji--1 { transform: rotate(0deg)   translateX(90px) rotate(0deg);   }
+  .vs-story-seal-emoji--2 { transform: rotate(72deg)  translateX(90px) rotate(-72deg); }
+  .vs-story-seal-emoji--3 { transform: rotate(144deg) translateX(90px) rotate(-144deg); }
+  .vs-story-seal-emoji--4 { transform: rotate(216deg) translateX(90px) rotate(-216deg); }
+  .vs-story-seal-emoji--5 { transform: rotate(288deg) translateX(90px) rotate(-288deg); }
+}
+
+/* story-stamp re-position so it sits over the seal */
+.vs-story-seal-wrap .vs-story-stamp {
+  top: 6%;
+  left: -2%;
+  z-index: 4;
+  animation: vsStampWobble 6s ease-in-out infinite;
+}
 .vs-stamp-year {
   font-family: var(--ff-display);
   font-weight: 900;
@@ -4372,7 +4478,295 @@ body.vs-legal-open { overflow: hidden; }
   .vs-stars, .vs-strip-track .dot, .vs-pillar-icon, .vs-cat-img img,
   .vs-sig-ribbon, .vs-yaller-btn::after, .vs-rewards-fill::after,
   .vs-dot::after, .vs-burger span, .vs-footer-logo, .vs-tile-badge,
-  .vs-hero-ctas .vs-cta-primary, .vs-story-stamp {
+  .vs-hero-ctas .vs-cta-primary, .vs-story-stamp,
+  .vs-story-seal-ring, .vs-story-seal-orbit, .vs-story-seal::before,
+  .vs-story-seal-core {
     animation: none !important;
+  }
+}
+
+/* =========================================================
+   MORE MOTION DESIGN — global + mobile
+   ========================================================= */
+
+/* tilt category cards on hover (desktop) */
+@media (hover: hover) {
+  .vs-cat {
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.45s ease,
+                border-color 0.3s ease;
+  }
+  .vs-cat:hover {
+    transform: translateY(-8px) rotate(-0.4deg);
+  }
+  .vs-cat:nth-child(2n):hover {
+    transform: translateY(-8px) rotate(0.4deg);
+  }
+
+  /* sig cards subtle 3D feel */
+  .vs-sig {
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease;
+  }
+  .vs-sig:hover { transform: translateY(-6px) scale(1.005); }
+}
+
+/* H1 letters rise on reveal (split via existing vs-h1-display & vs-h1-script) */
+.vs-h1-display {
+  display: inline-block;
+  animation: vsLetterRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.15s;
+}
+.vs-h1-script {
+  display: inline-block;
+  animation: vsLetterRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.35s;
+}
+@keyframes vsLetterRise {
+  from { opacity: 0; transform: translateY(28px) rotate(-2deg); }
+  to   { opacity: 1; transform: translateY(0) rotate(0); }
+}
+
+/* h2 italic script line: slide up + shimmer on visible */
+.vs-section-head.visible .vs-h2 em.vs-script {
+  animation: vsScriptIn 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes vsScriptIn {
+  from { opacity: 0; transform: translateY(12px) rotate(-1.5deg); }
+  to   { opacity: 1; transform: translateY(0) rotate(0); }
+}
+
+/* hero plate: subtle wobble + shine */
+.vs-plate-img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.vs-plate-glow {
+  animation: vsGlow 4s ease-in-out infinite, vsGlowShift 8s linear infinite;
+}
+@keyframes vsGlowShift {
+  0%, 100% { background: radial-gradient(circle, rgba(200, 153, 90, 0.4) 0%, transparent 60%); }
+  50%      { background: radial-gradient(circle, rgba(241, 201, 122, 0.5) 0%, transparent 60%); }
+}
+
+/* floating ingredient emojis around hero (desktop AND mobile) */
+.vs-hero-visual::before,
+.vs-hero-visual::after {
+  content: "🍅";
+  position: absolute;
+  font-size: 28px;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 10px rgba(42, 24, 16, 0.25));
+  z-index: 2;
+}
+.vs-hero-visual::before {
+  top: 14%;
+  right: -2%;
+  animation: vsHeroFloatA 5.5s ease-in-out infinite;
+}
+.vs-hero-visual::after {
+  content: "🌶️";
+  bottom: 18%;
+  left: -4%;
+  animation: vsHeroFloatB 6s ease-in-out infinite;
+}
+@keyframes vsHeroFloatA {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50%      { transform: translateY(-10px) rotate(8deg); }
+}
+@keyframes vsHeroFloatB {
+  0%, 100% { transform: translateY(0) rotate(6deg); }
+  50%      { transform: translateY(-14px) rotate(-6deg); }
+}
+@media (max-width: 480px) {
+  .vs-hero-visual::before, .vs-hero-visual::after { display: none; }
+}
+
+/* counter numbers in hero: subtle scale pulse on completion */
+.vs-counter {
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+.vs-counter.done {
+  animation: vsCounterPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes vsCounterPop {
+  0%, 100% { transform: scale(1); color: var(--coffee); }
+  50%      { transform: scale(1.18); color: var(--bronze); }
+}
+
+/* signature ribbon glow */
+.vs-sig-ribbon {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 16px rgba(200, 153, 90, 0.5);
+}
+
+/* cart drawer total: pulses gently when changes */
+.vs-cart-total-val.bump {
+  animation: vsTotalBump 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes vsTotalBump {
+  0%, 100% { transform: scale(1); color: var(--coffee); }
+  40%      { transform: scale(1.12); color: var(--bronze); }
+}
+
+/* confetti on max tier reached */
+.vs-rewards-prize--max {
+  position: relative;
+  overflow: visible;
+}
+.vs-rewards-prize--max::before,
+.vs-rewards-prize--max::after {
+  content: "✨";
+  position: absolute;
+  font-size: 14px;
+  animation: vsSparkle 1.6s ease-in-out infinite;
+}
+.vs-rewards-prize--max::before {
+  left: -16px;
+  top: -4px;
+}
+.vs-rewards-prize--max::after {
+  right: -16px;
+  top: -4px;
+  animation-delay: 0.8s;
+}
+@keyframes vsSparkle {
+  0%, 100% { transform: scale(0.6) rotate(0deg); opacity: 0.5; }
+  50%      { transform: scale(1.3) rotate(180deg); opacity: 1; }
+}
+
+/* category cards: gradient border travel on hover (desktop) */
+@media (hover: hover) {
+  .vs-cat {
+    position: relative;
+    isolation: isolate;
+  }
+  .vs-cat::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    padding: 1px;
+    background: linear-gradient(135deg, transparent, transparent);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+    transition: background 0.4s ease;
+    z-index: -1;
+  }
+  .vs-cat:hover::before {
+    background: linear-gradient(135deg, var(--bronze), transparent 30%, transparent 70%, var(--bronze));
+  }
+}
+
+/* h2 stagger words on reveal — phrase-level slide */
+.vs-section-head .vs-h2 {
+  overflow: hidden;
+  display: inline-block;
+}
+.vs-section-head.visible .vs-h2 {
+  animation: vsH2Reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes vsH2Reveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* nav primary CTA: shine sweep */
+.vs-cta-primary { position: relative; overflow: hidden; }
+.vs-cta-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(110deg, transparent 0%, rgba(255, 240, 200, 0.22) 50%, transparent 100%);
+  transform: skewX(-20deg);
+  transition: left 0.8s ease;
+  pointer-events: none;
+}
+.vs-cta-primary:hover::before { left: 125%; }
+
+/* announcement strip dot wave */
+.vs-strip-track {
+  animation: vsScroll 28s linear infinite;
+}
+
+/* page enter fade — on first paint */
+body { animation: vsBodyFade 0.6s ease both; }
+@keyframes vsBodyFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  /* mobile: extra emoji confetti when adding to cart (toast-like) */
+  .vs-tile-badge.bump::after {
+    content: "+1";
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--bronze);
+    background: var(--coffee);
+    padding: 2px 5px;
+    border-radius: 6px;
+    animation: vsFloatUpFade 0.9s ease-out forwards;
+    pointer-events: none;
+  }
+  @keyframes vsFloatUpFade {
+    0%   { opacity: 0; transform: translateY(0) scale(0.6); }
+    30%  { opacity: 1; transform: translateY(-12px) scale(1); }
+    100% { opacity: 0; transform: translateY(-32px) scale(0.9); }
+  }
+
+  /* cart drawer header: bronze underline animates in */
+  .vs-cart-drawer.open .vs-cart-head h3 {
+    background: linear-gradient(var(--bronze), var(--bronze)) bottom left / 100% 2px no-repeat;
+    animation: vsUnderlineIn 0.6s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+    padding-bottom: 6px;
+  }
+  @keyframes vsUnderlineIn {
+    from { background-size: 0 2px; }
+    to   { background-size: 100% 2px; }
+  }
+
+  /* hero plate slow rotate + breathe */
+  .vs-plate-img {
+    animation: vsPlateBreathe 7s ease-in-out infinite;
+  }
+  @keyframes vsPlateBreathe {
+    0%, 100% { transform: translateY(0) rotate(-0.6deg) scale(1); }
+    50%      { transform: translateY(-6px) rotate(0.6deg) scale(1.012); }
+  }
+
+  /* category number 01/02/03: shimmer bronze */
+  .vs-cat-num {
+    background: linear-gradient(110deg, var(--bronze) 20%, #f1c97a 50%, var(--bronze) 80%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: vsScriptShine 4s ease-in-out infinite;
+  }
+
+  /* category card image: tiny breath */
+  .vs-cat:hover .vs-cat-img img,
+  .vs-cat:active .vs-cat-img img { transform: scale(1.04); }
+
+  /* footer logo float was already there; let's add glow */
+  .vs-footer-logo {
+    filter: drop-shadow(0 0 12px rgba(200, 153, 90, 0.15));
+  }
+
+  /* announcement strip: each span fades in/out slightly */
+  .vs-strip-track span:not(.dot) {
+    animation: vsStripFade 4s ease-in-out infinite;
+  }
+  @keyframes vsStripFade {
+    0%, 100% { opacity: 0.92; }
+    50%      { opacity: 1; }
   }
 }

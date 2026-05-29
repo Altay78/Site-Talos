@@ -88,6 +88,7 @@
       const eased = 1 - Math.pow(1 - p, 3);
       el.textContent = Math.round(eased * target);
       if (p < 1) requestAnimationFrame(tick);
+      else { el.classList.add('done'); setTimeout(() => el.classList.remove('done'), 600); }
     };
     requestAnimationFrame(tick);
   };
@@ -357,7 +358,13 @@
       </div>`;
     });
     list.innerHTML = html;
-    total.textContent = fmt(cartTotal());
+    const newTotal = fmt(cartTotal());
+    if (total.textContent !== newTotal) {
+      total.textContent = newTotal;
+      total.classList.remove('bump');
+      void total.offsetWidth;
+      total.classList.add('bump');
+    }
   };
 
   const addToCart = (name, price, cat) => {
@@ -510,9 +517,9 @@
   const catModal = document.getElementById('vsCatModal');
   const CAT_INFO = {
     pizza:      { name: 'Nos pizzas',     emoji: '🍕', img: 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=1000&auto=format&fit=crop&q=80', fallback: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1000&auto=format&fit=crop&q=80', desc: 'Pâte affinée 48 h, cuisson au feu de bois. 14 recettes au choix, à partir de 9 €.' },
-    kebab:      { name: 'Nos kebabs',     emoji: '🥙', img: 'https://images.unsplash.com/photo-1644078813143-bcc2dafff90c?w=1000&auto=format&fit=crop&q=80', fallback: 'https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=1000&auto=format&fit=crop&q=80', desc: 'Kebab turc — viande halal marinée 24 h, broche tournée à la main. Pain au choix, sauces maison.' },
+    kebab:      { name: 'Nos kebabs',     emoji: '🥙', img: 'https://images.unsplash.com/photo-1581352974628-23f97b568f04?w=1000&auto=format&fit=crop&q=80', fallback: 'https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=1000&auto=format&fit=crop&q=80', desc: 'Kebab turc — viande halal marinée 24 h, broche tournée à la main. Pain au choix, sauces maison.' },
     burger:     { name: 'Nos burgers',    emoji: '🍔', img: 'https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=1000&auto=format&fit=crop&q=80', fallback: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=1000&auto=format&fit=crop&q=80', desc: 'Steak haché frais, smashé à la commande, pain brioché, cheddar affiné. Frites maison incluses.' },
-    tacos:      { name: 'Nos tacos',      emoji: '🌮', img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=1000&auto=format&fit=crop&q=80', fallback: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1000&auto=format&fit=crop&q=80', desc: 'French tacos façon O\'Tacos : galette grillée à la plancha, sauce fromagère onctueuse. 1, 2 ou 3 viandes au choix.' },
+    tacos:      { name: 'Nos tacos',      emoji: '🌮', img: 'https://images.unsplash.com/photo-1547928576-b822bc410bdf?w=1000&auto=format&fit=crop&q=80', fallback: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1000&auto=format&fit=crop&q=80', desc: 'French tacos façon O\'Tacos : galette grillée à la plancha, sauce fromagère onctueuse. 1, 2 ou 3 viandes au choix.' },
     americain:  { name: 'L\'Américain',   emoji: '🍗', img: 'https://images.unsplash.com/photo-1539252554453-80ab65ce3586?w=1000&auto=format&fit=crop&q=80', fallback: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1000&auto=format&fit=crop&q=80', desc: 'Sandwich américain garni — steak, merguez ou veggie — frites maison à la graisse de bœuf incluses.' }
   };
   const openCatModal = (cat) => {
