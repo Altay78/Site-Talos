@@ -332,23 +332,29 @@ body::after {
 
 .vs-burger {
   display: none;
-  width: 36px;
-  height: 36px;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   flex-direction: column;
   justify-content: center;
-  gap: 5px;
-  padding: 8px;
+  align-items: center;
 }
 .vs-burger span {
-  display: block;
-  width: 100%;
+  position: absolute;
+  left: 50%;
+  width: 22px;
   height: 1.5px;
+  margin-left: -11px;
   background: var(--coffee);
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: top 0.3s ease, transform 0.3s ease, opacity 0.2s ease;
 }
-.vs-burger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.vs-burger span:nth-child(1) { top: 15px; }
+.vs-burger span:nth-child(2) { top: 21px; }
+.vs-burger span:nth-child(3) { top: 27px; }
+.vs-burger.active span:nth-child(1) { top: 21px; transform: rotate(45deg); }
 .vs-burger.active span:nth-child(2) { opacity: 0; }
-.vs-burger.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.vs-burger.active span:nth-child(3) { top: 21px; transform: rotate(-45deg); }
 
 .vs-mobile-menu {
   position: fixed;
@@ -2509,7 +2515,7 @@ body::after {
   /* NAV — smaller, tighter */
   .vs-nav { padding: 10px 14px; gap: 8px; }
   .vs-logo svg { width: 42px; height: 42px; }
-  .vs-burger { width: 32px; height: 32px; padding: 6px; }
+  /* burger keeps 44x44 globally */
 
   /* MOBILE MENU — fix top to current nav height */
   .vs-mobile-menu { top: 62px; padding: 16px 18px 28px; gap: 16px; }
@@ -2782,15 +2788,7 @@ textarea {
   /* sticky nav: scroll-padding compensates for nav + cats height on menu page */
   html { scroll-padding-top: 64px; }
 
-  /* burger touch target (visual stays compact, hit area grows) */
-  .vs-burger {
-    width: 44px;
-    height: 44px;
-    padding: 12px 10px;
-    align-items: center;
-    justify-content: center;
-  }
-  .vs-burger span { width: 22px; }
+  /* burger already 44x44 globally, nothing to override here */
 
   /* touch-friendly qty buttons in cart */
   .vs-qty-btn { width: 32px; height: 32px; font-size: 16px; }
@@ -3220,3 +3218,337 @@ textarea {
   position: -webkit-sticky;
   position: sticky;
 }
+
+/* =========================================================
+   MOBILE ACTION BAR — 4 tiles + Panier badge
+   ========================================================= */
+.vs-mobile-action--4 { grid-template-columns: repeat(4, 1fr); }
+.vs-mobile-action a { position: relative; }
+.vs-tile-badge {
+  position: absolute;
+  top: 4px;
+  right: 16%;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: var(--bronze);
+  color: var(--coffee);
+  font-family: var(--ff-sans);
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+  border-radius: 999px;
+  letter-spacing: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+.vs-tile-badge.has-items {
+  opacity: 1;
+  transform: scale(1);
+}
+.vs-tile-badge.bump { animation: vsBadgePop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes vsBadgePop {
+  0%, 100% { transform: scale(1); }
+  40%      { transform: scale(1.35); }
+}
+
+/* =========================================================
+   PRODUCT MODAL
+   ========================================================= */
+.vs-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+.vs-modal.open { display: flex; pointer-events: auto; }
+.vs-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(31, 17, 8, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.vs-modal.open .vs-modal-overlay { opacity: 1; }
+
+.vs-modal-card {
+  position: relative;
+  background: var(--cream);
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 22px 22px 0 0;
+  padding: 32px 28px calc(28px + env(safe-area-inset-bottom, 0));
+  box-shadow: 0 -20px 60px rgba(42, 24, 16, 0.35);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+  border-top: 1px solid var(--paper-edge);
+}
+.vs-modal.open .vs-modal-card { transform: translateY(0); opacity: 1; }
+
+@media (min-width: 700px) {
+  .vs-modal { align-items: center; padding: 24px; }
+  .vs-modal-card { border-radius: 18px; max-height: 84vh; }
+}
+
+.vs-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--cream-light);
+  border: 1px solid var(--paper-edge);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--coffee);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.vs-modal-close:hover { background: var(--cream-edge); }
+.vs-modal-close svg { width: 18px; height: 18px; }
+
+.vs-modal-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.vs-modal-title {
+  font-family: var(--ff-display);
+  font-weight: 900;
+  font-size: 30px;
+  letter-spacing: -0.01em;
+  color: var(--coffee);
+  margin-bottom: 6px;
+  line-height: 1.1;
+  padding-right: 48px;
+}
+.vs-modal-price {
+  font-family: var(--ff-display);
+  font-weight: 900;
+  font-size: 24px;
+  color: var(--bronze);
+  margin-bottom: 14px;
+}
+.vs-modal-desc {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--coffee-soft);
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px dashed var(--cream-edge);
+}
+.vs-modal-section { margin-bottom: 18px; }
+.vs-modal-section h4 {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--coffee-mid);
+  margin-bottom: 10px;
+}
+.vs-modal-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  padding: 0;
+}
+.vs-modal-list li {
+  font-size: 13.5px;
+  color: var(--coffee);
+  background: var(--cream-light);
+  border: 1px solid var(--paper-edge);
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+.vs-modal-allergens {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+}
+.vs-modal-allergens li {
+  font-size: 12px;
+  font-weight: 600;
+  color: #8c3a1a;
+  background: rgba(220, 130, 70, 0.12);
+  border: 1px solid rgba(180, 70, 30, 0.25);
+  padding: 4px 9px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.vs-modal-allergens li::before {
+  content: "⚠";
+  font-size: 10px;
+  opacity: 0.7;
+}
+.vs-modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 22px;
+}
+.vs-modal-tag {
+  font-size: 12px;
+  color: var(--coffee-mid);
+  background: rgba(42, 24, 16, 0.06);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.vs-modal-add {
+  width: 100%;
+  justify-content: center;
+  padding: 15px 22px;
+  font-size: 14px;
+}
+
+/* =========================================================
+   CART DRAWER (relaunched, mobile-first)
+   ========================================================= */
+.vs-cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 17, 8, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 85;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.vs-cart-overlay.open { opacity: 1; visibility: visible; }
+
+.vs-cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 440px;
+  background: var(--cream);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(105%);
+  transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+  box-shadow: -20px 0 60px rgba(42, 24, 16, 0.2);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+.vs-cart-drawer.open { transform: translateX(0); }
+
+.vs-cart-call {
+  width: 100%;
+  justify-content: center;
+  padding: 14px 22px;
+}
+.vs-cart-disclaimer {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--coffee-mid);
+  line-height: 1.4;
+}
+
+/* row item inside cart */
+.vs-cart-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 14px;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--cream-edge);
+}
+.vs-cart-row:last-child { border-bottom: none; }
+.vs-cart-row-name {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--coffee);
+  line-height: 1.2;
+}
+.vs-cart-row-unit { font-size: 12px; color: var(--coffee-mid); margin-top: 2px; }
+.vs-cart-row-price {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--coffee);
+  white-space: nowrap;
+}
+.vs-cart-row-qty {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+.vs-cart-row-qty button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--paper-edge);
+  background: var(--cream-light);
+  color: var(--coffee);
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.vs-cart-row-qty button:hover { background: var(--coffee); color: var(--cream-light); }
+.vs-cart-row-qty .vs-cart-row-q {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--coffee);
+}
+.vs-cart-row-rm {
+  margin-left: auto;
+  background: transparent;
+  border: 0;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--coffee-mid);
+  cursor: pointer;
+  padding: 0;
+}
+.vs-cart-row-rm:hover { color: #b34; }
+
+/* item is now visibly tappable */
+.vs-item { cursor: pointer; }
+.vs-item:hover { border-color: var(--bronze-light); }
+
+/* prevent body scroll when modal/drawer open */
+body.vs-modal-open,
+body.vs-cart-open { overflow: hidden; }
+
+/* clickable review tile */
+.vs-meta-link {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+}
+.vs-meta-link:hover { transform: translateY(-2px); }
+.vs-meta-link:hover .vs-meta-label { color: var(--bronze); }

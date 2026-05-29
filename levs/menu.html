@@ -16,13 +16,13 @@
 <div class="vs-strip">
   <div class="vs-strip-track">
     <span>Frites maison à la graisse de bœuf</span><span class="dot">·</span>
-    <span>Livraison 7j/7</span><span class="dot">·</span>
     <span>Viande halal certifiée</span><span class="dot">·</span>
     <span>Ouvert jusqu'à 23h30</span><span class="dot">·</span>
+    <span>Tacos · Pizza · Kebab · Burger · Américain</span><span class="dot">·</span>
     <span>Frites maison à la graisse de bœuf</span><span class="dot">·</span>
-    <span>Livraison 7j/7</span><span class="dot">·</span>
     <span>Viande halal certifiée</span><span class="dot">·</span>
     <span>Ouvert jusqu'à 23h30</span><span class="dot">·</span>
+    <span>Tacos · Pizza · Kebab · Burger · Américain</span><span class="dot">·</span>
   </div>
 </div>
 
@@ -529,20 +529,80 @@
 <script src="app.js"></script>
 
 <!-- MOBILE BOTTOM ACTION BAR -->
-<nav class="vs-mobile-action" aria-label="Actions rapides">
+<nav class="vs-mobile-action vs-mobile-action--4" aria-label="Actions rapides">
   <a href="tel:+33237997036" aria-label="Appeler">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
     Appeler
   </a>
-  <a href="menu.html" class="is-primary" aria-label="Voir la carte">
+  <a href="#pizza" class="is-primary" aria-label="Voir la carte">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v4H4zM4 12h16v4H4zM4 20h16"/></svg>
     La carte
+  </a>
+  <a href="#panier" id="vsPanierTile" aria-label="Mon panier">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/><path d="M6 6L4 2H2"/></svg>
+    Panier
+    <span class="vs-tile-badge" data-count="0">0</span>
   </a>
   <a href="https://www.google.com/maps/dir/?api=1&destination=15+Rue+du+G%C3%A9n%C3%A9ral+Leclerc+28230+%C3%89pernon" target="_blank" rel="noopener" aria-label="Itinéraire">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
     Y aller
   </a>
 </nav>
+
+<!-- PRODUCT MODAL -->
+<div class="vs-modal" id="vsModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vsModalTitle">
+  <div class="vs-modal-overlay" data-modal-close></div>
+  <div class="vs-modal-card" role="document">
+    <button class="vs-modal-close" data-modal-close aria-label="Fermer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+    </button>
+    <div class="vs-modal-eyebrow" id="vsModalCat">—</div>
+    <h3 class="vs-modal-title" id="vsModalTitle">—</h3>
+    <div class="vs-modal-price" id="vsModalPrice">—</div>
+    <p class="vs-modal-desc" id="vsModalDesc">—</p>
+    <div class="vs-modal-section" id="vsModalIngrWrap">
+      <h4>Ingrédients</h4>
+      <ul class="vs-modal-list" id="vsModalIngr"></ul>
+    </div>
+    <div class="vs-modal-section" id="vsModalAllergWrap">
+      <h4>Allergènes</h4>
+      <ul class="vs-modal-allergens" id="vsModalAllerg"></ul>
+    </div>
+    <div class="vs-modal-tags" id="vsModalTags"></div>
+    <button class="vs-modal-add vs-cta-primary" id="vsModalAdd">
+      Ajouter au panier
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- CART DRAWER -->
+<div class="vs-cart-overlay" id="vsCartOverlay" data-cart-close></div>
+<aside class="vs-cart-drawer" id="vsCartDrawer" aria-hidden="true" aria-label="Mon panier">
+  <div class="vs-cart-head">
+    <h3>Mon panier</h3>
+    <button class="vs-cart-close" data-cart-close aria-label="Fermer">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+    </button>
+  </div>
+  <div class="vs-cart-list" id="vsCartList">
+    <div class="vs-cart-empty">
+      <div class="vs-cart-empty-icon">🛒</div>
+      <p>Votre panier est vide.<br>Tapotez un plat pour l'ajouter.</p>
+    </div>
+  </div>
+  <div class="vs-cart-foot">
+    <div class="vs-cart-total">
+      <span class="vs-cart-total-label">Total estimé</span>
+      <span class="vs-cart-total-val" id="vsCartTotal">0,00 €</span>
+    </div>
+    <a href="tel:+33237997036" class="vs-cta-primary vs-cart-call">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Commander par téléphone
+    </a>
+    <p class="vs-cart-disclaimer">Ce récap vous aide à passer commande par téléphone. Aucun paiement en ligne.</p>
+  </div>
+</aside>
 
 </body>
 </html>

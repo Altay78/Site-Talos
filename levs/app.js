@@ -165,7 +165,7 @@
     }, { passive: true });
   }
 
-  // ------- MENU ITEMS: tap → emoji flies to "La carte" / counter -------
+  // ------- MENU ITEMS: tap → product modal + real cart -------
   const items = document.querySelectorAll('.vs-item');
   if (items.length) {
     const emojiFor = (cat) => ({
@@ -173,80 +173,217 @@
       americain: '🍗', enfants: '🍟', petitefaim: '🍟', boissons: '🥤'
     }[cat] || '⭐');
 
-    const targetEl = document.querySelector('.vs-mobile-action a.is-primary')
-                  || document.querySelector('.vs-mobile-action a:nth-child(2)');
+    const catLabel = (cat) => ({
+      pizza: 'Pizza', kebab: 'Kebab', burger: 'Burger', tacos: 'Tacos',
+      americain: 'Américain', enfants: 'Enfants', petitefaim: 'Petite faim',
+      boissons: 'Boisson'
+    }[cat] || 'Plat');
 
-    // counter badge on the bottom "La carte" tile
-    let badge = null;
-    let count = 0;
-    let badgeTimer = null;
-    const showCount = () => {
-      if (!targetEl) return;
-      if (!badge) {
-        badge = document.createElement('span');
-        badge.className = 'vs-floor-badge';
-        targetEl.appendChild(badge);
+    // ===== Ingredient + allergen knowledge base =====
+    // Map common French phrases in descriptions to allergens
+    const ALLERGENS = [
+      { rx: /(mozzarella|fromage|cheddar|fior di latte|parmesan|gorgonzola|chèvre|tartiflette)/i, name: 'Lait (lactose)' },
+      { rx: /(pain|brioché|naan|pita|galette|pâte|calzone|pizza)/i, name: 'Gluten (blé)' },
+      { rx: /(œuf|oeuf)/i, name: 'Œuf' },
+      { rx: /(thon|anchois|saumon)/i, name: 'Poisson' },
+      { rx: /(crevette|fruits de mer)/i, name: 'Crustacés' },
+      { rx: /(moutarde)/i, name: 'Moutarde' },
+      { rx: /(sésame)/i, name: 'Sésame' },
+      { rx: /(soja)/i, name: 'Soja' },
+      { rx: /(céleri)/i, name: 'Céleri' },
+      { rx: /(arachide|cacahuète)/i, name: 'Arachides' },
+      { rx: /(noix|amande|noisette)/i, name: 'Fruits à coque' }
+    ];
+
+    const detectAllergens = (text) => {
+      const found = new Set();
+      ALLERGENS.forEach(a => { if (a.rx.test(text)) found.add(a.name); });
+      return [...found];
+    };
+    const splitIngredients = (text) => {
+      // remove punctuation-ish, split on commas/semicolons; cap at ~14
+      return text
+        .replace(/Servi avec.*$/i, '')
+        .replace(/\.$/, '')
+        .split(/[,;·•—]| et /i)
+        .map(s => s.trim())
+        .filter(s => s.length > 1 && s.length < 60)
+        .slice(0, 16);
+    };
+
+    // ===== Modal element refs (menu page only) =====
+    const modal = document.getElementById('vsModal');
+    const drawer = document.getElementById('vsCartDrawer');
+    const overlay = document.getElementById('vsCartOverlay');
+    const tile = document.getElementById('vsPanierTile');
+    const tileBadge = tile ? tile.querySelector('.vs-tile-badge') : null;
+
+    // ===== Cart state (persists during session) =====
+    const cart = new Map(); // key=name, val={name,price,qty,cat}
+    const fmt = (n) => (Math.round(n * 100) / 100).toFixed(2).replace('.', ',') + ' €';
+    const cartCount = () => [...cart.values()].reduce((s, x) => s + x.qty, 0);
+    const cartTotal = () => [...cart.values()].reduce((s, x) => s + x.qty * x.price, 0);
+
+    const updateBadge = () => {
+      if (!tileBadge) return;
+      const n = cartCount();
+      tileBadge.textContent = String(n);
+      tileBadge.dataset.count = n;
+      tileBadge.classList.toggle('has-items', n > 0);
+      // bump
+      tileBadge.classList.remove('bump');
+      void tileBadge.offsetWidth;
+      if (n > 0) tileBadge.classList.add('bump');
+    };
+
+    const renderCart = () => {
+      const list = document.getElementById('vsCartList');
+      const total = document.getElementById('vsCartTotal');
+      if (!list || !total) return;
+      if (cart.size === 0) {
+        list.innerHTML = '<div class="vs-cart-empty"><div class="vs-cart-empty-icon">🛒</div><p>Votre panier est vide.<br>Tapotez un plat pour l\'ajouter.</p></div>';
+        total.textContent = '0,00 €';
+        return;
       }
-      badge.textContent = '+' + count;
-      badge.classList.remove('show');
-      // restart animation
-      void badge.offsetWidth;
-      badge.classList.add('show');
-      clearTimeout(badgeTimer);
-      badgeTimer = setTimeout(() => {
-        if (badge) badge.classList.remove('show');
-      }, 1800);
-    };
-
-    const fly = (startRect, emoji) => {
-      const el = document.createElement('div');
-      el.className = 'vs-fly';
-      el.textContent = emoji;
-      document.body.appendChild(el);
-
-      const tx = (targetEl ? targetEl.getBoundingClientRect() : { left: window.innerWidth - 60, top: window.innerHeight - 40, width: 0, height: 0 });
-      const startX = startRect.left + startRect.width / 2;
-      const startY = startRect.top + startRect.height / 2;
-      const endX = tx.left + tx.width / 2;
-      const endY = tx.top + tx.height / 2;
-
-      el.style.left = startX + 'px';
-      el.style.top = startY + 'px';
-      el.style.setProperty('--dx', (endX - startX) + 'px');
-      el.style.setProperty('--dy', (endY - startY) + 'px');
-
-      el.addEventListener('animationend', () => {
-        el.remove();
-        if (targetEl) {
-          targetEl.classList.remove('bump');
-          void targetEl.offsetWidth;
-          targetEl.classList.add('bump');
-          setTimeout(() => targetEl && targetEl.classList.remove('bump'), 500);
-        }
+      let html = '';
+      cart.forEach((it) => {
+        html += `<div class="vs-cart-row" data-key="${encodeURIComponent(it.name)}">
+          <div>
+            <div class="vs-cart-row-name">${it.name}</div>
+            <div class="vs-cart-row-unit">${fmt(it.price)} l'unité</div>
+          </div>
+          <div class="vs-cart-row-price">${fmt(it.qty * it.price)}</div>
+          <div class="vs-cart-row-qty">
+            <button data-action="dec" aria-label="Moins">−</button>
+            <span class="vs-cart-row-q">${it.qty}</span>
+            <button data-action="inc" aria-label="Plus">+</button>
+            <button class="vs-cart-row-rm" data-action="rm">Retirer</button>
+          </div>
+        </div>`;
       });
+      list.innerHTML = html;
+      total.textContent = fmt(cartTotal());
     };
 
+    const addToCart = (name, price, cat) => {
+      const k = name;
+      if (cart.has(k)) cart.get(k).qty += 1;
+      else cart.set(k, { name, price, qty: 1, cat });
+      updateBadge();
+      renderCart();
+    };
+
+    // qty + remove inside cart
+    if (drawer) {
+      drawer.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-action]');
+        if (!btn) return;
+        const row = btn.closest('.vs-cart-row');
+        if (!row) return;
+        const key = decodeURIComponent(row.dataset.key);
+        const it = cart.get(key);
+        if (!it) return;
+        const act = btn.dataset.action;
+        if (act === 'inc') it.qty += 1;
+        else if (act === 'dec') { it.qty -= 1; if (it.qty <= 0) cart.delete(key); }
+        else if (act === 'rm') cart.delete(key);
+        updateBadge();
+        renderCart();
+      });
+    }
+
+    // Open / close cart drawer
+    const openCart = () => {
+      if (!drawer || !overlay) return;
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('vs-cart-open');
+    };
+    const closeCart = () => {
+      if (!drawer || !overlay) return;
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('vs-cart-open');
+    };
+    if (tile) tile.addEventListener('click', (e) => { e.preventDefault(); openCart(); });
+    document.querySelectorAll('[data-cart-close]').forEach(el => el.addEventListener('click', closeCart));
+    if (window.location.hash === '#panier') setTimeout(openCart, 300);
+
+    // ===== Modal logic =====
+    const openModal = (item) => {
+      if (!modal) return;
+      const name = item.dataset.name || item.querySelector('h3')?.textContent.trim() || 'Plat';
+      const price = parseFloat(item.dataset.price || '0');
+      const section = item.closest('[data-cat]');
+      const cat = section ? section.dataset.cat : 'all';
+      const desc = item.querySelector('.vs-item-desc')?.textContent.trim() || '';
+      const tags = [...item.querySelectorAll('.vs-item-tag')].map(t => t.textContent.trim());
+
+      document.getElementById('vsModalCat').textContent = catLabel(cat);
+      document.getElementById('vsModalTitle').textContent = name;
+      document.getElementById('vsModalPrice').textContent = fmt(price);
+      document.getElementById('vsModalDesc').textContent = desc;
+
+      const ingredients = splitIngredients(desc);
+      const ingrWrap = document.getElementById('vsModalIngrWrap');
+      const ingrList = document.getElementById('vsModalIngr');
+      if (ingredients.length) {
+        ingrList.innerHTML = ingredients.map(s => `<li>${s.charAt(0).toUpperCase() + s.slice(1)}</li>`).join('');
+        ingrWrap.style.display = '';
+      } else { ingrWrap.style.display = 'none'; }
+
+      const allergens = detectAllergens(desc + ' ' + name);
+      const allWrap = document.getElementById('vsModalAllergWrap');
+      const allList = document.getElementById('vsModalAllerg');
+      if (allergens.length) {
+        allList.innerHTML = allergens.map(a => `<li>${a}</li>`).join('');
+        allWrap.style.display = '';
+      } else {
+        allList.innerHTML = '<li style="background:rgba(80,140,60,0.12);color:#3d6e2b;border-color:rgba(80,140,60,0.25)">Aucun allergène majeur détecté</li>';
+        allWrap.style.display = '';
+      }
+
+      const tagsEl = document.getElementById('vsModalTags');
+      tagsEl.innerHTML = tags.map(t => `<span class="vs-modal-tag">${t}</span>`).join('');
+
+      const addBtn = document.getElementById('vsModalAdd');
+      addBtn.onclick = () => {
+        addToCart(name, price, cat);
+        closeModal();
+      };
+
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('vs-modal-open');
+    };
+    const closeModal = () => {
+      if (!modal) return;
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('vs-modal-open');
+    };
+    if (modal) {
+      modal.querySelectorAll('[data-modal-close]').forEach(el => el.addEventListener('click', closeModal));
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      if (modal && modal.classList.contains('open')) closeModal();
+      else if (drawer && drawer.classList.contains('open')) closeCart();
+    });
+
+    // ===== Click on item: open modal (or just tacos detail) =====
     items.forEach((item) => {
-      // skip the big tacos detail card (it's a custom layout)
       if (item.classList.contains('vs-tacos-detail')) return;
-      item.style.cursor = 'pointer';
       item.addEventListener('click', (e) => {
-        // ignore clicks on the embedded "Toutes" links etc.
-        if (e.target.closest('a')) return;
-        const section = item.closest('[data-cat]');
-        const cat = section ? section.dataset.cat : 'all';
-        const emoji = emojiFor(cat);
-        const rect = item.getBoundingClientRect();
-        // item pulse
+        if (e.target.closest('a, button')) return;
+        // tiny pop
         item.classList.remove('vs-pop');
         void item.offsetWidth;
         item.classList.add('vs-pop');
         setTimeout(() => item.classList.remove('vs-pop'), 320);
-        // fly
-        fly(rect, emoji);
-        // count
-        count++;
-        showCount();
+        openModal(item);
       });
     });
   }

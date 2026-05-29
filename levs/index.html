@@ -39,13 +39,13 @@
 <div class="vs-strip">
   <div class="vs-strip-track">
     <span>Frites maison à la graisse de bœuf</span><span class="dot">·</span>
-    <span>Livraison 7j/7</span><span class="dot">·</span>
     <span>Viande halal certifiée</span><span class="dot">·</span>
     <span>Ouvert jusqu'à 23h30</span><span class="dot">·</span>
+    <span>Tacos · Pizza · Kebab · Burger · Américain</span><span class="dot">·</span>
     <span>Frites maison à la graisse de bœuf</span><span class="dot">·</span>
-    <span>Livraison 7j/7</span><span class="dot">·</span>
     <span>Viande halal certifiée</span><span class="dot">·</span>
     <span>Ouvert jusqu'à 23h30</span><span class="dot">·</span>
+    <span>Tacos · Pizza · Kebab · Burger · Américain</span><span class="dot">·</span>
   </div>
 </div>
 
@@ -148,10 +148,10 @@
           <div class="vs-meta-label">recettes à la carte</div>
         </div>
         <div class="vs-meta-divider"></div>
-        <div class="vs-meta-item">
-          <div class="vs-meta-num vs-stars">★★★★★</div>
-          <div class="vs-meta-label">4,8 / 5 — 1 200 avis</div>
-        </div>
+        <a class="vs-meta-item vs-meta-link" href="https://share.google/bkfuZp7tP8G7ofMkR" target="_blank" rel="noopener" aria-label="Voir les avis Google">
+          <div class="vs-meta-num vs-stars" id="vsRating">★★★★★</div>
+          <div class="vs-meta-label" id="vsReviews">Avis Google ↗</div>
+        </a>
       </div>
     </div>
 
@@ -657,7 +657,7 @@
 <script src="app.js"></script>
 
 <!-- MOBILE BOTTOM ACTION BAR -->
-<nav class="vs-mobile-action" aria-label="Actions rapides">
+<nav class="vs-mobile-action vs-mobile-action--4" aria-label="Actions rapides">
   <a href="tel:+33237997036" aria-label="Appeler">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
     Appeler
@@ -665,6 +665,11 @@
   <a href="menu.html" class="is-primary" aria-label="Voir la carte">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v4H4zM4 12h16v4H4zM4 20h16"/></svg>
     La carte
+  </a>
+  <a href="menu.html#panier" id="vsPanierTile" aria-label="Mon panier">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/><path d="M6 6L4 2H2"/></svg>
+    Panier
+    <span class="vs-tile-badge" data-count="0">0</span>
   </a>
   <a href="https://www.google.com/maps/dir/?api=1&destination=15+Rue+du+G%C3%A9n%C3%A9ral+Leclerc+28230+%C3%89pernon" target="_blank" rel="noopener" aria-label="Itinéraire">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
