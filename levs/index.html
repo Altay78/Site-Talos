@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Le VS Épernon — Pizza · Kebab · Burger · Tacos · Américain</title>
-<meta name="description" content="Le VS Épernon — 15 Rue du Général Leclerc. Pizzas, kebabs, burgers, tacos et spécialités américaines. Frites maison à la graisse de bœuf, viandes halal. 02 37 99 70 36.">
+<meta name="description" content="Le VS Épernon — 15 Rue du Général Leclerc. Pizzas, kebabs, burgers, tacos et spécialités américaines. Service midi & soir, fermé le lundi. 02 37 99 70 36.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Pinyon+Script&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -40,11 +40,11 @@
   <div class="vs-strip-track">
     <span>Frites maison à la graisse de bœuf</span><span class="dot">·</span>
     <span>Viande halal certifiée</span><span class="dot">·</span>
-    <span>Ouvert jusqu'à 23h30</span><span class="dot">·</span>
+    <span>Service midi &amp; soir</span><span class="dot">·</span>
     <span>Tacos · Pizza · Kebab · Burger · Américain</span><span class="dot">·</span>
     <span>Frites maison à la graisse de bœuf</span><span class="dot">·</span>
     <span>Viande halal certifiée</span><span class="dot">·</span>
-    <span>Ouvert jusqu'à 23h30</span><span class="dot">·</span>
+    <span>Service midi &amp; soir</span><span class="dot">·</span>
     <span>Tacos · Pizza · Kebab · Burger · Américain</span><span class="dot">·</span>
   </div>
 </div>
@@ -189,7 +189,7 @@
         <div class="vs-fc-pin">📍</div>
         <div>
           <div class="vs-fc-label">Aujourd'hui</div>
-          <div class="vs-fc-value">Ouvert · 11h – 23h30</div>
+          <div class="vs-fc-value">Service midi &amp; soir</div>
         </div>
       </div>
     </div>
@@ -546,10 +546,9 @@
       </div>
       <h3>Horaires</h3>
       <ul class="vs-hours">
-        <li><span>Lun &mdash; Jeu</span><strong>11h &mdash; 23h</strong></li>
-        <li><span>Vendredi</span><strong>11h &mdash; 00h</strong></li>
-        <li><span>Samedi</span><strong>11h &mdash; 00h</strong></li>
-        <li class="closed"><span>Dimanche</span><strong>Fermé</strong></li>
+        <li class="closed"><span>Lundi</span><strong>Fermé</strong></li>
+        <li><span>Mar &mdash; Sam</span><strong>11h30 &mdash; 13h30<br>18h30 &mdash; 21h00</strong></li>
+        <li><span>Dimanche</span><strong>Soir uniquement<br>18h30 &mdash; 21h00</strong></li>
       </ul>
     </div>
 
@@ -560,7 +559,7 @@
       <h3>Contact</h3>
       <p>
         <a href="tel:+33237997036">02 37 99 70 36</a><br>
-        <a href="mailto:contact@le-vs.com">contact@le-vs.com</a>
+        <a href="mailto:info@le-vs.com">info@le-vs.com</a>
       </p>
       <div class="vs-socials">
         <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
@@ -649,13 +648,13 @@
       <a href="#">Instagram</a>
       <a href="#">Facebook</a>
       <a href="#">TikTok</a>
-      <a href="mailto:contact@le-vs.com">contact@le-vs.com</a>
+      <a href="mailto:info@le-vs.com">info@le-vs.com</a>
     </div>
   </div>
 
   <div class="vs-footer-bottom">
     <span>© 2025 Le VS &mdash; Tous droits réservés.</span>
-    <span><a href="#">Mentions légales</a> · <a href="#">Confidentialité</a> · <a href="#">Allergènes</a></span>
+    <span><a href="#legal" data-legal-open>Mentions légales</a> · <a href="#legal" data-legal-open>Confidentialité</a> · <a href="menu.html">Allergènes</a></span>
   </div>
 </footer>
 
@@ -749,6 +748,48 @@
     <p class="vs-cart-disclaimer">Ce récap vous aide à passer commande par téléphone. Aucun paiement en ligne.</p>
   </div>
 </aside>
+
+<!-- LEGAL MODAL -->
+<div class="vs-legal" id="vsLegal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vsLegalTitle">
+  <div class="vs-legal-overlay" data-legal-close></div>
+  <div class="vs-legal-card" role="document">
+    <button class="vs-modal-close" data-legal-close aria-label="Fermer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+    </button>
+    <div class="vs-modal-eyebrow">Informations</div>
+    <h3 class="vs-modal-title" id="vsLegalTitle">Mentions légales</h3>
+
+    <div class="vs-legal-section">
+      <h4>Éditeur du site</h4>
+      <p><strong>Le VS SARL</strong><br>
+      15 Rue du Général Leclerc<br>
+      28230 Épernon</p>
+      <p>Tél. <a href="tel:+33237997036">02 37 99 70 36</a><br>
+      Email <a href="mailto:info@le-vs.com">info@le-vs.com</a></p>
+    </div>
+
+    <div class="vs-legal-section">
+      <h4>Identification</h4>
+      <p>RCS Chartres B 904 730 165<br>
+      Capital social : 5 000,00 €</p>
+    </div>
+
+    <div class="vs-legal-section">
+      <h4>Propriété intellectuelle</h4>
+      <p>Crédit photos : Le VS<br>
+      © Le VS — Tous droits réservés.</p>
+    </div>
+
+    <div class="vs-legal-section">
+      <h4>Confidentialité</h4>
+      <p>Aucune donnée personnelle n'est collectée par ce site. Le panier est mémorisé localement dans votre navigateur le temps de votre visite. Pour toute commande, contactez-nous au 02 37 99 70 36.</p>
+    </div>
+
+    <div class="vs-legal-section vs-legal-health">
+      <p>Pour votre santé, mangez au moins cinq fruits et légumes par jour et pratiquez une activité physique régulière. Informez-vous sur <a href="https://www.mangerbouger.fr" target="_blank" rel="noopener">mangerbouger.fr</a>.</p>
+    </div>
+  </div>
+</div>
 
 <script src="app.js"></script>
 </body>

@@ -461,9 +461,30 @@
   if (modal) {
     modal.querySelectorAll('[data-modal-close]').forEach(el => el.addEventListener('click', closeModal));
   }
+  // Legal modal
+  const legal = document.getElementById('vsLegal');
+  const openLegal = () => {
+    if (!legal) return;
+    legal.classList.add('open');
+    legal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('vs-legal-open');
+  };
+  const closeLegal = () => {
+    if (!legal) return;
+    legal.classList.remove('open');
+    legal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('vs-legal-open');
+  };
+  document.querySelectorAll('[data-legal-open]').forEach(el => {
+    el.addEventListener('click', (e) => { e.preventDefault(); openLegal(); });
+  });
+  document.querySelectorAll('[data-legal-close]').forEach(el => el.addEventListener('click', closeLegal));
+  if (window.location.hash === '#legal') setTimeout(openLegal, 300);
+
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
-    if (modal && modal.classList.contains('open')) closeModal();
+    if (legal && legal.classList.contains('open')) closeLegal();
+    else if (modal && modal.classList.contains('open')) closeModal();
     else if (drawer && drawer.classList.contains('open')) closeCart();
   });
 

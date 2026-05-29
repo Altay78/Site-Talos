@@ -3714,7 +3714,101 @@ textarea {
 
 /* prevent body scroll when modal/drawer open */
 body.vs-modal-open,
-body.vs-cart-open { overflow: hidden; }
+body.vs-cart-open,
+body.vs-legal-open { overflow: hidden; }
+
+/* =========================================================
+   LEGAL / MENTIONS MODAL — reuses modal foundations
+   ========================================================= */
+.vs-legal {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.vs-legal.open { opacity: 1; visibility: visible; pointer-events: auto; }
+.vs-legal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(31, 17, 8, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.32s ease;
+}
+.vs-legal.open .vs-legal-overlay { opacity: 1; }
+.vs-legal-card {
+  position: relative;
+  background: var(--cream);
+  width: 100%;
+  max-width: 580px;
+  max-height: 86vh;
+  overflow-y: auto;
+  border-radius: 18px;
+  padding: 32px 28px 28px;
+  border: 1px solid var(--paper-edge);
+  box-shadow: 0 30px 80px rgba(42, 24, 16, 0.4);
+  transform: translateY(30px) scale(0.97);
+  opacity: 0;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.32s ease;
+}
+.vs-legal.open .vs-legal-card { transform: translateY(0) scale(1); opacity: 1; }
+
+.vs-legal-section { margin-top: 22px; }
+.vs-legal-section h4 {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--bronze);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--cream-edge);
+}
+.vs-legal-section p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--coffee-soft);
+  margin-bottom: 8px;
+}
+.vs-legal-section p strong { color: var(--coffee); }
+.vs-legal-section a {
+  color: var(--coffee);
+  border-bottom: 1px dashed var(--bronze);
+  transition: color 0.2s ease;
+}
+.vs-legal-section a:hover { color: var(--bronze); }
+
+.vs-legal-health {
+  margin-top: 26px;
+  padding: 14px 16px;
+  background: rgba(80, 140, 60, 0.08);
+  border: 1px solid rgba(80, 140, 60, 0.25);
+  border-radius: 10px;
+}
+.vs-legal-health p {
+  font-size: 12.5px;
+  color: var(--coffee-soft);
+  margin: 0;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .vs-legal { padding: 0; align-items: flex-end; }
+  .vs-legal-card {
+    max-height: 90vh;
+    border-radius: 22px 22px 0 0;
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0));
+  }
+}
 
 /* clickable review tile */
 .vs-meta-link {
