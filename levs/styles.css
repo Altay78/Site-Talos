@@ -56,7 +56,7 @@ body {
   background: var(--cream);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
   max-width: 100vw;
 }
@@ -378,12 +378,17 @@ body::after {
 .vs-mobile-menu .vs-cta-primary {
   font-family: var(--ff-sans);
   font-size: 14px;
+  font-weight: 600;
+  color: var(--cream-light);
+  background: var(--coffee);
+  border: 1px solid var(--coffee);
   align-self: stretch;
   text-align: center;
   justify-content: center;
   margin-top: 12px;
   padding: 14px 22px;
 }
+.vs-mobile-menu .vs-cta-primary:hover { color: var(--cream-light); background: var(--bronze); border-color: var(--bronze); }
 
 /* =========================================================
    HERO
@@ -1772,8 +1777,9 @@ body::after {
 
 /* sticky category bar */
 .vs-menu-cats {
+  position: -webkit-sticky;
   position: sticky;
-  top: 78px;
+  top: 80px;
   z-index: 40;
   background: rgba(244, 233, 210, 0.96);
   backdrop-filter: blur(12px);
@@ -3138,3 +3144,79 @@ textarea {
 /* ============== motion polish — desktop too ============== */
 .vs-h1-display { transition: filter 0.4s ease; }
 .vs-h1-display:hover { filter: brightness(1.06); }
+
+/* =========================================================
+   FLYING EMOJI + COUNTER BADGE (tap-to-cart vibe)
+   ========================================================= */
+.vs-fly {
+  position: fixed;
+  font-size: 26px;
+  z-index: 80;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+  animation: vsFly 0.9s cubic-bezier(0.55, -0.2, 0.35, 1) forwards;
+  filter: drop-shadow(0 6px 12px rgba(42, 24, 16, 0.35));
+}
+@keyframes vsFly {
+  0%   { transform: translate(-50%, -50%) scale(0.7); opacity: 0; }
+  15%  { transform: translate(-50%, -50%) scale(1.6); opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.4) rotate(-20deg); opacity: 0; }
+}
+
+.vs-pop {
+  animation: vsItemPop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes vsItemPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(0.97); }
+  70%  { transform: scale(1.02); box-shadow: 0 18px 36px rgba(42, 24, 16, 0.18); }
+  100% { transform: scale(1); }
+}
+
+/* +N badge that lands on the bottom "La carte" button */
+.vs-floor-badge {
+  position: absolute;
+  top: 6px;
+  right: 18%;
+  background: var(--bronze);
+  color: var(--coffee);
+  font-family: var(--ff-sans);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0;
+  padding: 2px 7px;
+  border-radius: 999px;
+  line-height: 1.2;
+  opacity: 0;
+  transform: translateY(6px) scale(0.6);
+  pointer-events: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+.vs-floor-badge.show {
+  animation: vsBadgeIn 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes vsBadgeIn {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.5); }
+  20%  { opacity: 1; transform: translateY(0)   scale(1.3); }
+  35%  { transform: translateY(0) scale(1); }
+  75%  { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-6px) scale(0.9); }
+}
+
+.vs-mobile-action a.bump {
+  animation: vsTileBump 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes vsTileBump {
+  0%, 100% { transform: scale(1); }
+  40%      { transform: scale(1.08); }
+}
+
+/* item gets a soft tap-hint hover on desktop too */
+.vs-item { transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
+
+/* ============== FORCE sticky cats above everything ============== */
+.vs-menu-cats {
+  position: -webkit-sticky;
+  position: sticky;
+}

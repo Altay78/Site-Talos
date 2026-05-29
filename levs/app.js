@@ -165,4 +165,90 @@
     }, { passive: true });
   }
 
+  // ------- MENU ITEMS: tap → emoji flies to "La carte" / counter -------
+  const items = document.querySelectorAll('.vs-item');
+  if (items.length) {
+    const emojiFor = (cat) => ({
+      pizza: '🍕', kebab: '🥙', burger: '🍔', tacos: '🌮',
+      americain: '🍗', enfants: '🍟', petitefaim: '🍟', boissons: '🥤'
+    }[cat] || '⭐');
+
+    const targetEl = document.querySelector('.vs-mobile-action a.is-primary')
+                  || document.querySelector('.vs-mobile-action a:nth-child(2)');
+
+    // counter badge on the bottom "La carte" tile
+    let badge = null;
+    let count = 0;
+    let badgeTimer = null;
+    const showCount = () => {
+      if (!targetEl) return;
+      if (!badge) {
+        badge = document.createElement('span');
+        badge.className = 'vs-floor-badge';
+        targetEl.appendChild(badge);
+      }
+      badge.textContent = '+' + count;
+      badge.classList.remove('show');
+      // restart animation
+      void badge.offsetWidth;
+      badge.classList.add('show');
+      clearTimeout(badgeTimer);
+      badgeTimer = setTimeout(() => {
+        if (badge) badge.classList.remove('show');
+      }, 1800);
+    };
+
+    const fly = (startRect, emoji) => {
+      const el = document.createElement('div');
+      el.className = 'vs-fly';
+      el.textContent = emoji;
+      document.body.appendChild(el);
+
+      const tx = (targetEl ? targetEl.getBoundingClientRect() : { left: window.innerWidth - 60, top: window.innerHeight - 40, width: 0, height: 0 });
+      const startX = startRect.left + startRect.width / 2;
+      const startY = startRect.top + startRect.height / 2;
+      const endX = tx.left + tx.width / 2;
+      const endY = tx.top + tx.height / 2;
+
+      el.style.left = startX + 'px';
+      el.style.top = startY + 'px';
+      el.style.setProperty('--dx', (endX - startX) + 'px');
+      el.style.setProperty('--dy', (endY - startY) + 'px');
+
+      el.addEventListener('animationend', () => {
+        el.remove();
+        if (targetEl) {
+          targetEl.classList.remove('bump');
+          void targetEl.offsetWidth;
+          targetEl.classList.add('bump');
+          setTimeout(() => targetEl && targetEl.classList.remove('bump'), 500);
+        }
+      });
+    };
+
+    items.forEach((item) => {
+      // skip the big tacos detail card (it's a custom layout)
+      if (item.classList.contains('vs-tacos-detail')) return;
+      item.style.cursor = 'pointer';
+      item.addEventListener('click', (e) => {
+        // ignore clicks on the embedded "Toutes" links etc.
+        if (e.target.closest('a')) return;
+        const section = item.closest('[data-cat]');
+        const cat = section ? section.dataset.cat : 'all';
+        const emoji = emojiFor(cat);
+        const rect = item.getBoundingClientRect();
+        // item pulse
+        item.classList.remove('vs-pop');
+        void item.offsetWidth;
+        item.classList.add('vs-pop');
+        setTimeout(() => item.classList.remove('vs-pop'), 320);
+        // fly
+        fly(rect, emoji);
+        // count
+        count++;
+        showCount();
+      });
+    });
+  }
+
 })();
