@@ -15,23 +15,16 @@
 <!-- PRELOADER -->
 <div class="vs-preloader" id="preloader">
   <div class="vs-preloader-inner">
-    <svg class="vs-mark-pre" viewBox="0 0 200 200" aria-hidden="true">
-      <rect x="4" y="4" width="192" height="192" rx="16" fill="#1F1108"/>
-      <rect x="4" y="4" width="192" height="192" rx="16" fill="none" stroke="#C8995A" stroke-width="2.5"/>
-      <rect x="14" y="14" width="172" height="172" rx="10" fill="none" stroke="#C8995A" stroke-width="0.6" opacity="0.55"/>
-      <text x="100" y="46" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" letter-spacing="4" font-weight="600" fill="#C8995A">★ MAISON ★</text>
-      <line x1="48" y1="58" x2="82" y2="58" stroke="#C8995A" stroke-width="0.5"/>
-      <line x1="118" y1="58" x2="152" y2="58" stroke="#C8995A" stroke-width="0.5"/>
-      <circle cx="100" cy="58" r="1.4" fill="#C8995A"/>
-      <text x="100" y="122" text-anchor="middle" font-family="Pinyon Script, serif" font-size="62" fill="#F4E9D2" textLength="100" lengthAdjust="spacingAndGlyphs">Le VS</text>
-      <line x1="48" y1="150" x2="82" y2="150" stroke="#C8995A" stroke-width="0.5"/>
-      <line x1="118" y1="150" x2="152" y2="150" stroke="#C8995A" stroke-width="0.5"/>
-      <circle cx="100" cy="150" r="1.4" fill="#C8995A"/>
-      <text x="100" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" letter-spacing="3" font-weight="600" fill="#C8995A">EST. 2014</text>
-      <text x="100" y="186" text-anchor="middle" font-family="Inter, sans-serif" font-size="7.5" letter-spacing="2" font-weight="500" fill="#C8995A">PIZZA · KEBAB · BURGER · TACOS</text>
-    </svg>
+    <div class="vs-pre-pizza" aria-hidden="true">
+      <span class="vs-pre-emoji vs-pre-emoji--main">🍕</span>
+      <span class="vs-pre-orbit vs-pre-orbit--1">🥙</span>
+      <span class="vs-pre-orbit vs-pre-orbit--2">🍔</span>
+      <span class="vs-pre-orbit vs-pre-orbit--3">🌮</span>
+      <span class="vs-pre-orbit vs-pre-orbit--4">🍟</span>
+    </div>
+    <div class="vs-pre-brand">Le VS</div>
     <div class="vs-pre-bar"><span></span></div>
-    <div class="vs-pre-status">PRÉPARATION DU SERVICE</div>
+    <div class="vs-pre-status">ON CHAUFFE LE FOUR…</div>
   </div>
 </div>
 
@@ -164,8 +157,8 @@
       <div class="vs-plate">
         <div class="vs-plate-glow"></div>
         <img class="vs-plate-img"
-             src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=900&auto=format&fit=crop&q=80"
-             alt="Burger gourmand garni"
+             src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=900&auto=format&fit=crop&q=80"
+             alt="Kebab maison du VS"
              loading="eager">
         <div class="vs-badge-vintage">
           <svg viewBox="0 0 180 180" aria-hidden="true">
@@ -239,7 +232,7 @@
 
     <article class="vs-cat" data-cat="kebab">
       <div class="vs-cat-img">
-        <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=800&auto=format&fit=crop&q=80" alt="Kebab fait maison" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=800&auto=format&fit=crop&q=80" alt="Kebab fait maison" loading="lazy">
       </div>
       <div class="vs-cat-body">
         <div class="vs-cat-num">02</div>
@@ -269,7 +262,7 @@
 
     <article class="vs-cat" data-cat="tacos">
       <div class="vs-cat-img">
-        <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=800&auto=format&fit=crop&q=80" alt="Tacos français" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&auto=format&fit=crop&q=80" alt="French tacos grillé" loading="lazy">
       </div>
       <div class="vs-cat-body">
         <div class="vs-cat-num">04</div>
@@ -284,7 +277,7 @@
 
     <article class="vs-cat" data-cat="americain">
       <div class="vs-cat-img">
-        <img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=800&auto=format&fit=crop&q=80" alt="Tenders et frites" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&auto=format&fit=crop&q=80" alt="Sandwich américain et frites" loading="lazy">
       </div>
       <div class="vs-cat-body">
         <div class="vs-cat-num">05</div>
@@ -748,6 +741,30 @@
     <p class="vs-cart-disclaimer">Ce récap vous aide à passer commande par téléphone. Aucun paiement en ligne.</p>
   </div>
 </aside>
+
+<!-- CATEGORY PREVIEW MODAL -->
+<div class="vs-catmodal" id="vsCatModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vsCatModalTitle">
+  <div class="vs-catmodal-overlay" data-catmodal-close></div>
+  <div class="vs-catmodal-card" role="document">
+    <button class="vs-modal-close vs-catmodal-close" data-catmodal-close aria-label="Fermer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+    </button>
+    <div class="vs-catmodal-hero">
+      <img id="vsCatModalImg" src="" alt="">
+      <div class="vs-catmodal-overlay-grad"></div>
+      <div class="vs-catmodal-cat" id="vsCatModalCat">—</div>
+    </div>
+    <div class="vs-catmodal-body">
+      <h3 class="vs-catmodal-title" id="vsCatModalTitle">—</h3>
+      <p class="vs-catmodal-desc" id="vsCatModalDesc">—</p>
+      <div class="vs-catmodal-list" id="vsCatModalList"></div>
+      <a class="vs-cta-primary vs-catmodal-cta" id="vsCatModalCta" href="menu.html#pizza">
+        <span id="vsCatModalCtaText">Voir toute la carte</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
 
 <!-- LEGAL MODAL -->
 <div class="vs-legal" id="vsLegal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vsLegalTitle">

@@ -506,16 +506,86 @@
     });
   });
 
-  // Tap on .vs-cat (homepage category card) → go to that section in the menu
+  // ----- Category preview modal (homepage cat tap) -----
+  const catModal = document.getElementById('vsCatModal');
+  const CAT_INFO = {
+    pizza:      { name: 'Nos pizzas',     emoji: '🍕', img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1000&auto=format&fit=crop&q=80', desc: 'Pâte affinée 48 h, cuisson au feu de bois. 14 recettes au choix, à partir de 9 €.' },
+    kebab:      { name: 'Nos kebabs',     emoji: '🥙', img: 'https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=1000&auto=format&fit=crop&q=80', desc: 'Viande halal marinée 24 h, broche tournée à la main. Pain au choix, sauces maison.' },
+    burger:     { name: 'Nos burgers',    emoji: '🍔', img: 'https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=1000&auto=format&fit=crop&q=80', desc: 'Steak haché frais, smashé à la commande, pain brioché, cheddar affiné. Frites maison incluses.' },
+    tacos:      { name: 'Nos tacos',      emoji: '🌮', img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1000&auto=format&fit=crop&q=80', desc: 'Galette grillée à la plancha, sauce fromagère onctueuse. 1, 2 ou 3 viandes au choix, composition libre.' },
+    americain:  { name: 'L\'Américain',   emoji: '🍗', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1000&auto=format&fit=crop&q=80', desc: 'Sandwich américain garni — steak, merguez ou veggie — frites maison à la graisse de bœuf incluses.' }
+  };
+  const openCatModal = (cat) => {
+    if (!catModal) return;
+    const info = CAT_INFO[cat] || CAT_INFO.pizza;
+    document.getElementById('vsCatModalImg').src = info.img;
+    document.getElementById('vsCatModalImg').alt = info.name;
+    document.getElementById('vsCatModalCat').textContent = catLabel(cat);
+    document.getElementById('vsCatModalTitle').textContent = info.name;
+    document.getElementById('vsCatModalDesc').textContent = info.desc;
+
+    const list = document.getElementById('vsCatModalList');
+    const items = CATALOG.filter(it => it.cat === cat).slice(0, 4);
+    if (items.length === 0) {
+      // fallback: any 4 items
+      items.push(...CATALOG.slice(0, 4));
+    }
+    list.innerHTML = items.map(it => `<div class="vs-catmodal-row">
+      <span class="vs-catmodal-emoji">${it.emoji}</span>
+      <span class="vs-catmodal-name">${it.name}</span>
+      <span class="vs-catmodal-price">${fmt(it.price)}</span>
+    </div>`).join('');
+
+    const cta = document.getElementById('vsCatModalCta');
+    const ctaText = document.getElementById('vsCatModalCtaText');
+    cta.href = 'menu.html#' + cat;
+    const labelMap = {
+      pizza: 'Voir toutes les pizzas',
+      kebab: 'Voir tous les kebabs',
+      burger: 'Voir tous les burgers',
+      tacos: 'Voir les tacos',
+      americain: 'Voir les sandwiches américains'
+    };
+    if (ctaText) ctaText.textContent = labelMap[cat] || 'Voir toute la carte';
+
+    catModal.classList.add('open');
+    catModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('vs-modal-open');
+  };
+  const closeCatModal = () => {
+    if (!catModal) return;
+    catModal.classList.remove('open');
+    catModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('vs-modal-open');
+  };
+  if (catModal) {
+    catModal.querySelectorAll('[data-catmodal-close]').forEach(el => el.addEventListener('click', closeCatModal));
+  }
+
+  // Tap on .vs-cat (homepage category card) → open preview modal
   document.querySelectorAll('.vs-cat').forEach((card) => {
-    if (card.classList.contains('vs-cat-cta')) return;
+    if (card.classList.contains('vs-cat-cta')) {
+      // whole "Voir la carte complète" tile → navigate to menu.html
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('a, button')) return;
+        card.classList.remove('vs-pop'); void card.offsetWidth; card.classList.add('vs-pop');
+        setTimeout(() => { window.location.href = 'menu.html'; }, 160);
+      });
+      return;
+    }
     card.style.cursor = 'pointer';
     card.addEventListener('click', (e) => {
       if (e.target.closest('a, button')) return;
       const cat = card.dataset.cat || 'pizza';
       card.classList.remove('vs-pop'); void card.offsetWidth; card.classList.add('vs-pop');
-      setTimeout(() => { window.location.href = 'menu.html#' + cat; }, 180);
+      if (catModal) openCatModal(cat);
+      else window.location.href = 'menu.html#' + cat;
     });
+  });
+
+  // ESC also closes catmodal
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && catModal && catModal.classList.contains('open')) closeCatModal();
   });
 
 })();
