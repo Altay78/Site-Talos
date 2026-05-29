@@ -39,9 +39,14 @@
   --radius-lg:    8px;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 
 body {
   font-family: var(--ff-sans);
@@ -52,6 +57,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
 
 img { max-width: 100%; height: auto; display: block; }
@@ -368,8 +375,11 @@ body::after {
 .vs-mobile-menu .vs-cta-primary {
   font-family: var(--ff-sans);
   font-size: 14px;
-  align-self: flex-start;
-  margin-top: 8px;
+  align-self: stretch;
+  text-align: center;
+  justify-content: center;
+  margin-top: 12px;
+  padding: 14px 22px;
 }
 
 /* =========================================================
@@ -2253,4 +2263,719 @@ body::after {
 .vs-toast.show {
   opacity: 1;
   transform: translate(-50%, 0);
+}
+
+/* =========================================================
+   Y ALLER (replaces reservation form)
+   ========================================================= */
+.vs-yaller {
+  max-width: var(--max);
+  margin: 0 auto;
+  background: var(--coffee);
+  color: var(--cream-light);
+  border-radius: 16px;
+  padding: clamp(28px, 4vw, 50px);
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--bronze);
+}
+.vs-yaller::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(200,153,90,.2), transparent 55%),
+    radial-gradient(circle at 10% 90%, rgba(200,153,90,.1), transparent 55%);
+  pointer-events: none;
+}
+.vs-yaller > * { position: relative; z-index: 1; }
+.vs-yaller-pin {
+  font-size: 36px;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.vs-yaller-copy h3 {
+  color: var(--cream-light);
+  margin-bottom: 14px;
+}
+.vs-yaller-copy h3 em { color: var(--bronze-light); }
+.vs-yaller-copy p {
+  font-size: 16px;
+  color: var(--bronze-soft);
+  line-height: 1.55;
+}
+.vs-yaller-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.vs-yaller-btn {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 22px;
+  background: rgba(244, 233, 210, 0.06);
+  border: 1px solid rgba(200, 153, 90, 0.25);
+  border-radius: 999px;
+  color: var(--cream-light);
+  font-family: var(--ff-sans);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: all 0.25s ease;
+}
+.vs-yaller-btn:hover {
+  background: var(--bronze);
+  border-color: var(--bronze);
+  color: var(--coffee);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(200, 153, 90, 0.3);
+}
+.vs-yaller-ico {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(200, 153, 90, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vs-yaller-btn:hover .vs-yaller-ico {
+  background: rgba(31, 17, 8, 0.2);
+}
+.vs-yaller-ico svg { width: 18px; height: 18px; }
+.vs-yaller-arrow {
+  font-size: 22px;
+  font-weight: 400;
+  opacity: 0.7;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.vs-yaller-btn:hover .vs-yaller-arrow {
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+/* =========================================================
+   TACOS DETAIL CARD
+   ========================================================= */
+.vs-tacos-detail {
+  background: var(--cream-light);
+  border: 1px solid var(--paper-edge);
+  border-radius: var(--radius-lg);
+  padding: clamp(28px, 4vw, 44px);
+  position: relative;
+  overflow: hidden;
+}
+.vs-tacos-default {
+  text-align: center;
+  padding-bottom: 28px;
+  border-bottom: 1px dashed var(--cream-edge);
+  margin-bottom: 28px;
+}
+.vs-tacos-badge {
+  display: inline-block;
+  background: var(--bronze);
+  color: var(--coffee);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  padding: 5px 12px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+.vs-tacos-default h3 {
+  font-family: var(--ff-display);
+  font-weight: 900;
+  font-size: clamp(28px, 4vw, 40px);
+  color: var(--coffee);
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+.vs-tacos-base {
+  font-family: var(--ff-display);
+  font-size: clamp(15px, 1.5vw, 18px);
+  color: var(--coffee-soft);
+  line-height: 1.55;
+  max-width: 620px;
+  margin: 0 auto 18px;
+}
+.vs-tacos-base strong { color: var(--coffee); font-weight: 700; }
+.vs-tacos-base span {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: var(--ff-sans);
+  font-size: 13.5px;
+  color: var(--coffee-mid);
+  font-style: italic;
+}
+.vs-tacos-price-tag {
+  display: inline-block;
+  padding: 8px 18px;
+  background: var(--coffee);
+  color: var(--cream-light);
+  border-radius: 999px;
+  font-family: var(--ff-sans);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+.vs-tacos-price-tag strong {
+  font-family: var(--ff-display);
+  font-size: 18px;
+  color: var(--bronze-light);
+  margin-left: 8px;
+}
+
+.vs-tacos-options {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 36px;
+}
+.vs-tacos-col h4 {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--coffee);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--coffee);
+  display: inline-block;
+}
+.vs-tacos-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 16px;
+}
+.vs-tacos-options .vs-tacos-col:last-child .vs-tacos-list {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.vs-tacos-list li {
+  font-size: 13.5px;
+  color: var(--coffee-soft);
+  padding: 5px 0;
+  position: relative;
+  padding-left: 14px;
+}
+.vs-tacos-list li::before {
+  content: "+";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  color: var(--bronze);
+  font-weight: 700;
+}
+.vs-tacos-note {
+  text-align: center;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px dashed var(--cream-edge);
+  font-size: 14px;
+  color: var(--coffee-mid);
+}
+.vs-tacos-note a {
+  color: var(--coffee);
+  font-weight: 600;
+  border-bottom: 1px dashed var(--bronze);
+  white-space: nowrap;
+}
+.vs-tacos-note a:hover { color: var(--bronze); }
+
+/* =========================================================
+   MOBILE — AGGRESSIVE OVERRIDES (max 768px)
+   ========================================================= */
+@media (max-width: 768px) {
+  /* sane defaults: no horizontal overflow */
+  html, body { overflow-x: hidden; }
+  body { padding-bottom: 70px; }
+
+  /* tighter pad-x */
+  :root { --pad-x: 14px; }
+
+  /* NAV — smaller, tighter */
+  .vs-nav { padding: 10px 14px; gap: 8px; }
+  .vs-logo svg { width: 42px; height: 42px; }
+  .vs-burger { width: 32px; height: 32px; padding: 6px; }
+
+  /* MOBILE MENU — fix top to current nav height */
+  .vs-mobile-menu { top: 62px; padding: 16px 18px 28px; gap: 16px; }
+  .vs-mobile-menu a { font-size: 22px; }
+
+  /* STRIP — even smaller */
+  .vs-strip { padding: 7px 0; }
+  .vs-strip-track { font-size: 9.5px; gap: 18px; letter-spacing: 0.14em; }
+
+  /* HERO — compact */
+  .vs-hero { padding: 20px 14px 32px; }
+  .vs-hero-inner { gap: 22px; }
+  .vs-eyebrow { font-size: 9.5px; letter-spacing: 0.18em; margin-bottom: 14px; }
+  .vs-h1 { font-size: 38px; line-height: 1; margin-bottom: 14px; }
+  .vs-h1-display { display: inline; }
+  .vs-h1-script { font-size: 0.5em; }
+  .vs-lede { font-size: 14px; line-height: 1.55; margin-bottom: 18px; }
+  .vs-tags { padding: 10px 0; margin-bottom: 16px; gap: 4px 8px; }
+  .vs-tag { font-size: 13px; }
+  .vs-tag-sep { font-size: 10px; }
+  .vs-hero-ctas { gap: 8px; margin-bottom: 22px; }
+  .vs-hero-ctas .vs-cta-lg { padding: 12px 18px; font-size: 13px; }
+  .vs-hero-meta { gap: 8px; padding-top: 16px; }
+  .vs-meta-num { font-size: 20px; }
+  .vs-meta-label { font-size: 8.5px; letter-spacing: 0.1em; }
+  .vs-stars { font-size: 12px; letter-spacing: 0; }
+  .vs-hero-visual { max-width: 240px; }
+
+  /* SECTIONS — tighter */
+  .vs-section { padding: 36px 14px; }
+  .vs-section-head { margin-bottom: 24px; }
+  .vs-h2 { font-size: 32px; margin-bottom: 10px; }
+  .vs-h2.huge { font-size: 36px; }
+  .vs-section-lede { font-size: 14px; line-height: 1.55; }
+
+  /* CATEGORIES — 2 cols, tight */
+  .vs-cat-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .vs-cat-img { aspect-ratio: 1/1; }
+  .vs-cat-body { padding: 12px 12px 14px; }
+  .vs-cat-num { font-size: 11px; margin-bottom: 1px; }
+  .vs-cat h3 { font-size: 17px; margin-bottom: 4px; line-height: 1; }
+  .vs-cat p { font-size: 11.5px; line-height: 1.4; margin-bottom: 8px; }
+  .vs-cat-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding-top: 8px;
+    font-size: 10px;
+  }
+  .vs-cat-cta {
+    grid-column: span 2;
+    padding: 20px 18px;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .vs-cat-cta .vs-cat-num { font-size: 22px; margin: 0; }
+  .vs-cat-cta h3 { font-size: 22px; flex: 1; min-width: 120px; line-height: 1; }
+  .vs-cat-cta p { font-size: 12px; margin-bottom: 0; flex: 1; min-width: 140px; }
+
+  /* SIGNATURES — tighter */
+  .vs-sig-grid { gap: 12px; }
+  .vs-sig { grid-template-columns: 1fr; }
+  .vs-sig-img { aspect-ratio: 16/10; }
+  .vs-sig-body { padding: 16px 16px 20px; }
+  .vs-sig h3 { font-size: 20px; }
+  .vs-price { font-size: 18px; }
+  .vs-sig p { font-size: 13.5px; }
+  .vs-sig-meta { font-size: 11px; }
+
+  /* STORY */
+  .vs-story-inner { gap: 24px; }
+  .vs-story-visual { aspect-ratio: 1/1; max-width: 100%; }
+  .vs-story-img.main { inset: 0 18% 16% 0; border-width: 4px; }
+  .vs-story-img.inset { width: 50%; height: 50%; border-width: 4px; }
+  .vs-story-stamp { padding: 10px 14px; }
+  .vs-stamp-year { font-size: 24px; }
+  .vs-stamp-line { font-size: 8px; }
+  .vs-story-text { font-size: 14.5px; line-height: 1.65; margin-bottom: 14px; }
+  .vs-pillars { grid-template-columns: 1fr; gap: 12px; margin-top: 22px; padding-top: 22px; }
+  .vs-pillar h4 { font-size: 15px; }
+  .vs-pillar p { font-size: 12.5px; }
+
+  /* CTA BAND */
+  .vs-cta-band { padding: 40px 14px; }
+  .vs-cta-band-lede { font-size: 14px; margin: 12px auto 18px; }
+  .vs-cta-band-ctas { flex-direction: column; gap: 8px; width: 100%; }
+  .vs-cta-band-ctas .vs-cta-lg { width: 100%; justify-content: center; padding: 13px 18px; }
+
+  /* CONTACT — info cards 2 cols */
+  .vs-contact-grid { grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 24px; }
+  .vs-info-card { padding: 18px 12px; }
+  .vs-info-card:last-child { grid-column: span 2; }
+  .vs-info-card h3 { font-size: 16px; margin-bottom: 6px; }
+  .vs-info-card p { font-size: 13px; line-height: 1.5; }
+  .vs-info-icon { width: 36px; height: 36px; margin-bottom: 10px; }
+  .vs-info-icon svg { width: 16px; height: 16px; }
+  .vs-hours { max-width: 100%; }
+  .vs-hours li { font-size: 12.5px; padding: 6px 0; }
+
+  /* Y ALLER */
+  .vs-yaller {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 26px 18px;
+    border-radius: 14px;
+  }
+  .vs-yaller-pin { font-size: 28px; margin-bottom: 8px; }
+  .vs-yaller-copy h3 { font-size: 24px; }
+  .vs-yaller-copy p { font-size: 14px; }
+  .vs-yaller-btn {
+    padding: 13px 16px;
+    font-size: 14px;
+    gap: 10px;
+  }
+  .vs-yaller-ico { width: 32px; height: 32px; }
+  .vs-yaller-ico svg { width: 16px; height: 16px; }
+
+  /* FOOTER — compact, centered */
+  .vs-footer { padding: 36px 14px 22px; }
+  .vs-footer-inner { grid-template-columns: 1fr; gap: 24px; margin-bottom: 24px; text-align: center; }
+  .vs-footer-brand { text-align: center; }
+  .vs-footer-logo { margin: 0 auto 14px; width: 80px; height: 80px; }
+  .vs-footer-tag { font-size: 13px; }
+  .vs-footer-desc { font-size: 12.5px; margin: 0 auto; }
+  .vs-footer-col h5 { font-size: 10.5px; margin-bottom: 12px; }
+  .vs-footer-col a { font-size: 13px; padding: 3px 0; }
+  .vs-footer-bottom { flex-direction: column; gap: 8px; text-align: center; font-size: 11px; padding-top: 18px; }
+
+  /* MENU PAGE */
+  .vs-menu-hero { padding: 28px 14px 14px; }
+  .vs-menu-hero h1 { font-size: 38px; margin: 8px 0 8px; line-height: 1; }
+  .vs-menu-hero p { font-size: 13px; margin-bottom: 8px; line-height: 1.5; }
+  .vs-menu-cats {
+    top: 62px;
+    padding: 10px 12px;
+    gap: 6px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+  }
+  .vs-menu-cat-btn { padding: 8px 14px; font-size: 12px; flex-shrink: 0; }
+  .vs-menu-section { padding: 22px 14px 22px; scroll-margin-top: 140px; }
+  .vs-menu-section-head { padding-bottom: 10px; margin-bottom: 14px; }
+  .vs-menu-section-head h2 { font-size: 26px; }
+  .vs-menu-section-count { font-size: 10px; }
+  .vs-menu-grid { grid-template-columns: 1fr; gap: 8px; }
+  .vs-item { padding: 14px 14px 16px; gap: 6px; }
+  .vs-item-head { flex-wrap: wrap; }
+  .vs-item h3 { font-size: 17px; line-height: 1.1; }
+  .vs-item-price { font-size: 17px; margin-top: 0; }
+  .vs-item-desc { font-size: 13px; line-height: 1.5; }
+  .vs-item-tags { font-size: 10.5px; gap: 4px; }
+  .vs-item-tag { padding: 2px 6px; }
+  .vs-item-badge { right: 14px; padding: 4px 8px; font-size: 9px; letter-spacing: 0.12em; }
+
+  /* TACOS DETAIL — mobile */
+  .vs-tacos-detail { padding: 22px 16px; }
+  .vs-tacos-default { padding-bottom: 20px; margin-bottom: 20px; }
+  .vs-tacos-badge { font-size: 9.5px; padding: 4px 10px; margin-bottom: 12px; }
+  .vs-tacos-default h3 { font-size: 26px; margin-bottom: 10px; }
+  .vs-tacos-base { font-size: 14.5px; }
+  .vs-tacos-base span { font-size: 12.5px; }
+  .vs-tacos-options { grid-template-columns: 1fr; gap: 22px; }
+  .vs-tacos-options .vs-tacos-col:last-child .vs-tacos-list { grid-template-columns: 1fr 1fr; }
+  .vs-tacos-col h4 { font-size: 15px; margin-bottom: 10px; }
+  .vs-tacos-list li { font-size: 12.5px; padding: 4px 0 4px 12px; }
+  .vs-tacos-note { font-size: 13px; margin-top: 20px; padding-top: 18px; }
+
+  /* MOBILE ACTION BAR — slightly smaller */
+  .vs-mobile-action a { padding: 9px 4px; font-size: 9.5px; gap: 3px; letter-spacing: 0.04em; }
+  .vs-mobile-action a svg { width: 16px; height: 16px; }
+}
+
+@media (max-width: 480px) {
+  :root { --pad-x: 12px; }
+
+  /* HERO ultra-compact */
+  .vs-h1 { font-size: 34px; }
+  .vs-h1-script { font-size: 0.45em; }
+  .vs-lede { font-size: 13.5px; }
+  .vs-hero-visual { display: none; }
+  .vs-hero { padding-bottom: 24px; }
+
+  .vs-tags { gap: 4px 6px; }
+  .vs-tag { font-size: 12px; }
+  .vs-tag-sep { font-size: 9px; }
+
+  .vs-hero-meta { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .vs-meta-num { font-size: 18px; }
+  .vs-meta-label { font-size: 8px; }
+  .vs-stars { font-size: 11px; }
+
+  /* sections even tighter */
+  .vs-section { padding: 28px 12px; }
+  .vs-h2 { font-size: 28px; }
+  .vs-h2.huge { font-size: 32px; }
+
+  /* categories on smallest: 1 col */
+  .vs-cat-grid { grid-template-columns: 1fr; gap: 8px; }
+  .vs-cat-cta { grid-column: auto; }
+
+  /* contact 1 col */
+  .vs-contact-grid { grid-template-columns: 1fr; gap: 8px; }
+  .vs-info-card:last-child { grid-column: auto; }
+
+  /* tacos list back to 2 cols max */
+  .vs-tacos-options .vs-tacos-col:last-child .vs-tacos-list { grid-template-columns: 1fr 1fr; }
+
+  /* mobile action bar — icon + tiny text */
+  .vs-mobile-action a { font-size: 9px; letter-spacing: 0; }
+}
+
+@media (max-width: 360px) {
+  .vs-h1 { font-size: 30px; }
+  .vs-h2 { font-size: 24px; }
+  .vs-menu-hero h1 { font-size: 32px; }
+  .vs-menu-section-head h2 { font-size: 22px; }
+  .vs-item h3 { font-size: 16px; }
+  .vs-item-price { font-size: 16px; }
+  .vs-tacos-options .vs-tacos-col:last-child .vs-tacos-list { grid-template-columns: 1fr; }
+}
+
+/* =========================================================
+   MOBILE POLISH — final overrides (touch, safe areas, fixes)
+   ========================================================= */
+
+/* prevent iOS zoom on inputs (font-size must be >= 16px) */
+.vs-field input,
+.vs-field select,
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  /* iOS safe-area insets for bottom action bar + cart drawer */
+  .vs-mobile-action {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0)); }
+
+  /* cart FAB raised above mobile action bar */
+  .vs-cart-fab {
+    right: 14px;
+    bottom: calc(74px + env(safe-area-inset-bottom, 0));
+    padding: 12px 16px;
+    font-size: 13px;
+    gap: 8px;
+  }
+  .vs-cart-fab svg { width: 16px; height: 16px; }
+  .vs-cart-fab-count { width: 20px; height: 20px; font-size: 11px; }
+  .vs-cart-fab-total { padding-left: 10px; }
+
+  /* cart drawer fills viewport on phones, internal scroll */
+  .vs-cart-drawer {
+    width: 100%;
+    max-width: 100%;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  .vs-cart-head { padding: 18px 18px; }
+  .vs-cart-head h3 { font-size: 22px; }
+  .vs-cart-list { padding: 4px 18px; }
+  .vs-cart-foot { padding: 16px 18px 20px; }
+  .vs-cart-total-val { font-size: 26px; }
+
+  /* sticky nav: scroll-padding compensates for nav + cats height on menu page */
+  html { scroll-padding-top: 64px; }
+
+  /* burger touch target (visual stays compact, hit area grows) */
+  .vs-burger {
+    width: 44px;
+    height: 44px;
+    padding: 12px 10px;
+    align-items: center;
+    justify-content: center;
+  }
+  .vs-burger span { width: 22px; }
+
+  /* touch-friendly qty buttons in cart */
+  .vs-qty-btn { width: 32px; height: 32px; font-size: 16px; }
+
+  /* socials larger touch */
+  .vs-socials a { width: 40px; height: 40px; }
+
+  /* announcement strip: smoother & smaller */
+  .vs-strip-track { animation-duration: 36s; }
+
+  /* nav: ensure cta primary stays available next to burger on phones */
+  .vs-nav { flex-wrap: nowrap; }
+  .vs-nav-cta { flex-shrink: 0; }
+
+  /* mobile menu: scrollable & full-height feel */
+  .vs-mobile-menu {
+    top: 64px;
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
+    padding-bottom: calc(40px + env(safe-area-inset-bottom, 0));
+  }
+  /* sticky menu cats sits right under nav on menu page */
+  .vs-menu-cats { top: 64px; }
+
+  /* hero: cap visual better, hide floating card cleanly */
+  .vs-hero { padding-top: 18px; }
+  .vs-hero-visual { width: 100%; }
+  .vs-plate-img { border-width: 6px; }
+  .vs-floating-card { display: none; }
+  .vs-badge-vintage { width: 26%; bottom: -2%; right: -2%; animation: none; }
+  .vs-plate-glow { animation: none; opacity: 0.6; }
+
+  /* eyebrow: don't wrap awkwardly */
+  .vs-eyebrow { flex-wrap: wrap; }
+
+  /* sections: avoid horizontal bleed */
+  .vs-section,
+  .vs-cta-band,
+  .vs-hero,
+  .vs-menu-section,
+  .vs-menu-hero,
+  .vs-footer { max-width: 100vw; }
+
+  /* pillars: 2x2 grid on mobile, more compact */
+  .vs-pillars { grid-template-columns: 1fr 1fr; gap: 14px 12px; }
+  .vs-pillar { gap: 10px; }
+  .vs-pillar-icon { width: 34px; height: 34px; }
+  .vs-pillar-icon svg { width: 16px; height: 16px; }
+  .vs-pillar h4 { font-size: 13.5px; }
+  .vs-pillar p { font-size: 11.5px; line-height: 1.4; }
+
+  /* story visual: smaller on phones, cleaner overlap */
+  .vs-story-visual {
+    aspect-ratio: 4/3;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .vs-story-img.main { inset: 0 22% 18% 0; }
+  .vs-story-img.inset { width: 48%; height: 50%; }
+  .vs-story-stamp { padding: 8px 12px; top: -8px; left: -4px; }
+  .vs-stamp-year { font-size: 22px; }
+  .vs-stamp-line { font-size: 7.5px; letter-spacing: 0.18em; }
+
+  /* sig (signatures) — improve dark card readability */
+  .vs-sig-img img { aspect-ratio: 16/10; }
+  .vs-sig-ribbon { font-size: 9px; padding: 4px 30px; top: 12px; left: -32px; }
+
+  /* signatures on coffee bg need contrast */
+  .vs-signatures { padding-left: 14px; padding-right: 14px; }
+
+  /* mobile menu cats: edge fade & scroll-snap */
+  .vs-menu-cats {
+    scroll-snap-type: x mandatory;
+    scroll-padding: 14px;
+    mask-image: linear-gradient(90deg, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
+  }
+  .vs-menu-cat-btn { scroll-snap-align: start; }
+
+  /* item: ensure prices/titles wrap nicely */
+  .vs-item-head { flex-wrap: wrap; gap: 6px 10px; }
+  .vs-item-head h3 { min-width: 0; word-break: break-word; }
+
+  /* tacos detail: remove the rotation / extra padding */
+  .vs-tacos-detail { border-radius: 12px; }
+
+  /* yaller: ensure full width and tap-friendly */
+  .vs-yaller-btn {
+    grid-template-columns: 32px 1fr auto;
+    padding: 14px 16px;
+    font-size: 14px;
+    min-height: 56px;
+  }
+  .vs-yaller-arrow { font-size: 18px; }
+
+  /* mobile action bar safe area + cleaner border */
+  .vs-mobile-action a {
+    min-height: 56px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+
+  /* CTA buttons readable + tap-safe */
+  .vs-cta-primary,
+  .vs-cta-ghost {
+    min-height: 44px;
+  }
+
+  /* h2 emphasis script size */
+  .vs-script { font-size: 0.85em; }
+
+  /* contact info cards: phone & email full tap */
+  .vs-info-card p a {
+    display: inline-block;
+    padding: 4px 0;
+    min-height: 32px;
+  }
+
+  /* footer cleanup */
+  .vs-footer-bottom span:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 10px;
+  }
+
+  /* preloader: smaller mark on phones */
+  .vs-mark-pre { width: 100px; height: 100px; }
+  .vs-pre-bar { width: 160px; }
+}
+
+/* ============== very small phones (<= 420px) ============== */
+@media (max-width: 420px) {
+  /* tighter nav: stack phone link out, keep just logo + burger */
+  .vs-nav-cta .vs-phone { display: none; }
+  .vs-nav-cta .vs-cta-primary { display: none; }
+
+  /* hero h1 sane size */
+  .vs-h1 { font-size: 32px; line-height: 1.05; }
+  .vs-h1-script { font-size: 0.5em; display: inline-block; }
+
+  /* hero-meta single line */
+  .vs-meta-num { font-size: 18px; }
+
+  /* category CTA on smallest: compact */
+  .vs-cat-cta { padding: 18px 16px; }
+  .vs-cat-cta h3 { font-size: 22px; }
+
+  /* signatures 1 col always */
+  .vs-sig-grid { grid-template-columns: 1fr; }
+  .vs-sig { grid-template-columns: 1fr; }
+
+  /* pillars back to 1 col if too cramped */
+  .vs-pillars { grid-template-columns: 1fr; }
+
+  /* menu hero compact */
+  .vs-menu-hero h1 { font-size: 32px; }
+
+  /* menu item padding */
+  .vs-item { padding: 12px 12px 14px; }
+
+  /* tacos: tighter */
+  .vs-tacos-detail { padding: 18px 14px; }
+  .vs-tacos-default h3 { font-size: 22px; }
+  .vs-tacos-base { font-size: 13.5px; }
+  .vs-tacos-price-tag { font-size: 12px; padding: 6px 14px; }
+  .vs-tacos-price-tag strong { font-size: 16px; }
+}
+
+/* ============== ultra-small (<= 340px) ============== */
+@media (max-width: 340px) {
+  :root { --pad-x: 10px; }
+  .vs-h1 { font-size: 26px; }
+  .vs-h2 { font-size: 22px; }
+  .vs-tag { font-size: 11px; }
+  .vs-tag-sep { font-size: 9px; }
+  .vs-mobile-action a { font-size: 8.5px; }
+  .vs-strip-track { font-size: 8.5px; gap: 14px; }
+}
+
+/* ============== landscape phone fix ============== */
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+  .vs-hero { padding-top: 14px; padding-bottom: 30px; }
+  .vs-hero-visual { display: none; }
+  .vs-h1 { font-size: 32px; }
+  .vs-mobile-menu { padding: 12px 18px 20px; }
+  .vs-mobile-menu a { font-size: 18px; }
+}
+
+/* ============== reduce motion ============== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
