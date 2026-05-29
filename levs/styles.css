@@ -198,7 +198,7 @@ body::after {
 .vs-nav {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 60;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -336,50 +336,75 @@ body::after {
   width: 44px;
   height: 44px;
   padding: 0;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
 }
 .vs-burger span {
   position: absolute;
-  left: 50%;
+  left: 11px;
+  top: 50%;
   width: 22px;
   height: 1.5px;
-  margin-left: -11px;
+  margin-top: -0.75px;
   background: var(--coffee);
-  transition: top 0.3s ease, transform 0.3s ease, opacity 0.2s ease;
+  transform-origin: 50% 50%;
+  transition: transform 0.32s cubic-bezier(0.7, -0.2, 0.3, 1.2), opacity 0.15s ease;
 }
-.vs-burger span:nth-child(1) { top: 15px; }
-.vs-burger span:nth-child(2) { top: 21px; }
-.vs-burger span:nth-child(3) { top: 27px; }
-.vs-burger.active span:nth-child(1) { top: 21px; transform: rotate(45deg); }
-.vs-burger.active span:nth-child(2) { opacity: 0; }
-.vs-burger.active span:nth-child(3) { top: 21px; transform: rotate(-45deg); }
+.vs-burger span:nth-child(1) { transform: translateY(-6px); }
+.vs-burger span:nth-child(2) { transform: translateY(0); }
+.vs-burger span:nth-child(3) { transform: translateY(6px); }
+.vs-burger.active span:nth-child(1) { transform: translateY(0) rotate(45deg); }
+.vs-burger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.vs-burger.active span:nth-child(3) { transform: translateY(0) rotate(-45deg); }
 
 .vs-mobile-menu {
   position: fixed;
-  top: 70px;
-  left: 0;
+  top: 0;
   right: 0;
   bottom: 0;
+  width: 80vw;
+  max-width: 360px;
   background: var(--cream);
-  border-bottom: 1px solid var(--paper-edge);
-  padding: 24px var(--pad-x) 40px;
+  border-left: 1px solid var(--paper-edge);
+  padding: 84px 26px calc(40px + env(safe-area-inset-bottom, 0));
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   z-index: 55;
-  transform: translateY(-110%);
-  transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+  transform: translateX(105%);
+  transition: transform 0.42s cubic-bezier(0.65, 0, 0.35, 1);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  box-shadow: -20px 0 60px rgba(42, 24, 16, 0.25);
 }
-.vs-mobile-menu.active { transform: translateY(0); }
+.vs-mobile-menu.active { transform: translateX(0); }
 .vs-mobile-menu a {
   font-family: var(--ff-display);
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
   color: var(--coffee);
+  padding: 6px 0;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.4s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.vs-mobile-menu.active a { opacity: 1; transform: translateX(0); }
+.vs-mobile-menu.active a:nth-child(1) { transition-delay: 0.08s; }
+.vs-mobile-menu.active a:nth-child(2) { transition-delay: 0.14s; }
+.vs-mobile-menu.active a:nth-child(3) { transition-delay: 0.20s; }
+.vs-mobile-menu.active a:nth-child(4) { transition-delay: 0.26s; }
+.vs-mobile-menu.active a:nth-child(5) { transition-delay: 0.32s; }
+.vs-mobile-menu.active a:nth-child(6) { transition-delay: 0.38s; }
+.vs-mobile-menu::before {
+  content: "Menu";
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  font-weight: 600;
+  margin-bottom: 8px;
 }
 .vs-mobile-menu .vs-cta-primary {
   font-family: var(--ff-sans);
@@ -391,10 +416,24 @@ body::after {
   align-self: stretch;
   text-align: center;
   justify-content: center;
-  margin-top: 12px;
+  margin-top: auto;
   padding: 14px 22px;
 }
 .vs-mobile-menu .vs-cta-primary:hover { color: var(--cream-light); background: var(--bronze); border-color: var(--bronze); }
+
+/* mobile menu backdrop */
+.vs-mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 17, 8, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 50;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.vs-mobile-backdrop.active { opacity: 1; visibility: visible; }
 
 /* =========================================================
    HERO
@@ -2518,7 +2557,6 @@ body::after {
   /* burger keeps 44x44 globally */
 
   /* MOBILE MENU — fix top to current nav height */
-  .vs-mobile-menu { top: 62px; padding: 16px 18px 28px; gap: 16px; }
   .vs-mobile-menu a { font-size: 22px; }
 
   /* STRIP — even smaller */
@@ -2803,14 +2841,7 @@ textarea {
   .vs-nav { flex-wrap: nowrap; }
   .vs-nav-cta { flex-shrink: 0; }
 
-  /* mobile menu: scrollable & full-height feel */
-  .vs-mobile-menu {
-    top: 64px;
-    bottom: 0;
-    max-height: calc(100dvh - 64px);
-    overflow-y: auto;
-    padding-bottom: calc(40px + env(safe-area-inset-bottom, 0));
-  }
+  /* mobile menu is now a right-side drawer — base rule handles it */
   /* sticky menu cats sits right under nav on menu page */
   .vs-menu-cats { top: 64px; }
   /* hide bottom action bar + cart fab while mobile menu is open */
@@ -2978,8 +3009,7 @@ textarea {
   .vs-hero { padding-top: 14px; padding-bottom: 30px; }
   .vs-hero-visual { display: none; }
   .vs-h1 { font-size: 32px; }
-  .vs-mobile-menu { padding: 12px 18px 20px; }
-  .vs-mobile-menu a { font-size: 18px; }
+  .vs-mobile-menu a { font-size: 20px; }
 }
 
 /* ============== reduce motion ============== */
@@ -3263,12 +3293,16 @@ textarea {
   position: fixed;
   inset: 0;
   z-index: 90;
-  display: none;
+  display: flex;
   align-items: flex-end;
   justify-content: center;
   pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
-.vs-modal.open { display: flex; pointer-events: auto; }
+.vs-modal.open { opacity: 1; visibility: visible; pointer-events: auto; }
+
 .vs-modal-overlay {
   position: absolute;
   inset: 0;
@@ -3276,7 +3310,7 @@ textarea {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.32s ease;
 }
 .vs-modal.open .vs-modal-overlay { opacity: 1; }
 
@@ -3290,12 +3324,12 @@ textarea {
   border-radius: 22px 22px 0 0;
   padding: 32px 28px calc(28px + env(safe-area-inset-bottom, 0));
   box-shadow: 0 -20px 60px rgba(42, 24, 16, 0.35);
-  transform: translateY(20px);
+  transform: translateY(40px) scale(0.97);
   opacity: 0;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.32s ease;
   border-top: 1px solid var(--paper-edge);
 }
-.vs-modal.open .vs-modal-card { transform: translateY(0); opacity: 1; }
+.vs-modal.open .vs-modal-card { transform: translateY(0) scale(1); opacity: 1; }
 
 @media (min-width: 700px) {
   .vs-modal { align-items: center; padding: 24px; }
@@ -3552,3 +3586,54 @@ body.vs-cart-open { overflow: hidden; }
 }
 .vs-meta-link:hover { transform: translateY(-2px); }
 .vs-meta-link:hover .vs-meta-label { color: var(--bronze); }
+
+/* =========================================================
+   DESKTOP NAV CART BUTTON
+   ========================================================= */
+.vs-cart-nav {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--coffee-line);
+  background: transparent;
+  color: var(--coffee);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.vs-cart-nav:hover {
+  background: var(--coffee);
+  color: var(--bronze-light);
+  border-color: var(--coffee);
+  transform: translateY(-1px);
+}
+.vs-cart-nav-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: var(--bronze);
+  color: var(--coffee);
+  font-family: var(--ff-sans);
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+.vs-cart-nav-badge.has-items { opacity: 1; transform: scale(1); }
+.vs-cart-nav-badge.bump { animation: vsBadgePop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+@media (max-width: 768px) {
+  .vs-cart-nav { display: none; }
+}

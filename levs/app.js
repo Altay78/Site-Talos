@@ -22,22 +22,31 @@
   // ------- MOBILE MENU -------
   const burger = document.getElementById('vsBurger');
   const mobile = document.getElementById('vsMobile');
+  const backdrop = document.getElementById('vsMobileBackdrop');
   if (burger && mobile) {
     const closeMenu = () => {
       burger.classList.remove('active');
       mobile.classList.remove('active');
+      if (backdrop) backdrop.classList.remove('active');
       burger.setAttribute('aria-expanded', 'false');
+      mobile.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('vs-menu-open');
       document.body.style.overflow = '';
     };
+    const openMenu = () => {
+      burger.classList.add('active');
+      mobile.classList.add('active');
+      if (backdrop) backdrop.classList.add('active');
+      burger.setAttribute('aria-expanded', 'true');
+      mobile.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('vs-menu-open');
+      document.body.style.overflow = 'hidden';
+    };
     burger.addEventListener('click', () => {
-      const open = burger.classList.toggle('active');
-      mobile.classList.toggle('active', open);
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      document.body.classList.toggle('vs-menu-open', open);
-      document.body.style.overflow = open ? 'hidden' : '';
+      if (mobile.classList.contains('active')) closeMenu(); else openMenu();
     });
     mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    if (backdrop) backdrop.addEventListener('click', closeMenu);
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && mobile.classList.contains('active')) closeMenu();
     });
@@ -165,227 +174,220 @@
     }, { passive: true });
   }
 
-  // ------- MENU ITEMS: tap → product modal + real cart -------
-  const items = document.querySelectorAll('.vs-item');
-  if (items.length) {
-    const emojiFor = (cat) => ({
-      pizza: '🍕', kebab: '🥙', burger: '🍔', tacos: '🌮',
-      americain: '🍗', enfants: '🍟', petitefaim: '🍟', boissons: '🥤'
-    }[cat] || '⭐');
+  // ------- PRODUCT MODAL + CART DRAWER -------
+  const modal = document.getElementById('vsModal');
+  const drawer = document.getElementById('vsCartDrawer');
+  const cartOverlay = document.getElementById('vsCartOverlay');
+  const tile = document.getElementById('vsPanierTile');
+  const tileBadge = tile ? tile.querySelector('.vs-tile-badge') : null;
+  const navCart = document.getElementById('vsCartNav');
+  const navCartBadge = document.getElementById('vsCartNavBadge');
 
-    const catLabel = (cat) => ({
-      pizza: 'Pizza', kebab: 'Kebab', burger: 'Burger', tacos: 'Tacos',
-      americain: 'Américain', enfants: 'Enfants', petitefaim: 'Petite faim',
-      boissons: 'Boisson'
-    }[cat] || 'Plat');
+  const catLabel = (cat) => ({
+    pizza: 'Pizza', kebab: 'Kebab', burger: 'Burger', tacos: 'Tacos',
+    americain: 'Américain', enfants: 'Enfants', petitefaim: 'Petite faim',
+    boissons: 'Boisson'
+  }[cat] || 'Plat');
 
-    // ===== Ingredient + allergen knowledge base =====
-    // Map common French phrases in descriptions to allergens
-    const ALLERGENS = [
-      { rx: /(mozzarella|fromage|cheddar|fior di latte|parmesan|gorgonzola|chèvre|tartiflette)/i, name: 'Lait (lactose)' },
-      { rx: /(pain|brioché|naan|pita|galette|pâte|calzone|pizza)/i, name: 'Gluten (blé)' },
-      { rx: /(œuf|oeuf)/i, name: 'Œuf' },
-      { rx: /(thon|anchois|saumon)/i, name: 'Poisson' },
-      { rx: /(crevette|fruits de mer)/i, name: 'Crustacés' },
-      { rx: /(moutarde)/i, name: 'Moutarde' },
-      { rx: /(sésame)/i, name: 'Sésame' },
-      { rx: /(soja)/i, name: 'Soja' },
-      { rx: /(céleri)/i, name: 'Céleri' },
-      { rx: /(arachide|cacahuète)/i, name: 'Arachides' },
-      { rx: /(noix|amande|noisette)/i, name: 'Fruits à coque' }
-    ];
+  const ALLERGENS = [
+    { rx: /(mozzarella|fromage|cheddar|fior di latte|parmesan|gorgonzola|chèvre|tartiflette|crème|beurre|lait)/i, name: 'Lait (lactose)' },
+    { rx: /(pain|brioché|naan|pita|galette|pâte|calzone|pizza|nuggets|tenders|panier|pané|panées|frites)/i, name: 'Gluten (blé)' },
+    { rx: /(œuf|oeuf)/i, name: 'Œuf' },
+    { rx: /(thon|anchois|saumon)/i, name: 'Poisson' },
+    { rx: /(crevette|fruits de mer)/i, name: 'Crustacés' },
+    { rx: /(moutarde)/i, name: 'Moutarde' },
+    { rx: /(sésame)/i, name: 'Sésame' },
+    { rx: /(soja)/i, name: 'Soja' },
+    { rx: /(céleri)/i, name: 'Céleri' },
+    { rx: /(arachide|cacahuète)/i, name: 'Arachides' },
+    { rx: /(noix|amande|noisette)/i, name: 'Fruits à coque' }
+  ];
+  const detectAllergens = (text) => {
+    const found = new Set();
+    ALLERGENS.forEach(a => { if (a.rx.test(text)) found.add(a.name); });
+    return [...found];
+  };
+  const splitIngredients = (text) => text
+    .replace(/Servi avec.*$/i, '')
+    .replace(/\.$/, '')
+    .split(/[,;·•—]| et /i)
+    .map(s => s.trim())
+    .filter(s => s.length > 1 && s.length < 60)
+    .slice(0, 16);
 
-    const detectAllergens = (text) => {
-      const found = new Set();
-      ALLERGENS.forEach(a => { if (a.rx.test(text)) found.add(a.name); });
-      return [...found];
-    };
-    const splitIngredients = (text) => {
-      // remove punctuation-ish, split on commas/semicolons; cap at ~14
-      return text
-        .replace(/Servi avec.*$/i, '')
-        .replace(/\.$/, '')
-        .split(/[,;·•—]| et /i)
-        .map(s => s.trim())
-        .filter(s => s.length > 1 && s.length < 60)
-        .slice(0, 16);
-    };
+  // Cart state (in-memory; resets on page reload)
+  const cart = new Map();
+  const fmt = (n) => (Math.round(n * 100) / 100).toFixed(2).replace('.', ',') + ' €';
+  const cartCount = () => [...cart.values()].reduce((s, x) => s + x.qty, 0);
+  const cartTotal = () => [...cart.values()].reduce((s, x) => s + x.qty * x.price, 0);
 
-    // ===== Modal element refs (menu page only) =====
-    const modal = document.getElementById('vsModal');
-    const drawer = document.getElementById('vsCartDrawer');
-    const overlay = document.getElementById('vsCartOverlay');
-    const tile = document.getElementById('vsPanierTile');
-    const tileBadge = tile ? tile.querySelector('.vs-tile-badge') : null;
+  const updateBadge = () => {
+    const n = cartCount();
+    [tileBadge, navCartBadge].forEach((b) => {
+      if (!b) return;
+      b.textContent = String(n);
+      b.dataset.count = n;
+      b.classList.toggle('has-items', n > 0);
+      b.classList.remove('bump');
+      void b.offsetWidth;
+      if (n > 0) b.classList.add('bump');
+    });
+  };
 
-    // ===== Cart state (persists during session) =====
-    const cart = new Map(); // key=name, val={name,price,qty,cat}
-    const fmt = (n) => (Math.round(n * 100) / 100).toFixed(2).replace('.', ',') + ' €';
-    const cartCount = () => [...cart.values()].reduce((s, x) => s + x.qty, 0);
-    const cartTotal = () => [...cart.values()].reduce((s, x) => s + x.qty * x.price, 0);
+  const renderCart = () => {
+    const list = document.getElementById('vsCartList');
+    const total = document.getElementById('vsCartTotal');
+    if (!list || !total) return;
+    if (cart.size === 0) {
+      list.innerHTML = '<div class="vs-cart-empty"><div class="vs-cart-empty-icon">🛒</div><p>Votre panier est vide.<br>Tapotez un plat pour l\'ajouter.</p></div>';
+      total.textContent = '0,00 €';
+      return;
+    }
+    let html = '';
+    cart.forEach((it) => {
+      html += `<div class="vs-cart-row" data-key="${encodeURIComponent(it.name)}">
+        <div>
+          <div class="vs-cart-row-name">${it.name}</div>
+          <div class="vs-cart-row-unit">${fmt(it.price)} l'unité</div>
+        </div>
+        <div class="vs-cart-row-price">${fmt(it.qty * it.price)}</div>
+        <div class="vs-cart-row-qty">
+          <button data-action="dec" aria-label="Moins">−</button>
+          <span class="vs-cart-row-q">${it.qty}</span>
+          <button data-action="inc" aria-label="Plus">+</button>
+          <button class="vs-cart-row-rm" data-action="rm">Retirer</button>
+        </div>
+      </div>`;
+    });
+    list.innerHTML = html;
+    total.textContent = fmt(cartTotal());
+  };
 
-    const updateBadge = () => {
-      if (!tileBadge) return;
-      const n = cartCount();
-      tileBadge.textContent = String(n);
-      tileBadge.dataset.count = n;
-      tileBadge.classList.toggle('has-items', n > 0);
-      // bump
-      tileBadge.classList.remove('bump');
-      void tileBadge.offsetWidth;
-      if (n > 0) tileBadge.classList.add('bump');
-    };
+  const addToCart = (name, price, cat) => {
+    const k = name;
+    if (cart.has(k)) cart.get(k).qty += 1;
+    else cart.set(k, { name, price, qty: 1, cat });
+    updateBadge();
+    renderCart();
+  };
 
-    const renderCart = () => {
-      const list = document.getElementById('vsCartList');
-      const total = document.getElementById('vsCartTotal');
-      if (!list || !total) return;
-      if (cart.size === 0) {
-        list.innerHTML = '<div class="vs-cart-empty"><div class="vs-cart-empty-icon">🛒</div><p>Votre panier est vide.<br>Tapotez un plat pour l\'ajouter.</p></div>';
-        total.textContent = '0,00 €';
-        return;
-      }
-      let html = '';
-      cart.forEach((it) => {
-        html += `<div class="vs-cart-row" data-key="${encodeURIComponent(it.name)}">
-          <div>
-            <div class="vs-cart-row-name">${it.name}</div>
-            <div class="vs-cart-row-unit">${fmt(it.price)} l'unité</div>
-          </div>
-          <div class="vs-cart-row-price">${fmt(it.qty * it.price)}</div>
-          <div class="vs-cart-row-qty">
-            <button data-action="dec" aria-label="Moins">−</button>
-            <span class="vs-cart-row-q">${it.qty}</span>
-            <button data-action="inc" aria-label="Plus">+</button>
-            <button class="vs-cart-row-rm" data-action="rm">Retirer</button>
-          </div>
-        </div>`;
-      });
-      list.innerHTML = html;
-      total.textContent = fmt(cartTotal());
-    };
-
-    const addToCart = (name, price, cat) => {
-      const k = name;
-      if (cart.has(k)) cart.get(k).qty += 1;
-      else cart.set(k, { name, price, qty: 1, cat });
+  // qty + remove inside cart
+  if (drawer) {
+    drawer.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      const row = btn.closest('.vs-cart-row');
+      if (!row) return;
+      const key = decodeURIComponent(row.dataset.key);
+      const it = cart.get(key);
+      if (!it) return;
+      const act = btn.dataset.action;
+      if (act === 'inc') it.qty += 1;
+      else if (act === 'dec') { it.qty -= 1; if (it.qty <= 0) cart.delete(key); }
+      else if (act === 'rm') cart.delete(key);
       updateBadge();
       renderCart();
-    };
-
-    // qty + remove inside cart
-    if (drawer) {
-      drawer.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-action]');
-        if (!btn) return;
-        const row = btn.closest('.vs-cart-row');
-        if (!row) return;
-        const key = decodeURIComponent(row.dataset.key);
-        const it = cart.get(key);
-        if (!it) return;
-        const act = btn.dataset.action;
-        if (act === 'inc') it.qty += 1;
-        else if (act === 'dec') { it.qty -= 1; if (it.qty <= 0) cart.delete(key); }
-        else if (act === 'rm') cart.delete(key);
-        updateBadge();
-        renderCart();
-      });
-    }
-
-    // Open / close cart drawer
-    const openCart = () => {
-      if (!drawer || !overlay) return;
-      drawer.classList.add('open');
-      overlay.classList.add('open');
-      drawer.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('vs-cart-open');
-    };
-    const closeCart = () => {
-      if (!drawer || !overlay) return;
-      drawer.classList.remove('open');
-      overlay.classList.remove('open');
-      drawer.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('vs-cart-open');
-    };
-    if (tile) tile.addEventListener('click', (e) => { e.preventDefault(); openCart(); });
-    document.querySelectorAll('[data-cart-close]').forEach(el => el.addEventListener('click', closeCart));
-    if (window.location.hash === '#panier') setTimeout(openCart, 300);
-
-    // ===== Modal logic =====
-    const openModal = (item) => {
-      if (!modal) return;
-      const name = item.dataset.name || item.querySelector('h3')?.textContent.trim() || 'Plat';
-      const price = parseFloat(item.dataset.price || '0');
-      const section = item.closest('[data-cat]');
-      const cat = section ? section.dataset.cat : 'all';
-      const desc = item.querySelector('.vs-item-desc')?.textContent.trim() || '';
-      const tags = [...item.querySelectorAll('.vs-item-tag')].map(t => t.textContent.trim());
-
-      document.getElementById('vsModalCat').textContent = catLabel(cat);
-      document.getElementById('vsModalTitle').textContent = name;
-      document.getElementById('vsModalPrice').textContent = fmt(price);
-      document.getElementById('vsModalDesc').textContent = desc;
-
-      const ingredients = splitIngredients(desc);
-      const ingrWrap = document.getElementById('vsModalIngrWrap');
-      const ingrList = document.getElementById('vsModalIngr');
-      if (ingredients.length) {
-        ingrList.innerHTML = ingredients.map(s => `<li>${s.charAt(0).toUpperCase() + s.slice(1)}</li>`).join('');
-        ingrWrap.style.display = '';
-      } else { ingrWrap.style.display = 'none'; }
-
-      const allergens = detectAllergens(desc + ' ' + name);
-      const allWrap = document.getElementById('vsModalAllergWrap');
-      const allList = document.getElementById('vsModalAllerg');
-      if (allergens.length) {
-        allList.innerHTML = allergens.map(a => `<li>${a}</li>`).join('');
-        allWrap.style.display = '';
-      } else {
-        allList.innerHTML = '<li style="background:rgba(80,140,60,0.12);color:#3d6e2b;border-color:rgba(80,140,60,0.25)">Aucun allergène majeur détecté</li>';
-        allWrap.style.display = '';
-      }
-
-      const tagsEl = document.getElementById('vsModalTags');
-      tagsEl.innerHTML = tags.map(t => `<span class="vs-modal-tag">${t}</span>`).join('');
-
-      const addBtn = document.getElementById('vsModalAdd');
-      addBtn.onclick = () => {
-        addToCart(name, price, cat);
-        closeModal();
-      };
-
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('vs-modal-open');
-    };
-    const closeModal = () => {
-      if (!modal) return;
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('vs-modal-open');
-    };
-    if (modal) {
-      modal.querySelectorAll('[data-modal-close]').forEach(el => el.addEventListener('click', closeModal));
-    }
-    document.addEventListener('keydown', (e) => {
-      if (e.key !== 'Escape') return;
-      if (modal && modal.classList.contains('open')) closeModal();
-      else if (drawer && drawer.classList.contains('open')) closeCart();
-    });
-
-    // ===== Click on item: open modal (or just tacos detail) =====
-    items.forEach((item) => {
-      if (item.classList.contains('vs-tacos-detail')) return;
-      item.addEventListener('click', (e) => {
-        if (e.target.closest('a, button')) return;
-        // tiny pop
-        item.classList.remove('vs-pop');
-        void item.offsetWidth;
-        item.classList.add('vs-pop');
-        setTimeout(() => item.classList.remove('vs-pop'), 320);
-        openModal(item);
-      });
     });
   }
+
+  const openCart = () => {
+    if (!drawer || !cartOverlay) return;
+    drawer.classList.add('open');
+    cartOverlay.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('vs-cart-open');
+    renderCart();
+  };
+  const closeCart = () => {
+    if (!drawer || !cartOverlay) return;
+    drawer.classList.remove('open');
+    cartOverlay.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('vs-cart-open');
+  };
+  if (tile) tile.addEventListener('click', (e) => { e.preventDefault(); openCart(); });
+  if (navCart) navCart.addEventListener('click', openCart);
+  document.querySelectorAll('[data-cart-close]').forEach(el => el.addEventListener('click', closeCart));
+  if (window.location.hash === '#panier') setTimeout(openCart, 300);
+
+  // Modal
+  const openModalWith = (data) => {
+    if (!modal) return;
+    const { name, price, cat, desc, tags } = data;
+    document.getElementById('vsModalCat').textContent = catLabel(cat);
+    document.getElementById('vsModalTitle').textContent = name;
+    document.getElementById('vsModalPrice').textContent = fmt(price);
+    document.getElementById('vsModalDesc').textContent = desc;
+
+    const ingredients = splitIngredients(desc);
+    const ingrWrap = document.getElementById('vsModalIngrWrap');
+    const ingrList = document.getElementById('vsModalIngr');
+    if (ingredients.length) {
+      ingrList.innerHTML = ingredients.map(s => `<li>${s.charAt(0).toUpperCase() + s.slice(1)}</li>`).join('');
+      ingrWrap.style.display = '';
+    } else { ingrWrap.style.display = 'none'; }
+
+    const allergens = detectAllergens(desc + ' ' + name);
+    const allList = document.getElementById('vsModalAllerg');
+    if (allergens.length) {
+      allList.innerHTML = allergens.map(a => `<li>${a}</li>`).join('');
+    } else {
+      allList.innerHTML = '<li style="background:rgba(80,140,60,0.12);color:#3d6e2b;border-color:rgba(80,140,60,0.25)">Aucun allergène majeur détecté</li>';
+    }
+
+    const tagsEl = document.getElementById('vsModalTags');
+    tagsEl.innerHTML = (tags || []).map(t => `<span class="vs-modal-tag">${t}</span>`).join('');
+
+    const addBtn = document.getElementById('vsModalAdd');
+    addBtn.onclick = () => { addToCart(name, price, cat); closeModal(); };
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('vs-modal-open');
+  };
+  const closeModal = () => {
+    if (!modal) return;
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('vs-modal-open');
+  };
+  if (modal) {
+    modal.querySelectorAll('[data-modal-close]').forEach(el => el.addEventListener('click', closeModal));
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (modal && modal.classList.contains('open')) closeModal();
+    else if (drawer && drawer.classList.contains('open')) closeCart();
+  });
+
+  // Tap on .vs-item (menu page) → open modal
+  document.querySelectorAll('.vs-item').forEach((item) => {
+    if (item.classList.contains('vs-tacos-detail')) return;
+    item.addEventListener('click', (e) => {
+      if (e.target.closest('a, button')) return;
+      item.classList.remove('vs-pop'); void item.offsetWidth; item.classList.add('vs-pop');
+      setTimeout(() => item.classList.remove('vs-pop'), 320);
+      const section = item.closest('[data-cat]');
+      openModalWith({
+        name: item.dataset.name || item.querySelector('h3')?.textContent.trim() || 'Plat',
+        price: parseFloat(item.dataset.price || '0'),
+        cat: section ? section.dataset.cat : 'all',
+        desc: item.querySelector('.vs-item-desc')?.textContent.trim() || '',
+        tags: [...item.querySelectorAll('.vs-item-tag')].map(t => t.textContent.trim())
+      });
+    });
+  });
+
+  // Tap on .vs-cat (homepage category card) → go to that section in the menu
+  document.querySelectorAll('.vs-cat').forEach((card) => {
+    if (card.classList.contains('vs-cat-cta')) return;
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('a, button')) return;
+      const cat = card.dataset.cat || 'pizza';
+      card.classList.remove('vs-pop'); void card.offsetWidth; card.classList.add('vs-pop');
+      setTimeout(() => { window.location.href = 'menu.html#' + cat; }, 180);
+    });
+  });
 
 })();

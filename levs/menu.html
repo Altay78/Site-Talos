@@ -56,6 +56,10 @@
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       <span>02 37 99 70 36</span>
     </a>
+    <button class="vs-cart-nav" id="vsCartNav" aria-label="Mon panier">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/><path d="M6 6L4 2H2"/></svg>
+      <span class="vs-cart-nav-badge" id="vsCartNavBadge" data-count="0">0</span>
+    </button>
     <a href="https://www.google.com/maps/dir/?api=1&destination=15+Rue+du+G%C3%A9n%C3%A9ral+Leclerc+28230+%C3%89pernon" target="_blank" rel="noopener" class="vs-cta-primary">
       Y aller
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -67,13 +71,14 @@
 </nav>
 
 <!-- MOBILE MENU -->
-<div class="vs-mobile-menu" id="vsMobile">
+<div class="vs-mobile-backdrop" id="vsMobileBackdrop"></div>
+<aside class="vs-mobile-menu" id="vsMobile" aria-hidden="true">
   <a href="index.html">Accueil</a>
   <a href="menu.html">La carte</a>
   <a href="index.html#histoire">Notre histoire</a>
   <a href="index.html#contact">Nous trouver</a>
   <a href="https://www.google.com/maps/dir/?api=1&destination=15+Rue+du+G%C3%A9n%C3%A9ral+Leclerc+28230+%C3%89pernon" target="_blank" rel="noopener" class="vs-cta-primary">Y aller</a>
-</div>
+</aside>
 
 <!-- HERO -->
 <header class="vs-menu-hero">
