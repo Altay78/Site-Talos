@@ -3870,3 +3870,288 @@ body.vs-legal-open { overflow: hidden; }
 @media (max-width: 768px) {
   .vs-cart-nav { display: none; }
 }
+
+/* =========================================================
+   MOBILE MOTION EXTRA — make the touch UI feel alive
+   ========================================================= */
+@media (max-width: 768px) {
+
+  /* — sticky cats: active button glides with a pill — */
+  .vs-menu-cats { padding-top: 12px; padding-bottom: 12px; }
+  .vs-menu-cat-btn {
+    transition: background 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                color 0.3s ease,
+                border-color 0.3s ease,
+                transform 0.18s ease,
+                box-shadow 0.3s ease;
+  }
+  .vs-menu-cat-btn.active {
+    transform: scale(1.06);
+    box-shadow: 0 6px 16px rgba(42, 24, 16, 0.25);
+  }
+  .vs-menu-cat-btn:active { transform: scale(0.95); }
+
+  /* — section titles: italic shimmer reinforced — */
+  .vs-h2 em.vs-script,
+  .vs-menu-section-head em {
+    background: linear-gradient(110deg, var(--bronze) 20%, #f1c97a 50%, var(--bronze) 80%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: vsScriptShine 4.5s ease-in-out infinite;
+  }
+
+  /* — review stars: gentle twinkle — */
+  .vs-stars {
+    background: linear-gradient(90deg, var(--bronze) 0%, #ffd476 50%, var(--bronze) 100%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: vsStarShine 3.5s ease-in-out infinite;
+  }
+  @keyframes vsStarShine {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+  }
+
+  /* — story stamp: gentle wobble — */
+  .vs-story-stamp {
+    animation: vsStampWobble 6s ease-in-out infinite;
+    transform-origin: 50% 80%;
+  }
+  @keyframes vsStampWobble {
+    0%, 100% { transform: rotate(-4deg); }
+    50%      { transform: rotate(-1deg); }
+  }
+
+  /* — strip dots pulse — */
+  .vs-strip-track .dot {
+    animation: vsDotPulse 1.6s ease-in-out infinite;
+  }
+  @keyframes vsDotPulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50%      { opacity: 1; transform: scale(1.3); }
+  }
+
+  /* — hero CTAs: glow pulse on primary — */
+  .vs-hero-ctas .vs-cta-primary {
+    animation: vsCtaGlow 3.2s ease-in-out infinite;
+  }
+  @keyframes vsCtaGlow {
+    0%, 100% { box-shadow: 0 6px 18px rgba(42, 24, 16, 0.18); }
+    50%      { box-shadow: 0 6px 22px rgba(200, 153, 90, 0.45); }
+  }
+
+  /* — pillars icons: subtle bob — */
+  .vs-pillar-icon {
+    animation: vsIconBob 3.5s ease-in-out infinite;
+  }
+  .vs-pillar:nth-child(2) .vs-pillar-icon { animation-delay: 0.4s; }
+  .vs-pillar:nth-child(3) .vs-pillar-icon { animation-delay: 0.8s; }
+  .vs-pillar:nth-child(4) .vs-pillar-icon { animation-delay: 1.2s; }
+  @keyframes vsIconBob {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-2px) rotate(2deg); }
+  }
+
+  /* — category cards: when revealed, image kens-burns — */
+  .vs-cat.visible .vs-cat-img img {
+    animation: vsKenBurns 8s ease-in-out infinite alternate;
+  }
+  .vs-cat:nth-child(2).visible .vs-cat-img img { animation-delay: 0.3s; }
+  .vs-cat:nth-child(3).visible .vs-cat-img img { animation-delay: 0.6s; }
+  .vs-cat:nth-child(4).visible .vs-cat-img img { animation-delay: 0.9s; }
+  .vs-cat:nth-child(5).visible .vs-cat-img img { animation-delay: 1.2s; }
+  @keyframes vsKenBurns {
+    from { transform: scale(1) translate(0, 0); }
+    to   { transform: scale(1.06) translate(-1%, -1%); }
+  }
+
+  /* — signature cards: ribbon flutter — */
+  .vs-sig-ribbon {
+    animation: vsRibbonFlutter 4s ease-in-out infinite;
+    transform-origin: 50% 50%;
+  }
+  @keyframes vsRibbonFlutter {
+    0%, 100% { transform: rotate(-45deg) translateY(0); }
+    50%      { transform: rotate(-45deg) translateY(-2px); }
+  }
+
+  /* — Y aller buttons: tiny gradient sheen sweeps — */
+  .vs-yaller-btn {
+    position: relative;
+    overflow: hidden;
+  }
+  .vs-yaller-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -40%;
+    width: 30%;
+    background: linear-gradient(110deg, transparent 0%, rgba(255, 240, 200, 0.18) 50%, transparent 100%);
+    transform: skewX(-20deg);
+    animation: vsSheen 5.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .vs-yaller-btn:nth-child(2)::after { animation-delay: 0.8s; }
+  .vs-yaller-btn:nth-child(3)::after { animation-delay: 1.6s; }
+  @keyframes vsSheen {
+    0%   { left: -40%; }
+    50%  { left: 110%; }
+    100% { left: 110%; }
+  }
+
+  /* — cart drawer rows stagger in — */
+  .vs-cart-drawer.open .vs-cart-row {
+    animation: vsRowIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .vs-cart-drawer.open .vs-cart-row:nth-child(1) { animation-delay: 0.05s; }
+  .vs-cart-drawer.open .vs-cart-row:nth-child(2) { animation-delay: 0.10s; }
+  .vs-cart-drawer.open .vs-cart-row:nth-child(3) { animation-delay: 0.15s; }
+  .vs-cart-drawer.open .vs-cart-row:nth-child(4) { animation-delay: 0.20s; }
+  .vs-cart-drawer.open .vs-cart-row:nth-child(n+5) { animation-delay: 0.25s; }
+  @keyframes vsRowIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* — cart drawer suggestion cards stagger — */
+  .vs-cart-drawer.open .vs-suggest-card {
+    animation: vsRowIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .vs-cart-drawer.open .vs-suggest-card:nth-child(2) { animation-delay: 0.08s; }
+  .vs-cart-drawer.open .vs-suggest-card:nth-child(3) { animation-delay: 0.16s; }
+
+  /* — reward fill: shimmer overlay — */
+  .vs-rewards-fill::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+    transform: translateX(-100%);
+    animation: vsFillShine 2.6s ease-in-out infinite;
+    border-radius: 999px;
+  }
+  @keyframes vsFillShine {
+    0%   { transform: translateX(-100%); }
+    60%  { transform: translateX(220%); }
+    100% { transform: translateX(220%); }
+  }
+
+  /* — eyebrow dot: outer halo pulse — */
+  .vs-dot::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px solid var(--bronze);
+    opacity: 0;
+    animation: vsHalo 2.6s ease-in-out infinite;
+  }
+  .vs-dot { position: relative; }
+  @keyframes vsHalo {
+    0%   { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 0; transform: scale(2.2); }
+  }
+
+  /* — burger lines breathe softly when idle — */
+  .vs-burger:not(.active) span:nth-child(2) {
+    animation: vsBurgerMid 3s ease-in-out infinite;
+  }
+  @keyframes vsBurgerMid {
+    0%, 100% { opacity: 0.85; }
+    50%      { opacity: 1; }
+  }
+
+  /* — footer logo gentle float — */
+  .vs-footer-logo {
+    animation: vsLogoFloat 5s ease-in-out infinite;
+  }
+  @keyframes vsLogoFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-3px); }
+  }
+
+  /* — section-head reveal: stronger curtain stagger — */
+  .vs-section-head .vs-eyebrow { transition-delay: 0s; }
+  .vs-section-head .vs-h2 { transition-delay: 0.08s; }
+  .vs-section-head .vs-section-lede { transition-delay: 0.16s; }
+
+  /* — tile badge in bottom bar: gentle idle pulse when has items — */
+  .vs-tile-badge.has-items {
+    animation: vsTilePulse 2.4s ease-in-out infinite;
+  }
+  @keyframes vsTilePulse {
+    0%, 100% { box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25), 0 0 0 0 rgba(200, 153, 90, 0.6); }
+    50%      { box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25), 0 0 0 6px rgba(200, 153, 90, 0); }
+  }
+
+  /* — mobile menu drawer items: glow on tap — */
+  .vs-mobile-menu a:active { color: var(--bronze); transform: translateX(-2px); }
+
+  /* — modal entry: small backdrop bloom — */
+  .vs-modal.open .vs-modal-overlay {
+    animation: vsBackdropBloom 0.5s ease-out;
+  }
+  @keyframes vsBackdropBloom {
+    from { backdrop-filter: blur(0); -webkit-backdrop-filter: blur(0); }
+    to   { backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+  }
+
+  /* — modal title: micro slide-up on top of card animation — */
+  .vs-modal.open .vs-modal-title {
+    animation: vsTitleIn 0.5s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .vs-modal.open .vs-modal-price {
+    animation: vsTitleIn 0.5s 0.16s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .vs-modal.open .vs-modal-desc {
+    animation: vsTitleIn 0.5s 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .vs-modal.open .vs-modal-section {
+    animation: vsTitleIn 0.5s 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .vs-modal.open .vs-modal-tags {
+    animation: vsTitleIn 0.5s 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .vs-modal.open .vs-modal-add {
+    animation: vsTitleIn 0.5s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes vsTitleIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* — info cards: tap response — */
+  .vs-info-card:active { transform: scale(0.985); }
+
+  /* — number counter pulses on tens — */
+  .vs-counter {
+    transition: color 0.2s ease;
+  }
+
+  /* — section script italic line slides up gently on reveal — */
+  .vs-h2 em {
+    display: inline-block;
+    transform: translateY(4px);
+    opacity: 0.92;
+    transition: transform 0.6s 0.15s ease, opacity 0.6s 0.15s ease;
+  }
+  .vs-section-head.visible .vs-h2 em {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* honor reduced-motion globally for new animations too */
+@media (prefers-reduced-motion: reduce) {
+  .vs-stars, .vs-strip-track .dot, .vs-pillar-icon, .vs-cat-img img,
+  .vs-sig-ribbon, .vs-yaller-btn::after, .vs-rewards-fill::after,
+  .vs-dot::after, .vs-burger span, .vs-footer-logo, .vs-tile-badge,
+  .vs-hero-ctas .vs-cta-primary, .vs-story-stamp {
+    animation: none !important;
+  }
+}
