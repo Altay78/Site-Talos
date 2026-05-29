@@ -221,6 +221,103 @@
   const cartCount = () => [...cart.values()].reduce((s, x) => s + x.qty, 0);
   const cartTotal = () => [...cart.values()].reduce((s, x) => s + x.qty * x.price, 0);
 
+  // Reward tiers
+  const TIERS = [
+    { min: 20, label: '🥤 1 canette offerte', short: 'canette' },
+    { min: 30, label: '🍾 1 bouteille 1,5 L offerte', short: 'bouteille' },
+    { min: 50, label: '🍾🍾 2 bouteilles + 🍟 1 Petite faim offerte', short: '2 bouteilles + Petite faim' }
+  ];
+
+  // Hardcoded catalog of suggestions (used everywhere — index + menu)
+  const CATALOG = [
+    { name: 'Portion frites',     price: 2.50, cat: 'petitefaim', emoji: '🍟' },
+    { name: 'Poutine',            price: 3.50, cat: 'petitefaim', emoji: '🍟' },
+    { name: 'Coca-Cola 33cl',     price: 1.50, cat: 'boissons',   emoji: '🥤' },
+    { name: 'Kebab Assiette',     price: 6.50, cat: 'kebab',      emoji: '🥙' },
+    { name: 'Cheese Burger',      price: 7.00, cat: 'burger',     emoji: '🍔' },
+    { name: 'Kebab Pita',         price: 7.50, cat: 'kebab',      emoji: '🥙' },
+    { name: 'Cheese Bacon',       price: 7.50, cat: 'burger',     emoji: '🍔' },
+    { name: 'Américain Steak',    price: 8.00, cat: 'americain',  emoji: '🍗' },
+    { name: 'Le Tacos Le VS',     price: 8.00, cat: 'tacos',      emoji: '🌮' },
+    { name: 'Double Cheese',      price: 8.50, cat: 'burger',     emoji: '🍔' },
+    { name: 'Double Cheese Bacon',price: 9.00, cat: 'burger',     emoji: '🍔' },
+    { name: 'Margarita',          price: 10.00, cat: 'pizza',     emoji: '🍕' },
+    { name: 'Reine',              price: 11.00, cat: 'pizza',     emoji: '🍕' },
+    { name: 'Calzone',            price: 11.00, cat: 'pizza',     emoji: '🍕' },
+    { name: 'Boîte 20 nuggets',   price: 19.00, cat: 'petitefaim', emoji: '🍟' }
+  ];
+
+  const pickSuggestions = (total, max = 3) => {
+    const next = TIERS.find(t => total < t.min);
+    if (!next) return [];
+    const gap = next.min - total;
+    // ideal: items that close the gap. prefer cheap if gap small, else single item that hits or overshoots.
+    const candidates = CATALOG.filter(it => it.price <= gap * 1.6 + 0.5);
+    // sort: closeness to gap, then price
+    candidates.sort((a, b) => Math.abs(a.price - gap) - Math.abs(b.price - gap) || a.price - b.price);
+    const picks = [];
+    const seen = new Set();
+    for (const it of candidates) {
+      if (seen.has(it.cat)) continue;
+      picks.push(it);
+      seen.add(it.cat);
+      if (picks.length >= max) break;
+    }
+    if (picks.length < max) {
+      for (const it of candidates) {
+        if (!picks.includes(it)) picks.push(it);
+        if (picks.length >= max) break;
+      }
+    }
+    return picks;
+  };
+
+  const updateRewards = () => {
+    const fillEl = document.getElementById('vsRewardsFill');
+    const labelEl = document.getElementById('vsRewardsLabel');
+    const suggestEl = document.getElementById('vsSuggest');
+    if (!fillEl || !labelEl) return;
+
+    const total = cartTotal();
+    // Map total to bar position: 0€=0%, 20€=40%, 30€=60%, 50€=100%
+    const pct = total <= 0 ? 0
+      : total >= 50 ? 100
+      : total >= 30 ? 60 + ((total - 30) / 20) * 40
+      : total >= 20 ? 40 + ((total - 20) / 10) * 20
+      : (total / 20) * 40;
+    fillEl.style.width = pct + '%';
+
+    // mark each stop reached
+    document.querySelectorAll('.vs-rewards-stop').forEach((el) => {
+      const t = parseInt(el.dataset.tier, 10);
+      const milestone = [0, 20, 30, 50][t];
+      el.classList.toggle('reached', total >= milestone);
+    });
+
+    const next = TIERS.find(t => total < t.min);
+    if (next) {
+      const gap = next.min - total;
+      labelEl.innerHTML = `Plus que <strong>${fmt(gap)}</strong> pour <span class="vs-rewards-prize">${next.label}</span>`;
+    } else {
+      labelEl.innerHTML = `<span class="vs-rewards-prize vs-rewards-prize--max">🎉 Vous avez tout débloqué — 2 bouteilles + 1 Petite faim offertes&nbsp;!</span>`;
+    }
+
+    if (suggestEl) {
+      const picks = pickSuggestions(total);
+      if (picks.length === 0) {
+        suggestEl.innerHTML = '';
+      } else {
+        suggestEl.innerHTML = '<div class="vs-suggest-title">Pour atteindre le palier&nbsp;:</div>' +
+          picks.map(it => `<button class="vs-suggest-card" data-name="${it.name}" data-price="${it.price}" data-cat="${it.cat}">
+            <span class="vs-suggest-emoji">${it.emoji}</span>
+            <span class="vs-suggest-name">${it.name}</span>
+            <span class="vs-suggest-price">${fmt(it.price)}</span>
+            <span class="vs-suggest-plus">+</span>
+          </button>`).join('');
+      }
+    }
+  };
+
   const updateBadge = () => {
     const n = cartCount();
     [tileBadge, navCartBadge].forEach((b) => {
@@ -269,11 +366,19 @@
     else cart.set(k, { name, price, qty: 1, cat });
     updateBadge();
     renderCart();
+    updateRewards();
   };
 
-  // qty + remove inside cart
+  // qty + remove inside cart, AND suggestion add
   if (drawer) {
     drawer.addEventListener('click', (e) => {
+      // suggestion card → add that item
+      const sug = e.target.closest('.vs-suggest-card');
+      if (sug) {
+        addToCart(sug.dataset.name, parseFloat(sug.dataset.price), sug.dataset.cat);
+        return;
+      }
+      // qty buttons / remove
       const btn = e.target.closest('[data-action]');
       if (!btn) return;
       const row = btn.closest('.vs-cart-row');
@@ -287,6 +392,7 @@
       else if (act === 'rm') cart.delete(key);
       updateBadge();
       renderCart();
+      updateRewards();
     });
   }
 
@@ -297,6 +403,7 @@
     drawer.setAttribute('aria-hidden', 'false');
     document.body.classList.add('vs-cart-open');
     renderCart();
+    updateRewards();
   };
   const closeCart = () => {
     if (!drawer || !cartOverlay) return;

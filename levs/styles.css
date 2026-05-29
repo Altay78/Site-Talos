@@ -3503,6 +3503,145 @@ textarea {
   line-height: 1.4;
 }
 
+/* ===== REWARDS / PROGRESS BAR ===== */
+.vs-cart-rewards {
+  padding: 18px 22px 16px;
+  border-bottom: 1px solid var(--paper-edge);
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 0%, rgba(200, 153, 90, 0.10), transparent 70%),
+    var(--cream-light);
+}
+.vs-rewards-head { margin-bottom: 14px; }
+.vs-rewards-label {
+  font-size: 13px;
+  color: var(--coffee-soft);
+  line-height: 1.45;
+}
+.vs-rewards-label strong { color: var(--coffee); font-weight: 700; }
+.vs-rewards-prize {
+  display: inline-block;
+  background: var(--coffee);
+  color: var(--bronze-light);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 12.5px;
+}
+.vs-rewards-prize--max {
+  background: linear-gradient(135deg, var(--bronze) 0%, var(--bronze-light) 100%);
+  color: var(--coffee);
+  padding: 6px 14px;
+  font-size: 13px;
+}
+.vs-rewards-bar {
+  position: relative;
+  height: 6px;
+  background: var(--cream-edge);
+  border-radius: 999px;
+  margin-bottom: 28px;
+  overflow: visible;
+}
+.vs-rewards-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  background: linear-gradient(90deg, var(--bronze) 0%, var(--bronze-light) 60%, #f1c97a 100%);
+  border-radius: 999px;
+  transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 0 14px rgba(200, 153, 90, 0.45);
+}
+.vs-rewards-stops {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.vs-rewards-stop {
+  position: absolute;
+  top: -6px;
+  transform: translateX(-50%);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--coffee-mid);
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: 0;
+}
+.vs-rewards-stop::before {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: var(--cream);
+  border: 2px solid var(--cream-edge);
+  border-radius: 50%;
+  margin: 0 auto 8px;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+.vs-rewards-stop.reached { color: var(--coffee); }
+.vs-rewards-stop.reached::before {
+  background: var(--bronze);
+  border-color: var(--coffee);
+  transform: scale(1.15);
+  box-shadow: 0 0 10px rgba(200, 153, 90, 0.6);
+}
+.vs-rewards-stop[data-tier="0"] { transform: translateX(0); text-align: left; }
+.vs-rewards-stop[data-tier="0"]::before { margin-left: 0; }
+.vs-rewards-stop[data-tier="3"] { transform: translateX(-100%); text-align: right; }
+.vs-rewards-stop[data-tier="3"]::before { margin-right: 0; }
+
+/* suggestion cards */
+.vs-rewards-suggest { display: flex; flex-direction: column; gap: 6px; }
+.vs-suggest-title {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--coffee-mid);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.vs-suggest-card {
+  display: grid;
+  grid-template-columns: 28px 1fr auto 28px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--cream);
+  border: 1px solid var(--paper-edge);
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--coffee);
+  text-align: left;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+  width: 100%;
+}
+.vs-suggest-card:hover {
+  background: var(--cream-light);
+  border-color: var(--bronze);
+  transform: translateX(2px);
+}
+.vs-suggest-card:active { transform: scale(0.98); }
+.vs-suggest-emoji { font-size: 18px; line-height: 1; }
+.vs-suggest-name { font-family: var(--ff-display); font-weight: 700; font-size: 14px; }
+.vs-suggest-price {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--bronze);
+}
+.vs-suggest-plus {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--coffee);
+  color: var(--bronze-light);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+}
+
 /* row item inside cart */
 .vs-cart-row {
   display: grid;
