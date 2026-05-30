@@ -4040,24 +4040,48 @@ textarea {
   font-size: 16px;
 }
 
-/* row item inside cart */
+/* row item inside cart — redesigned to keep the ✕ inside the row */
 .vs-cart-row {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 8px 14px;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "rm   info  price"
+    "rm   qty   qty";
+  align-items: start;
+  gap: 6px 12px;
   padding: 14px 0;
   border-bottom: 1px dashed var(--cream-edge);
 }
 .vs-cart-row:last-child { border-bottom: none; }
+.vs-cart-row-rm {
+  grid-area: rm;
+  margin-top: 2px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--paper-edge);
+  background: var(--cream);
+  color: var(--coffee-mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.vs-cart-row-rm:hover { background: #b34; color: var(--cream-light); border-color: #b34; }
+.vs-cart-row-info { grid-area: info; min-width: 0; }
 .vs-cart-row-name {
   font-family: var(--ff-display);
   font-weight: 700;
   font-size: 16px;
   color: var(--coffee);
   line-height: 1.2;
+  word-break: break-word;
 }
 .vs-cart-row-unit { font-size: 12px; color: var(--coffee-mid); margin-top: 2px; }
 .vs-cart-row-price {
+  grid-area: price;
   font-family: var(--ff-display);
   font-weight: 700;
   font-size: 16px;
@@ -4065,7 +4089,7 @@ textarea {
   white-space: nowrap;
 }
 .vs-cart-row-qty {
-  grid-column: 1 / -1;
+  grid-area: qty;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -4093,18 +4117,6 @@ textarea {
   font-weight: 700;
   color: var(--coffee);
 }
-.vs-cart-row-rm {
-  margin-left: auto;
-  background: transparent;
-  border: 0;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--coffee-mid);
-  cursor: pointer;
-  padding: 0;
-}
-.vs-cart-row-rm:hover { color: #b34; }
 
 /* item is now visibly tappable */
 .vs-item { cursor: pointer; }
@@ -4819,6 +4831,98 @@ body.vs-legal-open { overflow: hidden; }
 
 @media (max-width: 768px) {
   .vs-status { margin: 4px auto 18px; }
+}
+
+/* =========================================================
+   HOURS MODAL — schedule table + status summary
+   ========================================================= */
+.vs-hours-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 18px;
+}
+.vs-hours-row th {
+  text-align: left;
+  font-family: var(--ff-sans);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 10px 14px 10px 12px;
+  color: var(--coffee);
+  border-bottom: 1px dashed var(--cream-edge);
+  letter-spacing: 0.02em;
+}
+.vs-hours-row td {
+  font-family: var(--ff-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--coffee);
+  padding: 10px 8px;
+  text-align: right;
+  border-bottom: 1px dashed var(--cream-edge);
+  line-height: 1.4;
+}
+.vs-hours-row:last-child th,
+.vs-hours-row:last-child td { border-bottom: 0; }
+.vs-hours-row .vs-closed-cell { color: #b34; font-style: italic; font-weight: 500; }
+.vs-hours-row.today {
+  background: linear-gradient(90deg, rgba(200, 153, 90, 0.16), rgba(200, 153, 90, 0.04));
+  border-left: 3px solid var(--bronze);
+}
+.vs-hours-row.today th {
+  position: relative;
+  padding-left: 14px;
+}
+.vs-hours-row.today th::before {
+  content: "•";
+  color: var(--bronze);
+  margin-right: 6px;
+  font-size: 16px;
+}
+.vs-status-summary {
+  display: inline-flex;
+  margin: 4px 0 14px;
+}
+.vs-hours-call {
+  width: 100%;
+  justify-content: center;
+  padding: 14px 22px;
+}
+
+/* =========================================================
+   CONFETTI burst — max tier reached
+   ========================================================= */
+.vs-confetti {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+.vs-cart-foot { position: relative; }
+.vs-confetti-piece {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-block;
+  animation: vsConfettiBurst var(--dur, 2s) var(--delay, 0s) cubic-bezier(0.18, 0.7, 0.36, 1) forwards;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 6px rgba(42, 24, 16, 0.25));
+}
+@keyframes vsConfettiBurst {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg) scale(0.5);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(calc(var(--dx) * 0.4), calc(var(--dy) * 0.6)) rotate(calc(var(--rot) * 0.5)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), calc(var(--dy) + 220px)) rotate(var(--rot)) scale(0.7);
+  }
 }
 
 /* =========================================================

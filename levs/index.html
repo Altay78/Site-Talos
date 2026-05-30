@@ -7,8 +7,48 @@
 <meta name="description" content="Le VS Épernon — 15 Rue du Général Leclerc. Pizzas, kebabs, burgers, tacos et spécialités américaines. Service midi & soir, fermé le lundi. 02 37 99 70 36.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.idgastronomic.com" crossorigin>
+<link rel="preload" as="image" fetchpriority="high" href="https://www.idgastronomic.com/wp-content/uploads/2023/01/Kebab-de-Pollo-Asado-y-Loncheado-slider.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Pinyon+Script&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+
+<!-- OpenGraph -->
+<meta property="og:title" content="Le VS Épernon — Pizza · Kebab · Burger · Tacos · Américain">
+<meta property="og:description" content="Maison de street food à Épernon depuis 2014. Pizzas au feu de bois, kebabs marinés 24h, burgers smashés, tacos fondants. Tout est fait maison.">
+<meta property="og:type" content="restaurant.restaurant">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:image" content="https://www.idgastronomic.com/wp-content/uploads/2023/01/Kebab-de-Pollo-Asado-y-Loncheado-slider.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Schema.org Restaurant -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Le VS",
+  "alternateName": "Le VS Épernon",
+  "image": "https://www.idgastronomic.com/wp-content/uploads/2023/01/Kebab-de-Pollo-Asado-y-Loncheado-slider.jpg",
+  "description": "Maison de street food à Épernon depuis 2014 — pizzas au feu de bois, kebabs halal marinés 24 h, burgers smashés, tacos personnalisables et spécialités américaines. Frites maison à la graisse de bœuf, tout est fait maison.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "15 Rue du Général Leclerc",
+    "addressLocality": "Épernon",
+    "postalCode": "28230",
+    "addressCountry": "FR"
+  },
+  "telephone": "+33237997036",
+  "email": "info@le-vs.com",
+  "url": "https://www.le-vs.com",
+  "priceRange": "€",
+  "servesCuisine": ["Pizza", "Kebab", "Burger", "Tacos", "Cuisine américaine", "Halal"],
+  "menu": "https://www.le-vs.com/menu.html",
+  "foundingDate": "2014",
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "11:30", "closes": "13:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "18:30", "closes": "21:00" }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -173,10 +213,12 @@
       <div class="vs-plate">
         <div class="vs-plate-glow"></div>
         <img class="vs-plate-img"
-             src="https://images.unsplash.com/photo-1633321702518-7feccafb94d5?w=900&auto=format&fit=crop&q=80"
+             src="https://www.idgastronomic.com/wp-content/uploads/2023/01/Kebab-de-Pollo-Asado-y-Loncheado-slider.jpg"
              onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=900&auto=format&fit=crop&q=80'"
              alt="Kebab turc du VS"
-             loading="eager">
+             loading="eager"
+             fetchpriority="high"
+             decoding="async">
         <div class="vs-badge-vintage">
           <svg viewBox="0 0 180 180" aria-hidden="true">
             <defs>
@@ -761,9 +803,9 @@
       <div class="vs-rewards-fill" id="vsRewardsFill"></div>
       <div class="vs-rewards-stops">
         <div class="vs-rewards-stop" data-tier="0" style="left:0%">0€</div>
-        <div class="vs-rewards-stop" data-tier="1" style="left:40%">🥤 20€</div>
-        <div class="vs-rewards-stop" data-tier="2" style="left:60%">🍾 30€</div>
-        <div class="vs-rewards-stop" data-tier="3" style="left:100%">🍾🍾🍟 50€</div>
+        <div class="vs-rewards-stop" data-tier="1" style="left:35%">🥤 17,50€</div>
+        <div class="vs-rewards-stop" data-tier="2" style="left:65%">🍾🍟 30€</div>
+        <div class="vs-rewards-stop" data-tier="3" style="left:100%">🍔 50€</div>
       </div>
     </div>
     <div class="vs-rewards-suggest" id="vsSuggest"></div>
@@ -809,6 +851,38 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
     </div>
+  </div>
+</div>
+
+<!-- HOURS MODAL -->
+<div class="vs-legal vs-hours-modal" id="vsHoursModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vsHoursTitle">
+  <div class="vs-legal-overlay" data-hours-close></div>
+  <div class="vs-legal-card vs-hours-card" role="document">
+    <button class="vs-modal-close" data-hours-close aria-label="Fermer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+    </button>
+    <div class="vs-modal-eyebrow">Horaires d'ouverture</div>
+    <h3 class="vs-modal-title" id="vsHoursTitle">Quand venir ?</h3>
+    <div class="vs-status vs-status-summary" id="vsHoursStatus" data-state="closed">
+      <span class="vs-status-dot"></span>
+      <span class="vs-status-text">—</span>
+      <span class="vs-status-sub">—</span>
+    </div>
+    <table class="vs-hours-table">
+      <tbody>
+        <tr class="vs-hours-row" data-day="1"><th>Lundi</th><td class="vs-closed-cell">Fermé</td></tr>
+        <tr class="vs-hours-row" data-day="2"><th>Mardi</th><td>11h30 – 13h30<br>18h30 – 21h00</td></tr>
+        <tr class="vs-hours-row" data-day="3"><th>Mercredi</th><td>11h30 – 13h30<br>18h30 – 21h00</td></tr>
+        <tr class="vs-hours-row" data-day="4"><th>Jeudi</th><td>11h30 – 13h30<br>18h30 – 21h00</td></tr>
+        <tr class="vs-hours-row" data-day="5"><th>Vendredi</th><td>11h30 – 13h30<br>18h30 – 21h00</td></tr>
+        <tr class="vs-hours-row" data-day="6"><th>Samedi</th><td>11h30 – 13h30<br>18h30 – 21h00</td></tr>
+        <tr class="vs-hours-row" data-day="0"><th>Dimanche</th><td>Soir uniquement<br>18h30 – 21h00</td></tr>
+      </tbody>
+    </table>
+    <a href="tel:+33237997036" class="vs-cta-primary vs-hours-call">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      02 37 99 70 36
+    </a>
   </div>
 </div>
 

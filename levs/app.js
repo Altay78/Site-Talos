@@ -240,6 +240,79 @@
   refreshStatus();
   setInterval(refreshStatus, 60000); // refresh every minute
 
+  // status badge → open hours modal on click
+  const statusBadge = document.getElementById('vsStatus');
+  if (statusBadge) {
+    statusBadge.style.cursor = 'pointer';
+    statusBadge.setAttribute('role', 'button');
+    statusBadge.setAttribute('tabindex', '0');
+    statusBadge.addEventListener('click', () => openHoursModal());
+    statusBadge.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openHoursModal(); }
+    });
+  }
+
+  // ------- HOURS MODAL -------
+  const hoursModal = document.getElementById('vsHoursModal');
+  const openHoursModal = () => {
+    if (!hoursModal) return;
+    // highlight current day
+    const today = new Date().getDay();
+    hoursModal.querySelectorAll('.vs-hours-row').forEach(r => {
+      r.classList.toggle('today', parseInt(r.dataset.day, 10) === today);
+    });
+    // status summary at top
+    const r = computeStatus();
+    const sum = document.getElementById('vsHoursStatus');
+    if (sum) {
+      sum.dataset.state = r.state;
+      sum.querySelector('.vs-status-text').textContent = r.label;
+      sum.querySelector('.vs-status-sub').textContent = r.sub;
+    }
+    hoursModal.classList.add('open');
+    hoursModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('vs-legal-open');
+  };
+  const closeHoursModal = () => {
+    if (!hoursModal) return;
+    hoursModal.classList.remove('open');
+    hoursModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('vs-legal-open');
+  };
+  if (hoursModal) {
+    hoursModal.querySelectorAll('[data-hours-close]').forEach(el => el.addEventListener('click', closeHoursModal));
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && hoursModal && hoursModal.classList.contains('open')) closeHoursModal();
+  });
+
+  // ------- CONFETTI (max tier reached) -------
+  const fireConfetti = () => {
+    const burst = document.createElement('div');
+    burst.className = 'vs-confetti';
+    const emojis = ['🎉', '✨', '🍔', '🥤', '🍟', '🌟', '🎊'];
+    for (let i = 0; i < 28; i++) {
+      const p = document.createElement('span');
+      p.className = 'vs-confetti-piece';
+      p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      const x = (Math.random() - 0.5) * 260;
+      const y = -(120 + Math.random() * 180);
+      const r = (Math.random() - 0.5) * 540;
+      const d = 1.6 + Math.random() * 1.4;
+      p.style.setProperty('--dx', x + 'px');
+      p.style.setProperty('--dy', y + 'px');
+      p.style.setProperty('--rot', r + 'deg');
+      p.style.setProperty('--dur', d + 's');
+      p.style.setProperty('--delay', (Math.random() * 0.25) + 's');
+      p.style.fontSize = (16 + Math.random() * 14) + 'px';
+      burst.appendChild(p);
+    }
+    // anchor over the cart drawer foot if open, else viewport center
+    const anchor = document.querySelector('.vs-cart-drawer.open .vs-cart-foot') || document.body;
+    anchor.appendChild(burst);
+    setTimeout(() => burst.remove(), 3500);
+  };
+
   // ------- PRODUCT MODAL + CART DRAWER -------
   const modal = document.getElementById('vsModal');
   const drawer = document.getElementById('vsCartDrawer');
@@ -289,9 +362,9 @@
 
   // Reward tiers
   const TIERS = [
-    { min: 20, label: '🥤 1 canette offerte', short: 'canette' },
-    { min: 30, label: '🍾 1 bouteille 1,5 L offerte', short: 'bouteille' },
-    { min: 50, label: '🍾🍾 2 bouteilles + 🍟 1 Petite faim offerte', short: '2 bouteilles + Petite faim' }
+    { min: 17.5, label: '🥤 1 canette offerte', short: 'canette' },
+    { min: 30,   label: '🍾 1 bouteille + 🍟 1 petite frite', short: 'bouteille + frites' },
+    { min: 50,   label: '🍔 1 cheese burger offert', short: 'cheese burger' }
   ];
 
   // Hardcoded catalog of suggestions (used everywhere — index + menu)
@@ -345,27 +418,34 @@
     if (!fillEl || !labelEl) return;
 
     const total = cartTotal();
-    // Map total to bar position: 0€=0%, 20€=40%, 30€=60%, 50€=100%
+    // Map total to bar position: 0€=0%, 17.50€=35%, 30€=65%, 50€=100%
     const pct = total <= 0 ? 0
-      : total >= 50 ? 100
-      : total >= 30 ? 60 + ((total - 30) / 20) * 40
-      : total >= 20 ? 40 + ((total - 20) / 10) * 20
-      : (total / 20) * 40;
+      : total >= 50   ? 100
+      : total >= 30   ? 65 + ((total - 30) / 20) * 35
+      : total >= 17.5 ? 35 + ((total - 17.5) / 12.5) * 30
+      : (total / 17.5) * 35;
     fillEl.style.width = pct + '%';
 
     // mark each stop reached
     document.querySelectorAll('.vs-rewards-stop').forEach((el) => {
       const t = parseInt(el.dataset.tier, 10);
-      const milestone = [0, 20, 30, 50][t];
+      const milestone = [0, 17.5, 30, 50][t];
       el.classList.toggle('reached', total >= milestone);
     });
+
+    // confetti when MAX tier just reached
+    if (total >= 50 && !document.body.classList.contains('vs-tier-maxed')) {
+      document.body.classList.add('vs-tier-maxed');
+      fireConfetti();
+    }
+    if (total < 50) document.body.classList.remove('vs-tier-maxed');
 
     const next = TIERS.find(t => total < t.min);
     if (next) {
       const gap = next.min - total;
       labelEl.innerHTML = `Plus que <strong>${fmt(gap)}</strong> pour <span class="vs-rewards-prize">${next.label}</span>`;
     } else {
-      labelEl.innerHTML = `<span class="vs-rewards-prize vs-rewards-prize--max">🎉 Vous avez tout débloqué — 2 bouteilles + 1 Petite faim offertes&nbsp;!</span>`;
+      labelEl.innerHTML = `<span class="vs-rewards-prize vs-rewards-prize--max">🎉 Tout débloqué — 🍔 cheese burger offert&nbsp;!</span>`;
     }
 
     if (suggestEl) {
@@ -409,7 +489,10 @@
     let html = '';
     cart.forEach((it) => {
       html += `<div class="vs-cart-row" data-key="${encodeURIComponent(it.name)}">
-        <div>
+        <button class="vs-cart-row-rm" data-action="rm" aria-label="Retirer ${it.name}" title="Retirer">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+        </button>
+        <div class="vs-cart-row-info">
           <div class="vs-cart-row-name">${it.name}</div>
           <div class="vs-cart-row-unit">${fmt(it.price)} l'unité</div>
         </div>
@@ -418,7 +501,6 @@
           <button data-action="dec" aria-label="Moins">−</button>
           <span class="vs-cart-row-q">${it.qty}</span>
           <button data-action="inc" aria-label="Plus">+</button>
-          <button class="vs-cart-row-rm" data-action="rm">Retirer</button>
         </div>
       </div>`;
     });
