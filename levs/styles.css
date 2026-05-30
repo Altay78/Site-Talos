@@ -4906,20 +4906,22 @@ body.vs-legal-open { overflow: hidden; }
    ========================================================= */
 .vs-trust {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
   margin: 18px 0 24px;
+  align-items: stretch;
 }
 .vs-trust-badge {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 12px 8px 8px;
+  padding: 6px 12px 6px 6px;
   background: var(--cream-light);
   border: 1px solid var(--paper-edge);
   border-radius: 999px;
   cursor: default;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  min-height: 40px;
 }
 .vs-trust-badge:hover {
   transform: translateY(-2px);
@@ -4948,8 +4950,15 @@ body.vs-legal-open { overflow: hidden; }
   color: var(--coffee);
 }
 @media (max-width: 768px) {
-  .vs-trust { justify-content: center; }
-  .vs-trust-label { font-size: 10px; }
+  .vs-trust { justify-content: center; gap: 6px; }
+  .vs-trust-badge { padding: 5px 11px 5px 5px; min-height: 36px; }
+  .vs-trust-icon { width: 26px; height: 26px; font-size: 13px; }
+  .vs-trust-label { font-size: 9.5px; line-height: 1.1; }
+}
+@media (max-width: 380px) {
+  .vs-trust-label br { display: none; }
+  .vs-trust-label { white-space: nowrap; }
+  .vs-trust-badge { padding: 4px 10px 4px 4px; min-height: 32px; }
 }
 
 /* =========================================================
@@ -4995,6 +5004,18 @@ body.vs-legal-open { overflow: hidden; }
 /* push item content so it doesn't get covered by the button */
 .vs-item .vs-item-head { padding-right: 44px; }
 .vs-item.featured .vs-quick-add { background: var(--bronze); color: var(--coffee); }
+
+/* compact + button on boisson cards (smaller, lower-right) */
+.vs-drink .vs-quick-add {
+  width: 26px;
+  height: 26px;
+  top: auto;
+  bottom: 10px;
+  right: 10px;
+}
+.vs-drink .vs-quick-add svg { width: 12px; height: 12px; }
+.vs-drink .vs-item-head { padding-right: 0; }
+.vs-drink { padding-bottom: 38px !important; position: relative; }
 
 /* =========================================================
    CROSS-SELL inside product modal
@@ -5100,7 +5121,7 @@ body.vs-legal-open { overflow: hidden; }
   left: 16px;
   right: 16px;
   bottom: calc(82px + env(safe-area-inset-bottom, 0));
-  z-index: 95;
+  z-index: 70;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
