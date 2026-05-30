@@ -4594,6 +4594,47 @@ body.vs-legal-open { overflow: hidden; }
 }
 
 /* =========================================================
+   PHOTOS NON CONTRACTUELLES — subtle disclaimer
+   ========================================================= */
+.vs-photo-disclaimer {
+  max-width: 640px;
+  margin: 28px auto 0;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--coffee-mid);
+  text-align: center;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.5;
+  opacity: 0.75;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.vs-photo-disclaimer::before,
+.vs-photo-disclaimer::after {
+  content: "";
+  flex: 0 1 30px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.35;
+}
+.vs-photo-disclaimer.light { color: var(--bronze-soft); opacity: 0.6; }
+.vs-modal-disclaimer {
+  margin: -10px 0 14px;
+  font-size: 10.5px;
+  opacity: 0.6;
+  justify-content: flex-start;
+}
+.vs-modal-disclaimer::before,
+.vs-modal-disclaimer::after { display: none; }
+@media (max-width: 768px) {
+  .vs-photo-disclaimer { margin-top: 20px; font-size: 10.5px; }
+  .vs-photo-disclaimer::before, .vs-photo-disclaimer::after { flex-basis: 20px; }
+}
+
+/* =========================================================
    MORE MOTION DESIGN — global + mobile
    ========================================================= */
 
