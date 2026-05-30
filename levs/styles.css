@@ -4902,6 +4902,374 @@ body.vs-legal-open { overflow: hidden; }
 }
 
 /* =========================================================
+   TRUST BADGES — halal / Maître Restaurateur / Fait maison
+   ========================================================= */
+.vs-trust {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 18px 0 24px;
+}
+.vs-trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px 8px 8px;
+  background: var(--cream-light);
+  border: 1px solid var(--paper-edge);
+  border-radius: 999px;
+  cursor: default;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.vs-trust-badge:hover {
+  transform: translateY(-2px);
+  border-color: var(--bronze);
+  background: var(--cream);
+}
+.vs-trust-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--coffee);
+  color: var(--bronze-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.vs-trust-label {
+  font-family: var(--ff-sans);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--coffee);
+}
+@media (max-width: 768px) {
+  .vs-trust { justify-content: center; }
+  .vs-trust-label { font-size: 10px; }
+}
+
+/* =========================================================
+   QUICK ADD — round + button on each menu item
+   ========================================================= */
+.vs-item { position: relative; }
+.vs-quick-add {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--coffee);
+  color: var(--bronze-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 6px 14px rgba(42, 24, 16, 0.18);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, color 0.2s ease;
+}
+.vs-quick-add:hover {
+  background: var(--bronze);
+  color: var(--coffee);
+  transform: scale(1.1);
+}
+.vs-quick-add:active { transform: scale(0.92); }
+.vs-quick-add.added {
+  background: #4f9544;
+  color: #fff;
+  animation: vsQuickAdded 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes vsQuickAdded {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.4); }
+  70%  { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+
+/* push item content so it doesn't get covered by the button */
+.vs-item .vs-item-head { padding-right: 44px; }
+.vs-item.featured .vs-quick-add { background: var(--bronze); color: var(--coffee); }
+
+/* =========================================================
+   CROSS-SELL inside product modal
+   ========================================================= */
+.vs-modal-crosssell { margin: 18px 0 4px; }
+.vs-modal-crosssell:empty { display: none; }
+.vs-crosssell-title {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.vs-crosssell-title::before { content: "💡 "; }
+.vs-crosssell-list { display: flex; flex-direction: column; gap: 6px; }
+.vs-crosssell-item {
+  display: grid;
+  grid-template-columns: 26px 1fr auto 26px;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  background: var(--cream-light);
+  border: 1px solid var(--paper-edge);
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--coffee);
+  text-align: left;
+  width: 100%;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+  animation: vsChipIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.08s);
+}
+.vs-crosssell-item:hover { background: var(--cream); border-color: var(--bronze); transform: translateX(2px); }
+.vs-crosssell-item:active { transform: scale(0.98); }
+.vs-crosssell-item.added { background: rgba(80, 140, 60, 0.15); border-color: #4f9544; }
+.vs-crosssell-emoji { font-size: 18px; line-height: 1; }
+.vs-crosssell-name { font-family: var(--ff-display); font-weight: 700; font-size: 14px; }
+.vs-crosssell-price { font-family: var(--ff-display); font-weight: 700; font-size: 13px; color: var(--bronze); white-space: nowrap; }
+.vs-crosssell-plus {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--coffee);
+  color: var(--bronze-light);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+.vs-crosssell-item.added .vs-crosssell-plus {
+  background: #4f9544;
+  color: #fff;
+}
+.vs-crosssell-item.added .vs-crosssell-plus::before {
+  content: "✓";
+  font-size: 14px;
+}
+.vs-crosssell-item.added .vs-crosssell-plus { font-size: 0; }
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+.vs-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(86px + env(safe-area-inset-bottom, 0));
+  transform: translate(-50%, 16px);
+  background: var(--coffee);
+  color: var(--cream-light);
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 110;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 14px 32px rgba(42, 24, 16, 0.4);
+  border: 1px solid var(--bronze);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 90vw;
+}
+.vs-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.vs-toast-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+@media (min-width: 769px) {
+  .vs-toast { bottom: 30px; }
+}
+
+/* =========================================================
+   COOKIE BANNER
+   ========================================================= */
+.vs-cookies {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: calc(82px + env(safe-area-inset-bottom, 0));
+  z-index: 95;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.vs-cookies.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.vs-cookies-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  background: var(--coffee);
+  border: 1px solid var(--bronze);
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(31, 17, 8, 0.45);
+}
+.vs-cookies-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(200, 153, 90, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+.vs-cookies-body h4 {
+  font-family: var(--ff-display);
+  font-size: 16px;
+  color: var(--cream-light);
+  margin-bottom: 2px;
+}
+.vs-cookies-body p {
+  font-size: 12.5px;
+  color: var(--bronze-soft);
+  line-height: 1.45;
+}
+.vs-cookies-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.vs-cookies-btn {
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-family: var(--ff-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+.vs-cookies-secondary {
+  background: transparent;
+  color: var(--bronze-soft);
+  border-color: rgba(200, 153, 90, 0.35);
+}
+.vs-cookies-secondary:hover {
+  border-color: var(--bronze);
+  color: var(--cream-light);
+}
+.vs-cookies-primary {
+  background: var(--bronze);
+  color: var(--coffee);
+}
+.vs-cookies-primary:hover {
+  background: var(--cream-light);
+}
+.vs-cookies-primary:active { transform: scale(0.96); }
+
+@media (min-width: 769px) {
+  .vs-cookies { bottom: 24px; }
+}
+
+@media (max-width: 600px) {
+  .vs-cookies-inner {
+    grid-template-columns: 40px 1fr;
+    grid-template-areas:
+      "icon body"
+      "actions actions";
+    gap: 10px 12px;
+    padding: 14px;
+  }
+  .vs-cookies-icon { grid-area: icon; width: 40px; height: 40px; font-size: 20px; }
+  .vs-cookies-body { grid-area: body; }
+  .vs-cookies-actions { grid-area: actions; justify-content: stretch; }
+  .vs-cookies-btn { flex: 1; }
+}
+
+/* =========================================================
+   EMPTY CART — animated "ça mijote"
+   ========================================================= */
+.vs-cart-empty {
+  text-align: center;
+  padding: 50px 24px 30px;
+  color: var(--coffee-mid);
+}
+.vs-cart-empty-stove {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vs-cart-empty-pan {
+  font-size: 64px;
+  display: inline-block;
+  animation: vsPanJiggle 1.6s ease-in-out infinite;
+  filter: drop-shadow(0 10px 14px rgba(42, 24, 16, 0.18));
+}
+@keyframes vsPanJiggle {
+  0%, 100% { transform: rotate(-7deg) translateY(0); }
+  50%      { transform: rotate(7deg)  translateY(-2px); }
+}
+.vs-cart-empty-steam {
+  position: absolute;
+  top: -2px;
+  font-size: 18px;
+  color: var(--bronze);
+  opacity: 0;
+  animation: vsSteam 2.2s ease-out infinite;
+}
+.vs-cart-empty-steam:nth-child(2) { left: 28%; animation-delay: 0s; }
+.vs-cart-empty-steam:nth-child(3) { left: 48%; animation-delay: 0.7s; }
+.vs-cart-empty-steam:nth-child(4) { left: 68%; animation-delay: 1.4s; }
+@keyframes vsSteam {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.6); }
+  30%  { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-40px) scale(1.4); }
+}
+.vs-cart-empty-title {
+  font-family: var(--ff-display);
+  font-weight: 900;
+  font-size: 22px;
+  color: var(--coffee);
+  margin-bottom: 6px;
+  letter-spacing: -0.005em;
+}
+.vs-cart-empty-sub {
+  font-size: 13.5px;
+  color: var(--coffee-mid);
+  margin-bottom: 18px;
+}
+.vs-cart-empty-cta {
+  display: inline-flex;
+  text-decoration: none;
+  padding: 12px 22px;
+  font-size: 13px;
+}
+
+/* =========================================================
+   COPYABLE elements — subtle hint
+   ========================================================= */
+.vs-copyable {
+  cursor: pointer;
+  transition: color 0.2s ease;
+  position: relative;
+}
+.vs-copyable:hover { color: var(--bronze); }
+
+/* =========================================================
    HOURS MODAL — schedule table + status summary
    ========================================================= */
 .vs-hours-table {

@@ -650,6 +650,7 @@
       <ul class="vs-modal-allergens" id="vsModalAllerg"></ul>
     </div>
     <div class="vs-modal-tags" id="vsModalTags"></div>
+    <div class="vs-modal-crosssell" id="vsModalCrossSell"></div>
     <button class="vs-modal-add vs-cta-primary" id="vsModalAdd">
       Ajouter au panier
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
@@ -807,6 +808,24 @@
     </div>
   </div>
 </div>
+
+<!-- COOKIE BANNER -->
+<div class="vs-cookies" id="vsCookies" role="dialog" aria-label="Cookies" hidden>
+  <div class="vs-cookies-inner">
+    <div class="vs-cookies-icon">🍪</div>
+    <div class="vs-cookies-body">
+      <h4>Un cookie avec ça&nbsp;?</h4>
+      <p>Ce site n'utilise aucun cookie de pistage. Le panier et vos préférences restent en local sur votre navigateur, rien n'est envoyé à un tiers.</p>
+    </div>
+    <div class="vs-cookies-actions">
+      <button class="vs-cookies-btn vs-cookies-secondary" data-cookies="info" data-legal-open>En savoir +</button>
+      <button class="vs-cookies-btn vs-cookies-primary" data-cookies="accept">J'ai compris ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="vs-toast" id="vsToast" role="status" aria-live="polite"></div>
 
 <script src="app.js"></script>
 </body>

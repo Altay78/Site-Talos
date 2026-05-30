@@ -3,6 +3,76 @@
 (function () {
   'use strict';
 
+  // ------- HAPTIC FEEDBACK -------
+  const haptic = (ms = 10) => {
+    try {
+      if (window.matchMedia && window.matchMedia('(max-width: 1024px)').matches && navigator.vibrate) {
+        navigator.vibrate(ms);
+      }
+    } catch (_) {}
+  };
+
+  // ------- TOAST -------
+  const toast = (msg, icon = '✓') => {
+    const el = document.getElementById('vsToast');
+    if (!el) return;
+    el.innerHTML = `<span class="vs-toast-icon">${icon}</span><span>${msg}</span>`;
+    el.classList.remove('show');
+    void el.offsetWidth;
+    el.classList.add('show');
+    clearTimeout(el._t);
+    el._t = setTimeout(() => el.classList.remove('show'), 2200);
+  };
+
+  // ------- TAP TO COPY -------
+  const copyText = async (text) => {
+    try {
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      }
+      return true;
+    } catch (_) {
+      return false;
+    }
+  };
+  document.querySelectorAll('.vs-copyable').forEach((el) => {
+    el.addEventListener('click', async (e) => {
+      // for <a> with tel:/mailto:, let the native action happen on tap and also copy
+      const text = el.dataset.copyText || el.textContent.trim();
+      const ok = await copyText(text);
+      if (ok) {
+        toast('Copié dans le presse-papier', '📋');
+        haptic(15);
+      }
+    });
+  });
+
+  // ------- COOKIE BANNER -------
+  const cookies = document.getElementById('vsCookies');
+  if (cookies) {
+    const stored = localStorage.getItem('vs-cookies-v1');
+    if (!stored) {
+      setTimeout(() => { cookies.hidden = false; cookies.classList.add('show'); }, 1400);
+    }
+    cookies.querySelectorAll('[data-cookies]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (btn.dataset.cookies === 'accept') {
+          localStorage.setItem('vs-cookies-v1', 'accepted');
+          cookies.classList.remove('show');
+          setTimeout(() => { cookies.hidden = true; }, 350);
+          haptic(10);
+        }
+      });
+    });
+  }
+
   // ------- PRELOADER -------
   const preloader = document.getElementById('preloader');
   window.addEventListener('load', () => {
@@ -354,11 +424,33 @@
     .filter(s => s.length > 1 && s.length < 60)
     .slice(0, 16);
 
-  // Cart state (in-memory; resets on page reload)
+  // Cart state — persisted in localStorage
+  const CART_KEY = 'vs-cart-v1';
   const cart = new Map();
   const fmt = (n) => (Math.round(n * 100) / 100).toFixed(2).replace('.', ',') + ' €';
   const cartCount = () => [...cart.values()].reduce((s, x) => s + x.qty, 0);
   const cartTotal = () => [...cart.values()].reduce((s, x) => s + x.qty * x.price, 0);
+
+  const saveCart = () => {
+    try {
+      const arr = [...cart.values()];
+      localStorage.setItem(CART_KEY, JSON.stringify(arr));
+    } catch (_) {}
+  };
+  const loadCart = () => {
+    try {
+      const raw = localStorage.getItem(CART_KEY);
+      if (!raw) return;
+      const arr = JSON.parse(raw);
+      if (!Array.isArray(arr)) return;
+      arr.forEach((it) => {
+        if (it && it.name && it.price >= 0 && it.qty > 0) {
+          cart.set(it.name, { name: it.name, price: it.price, qty: it.qty, cat: it.cat || 'all' });
+        }
+      });
+    } catch (_) {}
+  };
+  loadCart();
 
   // Reward tiers
   const TIERS = [
@@ -500,7 +592,18 @@
     const total = document.getElementById('vsCartTotal');
     if (!list || !total) return;
     if (cart.size === 0) {
-      list.innerHTML = '<div class="vs-cart-empty"><div class="vs-cart-empty-icon">🛒</div><p>Votre panier est vide.<br>Tapotez un plat pour l\'ajouter.</p></div>';
+      list.innerHTML = `
+        <div class="vs-cart-empty">
+          <div class="vs-cart-empty-stove" aria-hidden="true">
+            <span class="vs-cart-empty-pan">🍳</span>
+            <span class="vs-cart-empty-steam">·</span>
+            <span class="vs-cart-empty-steam">·</span>
+            <span class="vs-cart-empty-steam">·</span>
+          </div>
+          <p class="vs-cart-empty-title">Ça mijote chez Le VS&nbsp;!</p>
+          <p class="vs-cart-empty-sub">Composez votre commande, on s'occupe du reste.</p>
+          <a href="menu.html" class="vs-cta-ghost vs-cart-empty-cta">Voir la carte →</a>
+        </div>`;
       total.textContent = '0,00 €';
       return;
     }
@@ -536,9 +639,11 @@
     const k = name;
     if (cart.has(k)) cart.get(k).qty += 1;
     else cart.set(k, { name, price, qty: 1, cat });
+    saveCart();
     updateBadge();
     renderCart();
     updateRewards();
+    haptic(20);
   };
 
   // qty + remove inside cart, AND suggestion add
@@ -562,9 +667,11 @@
       if (act === 'inc') it.qty += 1;
       else if (act === 'dec') { it.qty -= 1; if (it.qty <= 0) cart.delete(key); }
       else if (act === 'rm') cart.delete(key);
+      saveCart();
       updateBadge();
       renderCart();
       updateRewards();
+      haptic(act === 'rm' ? 25 : 10);
     });
   }
 
@@ -588,6 +695,12 @@
   if (navCart) navCart.addEventListener('click', openCart);
   document.querySelectorAll('[data-cart-close]').forEach(el => el.addEventListener('click', closeCart));
   if (window.location.hash === '#panier') setTimeout(openCart, 300);
+
+  // Sync UI with any restored cart from localStorage
+  // (mark max tier already-reached so no confetti fires at init)
+  if (cartTotal() >= 50) document.body.classList.add('vs-tier-maxed');
+  updateBadge();
+  setTimeout(() => updateRewards(), 0);
 
   // Modal
   const openModalWith = (data) => {
@@ -616,6 +729,50 @@
 
     const tagsEl = document.getElementById('vsModalTags');
     tagsEl.innerHTML = (tags || []).map(t => `<span class="vs-modal-tag">${t}</span>`).join('');
+
+    // cross-sell: suggest 2-3 complementary items
+    const crossEl = document.getElementById('vsModalCrossSell');
+    if (crossEl) {
+      const PAIRINGS = {
+        pizza:      ['boissons', 'petitefaim'],
+        kebab:      ['boissons', 'petitefaim'],
+        burger:     ['boissons', 'petitefaim'],
+        tacos:      ['boissons', 'petitefaim'],
+        americain:  ['boissons', 'petitefaim'],
+        enfants:    ['boissons'],
+        petitefaim: ['boissons'],
+        boissons:   ['petitefaim', 'tacos']
+      };
+      const targets = PAIRINGS[cat] || ['boissons'];
+      const sugg = [];
+      for (const tgt of targets) {
+        const candidates = CATALOG.filter(it => it.cat === tgt && it.name !== name);
+        if (candidates.length) sugg.push(candidates[Math.floor(Math.random() * candidates.length)]);
+        if (sugg.length >= 2) break;
+      }
+      if (sugg.length === 0) crossEl.innerHTML = '';
+      else {
+        crossEl.innerHTML =
+          '<div class="vs-crosssell-title">Vous voudrez peut-être aussi…</div>' +
+          '<div class="vs-crosssell-list">' +
+            sugg.map((it, i) => `<button class="vs-crosssell-item" style="--i:${i}" data-name="${it.name}" data-price="${it.price}" data-cat="${it.cat}">
+              <span class="vs-crosssell-emoji">${it.emoji}</span>
+              <span class="vs-crosssell-name">${it.name}</span>
+              <span class="vs-crosssell-price">${fmt(it.price)}</span>
+              <span class="vs-crosssell-plus">+</span>
+            </button>`).join('') +
+          '</div>';
+        crossEl.querySelectorAll('.vs-crosssell-item').forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            addToCart(btn.dataset.name, parseFloat(btn.dataset.price), btn.dataset.cat);
+            btn.classList.add('added');
+            setTimeout(() => btn.classList.remove('added'), 700);
+            toast(`${btn.dataset.name} ajouté`, '🛒');
+          });
+        });
+      }
+    }
 
     const addBtn = document.getElementById('vsModalAdd');
     addBtn.onclick = () => { addToCart(name, price, cat); closeModal(); };
@@ -660,9 +817,31 @@
     else if (drawer && drawer.classList.contains('open')) closeCart();
   });
 
-  // Tap on .vs-item (menu page) → open modal
+  // Tap on .vs-item (menu page) → open modal + inject quick-add button
   document.querySelectorAll('.vs-item').forEach((item) => {
     if (item.classList.contains('vs-tacos-detail')) return;
+
+    // inject quick-add "+ Ajouter" button
+    if (!item.querySelector('.vs-quick-add')) {
+      const qa = document.createElement('button');
+      qa.className = 'vs-quick-add';
+      qa.setAttribute('aria-label', 'Ajouter au panier');
+      qa.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
+      qa.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const section = item.closest('[data-cat]');
+        const name = item.dataset.name || item.querySelector('h3')?.textContent.trim() || 'Plat';
+        const price = parseFloat(item.dataset.price || '0');
+        const cat = section ? section.dataset.cat : 'all';
+        addToCart(name, price, cat);
+        // visual feedback on the button
+        qa.classList.remove('added'); void qa.offsetWidth; qa.classList.add('added');
+        setTimeout(() => qa.classList.remove('added'), 700);
+        toast(`${name} ajouté au panier`, '🛒');
+      });
+      item.appendChild(qa);
+    }
+
     item.addEventListener('click', (e) => {
       if (e.target.closest('a, button')) return;
       item.classList.remove('vs-pop'); void item.offsetWidth; item.classList.add('vs-pop');
