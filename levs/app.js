@@ -175,6 +175,71 @@
     }, { passive: true });
   }
 
+  // ------- LIVE OPEN/CLOSED STATUS BADGE -------
+  // Schedule (Paris time): mar-sam 11h30-13h30 + 18h30-21h00, dim 18h30-21h00, lun fermé
+  // Days: 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
+  const SCHEDULE = {
+    0: [[18.5, 21]],
+    1: [],
+    2: [[11.5, 13.5], [18.5, 21]],
+    3: [[11.5, 13.5], [18.5, 21]],
+    4: [[11.5, 13.5], [18.5, 21]],
+    5: [[11.5, 13.5], [18.5, 21]],
+    6: [[11.5, 13.5], [18.5, 21]]
+  };
+  const fmtHM = (h) => {
+    const hh = Math.floor(h);
+    const mm = Math.round((h - hh) * 60);
+    return `${hh}h${mm.toString().padStart(2, '0')}`;
+  };
+  const dayName = (d) => ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'][d];
+  const nextOpening = (now) => {
+    for (let i = 1; i <= 7; i++) {
+      const d = (now.getDay() + i) % 7;
+      const slots = SCHEDULE[d] || [];
+      if (slots.length) {
+        const isTomorrow = i === 1;
+        return { day: d, from: slots[0][0], isTomorrow };
+      }
+    }
+    return null;
+  };
+  const computeStatus = () => {
+    const now = new Date();
+    const h = now.getHours() + now.getMinutes() / 60;
+    const slots = SCHEDULE[now.getDay()] || [];
+    for (const [from, to] of slots) {
+      if (h >= from && h < to) {
+        const minsLeft = (to - h) * 60;
+        if (minsLeft <= 30) return { state: 'soon', label: 'Ferme bientôt', sub: `dans ${Math.round(minsLeft)} min` };
+        return { state: 'open', label: 'Ouvert maintenant', sub: `jusqu'à ${fmtHM(to)}` };
+      }
+      if (h < from) {
+        const minsTo = (from - h) * 60;
+        if (minsTo <= 60) return { state: 'soon', label: 'Ouvre bientôt', sub: `à ${fmtHM(from)}` };
+        return { state: 'closed', label: 'Fermé', sub: `ouvre à ${fmtHM(from)}` };
+      }
+    }
+    const next = nextOpening(now);
+    if (next) {
+      const when = next.isTomorrow ? 'demain' : dayName(next.day);
+      return { state: 'closed', label: 'Fermé', sub: `ouvre ${when} à ${fmtHM(next.from)}` };
+    }
+    return { state: 'closed', label: 'Fermé', sub: '' };
+  };
+  const refreshStatus = () => {
+    const wrap = document.getElementById('vsStatus');
+    if (!wrap) return;
+    const t = document.getElementById('vsStatusText');
+    const s = document.getElementById('vsStatusSub');
+    const r = computeStatus();
+    wrap.dataset.state = r.state;
+    if (t) t.textContent = r.label;
+    if (s) s.textContent = r.sub;
+  };
+  refreshStatus();
+  setInterval(refreshStatus, 60000); // refresh every minute
+
   // ------- PRODUCT MODAL + CART DRAWER -------
   const modal = document.getElementById('vsModal');
   const drawer = document.getElementById('vsCartDrawer');
@@ -596,5 +661,139 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && catModal && catModal.classList.contains('open')) closeCatModal();
   });
+
+  // ------- ALLERGENS MODAL -------
+  const allergensModal = document.getElementById('vsAllergens');
+  const openAllergens = () => {
+    if (!allergensModal) return;
+    allergensModal.classList.add('open');
+    allergensModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('vs-legal-open');
+  };
+  const closeAllergens = () => {
+    if (!allergensModal) return;
+    allergensModal.classList.remove('open');
+    allergensModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('vs-legal-open');
+  };
+  document.querySelectorAll('[data-allergens-open]').forEach(el => {
+    el.addEventListener('click', (e) => { e.preventDefault(); openAllergens(); });
+  });
+  document.querySelectorAll('[data-allergens-close]').forEach(el => el.addEventListener('click', closeAllergens));
+  if (window.location.hash === '#allergens') setTimeout(openAllergens, 300);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && allergensModal && allergensModal.classList.contains('open')) closeAllergens();
+  });
+
+  // ------- MENU FILTERS + SEARCH (menu page only) -------
+  const menuItems = document.querySelectorAll('.vs-item:not(.vs-tacos-detail)');
+  const filterBtns = document.querySelectorAll('.vs-filter-btn[data-filter]');
+  const searchInput = document.getElementById('vsMenuSearch');
+  const searchClear = document.getElementById('vsSearchClear');
+  const emptyMsg = document.getElementById('vsMenuEmpty');
+  const resetBtn = document.getElementById('vsResetTools');
+
+  if (menuItems.length && (filterBtns.length || searchInput)) {
+    // Detect tags for each item once
+    const detectTags = (item) => {
+      const tagText = [...item.querySelectorAll('.vs-item-tag')].map(t => t.textContent.toLowerCase()).join(' ');
+      const desc = (item.querySelector('.vs-item-desc')?.textContent || '').toLowerCase();
+      const name = (item.querySelector('h3')?.textContent || '').toLowerCase();
+      const section = item.closest('[data-cat]');
+      const cat = section ? section.dataset.cat : '';
+      const blob = name + ' ' + desc;
+      const tags = new Set();
+      // vege
+      if (/(végé|veggie|🌱)/i.test(tagText) ||
+          (!/(viande|bacon|poulet|steak|merguez|nuggets?|jambon|thon|kebab|chorizo|tenders?|chair)/i.test(blob)
+           && (cat === 'pizza' || cat === 'boissons' || cat === 'petitefaim')
+           && /margarita|fromage|quatre|tropical|cassis|tropico|orangina|fanta|sprite|coca|pepsi|7up|schweppes|oasis|pellegrino|lipton|frites/i.test(name + ' ' + desc))) {
+        tags.add('vege');
+      }
+      // halal
+      if (/halal/i.test(tagText) || /halal/i.test(blob) || cat === 'kebab' || (cat === 'tacos' && /viande kebab|halal/.test(blob))) {
+        tags.add('halal');
+      }
+      // spicy
+      if (/(épicé|épicée|harissa|🌶|piquant|samouraï|samourai|algérienne|algerienne|doux à fort|barbecue|brazil|curry)/i.test(blob + ' ' + tagText)) {
+        tags.add('spicy');
+      }
+      // gluten-free (very limited — boissons, viande seule)
+      if (cat === 'boissons' || /barquette viande/i.test(name)) {
+        tags.add('gluten-free');
+      }
+      return [...tags];
+    };
+    menuItems.forEach(it => { it.dataset.tags = detectTags(it).join(' '); });
+
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    const apply = () => {
+      const q = currentSearch.toLowerCase().trim();
+      const sections = new Map(); // section element → matches count
+      let totalShown = 0;
+      menuItems.forEach((it) => {
+        const tags = (it.dataset.tags || '').split(' ');
+        const name = (it.querySelector('h3')?.textContent || '').toLowerCase();
+        const desc = (it.querySelector('.vs-item-desc')?.textContent || '').toLowerCase();
+        const matchFilter = currentFilter === 'all' || tags.includes(currentFilter);
+        const matchSearch = !q || name.includes(q) || desc.includes(q);
+        const show = matchFilter && matchSearch;
+        it.hidden = !show;
+        if (show) it.classList.add('vs-fade-in');
+        else it.classList.remove('vs-fade-in');
+        const section = it.closest('.vs-menu-section');
+        if (section) sections.set(section, (sections.get(section) || 0) + (show ? 1 : 0));
+        if (show) totalShown++;
+      });
+      // hide sections with 0 visible items
+      sections.forEach((count, sec) => sec.classList.toggle('vs-hide-empty', count === 0));
+      // tacos detail card visible only when no filter / no search
+      const tacosDetail = document.querySelector('.vs-tacos-detail');
+      if (tacosDetail) {
+        const tacosSec = tacosDetail.closest('.vs-menu-section');
+        const tacosVisible = (currentFilter === 'all' || currentFilter === 'halal') && !q;
+        if (tacosSec) tacosSec.classList.toggle('vs-hide-empty', !tacosVisible && (sections.get(tacosSec) || 0) === 0);
+        if (tacosVisible) totalShown++;
+      }
+      if (emptyMsg) emptyMsg.hidden = totalShown > 0;
+    };
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.toggle('active', b === btn));
+        currentFilter = btn.dataset.filter;
+        apply();
+      });
+    });
+
+    if (searchInput) {
+      const onInput = () => {
+        currentSearch = searchInput.value;
+        if (searchClear) searchClear.hidden = !searchInput.value;
+        apply();
+      };
+      searchInput.addEventListener('input', onInput);
+      if (searchClear) {
+        searchClear.addEventListener('click', () => {
+          searchInput.value = '';
+          searchInput.focus();
+          onInput();
+        });
+      }
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        currentSearch = '';
+        currentFilter = 'all';
+        filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
+        if (searchClear) searchClear.hidden = true;
+        apply();
+      });
+    }
+  }
 
 })();

@@ -105,6 +105,11 @@
         <span class="vs-dot"></span>
         <span>Maison fondée &mdash; Service depuis 2014</span>
       </div>
+      <div class="vs-status" id="vsStatus" aria-live="polite">
+        <span class="vs-status-dot"></span>
+        <span class="vs-status-text" id="vsStatusText">Chargement des horaires…</span>
+        <span class="vs-status-sub" id="vsStatusSub"></span>
+      </div>
       <h1 class="vs-h1">
         L'authentique<br>
         <span class="vs-h1-display">street food</span><br>
@@ -597,9 +602,7 @@
         <a href="mailto:info@le-vs.com">info@le-vs.com</a>
       </p>
       <div class="vs-socials">
-        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
-        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-        <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+        <a href="mailto:info@le-vs.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
       </div>
     </div>
 
@@ -679,17 +682,16 @@
     </div>
 
     <div class="vs-footer-col">
-      <h5>Suivez-nous</h5>
-      <a href="#">Instagram</a>
-      <a href="#">Facebook</a>
-      <a href="#">TikTok</a>
+      <h5>Contact</h5>
+      <a href="tel:+33237997036">02 37 99 70 36</a>
       <a href="mailto:info@le-vs.com">info@le-vs.com</a>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=15+Rue+du+G%C3%A9n%C3%A9ral+Leclerc+28230+%C3%89pernon" target="_blank" rel="noopener">Itinéraire ↗</a>
     </div>
   </div>
 
   <div class="vs-footer-bottom">
     <span>© 2025 Le VS &mdash; Tous droits réservés.</span>
-    <span><a href="#legal" data-legal-open>Mentions légales</a> · <a href="#legal" data-legal-open>Confidentialité</a> · <a href="menu.html">Allergènes</a></span>
+    <span><a href="#legal" data-legal-open>Mentions légales</a> · <a href="#legal" data-legal-open>Confidentialité</a> · <a href="#allergens" data-allergens-open>Allergènes</a></span>
   </div>
 </footer>
 
@@ -806,6 +808,39 @@
         <span id="vsCatModalCtaText">Voir toute la carte</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
+    </div>
+  </div>
+</div>
+
+<!-- ALLERGENS MODAL -->
+<div class="vs-legal vs-allergens" id="vsAllergens" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vsAllergensTitle">
+  <div class="vs-legal-overlay" data-allergens-close></div>
+  <div class="vs-legal-card" role="document">
+    <button class="vs-modal-close" data-allergens-close aria-label="Fermer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+    </button>
+    <div class="vs-modal-eyebrow">⚠ Information</div>
+    <h3 class="vs-modal-title" id="vsAllergensTitle">Allergènes</h3>
+    <p class="vs-legal-intro">Conformément au règlement INCO (UE) n° 1169/2011, voici la liste des 14 allergènes susceptibles d'être présents dans nos préparations. Les plats étant préparés à la commande dans la même cuisine, des traces sont possibles dans tous nos produits.</p>
+
+    <div class="vs-allergens-grid">
+      <div class="vs-allergen"><div class="vs-allergen-ico">🌾</div><div><h5>Gluten (blé)</h5><p>Toutes les pâtes (pizza, calzone), pains (burger, kebab, naan, pita, baguette), galettes (tacos), nuggets et tenders panés, frites.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🥛</div><div><h5>Lait &amp; lactose</h5><p>Mozzarella, fior di latte, cheddar, gorgonzola, parmesan, sauce fromagère, sauce blanche, sauce barbecue maison.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🥚</div><div><h5>Œuf</h5><p>Calzone, certaines sauces (mayonnaise, samouraï, algérienne), pains briochés.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🐟</div><div><h5>Poissons</h5><p>Pizza Pêcheur (thon, anchois). Manipulés dans la même cuisine.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🌶</div><div><h5>Moutarde</h5><p>Sauce moutarde, certaines vinaigrettes et marinades de viande.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🫘</div><div><h5>Soja</h5><p>Traces possibles dans les sauces industrielles, certains pains briochés.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🌰</div><div><h5>Fruits à coque</h5><p>Pas d'utilisation directe, traces possibles dans la cuisine.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🌱</div><div><h5>Céleri</h5><p>Traces possibles dans bouillons et marinades.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🌻</div><div><h5>Sésame</h5><p>Pain burger et certains pains kebab.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🍷</div><div><h5>Sulfites</h5><p>Présents dans les boissons et certaines sauces industrielles.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🦐</div><div><h5>Crustacés &amp; mollusques</h5><p>Pas d'utilisation directe.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🥜</div><div><h5>Arachides</h5><p>Pas d'utilisation directe, traces possibles.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🌼</div><div><h5>Lupin</h5><p>Pas d'utilisation déclarée.</p></div></div>
+    </div>
+
+    <div class="vs-legal-section vs-legal-health">
+      <p><strong>Demandez en cuisine.</strong> Notre équipe peut vous renseigner sur la composition exacte d'un plat ou écarter un ingrédient si possible. Appelez le <a href="tel:+33237997036">02 37 99 70 36</a>.</p>
     </div>
   </div>
 </div>

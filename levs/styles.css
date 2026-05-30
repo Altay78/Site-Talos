@@ -2116,6 +2116,130 @@ body::after {
 }
 .vs-menu-cats::-webkit-scrollbar { display: none; }
 
+/* =========================================================
+   MENU TOOLS — search + filters
+   ========================================================= */
+.vs-menu-tools {
+  max-width: 980px;
+  margin: 22px auto 0;
+  padding: 0 var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.vs-menu-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.vs-menu-search svg:first-child {
+  position: absolute;
+  left: 16px;
+  pointer-events: none;
+  color: var(--coffee-mid);
+}
+.vs-menu-search input {
+  width: 100%;
+  padding: 12px 44px 12px 42px;
+  border: 1px solid var(--paper-edge);
+  border-radius: 999px;
+  background: var(--cream-light);
+  color: var(--coffee);
+  font-family: var(--ff-sans);
+  font-size: 14.5px;
+  letter-spacing: 0.01em;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.vs-menu-search input::placeholder { color: var(--coffee-mid); opacity: 0.7; }
+.vs-menu-search input:focus {
+  outline: none;
+  border-color: var(--bronze);
+  background: var(--cream);
+  box-shadow: 0 0 0 4px rgba(200, 153, 90, 0.15);
+}
+.vs-menu-search-clear {
+  position: absolute;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--paper-edge);
+  color: var(--coffee);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.vs-menu-search-clear:hover { background: var(--coffee); color: var(--cream-light); }
+
+.vs-menu-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.vs-filter-btn {
+  font-family: var(--ff-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--paper-edge);
+  color: var(--coffee);
+  background: var(--cream-light);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.vs-filter-btn:hover {
+  border-color: var(--bronze);
+  transform: translateY(-1px);
+}
+.vs-filter-btn.active {
+  background: var(--coffee);
+  color: var(--bronze-light);
+  border-color: var(--coffee);
+}
+.vs-filter-btn:active { transform: scale(0.96); }
+
+.vs-menu-empty {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--coffee-mid);
+  border: 1px dashed var(--cream-edge);
+  border-radius: 12px;
+  background: var(--cream-light);
+  margin-top: 8px;
+}
+.vs-menu-empty-emoji {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 6px;
+}
+.vs-menu-empty p {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+/* hide items that don't match current filter/search */
+.vs-item[hidden] { display: none; }
+.vs-menu-section[hidden] { display: none; }
+.vs-menu-section.vs-hide-empty { display: none; }
+.vs-item {
+  transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.vs-item.vs-fade-in {
+  animation: vsItemFadeIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes vsItemFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
 .vs-menu-cat-btn {
   font-family: var(--ff-sans);
   font-size: 13px;
@@ -4061,6 +4185,58 @@ body.vs-legal-open { overflow: hidden; }
 }
 .vs-legal-section a:hover { color: var(--bronze); }
 
+.vs-legal-intro {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--coffee-soft);
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--cream-edge);
+}
+
+.vs-allergens-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+@media (min-width: 600px) {
+  .vs-allergens-grid { grid-template-columns: 1fr 1fr; }
+}
+.vs-allergen {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--cream-light);
+  border: 1px solid var(--paper-edge);
+  border-radius: 10px;
+}
+.vs-allergen-ico {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--coffee);
+  color: var(--bronze-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+.vs-allergen h5 {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: 14.5px;
+  color: var(--coffee);
+  margin-bottom: 3px;
+}
+.vs-allergen p {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--coffee-soft);
+  margin: 0;
+}
+
 .vs-legal-health {
   margin-top: 26px;
   padding: 14px 16px;
@@ -4591,6 +4767,58 @@ body.vs-legal-open { overflow: hidden; }
   .vs-story-seal-core {
     animation: none !important;
   }
+}
+
+/* =========================================================
+   OPEN / CLOSED LIVE STATUS — hero badge
+   ========================================================= */
+.vs-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px 8px 12px;
+  background: rgba(244, 233, 210, 0.7);
+  border: 1px solid var(--paper-edge);
+  border-radius: 999px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+.vs-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--coffee-mid);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 0 currentColor;
+  animation: vsStatusPing 2.2s ease-out infinite;
+}
+.vs-status-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--coffee);
+  letter-spacing: 0.02em;
+}
+.vs-status-sub {
+  font-size: 12px;
+  color: var(--coffee-mid);
+  font-weight: 500;
+}
+.vs-status-sub:not(:empty)::before { content: "· "; opacity: 0.5; margin-right: 2px; }
+.vs-status[data-state="open"] { background: rgba(80, 140, 60, 0.10); border-color: rgba(80, 140, 60, 0.35); }
+.vs-status[data-state="open"] .vs-status-dot { background: #4f9544; color: rgba(79, 149, 68, 0.5); }
+.vs-status[data-state="soon"] { background: rgba(200, 153, 90, 0.14); border-color: rgba(200, 153, 90, 0.4); }
+.vs-status[data-state="soon"] .vs-status-dot { background: var(--bronze); color: rgba(200, 153, 90, 0.5); }
+.vs-status[data-state="closed"] { background: rgba(160, 70, 50, 0.10); border-color: rgba(160, 70, 50, 0.3); }
+.vs-status[data-state="closed"] .vs-status-dot { background: #b34; color: rgba(180, 60, 50, 0.5); animation: none; }
+@keyframes vsStatusPing {
+  0%   { box-shadow: 0 0 0 0 currentColor; }
+  100% { box-shadow: 0 0 0 10px transparent; }
+}
+
+@media (max-width: 768px) {
+  .vs-status { margin: 4px auto 18px; }
 }
 
 /* =========================================================

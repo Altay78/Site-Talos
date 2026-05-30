@@ -121,6 +121,29 @@
   <button class="vs-menu-cat-btn" data-cat="boissons">Boissons</button>
 </nav>
 
+<!-- SEARCH + FILTERS -->
+<div class="vs-menu-tools" id="vsMenuTools">
+  <div class="vs-menu-search">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    <input type="search" id="vsMenuSearch" placeholder="Rechercher un plat ou un ingrédient…" autocomplete="off">
+    <button class="vs-menu-search-clear" id="vsSearchClear" aria-label="Effacer" hidden>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+    </button>
+  </div>
+  <div class="vs-menu-filters" id="vsMenuFilters" role="group" aria-label="Filtres">
+    <button class="vs-filter-btn active" data-filter="all">Tout</button>
+    <button class="vs-filter-btn" data-filter="vege">🌱 Végé</button>
+    <button class="vs-filter-btn" data-filter="halal">Halal</button>
+    <button class="vs-filter-btn" data-filter="spicy">🌶️ Épicé</button>
+    <button class="vs-filter-btn" data-filter="gluten-free">Sans gluten</button>
+  </div>
+  <div class="vs-menu-empty" id="vsMenuEmpty" hidden>
+    <span class="vs-menu-empty-emoji">🤷</span>
+    <p>Aucun plat ne correspond à votre recherche.</p>
+    <button class="vs-filter-btn" id="vsResetTools">Tout réinitialiser</button>
+  </div>
+</div>
+
 <!-- PIZZA -->
 <section class="vs-menu-section" id="pizza" data-cat="pizza">
   <div class="vs-menu-section-head">
@@ -534,17 +557,16 @@
     </div>
 
     <div class="vs-footer-col">
-      <h5>Suivez-nous</h5>
-      <a href="#">Instagram</a>
-      <a href="#">Facebook</a>
-      <a href="#">TikTok</a>
+      <h5>Contact</h5>
+      <a href="tel:+33237997036">02 37 99 70 36</a>
       <a href="mailto:info@le-vs.com">info@le-vs.com</a>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=15+Rue+du+G%C3%A9n%C3%A9ral+Leclerc+28230+%C3%89pernon" target="_blank" rel="noopener">Itinéraire ↗</a>
     </div>
   </div>
 
   <div class="vs-footer-bottom">
     <span>© 2025 Le VS &mdash; Tous droits réservés.</span>
-    <span><a href="#legal" data-legal-open>Mentions légales</a> · <a href="#legal" data-legal-open>Confidentialité</a> · <a href="menu.html">Allergènes</a></span>
+    <span><a href="#legal" data-legal-open>Mentions légales</a> · <a href="#legal" data-legal-open>Confidentialité</a> · <a href="#allergens" data-allergens-open>Allergènes</a></span>
   </div>
 </footer>
 
@@ -639,6 +661,39 @@
     <p class="vs-cart-disclaimer">Ce récap vous aide à passer commande par téléphone. Aucun paiement en ligne.</p>
   </div>
 </aside>
+
+<!-- ALLERGENS MODAL -->
+<div class="vs-legal vs-allergens" id="vsAllergens" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vsAllergensTitle">
+  <div class="vs-legal-overlay" data-allergens-close></div>
+  <div class="vs-legal-card" role="document">
+    <button class="vs-modal-close" data-allergens-close aria-label="Fermer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+    </button>
+    <div class="vs-modal-eyebrow">⚠ Information</div>
+    <h3 class="vs-modal-title" id="vsAllergensTitle">Allergènes</h3>
+    <p class="vs-legal-intro">Conformément au règlement INCO (UE) n° 1169/2011, voici la liste des 14 allergènes susceptibles d'être présents dans nos préparations. Les plats étant préparés à la commande dans la même cuisine, des traces sont possibles dans tous nos produits.</p>
+
+    <div class="vs-allergens-grid">
+      <div class="vs-allergen"><div class="vs-allergen-ico">🌾</div><div><h5>Gluten (blé)</h5><p>Toutes les pâtes (pizza, calzone), pains (burger, kebab, naan, pita, baguette), galettes (tacos), nuggets et tenders panés, frites.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🥛</div><div><h5>Lait &amp; lactose</h5><p>Mozzarella, fior di latte, cheddar, gorgonzola, parmesan, sauce fromagère, sauce blanche, sauce barbecue maison.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🥚</div><div><h5>Œuf</h5><p>Calzone, certaines sauces (mayonnaise, samouraï, algérienne), pains briochés.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🐟</div><div><h5>Poissons</h5><p>Pizza Pêcheur (thon, anchois). Manipulés dans la même cuisine.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🌶</div><div><h5>Moutarde</h5><p>Sauce moutarde, certaines vinaigrettes et marinades de viande.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🫘</div><div><h5>Soja</h5><p>Traces possibles dans les sauces industrielles, certains pains briochés.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🌰</div><div><h5>Fruits à coque</h5><p>Pas d'utilisation directe, traces possibles dans la cuisine.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🌱</div><div><h5>Céleri</h5><p>Traces possibles dans bouillons et marinades.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🌻</div><div><h5>Sésame</h5><p>Pain burger et certains pains kebab.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🍷</div><div><h5>Sulfites</h5><p>Présents dans les boissons et certaines sauces industrielles.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🦐</div><div><h5>Crustacés &amp; mollusques</h5><p>Pas d'utilisation directe.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🥜</div><div><h5>Arachides</h5><p>Pas d'utilisation directe, traces possibles.</p></div></div>
+      <div class="vs-allergen"><div class="vs-allergen-ico">🌼</div><div><h5>Lupin</h5><p>Pas d'utilisation déclarée.</p></div></div>
+    </div>
+
+    <div class="vs-legal-section vs-legal-health">
+      <p><strong>Demandez en cuisine.</strong> Notre équipe peut vous renseigner sur la composition exacte d'un plat ou écarter un ingrédient si possible. Appelez le <a href="tel:+33237997036">02 37 99 70 36</a>.</p>
+    </div>
+  </div>
+</div>
 
 <!-- LEGAL MODAL -->
 <div class="vs-legal" id="vsLegal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vsLegalTitle">
