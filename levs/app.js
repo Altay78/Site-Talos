@@ -440,12 +440,30 @@
     }
     if (total < 50) document.body.classList.remove('vs-tier-maxed');
 
+    // cumulative unlocked rewards
+    const unlocked = TIERS.filter(t => total >= t.min);
+    const unlockedEl = document.getElementById('vsRewardsUnlocked');
+    if (unlockedEl) {
+      if (unlocked.length === 0) {
+        unlockedEl.innerHTML = '';
+        unlockedEl.classList.remove('show');
+      } else {
+        unlockedEl.classList.add('show');
+        unlockedEl.innerHTML =
+          '<div class="vs-unlocked-title">✓ Déjà débloqué</div>' +
+          '<div class="vs-unlocked-chips">' +
+            unlocked.map((t, i) => `<span class="vs-unlocked-chip" style="--i:${i}">${t.label}</span>`).join('') +
+          '</div>';
+      }
+    }
+
     const next = TIERS.find(t => total < t.min);
     if (next) {
       const gap = next.min - total;
-      labelEl.innerHTML = `Plus que <strong>${fmt(gap)}</strong> pour <span class="vs-rewards-prize">${next.label}</span>`;
+      const verb = unlocked.length > 0 ? 'pour ajouter' : 'pour';
+      labelEl.innerHTML = `Plus que <strong>${fmt(gap)}</strong> ${verb} <span class="vs-rewards-prize">${next.label}</span>`;
     } else {
-      labelEl.innerHTML = `<span class="vs-rewards-prize vs-rewards-prize--max">🎉 Tout débloqué — 🍔 cheese burger offert&nbsp;!</span>`;
+      labelEl.innerHTML = `<span class="vs-rewards-prize vs-rewards-prize--max">🎉 Tout débloqué — 🥤 canette + 🍾 bouteille + 🍟 frite + 🍔 cheese burger offerts&nbsp;!</span>`;
     }
 
     if (suggestEl) {
