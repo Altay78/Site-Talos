@@ -43,6 +43,8 @@
   "servesCuisine": ["Pizza", "Kebab", "Burger", "Tacos", "Halal"],
   "menu": "https://www.le-vs.com/menu.html",
   "foundingDate": "2014",
+  "hasMap": "https://www.google.com/maps/dir/?api=1&destination=15+Rue+du+G%C3%A9n%C3%A9ral+Leclerc+28230+%C3%89pernon",
+  "acceptsReservations": false,
   "openingHoursSpecification": [
     { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "11:30", "closes": "13:30" },
     { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "18:30", "closes": "21:00" }
@@ -74,11 +76,11 @@
     <span>Frites maison à la graisse de bœuf</span><span class="dot">·</span>
     <span>Viandes halal disponibles</span><span class="dot">·</span>
     <span>Service midi &amp; soir</span><span class="dot">·</span>
-    <span>Pizza · Kebab · Burger · Tacos</span><span class="dot">·</span>
+    <span>Uniquement à emporter</span><span class="dot">·</span>
     <span>Frites maison à la graisse de bœuf</span><span class="dot">·</span>
     <span>Viandes halal disponibles</span><span class="dot">·</span>
     <span>Service midi &amp; soir</span><span class="dot">·</span>
-    <span>Pizza · Kebab · Burger · Tacos</span><span class="dot">·</span>
+    <span>Uniquement à emporter</span><span class="dot">·</span>
   </div>
 </div>
 
@@ -289,30 +291,30 @@
 
     <article class="vs-cat" data-cat="pizza">
       <div class="vs-cat-img">
-        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&auto=format&fit=crop&q=80" alt="Pizza artisanale" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&auto=format&fit=crop&q=80" alt="Pizza maison" loading="lazy">
       </div>
       <div class="vs-cat-body">
         <div class="vs-cat-num">01</div>
         <h3>Pizza</h3>
-        <p>Pâte fraîche, sauce tomate, mozzarella. 14 recettes au choix.</p>
+        <p>Base tomate ou crème. 18 recettes signature, des classiques aux fromages.</p>
         <div class="vs-cat-meta">
-          <span>14 recettes</span>
-          <span class="vs-cat-from">à partir de <strong>9 €</strong></span>
+          <span>18 recettes</span>
+          <span class="vs-cat-from">à partir de <strong>10 €</strong></span>
         </div>
       </div>
     </article>
 
     <article class="vs-cat" data-cat="kebab">
       <div class="vs-cat-img">
-        <img src="https://www.idgastronomic.com/wp-content/uploads/2023/01/Kebab-de-Pollo-Asado-y-Loncheado-slider.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=800&auto=format&fit=crop&q=80'" alt="Kebab turc poulet rôti et tranché" loading="lazy">
+        <img src="https://www.idgastronomic.com/wp-content/uploads/2023/01/Kebab-de-Pollo-Asado-y-Loncheado-slider.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=800&auto=format&fit=crop&q=80'" alt="Kebab 100% poulet" loading="lazy">
       </div>
       <div class="vs-cat-body">
         <div class="vs-cat-num">02</div>
         <h3>Kebab</h3>
-        <p>Viande de kebab à la broche. Pain pita ou galette, sauces au choix.</p>
+        <p>Viande kebab 100% poulet, halal. Pain de boulangerie, pita ou assiette. Sauces au choix.</p>
         <div class="vs-cat-meta">
-          <span>8 formats</span>
-          <span class="vs-cat-from">à partir de <strong>8 €</strong></span>
+          <span>4 formats</span>
+          <span class="vs-cat-from">à partir de <strong>6 €</strong></span>
         </div>
       </div>
     </article>
@@ -324,10 +326,10 @@
       <div class="vs-cat-body">
         <div class="vs-cat-num">03</div>
         <h3>Burger</h3>
-        <p>Steak haché, pain brioché, cheddar, salade, sauces au choix.</p>
+        <p>Steak haché 120 g, cheddar, salade, tomate, oignon. Frites maison &amp; sauce au choix incluses.</p>
         <div class="vs-cat-meta">
-          <span>12 recettes</span>
-          <span class="vs-cat-from">à partir de <strong>10 €</strong></span>
+          <span>7 recettes</span>
+          <span class="vs-cat-from">à partir de <strong>7 €</strong></span>
         </div>
       </div>
     </article>
@@ -339,10 +341,10 @@
       <div class="vs-cat-body">
         <div class="vs-cat-num">04</div>
         <h3>Tacos</h3>
-        <p>Galette grillée à la plancha, sauce fromagère onctueuse. 1, 2 ou 3 viandes au choix.</p>
+        <p>French tacos personnalisable, sauce fromagère, frites incluses. 1, 2 ou 3 viandes au choix.</p>
         <div class="vs-cat-meta">
-          <span>3 tailles</span>
-          <span class="vs-cat-from">à partir de <strong>7,50 €</strong></span>
+          <span>Composition libre</span>
+          <span class="vs-cat-from">à partir de <strong>8 €</strong></span>
         </div>
       </div>
     </article>
@@ -380,28 +382,27 @@
       </div>
       <div class="vs-sig-body">
         <div class="vs-sig-row">
-          <h3>Le VS Tacos</h3>
-          <div class="vs-price">12,90 €</div>
+          <h3>Tacos personnalisable</h3>
+          <div class="vs-price">à partir de 8,00 €</div>
         </div>
-        <p>Triple viande au choix, sauce fromagère, oignons, frites à l'intérieur.</p>
+        <p>Sauce fromagère, jusqu'à 3 viandes au choix, frites incluses. +1 € par viande supplémentaire.</p>
         <div class="vs-sig-meta">
-          <span>🌶️ Doux à fort</span>
-          <span>· Halal</span>
-          <span>· 850 g</span>
+          <span>🌮 Composition libre</span>
+          <span>· Sauces au choix</span>
         </div>
       </div>
     </article>
 
     <article class="vs-sig">
       <div class="vs-sig-img">
-        <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=900&auto=format&fit=crop&q=80" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=900&auto=format&fit=crop&q=80'" alt="Pizza La Maison — San Marzano, fior di latte, jambon truffé, roquette, parmesan" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=900&auto=format&fit=crop&q=80" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=900&auto=format&fit=crop&q=80'" alt="Pizza Carbo" loading="lazy">
       </div>
       <div class="vs-sig-body">
         <div class="vs-sig-row">
-          <h3>Pizza La Maison</h3>
-          <div class="vs-price">14,50 €</div>
+          <h3>Pizza Carbo</h3>
+          <div class="vs-price">13,00 €</div>
         </div>
-        <p>Sauce tomate, mozzarella, jambon, champignons. La pizza signature.</p>
+        <p>Base crème. Lardons fumés, bacon, parmesan, œuf.</p>
         <div class="vs-sig-meta">
           <span>🍕 Recette du chef</span>
         </div>
@@ -410,34 +411,33 @@
 
     <article class="vs-sig">
       <div class="vs-sig-img">
-        <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=900&auto=format&fit=crop&q=80" alt="Smash burger signature" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=900&auto=format&fit=crop&q=80" alt="Double Cheese Bacon" loading="lazy">
         <div class="vs-sig-ribbon">★ NOUVEAU</div>
       </div>
       <div class="vs-sig-body">
         <div class="vs-sig-row">
-          <h3>Smash Le VS</h3>
-          <div class="vs-price">13,90 €</div>
+          <h3>Double Cheese Bacon</h3>
+          <div class="vs-price">9,00 €</div>
         </div>
-        <p>Double steak, cheddar, bacon, oignons, sauce barbecue.</p>
+        <p>Double steak haché 120 g, double cheddar, bacon grillé, salade, tomate. Frites incluses.</p>
         <div class="vs-sig-meta">
-          <span>🥩 200 g</span>
-          <span>· Halal</span>
+          <span>🍔 240 g de bœuf</span>
         </div>
       </div>
     </article>
 
     <article class="vs-sig">
       <div class="vs-sig-img">
-        <img src="https://www.idgastronomic.com/wp-content/uploads/2023/01/Kebab-de-Pollo-Asado-y-Loncheado-slider.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=900&auto=format&fit=crop&q=80'" alt="Kebab turc du Patron — poulet rôti et tranché" loading="lazy">
+        <img src="https://www.idgastronomic.com/wp-content/uploads/2023/01/Kebab-de-Pollo-Asado-y-Loncheado-slider.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=900&auto=format&fit=crop&q=80'" alt="Kebab classique" loading="lazy">
       </div>
       <div class="vs-sig-body">
         <div class="vs-sig-row">
-          <h3>Kebab du Patron</h3>
-          <div class="vs-price">11,00 €</div>
+          <h3>Kebab classique</h3>
+          <div class="vs-price">8,00 €</div>
         </div>
-        <p>Viande de kebab, salade, tomate, oignon rouge, sauce blanche.</p>
+        <p>Pain de boulangerie, viande kebab 100% poulet, salade, tomate, oignon. Frites maison et sauce au choix.</p>
         <div class="vs-sig-meta">
-          <span>🥙 Pain ou galette</span>
+          <span>🥙 100% poulet</span>
           <span>· Halal</span>
         </div>
       </div>
@@ -580,7 +580,7 @@
       Une envie&nbsp;? <em class="vs-script">on prépare.</em>
     </h2>
     <p class="vs-cta-band-lede">
-      Sur place ou à emporter — au 02 37 99 70 36.
+      Uniquement à emporter — appelez le 02 37 99 70 36.
     </p>
     <div class="vs-cta-band-ctas">
       <a href="tel:+33237997036" class="vs-cta-primary vs-cta-lg">

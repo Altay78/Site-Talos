@@ -5382,6 +5382,35 @@ body.vs-legal-open { overflow: hidden; }
   }
 }
 
+/* small note inside the CTA band */
+.vs-cta-band-note {
+  margin-top: 18px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bronze-soft);
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+/* small note under section heads */
+.vs-menu-section-note {
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  font-style: italic;
+  color: var(--coffee-mid);
+  text-align: center;
+  margin-top: 18px;
+  padding: 8px 14px;
+  background: rgba(200, 153, 90, 0.08);
+  border: 1px dashed rgba(200, 153, 90, 0.35);
+  border-radius: 999px;
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 /* =========================================================
    PHOTOS NON CONTRACTUELLES — subtle disclaimer
    ========================================================= */

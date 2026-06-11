@@ -461,21 +461,28 @@
 
   // Hardcoded catalog of suggestions (used everywhere — index + menu)
   const CATALOG = [
-    { name: 'Portion frites',     price: 2.50, cat: 'petitefaim', emoji: '🍟' },
-    { name: 'Poutine',            price: 3.50, cat: 'petitefaim', emoji: '🍟' },
-    { name: 'Coca-Cola 33cl',     price: 1.50, cat: 'boissons',   emoji: '🥤' },
-    { name: 'Kebab Assiette',     price: 6.50, cat: 'kebab',      emoji: '🥙' },
-    { name: 'Cheese Burger',      price: 7.00, cat: 'burger',     emoji: '🍔' },
-    { name: 'Kebab Pita',         price: 7.50, cat: 'kebab',      emoji: '🥙' },
-    { name: 'Cheese Bacon',       price: 7.50, cat: 'burger',     emoji: '🍔' },
-    { name: 'Américain Steak',    price: 8.00, cat: 'americain',  emoji: '🍗' },
-    { name: 'Le Tacos Le VS',     price: 8.00, cat: 'tacos',      emoji: '🌮' },
-    { name: 'Double Cheese',      price: 8.50, cat: 'burger',     emoji: '🍔' },
-    { name: 'Double Cheese Bacon',price: 9.00, cat: 'burger',     emoji: '🍔' },
-    { name: 'Margarita',          price: 10.00, cat: 'pizza',     emoji: '🍕' },
-    { name: 'Reine',              price: 11.00, cat: 'pizza',     emoji: '🍕' },
-    { name: 'Calzone',            price: 11.00, cat: 'pizza',     emoji: '🍕' },
-    { name: 'Boîte 20 nuggets',   price: 19.00, cat: 'petitefaim', emoji: '🍟' }
+    { name: 'Frites maison',           price: 2.50, cat: 'petitefaim', emoji: '🍟' },
+    { name: 'Frites sauce fromagère',  price: 3.50, cat: 'petitefaim', emoji: '🍟' },
+    { name: 'Wings 5 pcs',             price: 3.50, cat: 'petitefaim', emoji: '🍗' },
+    { name: 'Coca-Cola',               price: 1.50, cat: 'boissons',   emoji: '🥤' },
+    { name: 'Barquette de viande',     price: 6.00, cat: 'kebab',      emoji: '🥙' },
+    { name: 'Tenders 5 pcs',           price: 5.00, cat: 'petitefaim', emoji: '🍗' },
+    { name: 'Cheeseburger',            price: 7.00, cat: 'burger',     emoji: '🍔' },
+    { name: 'Chicken Burger',          price: 7.00, cat: 'burger',     emoji: '🍔' },
+    { name: 'Cheese Bacon',            price: 7.50, cat: 'burger',     emoji: '🍔' },
+    { name: 'Assiette kebab',          price: 7.50, cat: 'kebab',      emoji: '🥙' },
+    { name: 'Kebab classique',         price: 8.00, cat: 'kebab',      emoji: '🥙' },
+    { name: 'Kebab pita',              price: 8.00, cat: 'kebab',      emoji: '🥙' },
+    { name: 'K Burger',                price: 8.00, cat: 'burger',     emoji: '🍔' },
+    { name: 'Américain Steak',         price: 8.00, cat: 'americain',  emoji: '🥖' },
+    { name: 'Tacos 1 viande',          price: 8.00, cat: 'tacos',      emoji: '🌮' },
+    { name: 'Double Cheese Burger',    price: 8.50, cat: 'burger',     emoji: '🍔' },
+    { name: 'Double Cheese Bacon Burger', price: 9.00, cat: 'burger',  emoji: '🍔' },
+    { name: 'Margarita',               price: 10.00, cat: 'pizza',     emoji: '🍕' },
+    { name: 'Mix 15 pièces',           price: 10.50, cat: 'petitefaim', emoji: '🍗' },
+    { name: 'Reine',                   price: 11.00, cat: 'pizza',     emoji: '🍕' },
+    { name: 'Calzone',                 price: 11.00, cat: 'pizza',     emoji: '🍕' },
+    { name: 'Bucket du VS',            price: 14.90, cat: 'petitefaim', emoji: '🍗' }
   ];
 
   const pickSuggestions = (total, max = 3) => {
