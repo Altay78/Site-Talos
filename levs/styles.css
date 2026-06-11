@@ -5018,6 +5018,65 @@ body.vs-legal-open { overflow: hidden; }
 .vs-drink { padding-bottom: 38px !important; position: relative; }
 
 /* =========================================================
+   SAUCE PICKER inside product modal
+   ========================================================= */
+.vs-modal-sauces {
+  margin: 18px 0 4px;
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(200, 153, 90, 0.08), rgba(200, 153, 90, 0.02));
+  border: 1px dashed rgba(200, 153, 90, 0.4);
+  border-radius: 12px;
+}
+.vs-modal-sauces[hidden] { display: none; }
+.vs-modal-sauces h4 {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--bronze);
+  margin-bottom: 10px;
+}
+.vs-modal-sauces h4::before { content: "🥫 "; font-size: 13px; }
+.vs-sauce-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.vs-sauce-chip {
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--paper-edge);
+  color: var(--coffee);
+  background: var(--cream);
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.15s ease;
+  position: relative;
+}
+.vs-sauce-chip:hover { border-color: var(--bronze); transform: translateY(-1px); }
+.vs-sauce-chip:active { transform: scale(0.95); }
+.vs-sauce-chip.active {
+  background: var(--coffee);
+  color: var(--bronze-light);
+  border-color: var(--coffee);
+  padding-left: 22px;
+}
+.vs-sauce-chip.active::before {
+  content: "✓";
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: var(--bronze);
+  font-weight: 700;
+}
+
+/* =========================================================
    CROSS-SELL inside product modal
    ========================================================= */
 .vs-modal-crosssell { margin: 18px 0 4px; }

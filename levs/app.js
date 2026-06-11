@@ -459,6 +459,10 @@
     { min: 50,   label: '🍔 1 cheese burger offert', short: 'cheese burger' }
   ];
 
+  // 14 sauces disponibles, montrées sur les items avec "sauce au choix"
+  const SAUCES = ['Ketchup','Mayonnaise','Brazil','Cheezy','Blanche','Biggy','Moutarde','Curry','Samouraï','Algérienne','BBQ','BBQ Épicée','Fromagère','Harissa'];
+  const needsSauce = (desc, name) => /sauce au choix/i.test(desc + ' ' + name);
+
   // Hardcoded catalog of suggestions (used everywhere — index + menu)
   const CATALOG = [
     { name: 'Frites maison',           price: 2.50, cat: 'petitefaim', emoji: '🍟' },
@@ -737,6 +741,27 @@
     const tagsEl = document.getElementById('vsModalTags');
     tagsEl.innerHTML = (tags || []).map(t => `<span class="vs-modal-tag">${t}</span>`).join('');
 
+    // Sauces selector — only on items where the description says "sauce au choix"
+    const saucesWrap = document.getElementById('vsModalSauces');
+    const sauceList = document.getElementById('vsSauceList');
+    let pickedSauce = null;
+    if (saucesWrap && sauceList) {
+      if (needsSauce(desc, name)) {
+        sauceList.innerHTML = SAUCES.map(s => `<button type="button" class="vs-sauce-chip" data-sauce="${s}">${s}</button>`).join('');
+        saucesWrap.hidden = false;
+        sauceList.querySelectorAll('.vs-sauce-chip').forEach(btn => {
+          btn.addEventListener('click', () => {
+            sauceList.querySelectorAll('.vs-sauce-chip').forEach(b => b.classList.toggle('active', b === btn));
+            pickedSauce = btn.dataset.sauce;
+            haptic(8);
+          });
+        });
+      } else {
+        saucesWrap.hidden = true;
+        sauceList.innerHTML = '';
+      }
+    }
+
     // cross-sell: suggest 2-3 complementary items
     const crossEl = document.getElementById('vsModalCrossSell');
     if (crossEl) {
@@ -782,7 +807,11 @@
     }
 
     const addBtn = document.getElementById('vsModalAdd');
-    addBtn.onclick = () => { addToCart(name, price, cat); closeModal(); };
+    addBtn.onclick = () => {
+      const finalName = pickedSauce ? `${name} (sauce ${pickedSauce})` : name;
+      addToCart(finalName, price, cat);
+      closeModal();
+    };
 
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
@@ -837,14 +866,17 @@
       qa.addEventListener('click', (e) => {
         e.stopPropagation();
         const section = item.closest('[data-cat]');
-        const name = item.dataset.name || item.querySelector('h3')?.textContent.trim() || 'Plat';
+        const baseName = item.dataset.name || item.querySelector('h3')?.textContent.trim() || 'Plat';
         const price = parseFloat(item.dataset.price || '0');
         const cat = section ? section.dataset.cat : 'all';
+        const itemDesc = item.querySelector('.vs-item-desc')?.textContent.trim() || '';
+        // If item requires sauce, append "(sauce au choix)" so it's clear in the cart
+        const name = needsSauce(itemDesc, baseName) ? `${baseName} (sauce au choix)` : baseName;
         addToCart(name, price, cat);
         // visual feedback on the button
         qa.classList.remove('added'); void qa.offsetWidth; qa.classList.add('added');
         setTimeout(() => qa.classList.remove('added'), 700);
-        toast(`${name} ajouté au panier`, '🛒');
+        toast(`${baseName} ajouté au panier`, '🛒');
       });
       item.appendChild(qa);
     }
