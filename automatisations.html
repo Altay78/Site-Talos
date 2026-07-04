@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<script>(function(){try{var t=localStorage.getItem('talos-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automatisations — Talos</title>
+<meta name="description" content="9 automatisations à la carte pour les artisans du BTP : devis, relances, facturation Factur-X, impayés, trésorerie, tri inbox, réponse 24/7, prise de RDV, rappels. Activez seulement ce dont vous avez besoin.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="v2.css?v=19">
+</head>
+<body>
+<div class="mesh" aria-hidden="true"><span class="o1"></span><span class="o2"></span><span class="o3"></span></div>
+
+<nav class="v2" id="nav">
+  <div class="brand"><a href="index.html" aria-label="Talos"><svg viewBox="0 0 380 120"><g fill="#F5EDDC"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g><text x="66" y="100" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="100" fill="#F5EDDC" font-weight="700" letter-spacing="-4">ALOS</text></svg></a><span class="nav-live"><i></i>BÊTA · BTP</span></div>
+  <div class="nav-mid"><a href="automatisations.html" class="active">Automatisations</a><a href="methode.html">Méthode</a><a href="tarifs.html">Tarifs</a><a href="histoire.html">Histoire</a><a href="index.html#faq">FAQ</a></div>
+  <div class="nav-right">
+    <button class="theme-toggle" aria-label="Changer de thème" style="width:40px;height:40px;border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--parch)"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button>
+    <button class="nav-burger" id="v2burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="reserver.html" class="nav-cta">Réserver un créneau</a>
+  </div>
+</nav>
+<div class="v2menu" id="v2menu"><a href="automatisations.html">Automatisations</a><a href="methode.html">Méthode</a><a href="tarifs.html">Tarifs</a><a href="histoire.html">Histoire</a><a href="index.html#faq">FAQ</a><a href="reserver.html" class="mcta">Réserver un créneau →</a></div>
+
+<!-- HERO PREMIUM + DASHBOARDS GLASS -->
+<section class="auto-premium">
+  <div class="ap-inner">
+    <div class="ap-hero">
+      <div class="ap-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l1.7 6.3L20 11l-6.3 1.7L12 19l-1.7-6.3L4 11l6.3-1.7z"/></svg>Automatisations · BTP</div>
+      <h1 class="ap-h1">Vos chantiers, gérés <em>tout seuls</em>.</h1>
+      <p class="ap-sub">Imaginez vos devis, relances, factures et réponses clients qui se font automatiquement. Une intelligence sur mesure, branchée sur les outils que vous utilisez déjà.</p>
+      <a href="reserver.html" class="ap-cta">Réserver une démo<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <div class="ap-tools">
+        <span class="tlbl">Compatible avec vos outils</span>
+        <span class="tl">Gmail</span><span class="tl">Outlook</span><span class="tl">WhatsApp</span><span class="tl">Qonto</span><span class="tl">Google&nbsp;Agenda</span><span class="tl">Factur-X</span>
+      </div>
+    </div>
+
+    <div class="dash-grid">
+      <!-- DASH 1 — planning / RDV -->
+      <div class="dash reveal" style="--gl:#F4823E;--glow:rgba(244,130,62,.28)">
+        <div class="dash-head">
+          <div><b>Vous avez 3 nouveaux rendez-vous</b><span class="sub">Aujourd'hui · planifié par Talos</span></div>
+          <span class="bell" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
+        </div>
+        <div class="appt">
+          <div class="appt-top"><span class="av">DM</span><div><b>David Morel</b><span class="meta">08:00 · Chantier Bagnolet · dans 10 min</span></div></div>
+          <div class="appt-btns">
+            <button class="ab ghost" type="button"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Préparer</button>
+            <button class="ab solid" type="button"><svg viewBox="0 0 24 24"><path d="M7 5l11 7-11 7z"/></svg>Démarrer la visite</button>
+          </div>
+        </div>
+        <div class="notes">Notes à compléter</div>
+        <div class="appt mini"><span class="av sm">ZS</span><div><b>Zayn Sharp</b><span class="meta">Devis à valider · 23 mai</span></div><span class="chev" aria-hidden="true">›</span></div>
+      </div>
+
+      <!-- DASH 2 — automatisation en direct -->
+      <div class="dash reveal" style="--gl:#E0631F;--glow:rgba(216,86,70,.26)">
+        <div class="sess">
+          <div class="sess-top"><span class="av">MD</span><div><b>Devis #4221 · M. Dupont</b><span class="meta">Talos en cours · il y a 6 min</span></div><span class="live"><i></i>En direct</span></div>
+          <div class="srow">Devis chiffré généré<span class="t">3 s</span></div>
+          <div class="srow hl"><span class="si"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg></span><div><b>Relance programmée</b><span class="meta">J+3 · automatique</span></div><span class="t">il y a 1 s</span></div>
+        </div>
+        <div class="connector" aria-hidden="true"></div>
+        <div class="engage">
+          <div class="eng-top"><b>Facture émise à la signature</b><span class="tag">FACTUR-X</span></div>
+          <div class="done"><span class="dc"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Terminé — conforme 2026<span class="t">10:35</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMENT ÇA FONCTIONNE (bento) -->
+<section class="modules-wrap bwrap" id="fonctionnement">
+  <div class="modules-head reveal">
+    <div class="eyebrow">COMMENT ÇA FONCTIONNE</div>
+    <h2>Simple, rapide, <em>sans effort</em>.</h2>
+    <p>Vous n'installez rien, vous n'apprenez rien. On branche, Talos travaille, vous validez.</p>
+  </div>
+  <div class="bento reveal">
+    <div class="bcard">
+      <span class="bnum">01</span>
+      <h3>On branche vos outils</h3>
+      <p>Gmail, WhatsApp, votre agenda — rien ne change pour vous.</p>
+      <div class="bviz">
+        <div class="bv-tools">
+          <span class="bv-tool"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 5L2 7"/></svg></span>
+          <span class="bv-tool"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+          <span class="bv-tool"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+        </div>
+        <div class="bv-dash" aria-hidden="true"></div>
+        <span class="bv-chip"><svg viewBox="0 0 65 105"><rect x="0" y="18" width="62" height="14" fill="currentColor"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z" fill="currentColor"/></svg>TALOS</span>
+      </div>
+    </div>
+    <div class="bcard">
+      <span class="bnum">02</span>
+      <h3>Talos lit &amp; comprend</h3>
+      <p>Chaque demande est analysée : le client, le chantier, l'urgence.</p>
+      <div class="bviz">
+        <div class="bv-row"><span class="bv-av">MD</span><div><b>M. Dupont · rénovation SdB</b><span>Photos reçues · devis à chiffrer</span></div><i class="bv-b">1</i></div>
+        <div class="bv-row"><span class="bv-av">LC</span><div><b>Mme Costa · fuite urgente</b><span>Priorité haute · RDV proposé</span></div><i class="bv-b on">!</i></div>
+      </div>
+    </div>
+    <div class="bcard bcta">
+      <span class="bnum">03</span>
+      <h3>Ça tourne <em>tout seul</em></h3>
+      <p>Devis, relances, réponses — vous ne faites que valider.</p>
+      <a href="#modules" class="btn btn-primary bfull">Choisir mes automatisations</a>
+      <a href="reserver.html" class="bghost">Réserver une démo →</a>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES À LA CARTE (sélectionnables + animés) -->
+<section class="modules-wrap" id="modules" style="padding-top:0">
+  <div class="modules-head reveal">
+    <div class="eyebrow">À LA CARTE</div>
+    <h2>Activez ce dont vous <em>avez besoin</em>.</h2>
+    <p>Chaque automatisation est une option. Cliquez sur celles qui vous parlent — votre formule détermine combien vous en activez (de 1 à 20+). On met en place uniquement votre sélection.</p>
+    <div class="modules-hint"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L20 4"/><path d="M5 7l3 3"/><path d="M3 12l3 3"/></svg>Cliquez pour sélectionner</div>
+  </div>
+
+  <div class="modules mk-grid" id="modulesGrid">
+
+    <!-- 01 DEVIS AUTOMATIQUE -->
+    <div class="module mk reveal" role="button" tabindex="0" id="devis" aria-pressed="false" aria-label="Activer Devis automatique" style="--c:224,99,31">
+      <span class="mtoggle" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <span class="bnum mnum">01</span>
+      <h3 class="mk-t"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>Devis automatique</h3>
+      <p class="mk-s">La demande arrive, le devis part — chiffré à vos tarifs.</p>
+      <div class="mk-viz"><div class="mm-msg"><span class="mk-av"><i>ML</i><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=96&h=96&fit=crop&crop=faces&auto=format" alt="" loading="lazy" onerror="this.remove()"></span><div><b>Mme Lopez</b><span>« Bonjour, possible d'avoir un devis pour refaire la salle de bain ? »</span></div><span class="mm-time">19H42</span></div>
+        <span class="mm-re"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Devis #118 envoyé · 4 850 € · 19H51</span></div>
+      <div class="mk-acts"><span class="module-act"><svg class="ic-off" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><svg class="ic-on" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span class="l-off">Activer</span><span class="l-on">Activé</span></span><button class="mod-more" type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>En savoir plus</button></div>
+    </div>
+
+    <!-- 02 RELANCE DEVIS NON SIGNÉ -->
+    <div class="module mk reveal" role="button" tabindex="0" id="relances" aria-pressed="false" aria-label="Activer Relance devis non signé" style="--c:224,99,31">
+      <span class="mtoggle" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <span class="bnum mnum">02</span>
+      <h3 class="mk-t"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>Relance devis non signé</h3>
+      <p class="mk-s">Un devis sans réponse ? Talos insiste poliment, pour vous.</p>
+      <div class="mk-viz"><div class="mm-msg"><span class="mk-av"><i>MB</i><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=96&h=96&fit=crop&crop=faces&auto=format" alt="" loading="lazy" onerror="this.remove()"></span><div><b>M. Bernard</b><span>Devis 12 400 € · envoyé lundi, resté sans réponse</span></div></div>
+        <div class="mm-tl"><span class="tl-dot on">J+3</span><i></i><span class="tl-dot on">J+7</span><i></i><span class="tl-dot">J+14</span></div>
+        <span class="mm-re"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Signé à J+8</span></div>
+      <div class="mk-acts"><span class="module-act"><svg class="ic-off" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><svg class="ic-on" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span class="l-off">Activer</span><span class="l-on">Activé</span></span><button class="mod-more" type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>En savoir plus</button></div>
+    </div>
+
+    <!-- 03 FACTURATION FACTUR-X -->
+    <div class="module mk reveal" role="button" tabindex="0" id="facturation" aria-pressed="false" aria-label="Activer Facturation Factur-X" style="--c:224,99,31">
+      <span class="mtoggle" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <span class="bnum mnum">03</span>
+      <h3 class="mk-t"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Facturation Factur-X</h3>
+      <p class="mk-s">Chantier signé = facture émise. Conforme 2026, sans y penser.</p>
+      <div class="mk-viz"><div class="mm-doc"><span class="md-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><div><b>Facture F-2026-042</b><span>3 120 € HT · M. Girard · fin de chantier</span></div><span class="md-tag">2026</span></div>
+        <span class="mm-re"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Émise &amp; envoyée · conforme Factur-X</span></div>
+      <div class="mk-acts"><span class="module-act"><svg class="ic-off" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><svg class="ic-on" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span class="l-off">Activer</span><span class="l-on">Activé</span></span><button class="mod-more" type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>En savoir plus</button></div>
+    </div>
+
+    <!-- 04 RELANCES IMPAYÉS GRADUÉES -->
+    <div class="module mk reveal" role="button" tabindex="0" id="impayes" aria-pressed="false" aria-label="Activer Relances impayés graduées" style="--c:224,99,31">
+      <span class="mtoggle" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <span class="bnum mnum">04</span>
+      <h3 class="mk-t"><svg viewBox="0 0 24 24"><path d="M12 2 1 21h22z"/><path d="M12 9v5M12 18h.01"/></svg>Relances impayés graduées</h3>
+      <p class="mk-s">L'argent rentre, sans la conversation gênante.</p>
+      <div class="mk-viz"><div class="mm-msg"><span class="mk-av"><i>AR</i><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=96&h=96&fit=crop&crop=faces&auto=format" alt="" loading="lazy" onerror="this.remove()"></span><div><b>M. Rossi</b><span>Facture 2 340 € · 12 jours de retard</span></div><span class="mm-time">J+12</span></div>
+        <div class="mm-tl"><span class="tl-dot on">J+7</span><i></i><span class="tl-dot on">J+15</span><i></i><span class="tl-dot">J+30</span><i></i><span class="tl-dot">Courrier</span></div>
+        <span class="mm-re"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Payé après la relance J+15</span></div>
+      <div class="mk-acts"><span class="module-act"><svg class="ic-off" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><svg class="ic-on" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span class="l-off">Activer</span><span class="l-on">Activé</span></span><button class="mod-more" type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>En savoir plus</button></div>
+    </div>
+
+    <!-- 05 DASHBOARD TRÉSORERIE -->
+    <div class="module mk reveal" role="button" tabindex="0" id="tresorerie" aria-pressed="false" aria-label="Activer Dashboard trésorerie" style="--c:224,99,31">
+      <span class="mtoggle" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <span class="bnum mnum">05</span>
+      <h3 class="mk-t"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>Dashboard trésorerie</h3>
+      <p class="mk-s">Vous voyez le trou de trésorerie avant qu'il arrive.</p>
+      <div class="mk-viz"><div class="mm-doc"><span class="md-ic"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg></span><div><b>Solde : 12 480 €</b><span>3 factures à encaisser · 8 920 €</span></div></div>
+        <svg class="mm-chart" viewBox="0 0 240 64" preserveAspectRatio="none"><line x1="4" y1="40" x2="236" y2="40" stroke="rgba(224,99,31,.4)" stroke-width="1.5" stroke-dasharray="5 5"/><polyline points="6,16 52,24 96,18 140,32 184,46 234,52" fill="none" stroke="rgb(224,99,31)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="184" cy="46" r="4" fill="rgb(224,99,31)"/></svg>
+        <span class="mm-re warn"><svg viewBox="0 0 24 24"><path d="M12 2 1 21h22z"/><path d="M12 9v5M12 18h.01"/></svg>Alerte : passage sous 8 000 € prévu le 12</span></div>
+      <div class="mk-acts"><span class="module-act"><svg class="ic-off" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><svg class="ic-on" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span class="l-off">Activer</span><span class="l-on">Activé</span></span><button class="mod-more" type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>En savoir plus</button></div>
+    </div>
+
+    <!-- 06 TRI DE L'INBOX -->
+    <div class="module mk reveal" role="button" tabindex="0" id="inbox" aria-pressed="false" aria-label="Activer Tri de l'inbox" style="--c:224,99,31">
+      <span class="mtoggle" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <span class="bnum mnum">06</span>
+      <h3 class="mk-t"><svg viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5 5h14l3 7v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-6z"/></svg>Tri de l'inbox</h3>
+      <p class="mk-s">L'urgent remonte, le reste est classé — chaque matin.</p>
+      <div class="mk-viz"><div class="mm-msg hot"><span class="mk-av"><i>LC</i><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=96&h=96&fit=crop&crop=faces&auto=format" alt="" loading="lazy" onerror="this.remove()"></span><div><b>Mme Costa</b><span>« Fuite dans la cuisine, c'est urgent ! »</span></div><span class="mm-b">URGENT</span></div>
+        <div class="mm-msg dim"><span class="mk-av"><i>FS</i></span><div><b>Fournisseur Sanitaire+</b><span>Nouveaux tarifs 2026 — classé « Fournisseurs »</span></div><span class="mm-time">CLASSÉ</span></div>
+        <span class="mm-re"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>14 mails triés avant 7h00</span></div>
+      <div class="mk-acts"><span class="module-act"><svg class="ic-off" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><svg class="ic-on" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span class="l-off">Activer</span><span class="l-on">Activé</span></span><button class="mod-more" type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>En savoir plus</button></div>
+    </div>
+
+    <!-- 07 RÉPONSE AUTOMATIQUE 24/7 -->
+    <div class="module mk reveal" role="button" tabindex="0" id="reponses" aria-pressed="false" aria-label="Activer Réponse automatique 24/7" style="--c:224,99,31">
+      <span class="mtoggle" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <span class="bnum mnum">07</span>
+      <h3 class="mk-t"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Réponse automatique 24/7</h3>
+      <p class="mk-s">Il est 22h ? Votre client a déjà sa réponse.</p>
+      <div class="mk-viz"><div class="mm-msg"><span class="mk-av"><i>JF</i><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop&crop=faces&auto=format" alt="" loading="lazy" onerror="this.remove()"></span><div><b>M. Faure</b><span>« On a une fuite sous l'évier, vous pouvez passer quand ? »</span></div><span class="mm-time">22H14</span></div>
+        <span class="mm-re"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Réponse envoyée · RDV proposé · 22H14</span></div>
+      <div class="mk-acts"><span class="module-act"><svg class="ic-off" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><svg class="ic-on" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span class="l-off">Activer</span><span class="l-on">Activé</span></span><button class="mod-more" type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>En savoir plus</button></div>
+    </div>
+
+    <!-- 08 PRISE DE RDV EN LIGNE -->
+    <div class="module mk reveal" role="button" tabindex="0" id="rdv" aria-pressed="false" aria-label="Activer Prise de RDV en ligne" style="--c:224,99,31">
+      <span class="mtoggle" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <span class="bnum mnum">08</span>
+      <h3 class="mk-t"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Prise de RDV en ligne</h3>
+      <p class="mk-s">Le client choisit son créneau, votre agenda se remplit seul.</p>
+      <div class="mk-viz"><div class="mm-cal"><span></span><span></span><span class="sel">14</span><span></span><span></span><span></span><span></span><span></span></div>
+        <span class="mm-re"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Mardi 14h00 · Mme Petit · confirmé</span></div>
+      <div class="mk-acts"><span class="module-act"><svg class="ic-off" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><svg class="ic-on" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span class="l-off">Activer</span><span class="l-on">Activé</span></span><button class="mod-more" type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>En savoir plus</button></div>
+    </div>
+
+    <!-- 09 RAPPELS RDV CLIENT -->
+    <div class="module mk reveal" role="button" tabindex="0" id="rappels" aria-pressed="false" aria-label="Activer Rappels RDV client" style="--c:224,99,31">
+      <span class="mtoggle" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <span class="bnum mnum">09</span>
+      <h3 class="mk-t"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>Rappels RDV client</h3>
+      <p class="mk-s">Plus personne n'oublie — ni eux, ni vous.</p>
+      <div class="mk-viz"><div class="mm-msg"><span class="mk-av"><i><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#fff" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg></i></span><div><b>SMS automatique · J-1</b><span>« Rappel : RDV demain 8h00, 12 rue des Lilas. Répondez OUI pour confirmer. »</span></div></div>
+        <span class="mm-re"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>« OUI » — confirmé par le client</span></div>
+      <div class="mk-acts"><span class="module-act"><svg class="ic-off" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><svg class="ic-on" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span class="l-off">Activer</span><span class="l-on">Activé</span></span><button class="mod-more" type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>En savoir plus</button></div>
+    </div>
+
+  </div>
+
+  <!-- adaptability banner -->
+  <div class="adapt-banner reveal" style="margin-top:34px">
+    <div class="adapt-banner-in">
+      <span class="adapt-banner-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>SUR MESURE</span>
+      <p>Votre besoin n'est pas dans la liste ? <em>Talos s'adapte</em> — planning de chantiers, commandes fournisseurs, suivi RH, sous-traitance… <b>vous le décrivez, on le forge.</b></p>
+      <a href="reserver.html" class="btn btn-primary" style="min-height:46px;font-size:14px">Discuter de mon cas</a>
+    </div>
+  </div>
+</section>
+
+<!-- BARRE DE SÉLECTION FLOTTANTE -->
+<div class="selbar" id="selbar" aria-live="polite">
+  <span class="sc"><b id="selN">0</b> <span id="selLabel">automatisation choisie</span></span>
+  <a class="selbtn" id="selBtn" href="reserver.html">Réserver ma sélection<svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+</div>
+
+<!-- PROCESS — dans quel ordre on procède -->
+<section class="flow-wrap" id="ordre">
+  <div class="flow-head reveal">
+    <div class="eyebrow">DANS QUEL ORDRE ON PROCÈDE</div>
+    <h2>On commence par ce qui se <em>voit le plus vite</em>.</h2>
+    <p>On n'allume pas tout d'un coup. On déploie dans l'ordre qui vous fait gagner — et voir — un résultat dès les premiers jours.</p>
+  </div>
+  <div class="proc reveal">
+    <svg class="proc-svg" viewBox="0 0 1140 430" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <defs><linearGradient id="procGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#FFD9A0"/><stop offset=".5" stop-color="#F4823E"/><stop offset="1" stop-color="#E0631F"/>
+      </linearGradient></defs>
+      <path class="pw-base" d="M30 230 C110 230 150 165 205 150 C330 130 430 96 570 86 C720 75 820 132 935 152 C1010 165 1080 178 1110 182"/>
+      <path class="pw-pulse" d="M30 230 C110 230 150 165 205 150 C330 130 430 96 570 86 C720 75 820 132 935 152 C1010 165 1080 178 1110 182"/>
+    </svg>
+    <div class="proc-step p1">
+      <div class="proc-badge"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
+      <span class="proc-num">1</span>
+      <div class="wk">SEMAINE 1</div>
+      <h3>Le devis</h3>
+      <p>On branche le devis automatique d'abord. Dès vos premières demandes, vos devis partent en minutes — plus en jours. Le résultat se voit tout de suite.</p>
+    </div>
+    <div class="proc-step p2">
+      <div class="proc-badge"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+      <span class="proc-num">2</span>
+      <div class="wk">SEMAINES 2-3</div>
+      <h3>Les relances</h3>
+      <p>Relances devis et impayés. Vous signez plus de chantiers et vous encaissez plus vite, sans y penser.</p>
+    </div>
+    <div class="proc-step p3">
+      <div class="proc-badge"><svg viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <span class="proc-num">3</span>
+      <div class="wk">ENSUITE</div>
+      <h3>Le reste, à votre rythme</h3>
+      <p>Facturation Factur-X, trésorerie, prise de RDV, tri inbox… on active les suivantes une à une. Tout tourne, vous pilotez.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-strip">
+  <h2>Laquelle vous libérerait<br>le <em>plus</em> ?</h2>
+  <p>On regarde votre cas ensemble, en 30 minutes. Sans engagement.</p>
+  <a href="reserver.html" class="btn btn-primary">Réserver un créneau<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+</section>
+
+<footer class="v2">
+  <div class="foot-grid">
+    <div><svg width="100" height="28" viewBox="0 0 380 120"><g fill="#F5EDDC"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g><text x="66" y="100" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="100" fill="#F5EDDC" font-weight="700" letter-spacing="-4">ALOS</text></svg>
+      <p class="foot-tag">Notre travail, au service de votre temps. L'automate des artisans qui ont mieux à faire.</p></div>
+    <div class="foot-links">
+      <div class="foot-col"><h5>PRODUIT</h5><a href="automatisations.html">Automatisations</a><a href="methode.html">Méthode</a><a href="tarifs.html">Tarifs</a><a href="histoire.html">Histoire</a><a href="index.html#faq">FAQ</a><a href="reserver.html">Réserver</a></div>
+      <div class="foot-col"><h5>CONTACT</h5><a href="mailto:contact@talos-ai.tech">contact@talos-ai.tech</a><a href="https://www.linkedin.com/in/altay-sakalli/" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.instagram.com/talos.ai.tech/" target="_blank" rel="noopener">Instagram · Suivez-nous</a></div>
+    </div>
+  </div>
+  <div class="foot-bottom"><span>© TALOS · 2026 · FORGÉ MAIN</span><span>RCS PARIS · SIREN ···</span></div>
+</footer>
+<!-- POPUP : détail d'une automatisation -->
+<div class="amodal" id="autoModal" aria-hidden="true">
+  <div class="amodal-back" data-close></div>
+  <div class="amodal-card" role="dialog" aria-modal="true" aria-labelledby="amTitle">
+    <button class="amodal-x" type="button" data-close aria-label="Fermer"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="am-head">
+      <span class="am-ic" id="amIc" aria-hidden="true"></span>
+      <div><span class="am-kicker">AUTOMATISATION</span><h3 id="amTitle"></h3></div>
+    </div>
+    <div class="am-prob"><span class="am-prob-lbl">LE PROBLÈME</span><p id="amProblem"></p></div>
+    <div class="am-how"><span class="am-how-lbl">COMMENT ÇA MARCHE</span><ol id="amSteps"></ol></div>
+    <div class="am-res" id="amResult"></div>
+    <div class="am-foot">
+      <button class="am-add btn btn-primary" type="button" id="amAdd">Ajouter à ma sélection<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+      <a class="am-book" href="reserver.html">Réserver une démo →</a>
+    </div>
+  </div>
+</div>
+<script src="v2.js?v=19"></script>
+</body>
+</html>
