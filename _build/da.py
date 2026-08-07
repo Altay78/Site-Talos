@@ -165,6 +165,20 @@ html[data-theme="light"] .tnav-menu{background:#fff;
 .tnav-menu .m-cta{margin-top:8px;text-align:center;background:var(--indigo);color:#fff;
   border-radius:100px;padding:15px 16px;font-weight:700}
 .tnav-menu .m-cta:hover{background:var(--indigo-light)}
+/* bascule de thème du menu mobile : sous 600px la pastille de la barre n'a
+   plus la place de s'afficher, le réglage ne vivait alors nulle part */
+.tnav-menu .m-theme{display:none;align-items:center;gap:10px;width:100%;
+  padding:14px 16px;border:0;border-radius:14px;background:none;color:var(--ink);
+  font-family:inherit;font-size:16px;font-weight:600;letter-spacing:-.2px;
+  text-align:left;cursor:pointer}
+.tnav-menu .m-theme:hover{background:color-mix(in oklab,var(--indigo) 8%,transparent)}
+/* l'icône et le libellé annoncent le thème vers lequel on bascule */
+.tnav-menu .m-theme .moon,.tnav-menu .m-theme .lbl-light{display:none}
+.tnav-menu .m-theme .sun{display:block}
+html[data-theme="light"] .tnav-menu .m-theme .moon{display:block}
+html[data-theme="light"] .tnav-menu .m-theme .sun{display:none}
+html[data-theme="light"] .tnav-menu .m-theme .lbl-light{display:inline}
+html[data-theme="light"] .tnav-menu .m-theme .lbl-dark{display:none}
 
 /* la barre flotte au-dessus : sans marge, un lien d'ancre cadre sous elle */
 main > section,main > footer{scroll-margin-top:110px}
@@ -179,6 +193,7 @@ main > section,main > footer{scroll-margin-top:110px}
   .tnav-logo span{font-size:17px}
   .tnav-cta{min-height:40px;padding:0 16px;font-size:13.5px}
   .tnav .theme-toggle{display:none}
+  .tnav-menu .m-theme{display:flex}
   .tnav-menu{top:74px;width:calc(100% - 20px)}
 }
 @media (prefers-reduced-motion:reduce){
@@ -222,6 +237,7 @@ def nav_html(logo_mark, toggle_btn):
         '</div></nav>'
         '<div class="tnav-menu" id="tnav-menu">' + mlinks +
         '<a class="m-esp" href="' + ESPACE_URL + '" target="_blank" rel="noopener">Espace client</a>'
+        + MOBILE_THEME_BTN +
         '<a class="m-cta" href="#reserver">Réserver une démo</a>'
         '</div></header>')
 
@@ -387,13 +403,15 @@ THEME_JS = """
 /* bascule de thème — même clé de stockage que talos-site */
 (function(){
   var root = document.documentElement;
-  var btn  = document.querySelector('.theme-toggle');
-  if (!btn) return;
-  btn.addEventListener('click', function(){
+  /* la barre et le menu mobile en portent chacun une : les deux doivent agir */
+  var btns = document.querySelectorAll('.theme-toggle');
+  if (!btns.length) return;
+  function flip(){
     var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     root.setAttribute('data-theme', next);
     try { localStorage.setItem('talos-theme', next); } catch(e){}
-  });
+  }
+  for (var i = 0; i < btns.length; i++) btns[i].addEventListener('click', flip);
 })();
 """
 
@@ -407,3 +425,17 @@ TOGGLE_BTN = (
     'stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/>'
     '<path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22'
     'M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg></button>')
+
+# Bascule de thème du menu mobile : sous 600px TOGGLE_BTN est masqué (plus la
+# place dans la barre), le réglage n'était atteignable nulle part.
+MOBILE_THEME_BTN = (
+    '<button type="button" class="theme-toggle m-theme" aria-label="Changer de thème">'
+    '<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+    'stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'
+    '<path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>'
+    '<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+    'stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/>'
+    '<path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22'
+    'M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>'
+    '<span class="lbl-dark">Mode clair</span>'
+    '<span class="lbl-light">Mode sombre</span></button>')

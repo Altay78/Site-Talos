@@ -157,6 +157,20 @@ html[data-theme="light"] .tnav-menu{background:#fff;
 .tnav-menu .m-cta{margin-top:8px;text-align:center;background:var(--indigo);color:#fff;
   border-radius:100px;padding:15px 16px;font-weight:700}
 .tnav-menu .m-cta:hover{background:var(--indigo-light)}
+/* bascule de thème du menu mobile : sous 600px la pastille de la barre n'a
+   plus la place de s'afficher, le réglage ne vivait alors nulle part */
+.tnav-menu .m-theme{display:none;align-items:center;gap:10px;width:100%;
+  padding:14px 16px;border:0;border-radius:14px;background:none;color:var(--ink);
+  font-family:inherit;font-size:16px;font-weight:600;letter-spacing:-.2px;
+  text-align:left;cursor:pointer}
+.tnav-menu .m-theme:hover{background:color-mix(in oklab,var(--indigo) 8%,transparent)}
+/* l'icône et le libellé annoncent le thème vers lequel on bascule */
+.tnav-menu .m-theme .moon,.tnav-menu .m-theme .lbl-light{display:none}
+.tnav-menu .m-theme .sun{display:block}
+html[data-theme="light"] .tnav-menu .m-theme .moon{display:block}
+html[data-theme="light"] .tnav-menu .m-theme .sun{display:none}
+html[data-theme="light"] .tnav-menu .m-theme .lbl-light{display:inline}
+html[data-theme="light"] .tnav-menu .m-theme .lbl-dark{display:none}
 
 /* la barre flotte au-dessus : sans marge, un lien d'ancre cadre sous elle */
 main > section,main > footer{scroll-margin-top:110px}
@@ -171,6 +185,7 @@ main > section,main > footer{scroll-margin-top:110px}
   .tnav-logo span{font-size:17px}
   .tnav-cta{min-height:40px;padding:0 16px;font-size:13.5px}
   .tnav .theme-toggle{display:none}
+  .tnav-menu .m-theme{display:flex}
   .tnav-menu{top:74px;width:calc(100% - 20px)}
 }
 @media (prefers-reduced-motion:reduce){
@@ -597,7 +612,7 @@ html[data-theme="light"] .t-why .band figure{box-shadow:0 40px 90px rgba(40,25,1
 <main>
 
 <!-- ═══ NAVIGATION — identique aux autres pages du site ═══ -->
-<header class="tnav-wrap" id="tnav-wrap"><nav class="tnav" id="tnav" aria-label="Navigation principale"><a class="tnav-logo" href="index.html#top" aria-label="Talos — accueil"><svg viewBox="0 16 62 92" width="18" height="27" aria-hidden="true"><g fill="currentColor"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g></svg><span>Talos</span></a><div class="tnav-links"><a href="fonctionnalites.html">Fonctionnalités</a><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html" aria-current="page">Pourquoi Talos</a><a href="blog.html">Blog</a></div><div class="tnav-act"><button type="button" class="theme-toggle grid h-10 w-10 shrink-0 place-items-center rounded-lg" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg></button><a class="tnav-esp" href="espace-client.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="10" r="3.2"/><path d="M5.6 19a7 7 0 0 1 12.8 0"/></svg>Espace client</a><a class="tnav-cta" href="reserver.html">Réserver une démo</a><button class="tnav-burger" id="tnav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="tnav-menu"><i></i><i></i><i></i></button></div></nav><div class="tnav-menu" id="tnav-menu"><a href="fonctionnalites.html">Fonctionnalités</a><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html" aria-current="page">Pourquoi Talos</a><a href="blog.html">Blog</a><a class="m-esp" href="espace-client.html">Espace client</a><a class="m-cta" href="reserver.html">Réserver une démo</a></div></header>
+<header class="tnav-wrap" id="tnav-wrap"><nav class="tnav" id="tnav" aria-label="Navigation principale"><a class="tnav-logo" href="index.html#top" aria-label="Talos — accueil"><svg viewBox="0 16 62 92" width="18" height="27" aria-hidden="true"><g fill="currentColor"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g></svg><span>Talos</span></a><div class="tnav-links"><a href="fonctionnalites.html">Fonctionnalités</a><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html" aria-current="page">Pourquoi Talos</a><a href="blog.html">Blog</a></div><div class="tnav-act"><button type="button" class="theme-toggle grid h-10 w-10 shrink-0 place-items-center rounded-lg" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg></button><a class="tnav-esp" href="espace-client.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="10" r="3.2"/><path d="M5.6 19a7 7 0 0 1 12.8 0"/></svg>Espace client</a><a class="tnav-cta" href="reserver.html">Réserver une démo</a><button class="tnav-burger" id="tnav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="tnav-menu"><i></i><i></i><i></i></button></div></nav><div class="tnav-menu" id="tnav-menu"><a href="fonctionnalites.html">Fonctionnalités</a><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html" aria-current="page">Pourquoi Talos</a><a href="blog.html">Blog</a><a class="m-esp" href="espace-client.html">Espace client</a><button type="button" class="theme-toggle m-theme" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg><span class="lbl-dark">Mode clair</span><span class="lbl-light">Mode sombre</span></button><a class="m-cta" href="reserver.html">Réserver une démo</a></div></header>
 
 <nav class="t-rail" id="rail" aria-label="Chapitres">
   <a href="#c1"><i></i><span>1 · Notre histoire</span></a>
@@ -915,13 +930,15 @@ html[data-theme="light"] .t-why .band figure{box-shadow:0 40px 90px rgba(40,25,1
 /* bascule de thème — même clé de stockage que le reste du site */
 (function(){
   var root = document.documentElement;
-  var btn  = document.querySelector('.theme-toggle');
-  if (!btn) return;
-  btn.addEventListener('click', function(){
+  /* la barre et le menu mobile en portent chacun une : les deux doivent agir */
+  var btns = document.querySelectorAll('.theme-toggle');
+  if (!btns.length) return;
+  function flip(){
     var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     root.setAttribute('data-theme', next);
     try { localStorage.setItem('talos-theme', next); } catch(e){}
-  });
+  }
+  for (var i = 0; i < btns.length; i++) btns[i].addEventListener('click', flip);
 })();
 
 /* barre flottante : compacte au scroll + menu mobile */

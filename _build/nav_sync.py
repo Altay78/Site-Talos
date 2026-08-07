@@ -39,6 +39,22 @@ LOGO_SVG = ('<svg viewBox="0 16 62 92" width="18" height="27" aria-hidden="true"
             '<path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g></svg>')
 
 
+# Bascule de thème du menu mobile : sous 600px la pastille de la barre est
+# masquée (plus la place), le réglage n'était atteignable nulle part.
+# Pas de <div> ici : sync() découpe le menu jusqu'au premier </div>.
+M_THEME = (
+    u'<button type="button" class="theme-toggle m-theme" aria-label="Changer de thème">'
+    u'<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" '
+    u'stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'
+    u'<path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>'
+    u'<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" '
+    u'stroke="currentColor" stroke-width="1.9" stroke-linecap="round">'
+    u'<circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7'
+    u'M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>'
+    u'<span class="lbl-dark">Mode clair</span>'
+    u'<span class="lbl-light">Mode sombre</span></button>')
+
+
 def cur(href, page):
     return u' aria-current="page"' if href == page else u''
 
@@ -52,6 +68,7 @@ def menu_html(page):
     res = u' aria-current="page"' if page == 'reserver.html' else u''
     return (links_html(page)
             + u'<a class="m-esp" href="espace-client.html"%s>Espace client</a>' % esp
+            + M_THEME
             + u'<a class="m-cta" href="reserver.html"%s>Réserver une démo</a>' % res)
 
 

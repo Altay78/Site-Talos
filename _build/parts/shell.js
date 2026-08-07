@@ -2,13 +2,15 @@
 /* bascule de thème — même clé de stockage que le reste du site */
 (function(){
   var root = document.documentElement;
-  var btn  = document.querySelector('.theme-toggle');
-  if (!btn) return;
-  btn.addEventListener('click', function(){
+  /* la barre et le menu mobile en portent chacun une : les deux doivent agir */
+  var btns = document.querySelectorAll('.theme-toggle');
+  if (!btns.length) return;
+  function flip(){
     var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     root.setAttribute('data-theme', next);
     try { localStorage.setItem('talos-theme', next); } catch(e){}
-  });
+  }
+  for (var i = 0; i < btns.length; i++) btns[i].addEventListener('click', flip);
 })();
 
 /* barre flottante : compacte au scroll + menu mobile */
