@@ -1,0 +1,105 @@
+/* ═══════════════════════════════════════════════════════════════
+   404 — « notre chantier n'est pas encore là »
+   Plein cadre : la vue drone d'un chantier tourne en fond, le message
+   tient en trois lignes au centre. Pas de barre de navigation : la page
+   n'a qu'une sortie, le retour à l'accueil.
+   ═══════════════════════════════════════════════════════════════ */
+html,body{height:100%}
+/* la page reste sombre quel que soit le thème mémorisé : le fond est une
+   vidéo, un fond crème apparaîtrait sous elle au dépassement mobile */
+body{overflow:hidden;background:#140F0C}
+
+.t-404{position:relative;min-height:100svh;display:grid;
+  grid-template-rows:auto 1fr auto;
+  font-family:var(--sans);color:#F6EEE7;background:#140F0C;isolation:isolate}
+
+/* ── fond vidéo ── */
+.t-404 .bg{position:absolute;inset:0;z-index:-2;overflow:hidden;background:#140F0C}
+.t-404 .bg video,.t-404 .bg img{width:100%;height:100%;object-fit:cover;
+  /* la rushe est froide (béton, herbe verte) : on la ramène dans la Braise */
+  filter:grayscale(.55) sepia(.32) saturate(1.25) contrast(1.02) brightness(.72) hue-rotate(-8deg)}
+/* voile : le texte doit rester lisible sur les zones claires (le sable) */
+.t-404 .veil{position:absolute;inset:0;z-index:-1;
+  background:
+    radial-gradient(120% 90% at 50% 45%,rgba(20,15,12,.34) 0%,rgba(20,15,12,.82) 62%,rgba(20,15,12,.95) 100%),
+    linear-gradient(180deg,rgba(20,15,12,.7) 0%,transparent 26%,transparent 66%,rgba(20,15,12,.86) 100%)}
+/* trame de plan de chantier, très discrète */
+.t-404 .veil::after{content:'';position:absolute;inset:0;opacity:.16;
+  background-image:linear-gradient(rgba(246,238,231,.5) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(246,238,231,.5) 1px,transparent 1px);
+  background-size:96px 96px;
+  -webkit-mask-image:radial-gradient(75% 60% at 50% 50%,#000,transparent 78%);
+          mask-image:radial-gradient(75% 60% at 50% 50%,#000,transparent 78%)}
+
+/* ── en-tête minimal ── */
+.t-404 .top{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:26px 32px}
+.t-404 .logo{display:inline-flex;align-items:center;gap:9px;color:#F6EEE7;
+  text-decoration:none}
+.t-404 .logo span{font-size:19px;font-weight:700;letter-spacing:-.5px}
+.t-404 .top .demo{display:inline-flex;align-items:center;gap:8px;min-height:40px;
+  padding:0 20px;border-radius:100px;text-decoration:none;
+  border:1px solid rgba(246,238,231,.22);color:#F6EEE7;
+  font-size:13.5px;font-weight:600;letter-spacing:-.2px;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:border-color .25s ease,background .25s ease}
+.t-404 .top .demo:hover{border-color:#E0631F;background:rgba(224,99,31,.16)}
+
+/* ── message ── */
+.t-404 .mid{display:grid;place-items:center;padding:20px 24px;text-align:center}
+.t-404 .code{display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(246,238,231,.6)}
+.t-404 .code i{width:7px;height:7px;border-radius:50%;background:#E0631F;
+  box-shadow:0 0 0 5px rgba(224,99,31,.2);animation:x4_pulse 2.6s ease-in-out infinite}
+@keyframes x4_pulse{0%,100%{box-shadow:0 0 0 5px rgba(224,99,31,.2)}
+                    50%{box-shadow:0 0 0 11px rgba(224,99,31,0)}}
+
+.t-404 h1{margin:26px 0 0;max-width:15ch;font-size:clamp(38px,7.4vw,92px);
+  font-weight:800;letter-spacing:-3px;line-height:1}
+.t-404 h1 em{font-style:normal;
+  background:linear-gradient(100deg,#E0631F 0%,#F4823E 55%,#D69A66 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.t-404 p{margin:24px auto 0;max-width:46ch;font-size:clamp(14.5px,1.5vw,17px);
+  line-height:1.6;color:rgba(246,238,231,.68)}
+
+.t-404 .acts{margin-top:38px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.t-404 .b1,.t-404 .b2{display:inline-flex;align-items:center;gap:9px;min-height:52px;
+  padding:0 28px;border-radius:100px;text-decoration:none;
+  font-size:15px;font-weight:700;letter-spacing:-.2px;
+  transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s ease,background .3s ease,border-color .25s ease}
+.t-404 .b1{background:#E0631F;color:#fff}
+.t-404 .b1:hover{background:#F4823E;transform:translateY(-2px);
+  box-shadow:0 16px 34px rgba(224,99,31,.42)}
+.t-404 .b1 svg{transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.t-404 .b1:hover svg{transform:translateX(4px)}
+.t-404 .b2{border:1px solid rgba(246,238,231,.24);color:#F6EEE7;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.t-404 .b2:hover{border-color:#F4823E;color:#F4823E}
+
+/* ── raccourcis de bas de page ── */
+.t-404 .bottom{padding:0 32px 30px}
+.t-404 .links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 10px;
+  padding-top:22px;border-top:1px solid rgba(246,238,231,.12)}
+.t-404 .links a{padding:9px 16px;border-radius:100px;text-decoration:none;
+  border:1px solid rgba(246,238,231,.14);color:rgba(246,238,231,.72);
+  font-size:13px;font-weight:600;letter-spacing:-.1px;
+  transition:border-color .25s ease,color .25s ease,background .25s ease}
+.t-404 .links a:hover{border-color:#E0631F;color:#F6EEE7;background:rgba(224,99,31,.14)}
+
+/* ── responsive ── */
+@media (max-width:600px){
+  .t-404 .top{padding:20px}
+  .t-404 .top .demo{display:none}
+  .t-404 h1{letter-spacing:-1.6px}
+  .t-404 .acts{margin-top:28px}
+  .t-404 .b1,.t-404 .b2{width:100%;justify-content:center}
+  .t-404 .bottom{padding:0 20px 24px}
+  /* la page dépasse une hauteur d'écran sur mobile : on rend la main */
+  body{overflow:auto}
+}
+/* mouvement réduit demandé : la vidéo est mise en pause par le script,
+   le poster reste affiché */
+@media (prefers-reduced-motion:reduce){
+  .t-404 .code i{animation:none}
+}

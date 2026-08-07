@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<script>(function(){try{var t=localStorage.getItem('talos-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pourquoi Talos</title>
+<meta name="author" content="Talos">
+<meta name="description" content="Nous avons grandi avec des artisans. Nous avons vu nos parents finir leurs journées sur les chantiers, puis en recommencer une deuxième derrière un ordinateur. C'est de là que Talos est né.">
+<meta property="og:title" content="Pourquoi Talos">
+<meta property="og:description" content="Le temps est le plus beau chantier que nous pouvions vous rendre.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   TOKENS DA — repris de talos-site/v2.css (palette « Braise »)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* 1 · alias attendus par l'export Tailwind du hero.
+   L'export nomme --ink le TEXTE, v2.css nomme --ink le FOND :
+   les deux jeux cohabitent, chacun dans sa portée. */
+:root{
+  --ink:#F6EEE7; --ink-soft:#AB9F95;
+  --background:#140F0C; --foreground:#F6EEE7;
+  --surface:#140F0C; --surface-tint:#1C1611; --midnight:#140F0C;
+  --border:rgba(246,238,231,.08);
+  --indigo:#E0631F; --indigo-light:#F4823E;
+}
+html[data-theme="light"]{
+  --ink:#1C1310; --ink-soft:#6E6058;
+  --background:#FBF6F2; --foreground:#1C1310;
+  --surface:#FBF6F2; --surface-tint:#F4EBE3; --midnight:#1C1310;
+  --border:rgba(40,25,16,.12);
+  --indigo:#C5531C; --indigo-light:#E0631F;
+}
+
+/* 2 · tokens v2.css pour les sections (mêmes noms qu'en production) */
+.t-story,.t-how,.t-how2,.t-roi,.t-cat,.t-price,.t-faq,.t-ft,.t-feat{
+  --bronze:#E0631F; --bronze-2:#F4823E; --bronze-rgb:224,99,31;
+  --antique:#A8451A; --antique-rgb:168,69,26;
+  --olivier:#D69A66; --olivier-rgb:214,154,102;
+  --rouille:#C0432A;
+  --parch:#F6EEE7; --parch-rgb:246,238,231;
+  --lin:#AB9F95;
+  --ink:#140F0C; --ink-2:#1C1611; --ink-3:#241B15; --graphite:#352A20;
+  --line:rgba(246,238,231,.08); --line-2:rgba(246,238,231,.15);
+  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --r:16px; --maxw:1180px; --e:cubic-bezier(.16,1,.3,1);
+  color:var(--parch);
+}
+html[data-theme="light"] .t-story,html[data-theme="light"] .t-how,html[data-theme="light"] .t-how2,html[data-theme="light"] .t-roi,html[data-theme="light"] .t-cat,html[data-theme="light"] .t-price,html[data-theme="light"] .t-faq,html[data-theme="light"] .t-ft,html[data-theme="light"] .t-feat{
+  --bronze:#C5531C; --bronze-2:#E0631F; --bronze-rgb:197,83,28;
+  --antique:#9A3F12; --antique-rgb:154,63,18;
+  --olivier:#9A6A38; --olivier-rgb:154,106,56;
+  --rouille:#B0432A;
+  --parch:#1C1310; --parch-rgb:28,19,16;
+  --lin:#6E6058;
+  --ink:#FBF6F2; --ink-2:#FFFFFF; --ink-3:#F4EBE3; --graphite:#E7DACE;
+  --line:rgba(40,25,16,.12); --line-2:rgba(40,25,16,.22);
+}
+
+/* 3 · mot d'impact — signature obligatoire du brand book.
+   Helvetica, jamais de serif italique (DA v2). */
+.t-story em,.t-how em,.t-how2 em,.t-roi em,.t-cat em,.t-price em,.t-faq em,.t-ft em,.t-feat em{
+  font-family:var(--sans);font-style:normal;font-weight:inherit;
+  background:linear-gradient(100deg,#FFE7D4 0%,var(--bronze-2) 48%,var(--bronze) 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  animation:daGradFlow 6s ease-in-out infinite}
+html[data-theme="light"] .t-story em,html[data-theme="light"] .t-how em,html[data-theme="light"] .t-roi em,html[data-theme="light"] .t-cat em,html[data-theme="light"] .t-price em,html[data-theme="light"] .t-faq em,html[data-theme="light"] .t-ft em,html[data-theme="light"] .t-feat em{
+  background:linear-gradient(100deg,#B14512 0%,var(--bronze) 58%,var(--bronze-2) 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent}
+@keyframes daGradFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@media (prefers-reduced-motion:reduce){.t-story em,.t-how em,.t-how2 em,.t-roi em,.t-cat em,.t-price em,.t-faq em,.t-ft em{animation:none}}
+
+/* ═══ BARRE DE NAVIGATION — pilule flottante ═══ */
+/* le wrapper garde la hauteur dans le flux : la barre est fixed, sans lui
+   le contenu du hero remonterait sous la barre */
+.tnav-wrap{position:relative;z-index:60;height:92px}
+.tnav{position:fixed;top:14px;left:50%;transform:translateX(-50%);
+  width:calc(100% - 32px);max-width:1400px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:12px 12px 12px 22px;border-radius:100px;
+  /* le conteneur doit se détacher aussi bien de la photo du hero que des
+     sections plates : teinte quasi opaque + filet plus marqué que --border */
+  background:color-mix(in oklab,var(--surface-tint) 90%,transparent);
+  border:1px solid color-mix(in oklab,var(--ink) 13%,transparent);
+  box-shadow:0 10px 34px rgba(0,0,0,.34);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  transition:padding .3s cubic-bezier(.16,1,.3,1),box-shadow .3s ease,background .3s ease}
+html[data-theme="light"] .tnav{
+  background:color-mix(in oklab,#fff 88%,transparent);
+  border-color:rgba(40,25,16,.1);
+  box-shadow:0 1px 2px rgba(40,25,16,.05),0 14px 38px rgba(40,25,16,.1)}
+.tnav.scrolled{padding-top:8px;padding-bottom:8px;
+  box-shadow:0 14px 40px rgba(0,0,0,.4)}
+html[data-theme="light"] .tnav.scrolled{box-shadow:0 14px 40px rgba(40,25,16,.12)}
+
+.tnav-logo{display:inline-flex;align-items:center;gap:9px;flex:0 0 auto;
+  text-decoration:none;color:var(--ink)}
+.tnav-logo span{font-size:19px;font-weight:700;letter-spacing:-.5px}
+
+.tnav-links{display:flex;align-items:center;gap:24px;min-width:0}
+.tnav-links a{position:relative;color:var(--ink);text-decoration:none;
+  font-size:14.5px;font-weight:500;letter-spacing:-.2px;white-space:nowrap;
+  transition:color .25s ease}
+.tnav-links a::after{content:'';position:absolute;left:0;right:0;bottom:-6px;height:1.5px;
+  border-radius:2px;background:var(--indigo);transform:scaleX(0);transform-origin:left;
+  transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.tnav-links a:hover{color:var(--indigo)}
+.tnav-links a:hover::after{transform:scaleX(1)}
+.tnav-links a[aria-current="page"]{color:var(--indigo)}
+.tnav-links a[aria-current="page"]::after{transform:scaleX(1)}
+.tnav-menu a[aria-current="page"]{color:var(--indigo)}
+
+.tnav-act{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.tnav-esp{display:inline-flex;align-items:center;gap:7px;color:var(--ink);text-decoration:none;
+  font-size:14.5px;font-weight:500;letter-spacing:-.2px;white-space:nowrap;
+  transition:opacity .25s ease}
+.tnav-esp:hover{opacity:.62}
+.tnav-cta{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 24px;
+  border-radius:100px;background:var(--indigo);color:#fff;text-decoration:none;
+  font-size:14.5px;font-weight:700;letter-spacing:-.2px;white-space:nowrap;
+  transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s ease,background .3s ease}
+.tnav-cta:hover{background:var(--indigo-light);transform:translateY(-2px);
+  box-shadow:0 14px 32px color-mix(in oklab,var(--indigo) 42%,transparent)}
+.tnav .theme-toggle{width:40px;height:40px;border-radius:50%;flex:0 0 auto;
+  display:grid;place-items:center}
+
+/* ── burger + panneau mobile ── */
+.tnav-burger{display:none;width:42px;height:42px;flex:0 0 auto;border-radius:50%;
+  align-items:center;justify-content:center;gap:4.5px;flex-direction:column;
+  background:none;border:1px solid var(--border);color:var(--ink);cursor:pointer}
+.tnav-burger i{display:block;width:16px;height:1.8px;border-radius:2px;background:currentColor;
+  transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .2s ease}
+.tnav-wrap.open .tnav-burger i:nth-child(1){transform:translateY(6.3px) rotate(45deg)}
+.tnav-wrap.open .tnav-burger i:nth-child(2){opacity:0}
+.tnav-wrap.open .tnav-burger i:nth-child(3){transform:translateY(-6.3px) rotate(-45deg)}
+
+.tnav-menu{position:fixed;top:84px;left:50%;transform:translateX(-50%) translateY(-10px);
+  width:calc(100% - 32px);max-width:1400px;z-index:59;
+  display:flex;flex-direction:column;gap:2px;padding:14px;border-radius:26px;
+  background:var(--surface-tint);border:1px solid var(--border);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .3s ease,transform .35s cubic-bezier(.16,1,.3,1),visibility 0s linear .3s}
+html[data-theme="light"] .tnav-menu{background:#fff;
+  box-shadow:0 18px 50px rgba(40,25,16,.14)}
+.tnav-wrap.open .tnav-menu{opacity:1;visibility:visible;pointer-events:auto;
+  transform:translateX(-50%) translateY(0);transition-delay:0s}
+.tnav-menu a{padding:14px 16px;border-radius:14px;color:var(--ink);text-decoration:none;
+  font-size:16px;font-weight:600;letter-spacing:-.2px}
+.tnav-menu a:hover{background:color-mix(in oklab,var(--indigo) 8%,transparent)}
+.tnav-menu .m-esp{margin-top:8px;border-top:1px solid var(--border);border-radius:0;padding-top:18px}
+.tnav-menu .m-cta{margin-top:8px;text-align:center;background:var(--indigo);color:#fff;
+  border-radius:100px;padding:15px 16px;font-weight:700}
+.tnav-menu .m-cta:hover{background:var(--indigo-light)}
+
+/* la barre flotte au-dessus : sans marge, un lien d'ancre cadre sous elle */
+main > section,main > footer{scroll-margin-top:110px}
+
+@media (max-width:1240px){
+  .tnav-links,.tnav-esp{display:none}
+  .tnav-burger{display:flex}
+}
+@media (max-width:600px){
+  .tnav-wrap{height:80px}
+  .tnav{top:10px;width:calc(100% - 20px);padding:9px 9px 9px 16px}
+  .tnav-logo span{font-size:17px}
+  .tnav-cta{min-height:40px;padding:0 16px;font-size:13.5px}
+  .tnav .theme-toggle{display:none}
+  .tnav-menu{top:74px;width:calc(100% - 20px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .tnav,.tnav-cta,.tnav-links a::after,.tnav-burger i,.tnav-menu{transition:none}
+  .tnav-cta:hover{transform:none}
+}
+
+
+/*  section-footer.html  */
+.t-ft{position:relative;overflow:hidden;padding:80px 40px 36px;color:#F6EEE7;
+  background:#120D0A}
+.t-ft::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(246,238,231,.16) 1px,transparent 1px);
+  background-size:14px 14px;
+  -webkit-mask-image:radial-gradient(ellipse 85% 75% at 30% 105%,#000 0%,transparent 72%);
+          mask-image:radial-gradient(ellipse 85% 75% at 30% 105%,#000 0%,transparent 72%)}
+.t-ft::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 22% 118%,rgba(224,99,31,.85) 0%,
+    rgba(199,84,26,.4) 30%,rgba(60,32,16,.28) 55%,transparent 76%)}
+.t-ft .ft-in{position:relative;z-index:2;max-width:1280px;margin:0 auto}
+.t-ft .ft-top{display:grid;grid-template-columns:1.1fr repeat(3,minmax(0,.72fr));gap:32px;align-items:start}
+.t-ft .brand{display:flex;align-items:center;gap:16px}
+.t-ft .brand svg{height:46px;flex:0 0 auto}
+.t-ft .brand .word{font-size:clamp(20px,2vw,26px);font-weight:800;letter-spacing:.5px;
+  text-transform:uppercase;line-height:1.12}
+.t-ft .col h4{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(246,238,231,.55);font-weight:700;margin-bottom:18px}
+.t-ft .col ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+.t-ft .col a{color:#F6EEE7;text-decoration:none;font-size:18px;font-weight:500;letter-spacing:-.2px;
+  transition:color .25s ease,transform .25s var(--e);display:inline-block}
+.t-ft .col a:hover{color:var(--bronze-2);transform:translateX(2px)}
+.t-ft .col.tagline p{font-size:18px;font-weight:500;line-height:1.35;letter-spacing:-.2px;
+  color:#F6EEE7;max-width:20ch}
+.t-ft .socials{display:flex;gap:14px;margin-top:22px}
+.t-ft .socials a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(246,238,231,.28);
+  display:flex;align-items:center;justify-content:center;color:#F6EEE7;
+  transition:border-color .25s ease,background .25s ease,transform .25s var(--e)}
+.t-ft .socials a:hover{border-color:var(--bronze-2);background:rgba(224,99,31,.14);transform:translateY(-2px)}
+.t-ft .updates{margin-top:64px}
+.t-ft .updates h4{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(246,238,231,.55);font-weight:700;margin-bottom:16px}
+.t-ft .nform{display:flex;gap:0;border:1px solid rgba(246,238,231,.3);border-radius:100px;
+  padding:5px;max-width:640px;background:rgba(0,0,0,.15)}
+.t-ft .nform input{flex:1;min-width:0;background:none;border:0;padding:14px 22px;color:#F6EEE7;
+  font-family:var(--sans);font-size:15px}
+.t-ft .nform input::placeholder{color:rgba(246,238,231,.4);letter-spacing:1px;text-transform:uppercase;font-size:12.5px}
+.t-ft .nform input:focus{outline:none}
+.t-ft .nform button{flex:0 0 auto;border:0;border-radius:100px;padding:0 26px;
+  background:#F6EEE7;color:#161310;font-family:var(--mono);font-size:12px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;
+  transition:background .25s ease}
+.t-ft .nform button:hover{background:var(--bronze-2);color:#fff}
+.t-ft .ft-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  margin-top:70px;padding-top:26px;border-top:1px solid rgba(246,238,231,.14);
+  font-size:13.5px;color:rgba(246,238,231,.55)}
+.t-ft .ft-bottom .legal{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.t-ft .ft-bottom a{color:rgba(246,238,231,.7);text-decoration:none}
+.t-ft .ft-bottom a:hover{color:#F6EEE7}
+.t-ft .ft-bottom .dot{opacity:.5}
+@media (max-width:900px){
+.t-ft{padding:60px 24px 28px}
+.t-ft .ft-top{grid-template-columns:1fr 1fr;row-gap:44px}
+.t-ft .brand{grid-column:1 / -1}
+.t-ft .updates{margin-top:48px}
+.t-ft .ft-bottom{margin-top:48px;flex-direction:column;align-items:flex-start}
+}
+@media (max-width:520px){
+.t-ft .ft-top{grid-template-columns:1fr}
+.t-ft .brand svg{height:38px}
+.t-ft .brand .word{font-size:18px}
+.t-ft .nform{flex-direction:column;border-radius:20px;gap:8px}
+.t-ft .nform button{padding:14px 22px}
+}
+@media (prefers-reduced-motion:reduce){
+.t-ft .col a,.t-ft .socials a,.t-ft .nform button{transition:none}
+}
+
+
+/* bascule de thème (même comportement qu'en production) */
+.theme-toggle{border:1px solid var(--border);color:var(--ink);background:none;cursor:pointer;
+  transition:border-color .25s ease,background .25s ease}
+.theme-toggle:hover{border-color:var(--indigo);background:color-mix(in oklab,var(--indigo) 8%,transparent)}
+.theme-toggle .sun{display:none}
+html[data-theme="light"] .theme-toggle .sun{display:block}
+html[data-theme="light"] .theme-toggle .moon{display:none}
+
+
+/* ═══ FOOTER — il n'existait qu'en sombre ═══ */
+.t-ft{background:var(--ink);color:var(--parch)}
+html[data-theme="light"] .t-ft::before{
+  background-image:radial-gradient(rgba(40,25,16,.16) 1px,transparent 1px)}
+html[data-theme="light"] .t-ft::after{
+  background:radial-gradient(ellipse 70% 60% at 22% 118%,rgba(197,83,28,.5) 0%,
+    rgba(197,83,28,.2) 30%,rgba(231,218,206,.35) 55%,transparent 76%)}
+html[data-theme="light"] .t-ft .col a,
+html[data-theme="light"] .t-ft .col.tagline p,
+html[data-theme="light"] .t-ft .brand .word{color:var(--parch)}
+html[data-theme="light"] .t-ft .col h4,
+html[data-theme="light"] .t-ft .updates h4{color:rgba(var(--parch-rgb),.55)}
+html[data-theme="light"] .t-ft .socials a{border-color:rgba(var(--parch-rgb),.28);color:var(--parch)}
+html[data-theme="light"] .t-ft .nform{border-color:rgba(var(--parch-rgb),.28);background:rgba(255,255,255,.55)}
+html[data-theme="light"] .t-ft .nform input{color:var(--parch)}
+html[data-theme="light"] .t-ft .nform input::placeholder{color:rgba(var(--parch-rgb),.45)}
+html[data-theme="light"] .t-ft .nform button{background:var(--parch);color:var(--ink)}
+html[data-theme="light"] .t-ft .nform button:hover{background:var(--bronze);color:#fff}
+html[data-theme="light"] .t-ft .ft-bottom{border-top-color:rgba(var(--parch-rgb),.14);
+  color:rgba(var(--parch-rgb),.55)}
+html[data-theme="light"] .t-ft .ft-bottom a{color:rgba(var(--parch-rgb),.7)}
+html[data-theme="light"] .t-ft .ft-bottom a:hover{color:var(--parch)}
+
+/* ═══════════════════════════════════════════════════════════════
+   POURQUOI TALOS — le récit
+   Un acte par respiration. Le texte est celui d'Altay, au mot près.
+   Toute la mise en mouvement est faite maison : ni GSAP ni CDN,
+   la page reste autonome et fonctionne hors ligne.
+   ═══════════════════════════════════════════════════════════════ */
+.t-why{
+  --bronze:#E0631F; --bronze-2:#F4823E; --bronze-rgb:224,99,31;
+  --antique:#A8451A; --antique-rgb:168,69,26;
+  --parch:#F6EEE7; --parch-rgb:246,238,231;
+  --lin:#AB9F95;
+  --ink:#140F0C; --ink-2:#1C1611; --ink-3:#241B15; --graphite:#352A20;
+  --line:rgba(246,238,231,.08); --line-2:rgba(246,238,231,.15);
+  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --maxw:1180px; --e:cubic-bezier(.16,1,.3,1);
+  position:relative;color:var(--parch);background:var(--ink);
+  font-family:var(--sans);line-height:1.5}
+html[data-theme="light"] .t-why{
+  --bronze:#C5531C; --bronze-2:#E0631F; --bronze-rgb:197,83,28;
+  --antique:#9A3F12; --antique-rgb:154,63,18;
+  --parch:#1C1310; --parch-rgb:28,19,16;
+  --lin:#6E6058;
+  --ink:#FBF6F2; --ink-2:#FFFFFF; --ink-3:#F4EBE3; --graphite:#E7DACE;
+  --line:rgba(40,25,16,.12); --line-2:rgba(40,25,16,.22)}
+
+/* mot d'impact — signature du brand book, Helvetica, jamais de serif */
+.t-why em{font-family:var(--sans);font-style:normal;font-weight:inherit;
+  background:linear-gradient(100deg,#FFE7D4 0%,var(--bronze-2) 48%,var(--bronze) 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  animation:daGradFlow 6s ease-in-out infinite}
+html[data-theme="light"] .t-why em{
+  background:linear-gradient(100deg,#B14512 0%,var(--bronze) 58%,var(--bronze-2) 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent}
+@keyframes daGradFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+body{margin:0;background:var(--background);-webkit-font-smoothing:antialiased;
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;overflow-x:hidden}
+button,input,select,textarea{font-family:inherit}
+.t-why *{box-sizing:border-box}
+.t-why .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:28px;width:100%}
+.t-why img{display:block;max-width:100%}
+
+/* ── ACTE ── le rythme : assez d'air pour respirer, pas assez pour s'ennuyer */
+.t-why .act{position:relative;display:flex;align-items:center;
+  padding:88px 0;overflow:hidden}
+.t-why .act.full{min-height:74svh;padding:80px 0}
+.t-why .act.mid{min-height:58svh}
+
+.t-why .num{display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:11px;letter-spacing:2.6px;text-transform:uppercase;
+  font-weight:700;color:var(--lin);margin-bottom:30px}
+.t-why .num i{width:22px;height:1px;background:var(--bronze);display:block}
+.t-why .num b{color:var(--bronze);font-weight:700}
+
+/* ── TYPOGRAPHIE DU RÉCIT ── */
+.t-why .say{margin:0;padding:10px 0;color:var(--parch);
+  font-size:clamp(24px,3.1vw,40px);font-weight:500;letter-spacing:-.035em;line-height:1.16;
+  max-width:20ch}
+.t-why .say.soft{color:var(--lin)}
+.t-why .say.wide{max-width:28ch}
+/* même échelle que l'ouverture, pour les moments qui doivent peser */
+.t-why .say.big{font-size:clamp(25px,4.05vw,54px);letter-spacing:-.044em;line-height:1.08;
+  max-width:22ch;padding:12px 0}
+.t-why .cry{margin:0;color:var(--parch);text-align:center;
+  font-size:clamp(34px,6.4vw,86px);font-weight:500;letter-spacing:-.05em;line-height:1.03;
+  max-width:16ch;margin-inline:auto}
+.t-why .cry.sm{font-size:clamp(28px,4.6vw,62px);max-width:20ch}
+.t-why .cry.soft{color:var(--lin)}
+
+/* ══ MOTEUR D'ANIMATION ═══════════════════════════════════════════
+   1 · .split → chaque mot devient un .w, regroupé par ligne (--l).
+       Les lignes montent l'une après l'autre. Le regroupement est
+       recalculé au redimensionnement : le découpage suit la casse
+       du texte, donc il reste juste sur téléphone.
+   2 · .scrub → l'éclairage des mots est piloté par le scroll.
+   3 · .rv → repli simple pour les blocs non textuels. */
+.t-why .w{display:inline-block;will-change:transform,opacity}
+.t-why .split .w{opacity:0;transform:translateY(.62em) rotate(.4deg);
+  transition:opacity .5s var(--e),transform .66s var(--e);
+  transition-delay:calc(var(--l,0) * .075s + var(--k,0) * .012s)}
+.t-why .on.split .w,.t-why .on .split .w{opacity:1;transform:none}
+
+/* l'éclairage au scroll doit l'emporter sur la révélation à l'entrée :
+   même sélecteur de base, spécificité volontairement plus forte */
+.t-why .scrub.split .w,.t-why .on.scrub.split .w{
+  opacity:var(--o,.14);transform:none;transition:opacity .2s linear}
+
+.t-why .rv{opacity:0;transform:translateY(24px);
+  transition:opacity .7s var(--e),transform .7s var(--e);
+  transition-delay:calc(var(--i,0) * .09s)}
+.t-why .on .rv,.t-why .rv.on{opacity:1;transform:none}
+
+/* ── FOND PHOTO PLEIN CADRE ── */
+.t-why .shot{position:absolute;inset:0;z-index:0;overflow:hidden}
+.t-why .shot img{width:100%;height:100%;object-fit:cover;will-change:transform;
+  transform:scale(1.08);
+  filter:grayscale(.34) sepia(.30) saturate(1.25) contrast(1.04) brightness(.62)}
+html[data-theme="light"] .t-why .shot img{filter:grayscale(.2) sepia(.2) saturate(1.1) brightness(.95)}
+.t-why .shot::after{content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 76% 68% at 22% 108%,rgba(var(--bronze-rgb),.60) 0%,rgba(var(--antique-rgb),.26) 34%,transparent 72%),
+    linear-gradient(180deg,var(--ink) 0%,rgba(20,15,12,.42) 34%,rgba(20,15,12,.72) 74%,var(--ink) 100%)}
+html[data-theme="light"] .t-why .shot::after{
+  background:
+    radial-gradient(ellipse 76% 68% at 22% 108%,rgba(var(--bronze-rgb),.34) 0%,transparent 68%),
+    linear-gradient(180deg,var(--ink) 0%,rgba(251,246,242,.55) 34%,rgba(251,246,242,.82) 74%,var(--ink) 100%)}
+.t-why .act.has-shot .wrap{position:relative;z-index:2}
+.t-why .grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(var(--parch-rgb),.13) 1px,transparent 1px);
+  background-size:14px 14px;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent);
+          mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent)}
+
+/* ── OUVERTURE ── */
+/* l'ouverture : plein cadre, texte massif calé en bas à gauche */
+/* la barre de nav occupe 92 px dans le flux : sans ça le hero
+   dépasse d'exactement une hauteur de nav et la dernière ligne saute */
+.t-why .open{align-items:flex-end;min-height:calc(100svh - 92px);
+  padding-top:40px;padding-bottom:clamp(56px,8vh,96px)}
+.t-why .open h1{margin:0;font-size:clamp(25px,4.05vw,54px);font-weight:500;
+  letter-spacing:-.044em;line-height:1.06;max-width:22ch}
+.t-why .open h1 span.l{display:block}
+.t-why .open h1 span.l + span.l{margin-top:.26em}
+.t-why .open h1 .soft{display:block;color:var(--lin);
+  font-size:.55em;line-height:1.22;letter-spacing:-.03em;max-width:32ch;margin-top:.46em}
+.t-why .open .eyebrow{display:block;margin-bottom:clamp(20px,2.6vw,32px);
+  font-family:var(--mono);font-size:clamp(10.5px,1vw,12px);letter-spacing:3.2px;
+  text-transform:uppercase;font-weight:700;color:var(--bronze)}
+/* la vidéo se traite exactement comme une photo de fond */
+.t-why .shot video{width:100%;height:100%;object-fit:cover;will-change:transform;
+  transform:scale(1.08);
+  /* la vue drone est déjà dans les sables : on la réchauffe légèrement
+     et on la descend, juste assez pour que le titre porte */
+  filter:grayscale(.34) sepia(.34) saturate(1.3) contrast(1.06) brightness(.46)}
+html[data-theme="light"] .t-why .shot video{filter:grayscale(.18) sepia(.16) saturate(1.1) brightness(.9)}
+.t-why .scroll{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:3}
+.t-why .scroll i{display:block;width:1px;height:40px;
+  background:linear-gradient(180deg,var(--bronze),transparent);
+  animation:dropIn 2.4s ease-in-out infinite}
+@keyframes dropIn{0%{transform:scaleY(0);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  51%{transform:scaleY(1);transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ══ LA BOUCLE SANS FIN ══ la deuxième journée qui ne s'arrête jamais */
+.t-why .loop{position:relative;width:100%;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.t-why .loops{width:100%}
+.t-why .loop + .loop{margin-top:clamp(6px,1vw,14px)}
+.t-why .loop .track{display:flex;width:max-content;will-change:transform;
+  animation:loopL var(--sp,34s) linear infinite}
+.t-why .loop.rev .track{animation-name:loopR}
+.t-why .loop span{display:inline-flex;align-items:center;white-space:nowrap;
+  font-size:clamp(19px,2.6vw,34px);font-weight:500;letter-spacing:-.03em;line-height:1.3;
+  color:var(--lin);padding:6px 0}
+.t-why .loop span::after{content:'';display:inline-block;width:clamp(28px,4vw,54px);height:1px;
+  background:var(--bronze);opacity:.5;margin:0 clamp(18px,2.6vw,34px)}
+.t-why .loop.dim span{color:var(--lin)}
+@keyframes loopL{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@keyframes loopR{from{transform:translate3d(-50%,0,0)}to{transform:translate3d(0,0,0)}}
+
+/* ── BASCULE : la menace / l'opportunité ── */
+.t-why .split-two{display:grid;grid-template-columns:1fr 1fr;gap:0;width:100%;
+  border:1px solid var(--line);border-radius:26px;overflow:hidden}
+.t-why .split-two > div{padding:clamp(30px,4.2vw,60px)}
+.t-why .split-two .a{background:var(--ink-2);border-right:1px solid var(--line)}
+.t-why .split-two .b{position:relative;background:linear-gradient(168deg,var(--ink-3),var(--ink-2))}
+.t-why .split-two .b::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 74% 84% at 24% 122%,rgba(var(--bronze-rgb),.42),transparent 68%)}
+.t-why .split-two .b > *{position:relative;z-index:2}
+.t-why .split-two p{margin:0;padding:8px 0;font-size:clamp(19px,2.2vw,27px);font-weight:500;
+  letter-spacing:-.03em;line-height:1.24;color:var(--parch);max-width:22ch}
+.t-why .split-two p.soft{color:var(--lin)}
+
+/* ── CE QUE TALOS FAIT ── */
+.t-why .work{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(30px,5vw,80px);
+  align-items:center;width:100%}
+.t-why .work h2{margin:0 0 6px;font-size:clamp(21px,2.3vw,28px);font-weight:500;
+  letter-spacing:-.03em;line-height:1.24;color:var(--parch)}
+.t-why .work ol{list-style:none;margin:16px 0 0;padding:0}
+.t-why .work li{display:flex;align-items:center;gap:16px;padding:15px 0;
+  border-bottom:1px solid var(--line);
+  font-size:clamp(17px,1.85vw,21px);font-weight:500;letter-spacing:-.025em;color:var(--parch)}
+.t-why .work li:last-child{border-bottom:0}
+.t-why .work li svg{flex:0 0 auto;color:var(--bronze)}
+.t-why .phones{display:flex;justify-content:center;align-items:flex-end;gap:clamp(10px,1.6vw,20px)}
+.t-why .phones figure{margin:0;width:32%;max-width:212px;border-radius:20px;overflow:hidden;
+  border:1px solid var(--line-2);background:var(--ink);will-change:transform;
+  box-shadow:0 34px 70px rgba(0,0,0,.55)}
+html[data-theme="light"] .t-why .phones figure{box-shadow:0 34px 70px rgba(40,25,16,.16)}
+
+.t-why .band{padding:0 0 96px}
+.t-why .band figure{margin:0;position:relative;border-radius:26px;overflow:hidden;
+  border:1px solid var(--line);background:var(--ink-2);
+  box-shadow:0 40px 90px rgba(0,0,0,.5)}
+html[data-theme="light"] .t-why .band figure{box-shadow:0 40px 90px rgba(40,25,16,.12)}
+.t-why .band img{width:100%;height:auto}
+
+/* ── LES QUATRE « JAMAIS » ── */
+.t-why .never{max-width:900px;border-top:1px solid var(--line);margin:0;padding:0}
+.t-why .never li{list-style:none;display:flex;align-items:flex-start;gap:20px;
+  padding:26px 0;border-bottom:1px solid var(--line);
+  font-size:clamp(19px,2.2vw,28px);font-weight:500;letter-spacing:-.03em;line-height:1.24;
+  color:var(--parch)}
+.t-why .never li i{flex:0 0 auto;width:30px;height:30px;border-radius:50%;
+  display:grid;place-items:center;border:1px solid var(--line-2);color:var(--lin);
+  font-size:13px;font-style:normal;margin-top:4px}
+
+/* ── LES QUATRE QUALITÉS ── */
+.t-why .grid4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(16px,2.4vw,30px);width:100%}
+.t-why .grid4 div{padding:clamp(26px,3vw,38px);border-radius:22px;
+  background:var(--ink-2);border:1px solid var(--line);
+  font-size:clamp(18px,1.95vw,23px);font-weight:500;letter-spacing:-.028em;line-height:1.28;
+  color:var(--parch)}
+
+/* ── SIGNATURE ── */
+.t-why .end{position:relative;min-height:96svh;display:flex;align-items:center;
+  justify-content:center;text-align:center;overflow:hidden;border-top:1px solid var(--line)}
+.t-why .end::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 62% 58% at 50% 122%,rgba(var(--bronze-rgb),.80) 0%,
+    rgba(var(--antique-rgb),.30) 30%,transparent 70%);
+  transform:scale(var(--glow,1));transform-origin:50% 100%;
+  animation:breathe 7s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.74}50%{opacity:1}}
+.t-why .end .wrap{position:relative;z-index:2}
+.t-why .end h2{margin:0;font-size:clamp(34px,7vw,96px);font-weight:500;letter-spacing:-.052em;
+  line-height:1.02;max-width:15ch;margin-inline:auto}
+.t-why .end .mark{margin-top:40px;font-family:var(--mono);font-size:10.5px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--lin)}
+
+/* ── SORTIE ── */
+.t-why .out{padding:0 0 110px;text-align:center}
+.t-why .acts{display:flex;justify-content:center;flex-wrap:wrap;gap:13px}
+.t-why .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:54px;padding:0 28px;border-radius:100px;text-decoration:none;
+  font-size:15.5px;font-weight:700;letter-spacing:-.2px;
+  transition:transform .3s var(--e),box-shadow .3s ease,background .3s ease,border-color .3s ease}
+.t-why .btn-pri{background:var(--bronze);color:#fff}
+.t-why .btn-pri:hover{background:var(--bronze-2);transform:translateY(-2px);
+  box-shadow:0 16px 36px rgba(var(--bronze-rgb),.4)}
+.t-why .btn-gho{background:rgba(var(--parch-rgb),.04);color:var(--parch);border:1px solid var(--line-2)}
+.t-why .btn-gho:hover{border-color:var(--bronze);transform:translateY(-2px)}
+.t-why .btn svg{transition:transform .3s var(--e)}
+.t-why .btn:hover svg{transform:translateX(3px)}
+
+/* ── LE FIL : la chronologie ── */
+/* posé à droite : à gauche il passait sous les grands titres de chapitre.
+   Les traits restent collés au bord, les libellés se déplient vers l'intérieur. */
+.t-rail{position:fixed;right:26px;top:50%;transform:translateY(-50%);z-index:40;
+  display:flex;flex-direction:column;align-items:flex-end;gap:16px;
+  opacity:0;visibility:hidden;transition:opacity .5s ease,visibility .5s}
+.t-rail.on{opacity:1;visibility:visible}
+.t-rail a{display:flex;flex-direction:row-reverse;align-items:center;gap:11px;text-decoration:none;
+  font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10px;letter-spacing:1.8px;
+  color:var(--ink-soft);transition:color .3s ease}
+.t-rail a i{width:16px;height:1px;background:currentColor;display:block;
+  transition:width .35s cubic-bezier(.16,1,.3,1),background .3s ease}
+.t-rail a span{opacity:0;transform:translateX(4px);text-align:right;
+  transition:opacity .3s ease,transform .35s cubic-bezier(.16,1,.3,1);white-space:nowrap}
+.t-rail a:hover span,.t-rail a.now span{opacity:1;transform:none}
+.t-rail a.now{color:var(--indigo)}
+.t-rail a.now i{width:30px;background:var(--indigo)}
+@media (max-width:1240px){.t-rail{display:none}}
+
+/* ── RESPONSIVE ── */
+@media (max-width:900px){
+  .t-why .work{grid-template-columns:1fr;gap:40px}
+  .t-why .split-two{grid-template-columns:1fr}
+  .t-why .split-two .a{border-right:0;border-bottom:1px solid var(--line)}
+  .t-why .grid4{grid-template-columns:1fr}
+}
+@media (max-width:680px){
+  .t-why .wrap{padding-inline:22px}
+  .t-why .act{padding:64px 0}
+  .t-why .act.full{min-height:66svh;padding:70px 0}
+  .t-why .open{min-height:calc(100svh - 80px);padding-top:24px}
+  .t-why .scroll{display:none}   /* pas la place sur un écran de téléphone */
+  .t-why .act.mid{min-height:50svh}
+  .t-why .say{font-size:clamp(21px,6.4vw,28px);max-width:none}
+  .t-why .cry{font-size:clamp(30px,9.4vw,44px);max-width:none}
+  .t-why .cry.sm{font-size:clamp(27px,8.2vw,40px);max-width:none}
+  .t-why .say.big{font-size:clamp(25px,7.4vw,34px);max-width:none}
+  /* la boucle défile plus vite : l'écran est plus étroit */
+  .t-why .loop{--sp:20s}
+  .t-why .loop span{font-size:clamp(17px,5vw,22px)}
+  .t-why .num{flex-wrap:wrap;line-height:1.7;letter-spacing:2px}
+  .t-why .never li{padding:20px 0;gap:14px}
+  .t-why .phones figure{width:33%}
+  .t-why .band{padding-bottom:70px}
+  .t-why .end{min-height:82svh}
+  .t-why .out{padding-bottom:80px}
+  .t-why .acts .btn{width:100%}
+}
+/* ── mouvement réduit : tout reste lisible, rien ne bouge ── */
+@media (prefers-reduced-motion:reduce){
+  .t-why em,.t-why .end::before,.t-why .scroll i{animation:none}
+  .t-why .split .w,.t-why .rv{opacity:1!important;transform:none!important;transition:none}
+  .t-why .scrub .w{opacity:1!important}
+  .t-why .shot img,.t-why .shot video{transform:none!important}
+  .t-why .loop{-webkit-mask-image:none;mask-image:none}
+  .t-why .loop .track{animation:none;width:auto;flex-wrap:wrap;justify-content:center}
+  .t-why .loop .dup{display:none}
+  .t-why .btn{transition:none}
+  .t-why .btn:hover{transform:none}
+}
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══ NAVIGATION — identique aux autres pages du site ═══ -->
+<header class="tnav-wrap" id="tnav-wrap"><nav class="tnav" id="tnav" aria-label="Navigation principale"><a class="tnav-logo" href="index.html#top" aria-label="Talos — accueil"><svg viewBox="0 16 62 92" width="18" height="27" aria-hidden="true"><g fill="currentColor"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g></svg><span>Talos</span></a><div class="tnav-links"><a href="fonctionnalites.html">Fonctionnalités</a><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html" aria-current="page">Pourquoi Talos</a><a href="blog.html">Blog</a></div><div class="tnav-act"><button type="button" class="theme-toggle grid h-10 w-10 shrink-0 place-items-center rounded-lg" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg></button><a class="tnav-esp" href="espace-client.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="10" r="3.2"/><path d="M5.6 19a7 7 0 0 1 12.8 0"/></svg>Espace client</a><a class="tnav-cta" href="reserver.html">Réserver une démo</a><button class="tnav-burger" id="tnav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="tnav-menu"><i></i><i></i><i></i></button></div></nav><div class="tnav-menu" id="tnav-menu"><a href="fonctionnalites.html">Fonctionnalités</a><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html" aria-current="page">Pourquoi Talos</a><a href="blog.html">Blog</a><a class="m-esp" href="espace-client.html">Espace client</a><a class="m-cta" href="reserver.html">Réserver une démo</a></div></header>
+
+<nav class="t-rail" id="rail" aria-label="Chapitres">
+  <a href="#c1"><i></i><span>1 · Notre histoire</span></a>
+  <a href="#c2"><i></i><span>2 · Ce que Talos fait</span></a>
+  <a href="#c3"><i></i><span>3 · Ce qu'il ne fera jamais</span></a>
+  <a href="#c4"><i></i><span>4 · Pourquoi nous faire confiance</span></a>
+  <a href="#c5"><i></i><span>5 · Notre vision</span></a>
+</nav>
+
+<section class="t-why">
+
+  <!-- ═══════════ 1 · POURQUOI TALOS EXISTE ═══════════ -->
+
+  <div class="act open has-shot" id="c1">
+    <div class="shot">
+      <video src="video/chantier-drone.mp4" poster="video/chantier-drone-poster.jpg"
+             autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+    </div>
+    <div class="grain"></div>
+    <div class="wrap">
+      <span class="eyebrow rv">1. Notre histoire</span>
+      <h1 class="split">
+        <span class="l split scrub">Nous avons grandi avec des artisans et des professionnels du BTP.</span>
+        <span class="l soft split scrub">Nous avons vu nos parents finir leurs journées sur <em>les chantiers</em>...</span>
+      </h1>
+    </div>
+    <div class="scroll"><i></i></div>
+  </div>
+
+  <div class="act mid">
+    <div class="wrap">
+      <p class="say big split scrub">Puis recommencer une deuxième journée derrière <em>un ordinateur</em>.</p>
+    </div>
+  </div>
+
+  <!-- la deuxième journée : une boucle qui ne s'arrête jamais -->
+  <div class="act mid">
+   <div class="loops">
+    <div class="loop">
+      <div class="track">
+        <span>Les devis.</span><span>Les factures.</span><span>Les relances.</span><span>Les rendez-vous...</span>
+        <span class="dup" aria-hidden="true">Les devis.</span><span class="dup" aria-hidden="true">Les factures.</span><span class="dup" aria-hidden="true">Les relances.</span><span class="dup" aria-hidden="true">Les rendez-vous...</span>
+      </div>
+    </div>
+   </div>
+  </div>
+
+  <div class="act full">
+    <div class="wrap">
+      <p class="cry split scrub">Nous avons trouvé ça <em>injuste</em>.</p>
+    </div>
+  </div>
+
+  <div class="act mid">
+    <div class="wrap">
+      <p class="cry sm split">Puis l'intelligence artificielle est arrivée.</p>
+    </div>
+  </div>
+
+  <div class="act">
+    <div class="wrap">
+      <div class="split-two rv">
+        <div class="a">
+          <p class="split">Pour beaucoup, elle représentait une menace.</p>
+          <p class="soft split">Celle de ne plus savoir quoi faire de ses mains.</p>
+        </div>
+        <div class="b">
+          <p class="split">Pour nous, elle représentait une <em>opportunité</em>.</p>
+          <p class="soft split">Celle de rendre du temps à nos parents.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="act full has-shot">
+    <div class="shot"><img src="photos/soir-ordinateur.jpg" alt="Le soir, devant l'ordinateur" loading="lazy"></div>
+    <div class="grain"></div>
+    <div class="wrap">
+      <p class="cry split scrub">C'est de là que <em>Talos</em> est né.</p>
+      <p class="say soft split" style="max-width:44ch;margin:26px auto 0;text-align:center;font-size:clamp(16px,1.7vw,19px);line-height:1.55">Cette fois, c'était à notre tour de leur rendre ce qu'ils nous avaient transmis.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ 2 · CE QUE TALOS FAIT ═══════════ -->
+
+  <div class="act full has-shot" id="c2">
+    <div class="shot"><img src="photos/chantier.jpg" alt="Un chantier en fin de journée" loading="lazy"></div>
+    <div class="grain"></div>
+    <div class="wrap">
+      <span class="num rv"><i></i><b>2.</b> Ce que Talos fait</span>
+      <p class="say big split scrub">Aujourd'hui, un artisan termine son chantier...</p>
+      <p class="say big split scrub">Mais <em>pas sa journée</em>.</p>
+      <p class="say big split scrub">Talos est né pour <em>changer ça</em>.</p>
+    </div>
+  </div>
+
+  <div class="act">
+    <div class="wrap">
+      <div class="work">
+        <div>
+          <h2 class="split scrub">Pendant que vous êtes sur le terrain,</h2>
+          <ol>
+            <li class="rv" style="--i:1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6.5"/></svg>Talos prépare vos devis,</li>
+            <li class="rv" style="--i:2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6.5"/></svg>relance vos clients,</li>
+            <li class="rv" style="--i:3"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6.5"/></svg>organise vos rendez-vous,</li>
+            <li class="rv" style="--i:4"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6.5"/></svg>prépare vos factures,</li>
+            <li class="rv" style="--i:5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6.5"/></svg>suit vos paiements...</li>
+          </ol>
+        </div>
+        <div class="phones rv" style="--i:2">
+          <figure data-drift="26"><img src="shots/cm-01-note-vocale.png" alt="Note vocale dictée depuis le chantier" loading="lazy"></figure>
+          <figure data-drift="-34"><img src="shots/cm-02-edition-devis.png" alt="Devis préparé par Talos, prêt à valider" loading="lazy"></figure>
+          <figure data-drift="18"><img src="shots/fx-03-relance.png" alt="Relance client programmée" loading="lazy"></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="act full">
+    <div class="wrap">
+      <p class="cry sm split scrub">Vous restez concentré sur votre métier.</p>
+      <p class="cry sm split scrub" style="margin-top:14px">Talos s'occupe de <em>l'administratif</em>.</p>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="wrap">
+      <figure class="rv"><img src="photos/app-tableau-de-bord.jpg" alt="Le tableau de bord Talos : la pile du matin, la trésorerie et la journée préparée" loading="lazy"></figure>
+    </div>
+  </div>
+
+  <!-- ═══════════ 3 · CE QU'IL NE FERA JAMAIS ═══════════ -->
+
+  <div class="act" id="c3">
+    <div class="wrap">
+      <span class="num rv"><i></i><b>3.</b> Ce qu'il ne fera jamais</span>
+      <p class="cry sm soft split scrub" style="text-align:left;margin-inline:0">Nous ne croyons pas à une IA qui remplace les humains.</p>
+      <p class="cry sm split scrub" style="text-align:left;margin-inline:0;margin-top:18px">Nous croyons à une IA qui leur rend <em>du temps</em>.</p>
+    </div>
+  </div>
+
+  <div class="act">
+    <div class="wrap">
+      <ul class="never">
+        <li class="rv" style="--i:0"><i>✕</i>Talos ne prendra jamais une décision importante à votre place.</li>
+        <li class="rv" style="--i:1"><i>✕</i>Il ne modifiera jamais vos tarifs.</li>
+        <li class="rv" style="--i:2"><i>✕</i>Il n'enverra jamais un devis sans validation.</li>
+        <li class="rv" style="--i:3"><i>✕</i>Il ne promettra jamais une date à un client.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="act mid">
+    <div class="wrap">
+      <p class="say big soft split scrub">Talos n'a pas pour but d'être un robot automatique de bureau.</p>
+      <p class="say big split scrub">Nous voulons qu'il reste un assistant <em>extrêmement compétent</em>.</p>
+    </div>
+  </div>
+
+  <div class="act full">
+    <div class="wrap">
+      <p class="cry split scrub">Comme <em>Jarvis</em>.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ 4 · POURQUOI VOUS POUVEZ NOUS FAIRE CONFIANCE ═══════════ -->
+
+  <div class="act has-shot full" id="c4">
+    <div class="shot"><img src="photos/table-familiale.jpg" alt="Une table familiale" loading="lazy"></div>
+    <div class="grain"></div>
+    <div class="wrap">
+      <span class="num rv"><i></i><b>4.</b> Pourquoi vous pouvez nous faire confiance</span>
+      <p class="say big split scrub">Talos n'est pas né dans une salle de réunion.</p>
+      <p class="say big split scrub">Il est né autour d'une <em>table familiale</em>,</p>
+      <p class="say soft split scrub">en regardant nos parents rentrer fatigués...</p>
+      <p class="say soft split scrub">Puis rallumer leur ordinateur.</p>
+    </div>
+  </div>
+
+  <div class="act mid">
+    <div class="wrap">
+      <p class="say soft split scrub">Depuis,</p>
+      <p class="say wide split scrub">chaque fonctionnalité que nous développons répond à une seule question.</p>
+    </div>
+  </div>
+
+  <div class="act full">
+    <div class="wrap">
+      <p class="cry sm split scrub">Est-ce que cela ferait <em>réellement gagner du temps</em> à nos parents ?</p>
+    </div>
+  </div>
+
+  <div class="act mid">
+    <div class="wrap">
+      <p class="cry sm soft split scrub" style="font-size:clamp(24px,3.4vw,44px)">Si la réponse est non...</p>
+      <p class="cry sm split scrub" style="font-size:clamp(24px,3.4vw,44px);margin-top:14px">Nous ne la développons pas.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ 5 · NOTRE VISION ═══════════ -->
+
+  <div class="act" id="c5">
+    <div class="wrap">
+      <span class="num rv"><i></i><b>5.</b> Notre vision</span>
+      <p class="say big soft split scrub">Notre ambition n'est pas de créer un logiciel.</p>
+      <p class="say big split scrub">Notre ambition est de créer <em>l'assistant</em> que chaque artisan aurait aimé avoir depuis toujours.</p>
+    </div>
+  </div>
+
+  <div class="act">
+    <div class="wrap">
+      <div class="grid4">
+        <div class="rv" style="--i:0">Un assistant qui comprend rapidement.</div>
+        <div class="rv" style="--i:1">Qui travaille discrètement.</div>
+        <div class="rv" style="--i:2">Qui vous fait gagner du temps chaque jour.</div>
+        <div class="rv" style="--i:3">Et qui reste suffisamment accessible pour accompagner chaque artisan.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="act full">
+    <div class="wrap">
+      <p class="cry sm split scrub">Si un jour Talos devient <em>indispensable</em> à un artisan...</p>
+      <p class="cry sm split scrub" style="margin-top:14px">Alors nous aurons réussi.</p>
+    </div>
+  </div>
+
+  <div class="act mid">
+    <div class="wrap">
+      <p class="say soft wide split scrub">Parce que nous croyons qu'un bon outil doit rester accessible à ceux qui en ont le plus besoin,</p>
+      <p class="cry sm split scrub" style="text-align:left;margin-inline:0;margin-top:20px">Talos ne sera <em>jamais</em> un produit hors de prix.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ SIGNATURE ═══════════ -->
+
+  <div class="end">
+    <div class="wrap">
+      <h2 class="split scrub">Le temps est le plus beau <em>chantier</em> que nous pouvions vous rendre.</h2>
+      <p class="mark rv" style="--i:2">Talos · Forgé main</p>
+    </div>
+  </div>
+
+  <div class="out">
+    <div class="wrap">
+      <div class="acts">
+        <a class="btn btn-pri" href="reserver.html">Réserver une démo <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-gho" href="comment-ca-marche.html">Voir comment ça marche</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══ FOOTER — identique aux autres pages du site ═══ -->
+<footer class="t-ft">
+  <div class="ft-in">
+    <div class="ft-top">
+      <div class="brand">
+        <svg viewBox="0 0 380 120"><g fill="currentColor"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g><text x="66" y="100" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="100" fill="currentColor" font-weight="600" letter-spacing="-4">ALOS</text></svg>
+      </div>
+
+      <div class="col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html#top">Accueil</a></li>
+          <li><a href="fonctionnalites.html">Fonctionnalités</a></li>
+          <li><a href="comment-ca-marche.html">Comment ça marche</a></li>
+          <li><a href="tarifs.html">Tarifs</a></li>
+          <li><a href="simulateur.html">Simulateur</a></li>
+          <li><a href="pourquoi-talos.html" aria-current="page">Pourquoi Talos</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <h4>Accès</h4>
+        <ul>
+          <li><a href="espace-client.html">Mon espace</a></li>
+          <li><a href="reserver.html">Réserver une démo</a></li>
+        </ul>
+      </div>
+
+      <div class="col tagline">
+        <p>Le temps est le plus beau chantier que nous pouvions vous rendre.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/talos.ai.tech/" target="_blank" rel="noopener" aria-label="Instagram — @talos.ai.tech">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="updates">
+      <h4>Restez informé</h4>
+      <form class="nform" onsubmit="return false">
+        <input type="email" placeholder="Adresse e-mail" required>
+        <button type="submit">S'inscrire</button>
+      </form>
+    </div>
+
+    <div class="ft-bottom">
+      <div>© <span id="yr">2026</span> · Talos SAS · Tous droits réservés.</div>
+      <div class="legal">
+        <a href="#">Politique de confidentialité</a>
+        <span class="dot">·</span>
+        <a href="#">Conditions générales</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</main>
+
+<script>
+/* bascule de thème — même clé de stockage que le reste du site */
+(function(){
+  var root = document.documentElement;
+  var btn  = document.querySelector('.theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('talos-theme', next); } catch(e){}
+  });
+})();
+
+/* barre flottante : compacte au scroll + menu mobile */
+(function(){
+  var wrap = document.getElementById('tnav-wrap');
+  var bar  = document.getElementById('tnav');
+  var btn  = document.getElementById('tnav-burger');
+  if (!wrap || !bar) return;
+
+  var ticking = false;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      bar.classList.toggle('scrolled', window.scrollY > 20);
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  function close(){ wrap.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click', function(){
+    var open = !wrap.classList.contains('open');
+    wrap.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.getElementById('tnav-menu').addEventListener('click', function(e){
+    if (e.target.closest('a')) close();
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+  document.addEventListener('click', function(e){
+    if (wrap.classList.contains('open') && !wrap.contains(e.target)) close();
+  });
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   LE MOUVEMENT DU RÉCIT
+   Tout est fait à la main, sans librairie : découpage en mots,
+   regroupement par ligne recalculé à chaque redimensionnement,
+   révélation ligne par ligne, éclairage piloté par le scroll,
+   dérive des photos. Une seule boucle rAF pour tout le scroll.
+   ═══════════════════════════════════════════════════════════════ */
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── 1 · découpage en mots ──
+     Un <em> compte pour un seul mot : son dégradé doit rester d'un
+     seul tenant, sinon il redémarre à chaque mot. */
+  function splitWords(el){
+    if (el.dataset.split) return;
+    var out = [];
+    [].slice.call(el.childNodes).forEach(function(node){
+      if (node.nodeType === 3) {
+        var parts = node.nodeValue.split(/(\s+)/);
+        parts.forEach(function(p){
+          if (!p) return;
+          if (/^\s+$/.test(p)) { out.push(document.createTextNode(p)); return; }
+          var s = document.createElement('span');
+          s.className = 'w';
+          s.textContent = p;
+          out.push(s);
+        });
+      } else if (node.nodeType === 1) {
+        if (node.classList.contains('l')) {          // ligne explicite du hero
+          splitWords(node);
+          out.push(node);
+        } else {
+          var s = document.createElement('span');
+          s.className = 'w';
+          s.appendChild(node.cloneNode(true));
+          out.push(s);
+        }
+      }
+    });
+    el.innerHTML = '';
+    out.forEach(function(n){ el.appendChild(n); });
+    el.dataset.split = '1';
+  }
+
+  var splits = [].slice.call(document.querySelectorAll('.t-why .split'));
+  splits.forEach(splitWords);
+
+  /* ── 2 · regroupement par ligne ──
+     On lit la position réelle de chaque mot après mise en page :
+     le découpage suit donc la largeur de l'écran, pas une supposition. */
+  var lastW = 0;
+  function measure(){
+    splits.forEach(function(el){
+      var words = el.querySelectorAll('.w'), top = null, line = -1, k = 0;
+      [].forEach.call(words, function(w){
+        var t = w.offsetTop;
+        if (top === null || Math.abs(t - top) > 4) { top = t; line++; k = 0; }
+        w.style.setProperty('--l', line);
+        w.style.setProperty('--k', k++);
+      });
+    });
+    lastW = window.innerWidth;
+  }
+  measure();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+
+  var rt;
+  window.addEventListener('resize', function(){
+    if (window.innerWidth === lastW) return;      // ignore la barre d'URL mobile
+    clearTimeout(rt);
+    rt = setTimeout(measure, 140);
+  }, {passive:true});
+
+  /* ── 3 · entrée en scène ── */
+  var targets = [].slice.call(document.querySelectorAll('.t-why .act,.t-why .band,.t-why .end,.t-why .split'));
+  if (!('IntersectionObserver' in window) || reduce) {
+    targets.forEach(function(t){ t.classList.add('on'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        e.target.classList.add('on');
+        io.unobserve(e.target);
+      });
+    }, {rootMargin:'0px 0px -12% 0px', threshold:.12});
+    targets.forEach(function(t){ io.observe(t); });
+    requestAnimationFrame(function(){
+      var open = document.querySelector('.t-why .open');
+      if (open) { open.classList.add('on'); open.querySelectorAll('.split').forEach(function(s){ s.classList.add('on'); }); }
+    });
+  }
+
+  /* ── 4 · le scroll pilote : éclairage des mots, dérive des photos, fil ── */
+  var scrubs  = [].slice.call(document.querySelectorAll('.t-why .scrub'));
+  var shots   = [].slice.call(document.querySelectorAll('.t-why .shot img,.t-why .shot video'));
+  var drifts  = [].slice.call(document.querySelectorAll('.t-why [data-drift]'));
+  var endGlow = document.querySelector('.t-why .end');
+  var rail    = document.getElementById('rail');
+  var links   = rail ? [].slice.call(rail.querySelectorAll('a')) : [];
+  var marks   = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  var ticking = false;
+
+  function clamp(v){ return v < 0 ? 0 : (v > 1 ? 1 : v); }
+
+  function frame(){
+    ticking = false;
+    var vh = window.innerHeight;
+
+    if (!reduce) {
+      /* les mots s'allument au fur et à mesure que la phrase traverse l'écran */
+      scrubs.forEach(function(el){
+        var r = el.getBoundingClientRect();
+        if (r.bottom < -80 || r.top > vh + 80) return;
+        /* la phrase s'allume entre 92 % et 47 % de la hauteur d'écran :
+           assez tôt pour accompagner la lecture, assez tard pour
+           qu'une phrase centrée soit toujours entièrement lue */
+        /* dans l'ouverture, la première phrase doit être lisible à
+           l'arrivée : on lui donne une avance, le reste suit au scroll */
+        var lead = el.closest('.open') ? (window.innerWidth < 700 ? .34 : .22) : 0;
+        var p = clamp((vh * (.92 + lead) - r.top) / (vh * .45));
+        var ws = el.querySelectorAll('.w'), n = ws.length;
+        [].forEach.call(ws, function(w, i){
+          var s = clamp(p * (n + 1.2) - i);
+          w.style.setProperty('--o', (.14 + s * .86).toFixed(3));
+        });
+      });
+
+      /* les photos dérivent : elles donnent du poids sans voler la vedette */
+      shots.forEach(function(img){
+        var host = img.closest('.act');
+        var r = host.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > vh + 200) return;
+        var p = (vh - r.top) / (vh + r.height);
+        img.style.transform = 'scale(1.08) translate3d(0,' + ((p - .5) * -46).toFixed(1) + 'px,0)';
+      });
+
+      /* les trois téléphones ne montent pas à la même vitesse */
+      drifts.forEach(function(el){
+        var r = el.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > vh + 200) return;
+        var p = (vh - r.top) / (vh + r.height) - .5;
+        el.style.transform = 'translate3d(0,' + (p * parseFloat(el.dataset.drift)).toFixed(1) + 'px,0)';
+      });
+
+      /* la braise finale grandit à l'approche */
+      if (endGlow) {
+        var re = endGlow.getBoundingClientRect();
+        if (re.top < vh && re.bottom > 0) {
+          endGlow.style.setProperty('--glow', (1 + clamp((vh - re.top) / vh) * .22).toFixed(3));
+        }
+      }
+    }
+
+    /* le fil suit le chapitre en cours */
+    if (rail) {
+      rail.classList.toggle('on', window.scrollY > vh * .6);
+      var y = window.scrollY + vh * .42, cur = 0;
+      marks.forEach(function(m, i){ if (m && m.offsetTop <= y) cur = i; });
+      links.forEach(function(a, i){ a.classList.toggle('now', i === cur); });
+    }
+  }
+
+  function onScroll(){ if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
+  frame();
+
+  /* mouvement réduit : la vidéo d'ouverture se fige sur son image */
+  if (reduce) {
+    var v = document.querySelector('.t-why .shot video');
+    if (v) { v.removeAttribute('autoplay'); v.pause(); }
+  }
+})();
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

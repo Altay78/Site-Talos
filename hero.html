@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talos — Hero premium (proof)</title>
+<style>
+  :root {
+    --ink:#0A0908; --ink-2:#14110F; --ink-3:#1b1713;
+    --parchemin:#F5EDDC; --bronze:#C9963F; --bronze-2:#D9A658; --olivier:#7E9587;
+    --line: rgba(245,237,220,0.08);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { height:100%; }
+  body {
+    background:var(--ink); color:var(--parchemin);
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased; overflow:hidden;
+  }
+  .stage { position:relative; width:1440px; height:900px; overflow:hidden; }
+
+  /* ---------- background layers ---------- */
+  .bg-grid {
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse 90% 80% at 50% 30%, #000 30%, transparent 75%);
+    opacity:0.6;
+  }
+  .orb {
+    position:absolute; border-radius:50%; filter:blur(8px);
+  }
+  .orb-1 {
+    width:780px; height:780px; right:-160px; top:-260px;
+    background:radial-gradient(circle at 40% 40%, rgba(217,166,88,0.45), rgba(201,150,63,0.16) 38%, transparent 66%);
+    filter:blur(20px);
+    animation:drift1 14s ease-in-out infinite alternate;
+  }
+  .orb-2 {
+    width:560px; height:560px; left:-180px; bottom:-220px;
+    background:radial-gradient(circle, rgba(201,150,63,0.18), transparent 64%);
+    filter:blur(30px);
+    animation:drift2 18s ease-in-out infinite alternate;
+  }
+  @keyframes drift1 { to { transform:translate(-40px,30px) scale(1.06);} }
+  @keyframes drift2 { to { transform:translate(30px,-24px) scale(1.08);} }
+
+  .watermark {
+    position:absolute; right:-60px; bottom:-120px; width:520px; opacity:0.04;
+  }
+  .grain { position:absolute; inset:0; opacity:0.5; pointer-events:none; mix-blend-mode:overlay; }
+  .vignette {
+    position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(ellipse 75% 70% at 50% 45%, transparent 55%, rgba(0,0,0,0.55));
+  }
+
+  /* ---------- nav ---------- */
+  nav {
+    position:relative; z-index:5;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:30px 56px;
+  }
+  .brand { display:flex; align-items:center; gap:0; }
+  .brand svg { height:26px; width:auto; }
+  .nav-links { display:flex; gap:40px; }
+  .nav-links a {
+    color:rgba(245,237,220,0.72); text-decoration:none; font-size:15px; letter-spacing:-0.2px;
+    transition:color .2s;
+  }
+  .nav-links a:hover { color:var(--parchemin); }
+  .nav-cta {
+    display:flex; align-items:center; gap:16px;
+  }
+  .nav-cta .login { color:rgba(245,237,220,0.72); font-size:15px; text-decoration:none; }
+  .btn {
+    font-size:15px; font-weight:600; letter-spacing:-0.2px; cursor:pointer;
+    padding:11px 22px; border-radius:10px; border:1px solid transparent; text-decoration:none; display:inline-block;
+  }
+  .btn-primary {
+    background:linear-gradient(180deg, var(--bronze-2), var(--bronze));
+    color:var(--ink);
+    box-shadow:0 8px 30px rgba(201,150,63,0.35), inset 0 1px 0 rgba(255,255,255,0.35);
+  }
+  .btn-ghost {
+    background:rgba(245,237,220,0.04); color:var(--parchemin);
+    border:1px solid rgba(245,237,220,0.16);
+    backdrop-filter:blur(8px);
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position:relative; z-index:4;
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:40px;
+    padding:56px 56px 0; align-items:center; height:calc(900px - 96px);
+  }
+
+  .eyebrow {
+    display:inline-flex; align-items:center; gap:10px;
+    padding:8px 16px; border-radius:100px;
+    background:rgba(201,150,63,0.10); border:1px solid rgba(201,150,63,0.30);
+    font-family:'SF Mono',Menlo,monospace; font-size:12.5px; letter-spacing:2px;
+    color:var(--bronze-2); text-transform:uppercase; margin-bottom:30px;
+  }
+  .eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--olivier); box-shadow:0 0 8px var(--olivier); }
+
+  h1 {
+    font-size:78px; line-height:1.02; letter-spacing:-3px; font-weight:700;
+    margin-bottom:26px;
+  }
+  h1 .accent {
+    font-family:Georgia,'Times New Roman',serif; font-style:italic; font-weight:400;
+    background:linear-gradient(180deg, var(--bronze-2), var(--bronze));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .lead {
+    font-size:19px; line-height:1.55; color:rgba(245,237,220,0.66);
+    max-width:520px; margin-bottom:36px; letter-spacing:-0.2px;
+  }
+  .cta-row { display:flex; gap:14px; align-items:center; margin-bottom:48px; }
+  .btn-lg { padding:15px 28px; font-size:16px; border-radius:12px; }
+
+  .stats { display:flex; gap:40px; }
+  .stat .num { font-size:34px; font-weight:700; letter-spacing:-1.5px; }
+  .stat .num .s { color:var(--olivier); }
+  .stat .lbl {
+    font-family:'SF Mono',Menlo,monospace; font-size:11.5px; letter-spacing:1.5px;
+    color:rgba(245,237,220,0.45); text-transform:uppercase; margin-top:6px;
+  }
+  .stat-sep { width:1px; background:var(--line); align-self:stretch; }
+
+  /* ---------- right: product glass card ---------- */
+  .visual { position:relative; height:100%; display:flex; align-items:center; justify-content:center; }
+  .glow-behind {
+    position:absolute; width:420px; height:420px; border-radius:50%;
+    background:radial-gradient(circle, rgba(201,150,63,0.5), rgba(201,150,63,0.12) 45%, transparent 70%);
+    filter:blur(30px); z-index:0;
+  }
+  .card {
+    position:relative; z-index:2; width:430px;
+    background:linear-gradient(160deg, rgba(34,29,25,0.86), rgba(20,17,15,0.78));
+    border:1px solid rgba(245,237,220,0.12);
+    border-radius:22px; padding:24px;
+    box-shadow:0 40px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(245,237,220,0.10);
+    backdrop-filter:blur(12px);
+    animation:float 7s ease-in-out infinite alternate;
+  }
+  @keyframes float { to { transform:translateY(-14px);} }
+  .card-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+  .card-title { display:flex; align-items:center; gap:10px; font-size:15px; font-weight:600; }
+  .card-title svg { width:16px; }
+  .live {
+    font-family:'SF Mono',monospace; font-size:11px; letter-spacing:1.5px; color:var(--olivier);
+    display:flex; align-items:center; gap:6px;
+  }
+  .live .dot { width:7px; height:7px; border-radius:50%; background:var(--olivier); box-shadow:0 0 8px var(--olivier); }
+
+  .auto-row {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 14px; border-radius:12px; margin-bottom:8px;
+    background:rgba(245,237,220,0.03); border:1px solid rgba(245,237,220,0.06);
+  }
+  .auto-left { display:flex; align-items:center; gap:12px; }
+  .auto-ic {
+    width:34px; height:34px; border-radius:9px; flex:none;
+    background:rgba(201,150,63,0.14); border:1px solid rgba(201,150,63,0.28);
+    display:flex; align-items:center; justify-content:center; color:var(--bronze-2); font-size:15px;
+  }
+  .auto-name { font-size:14.5px; font-weight:500; }
+  .auto-sub { font-family:'SF Mono',monospace; font-size:11px; color:rgba(245,237,220,0.4); margin-top:2px; letter-spacing:0.5px; }
+  .toggle {
+    width:42px; height:24px; border-radius:100px; position:relative; flex:none;
+    background:linear-gradient(180deg,var(--bronze-2),var(--bronze));
+    box-shadow:inset 0 1px 2px rgba(0,0,0,0.2);
+  }
+  .toggle::after { content:''; position:absolute; width:18px; height:18px; border-radius:50%; background:#fff; top:3px; right:3px; box-shadow:0 1px 3px rgba(0,0,0,0.3); }
+
+  .card-foot {
+    margin-top:18px; padding-top:18px; border-top:1px solid rgba(245,237,220,0.08);
+    display:flex; align-items:baseline; justify-content:space-between;
+  }
+  .card-foot .big { font-size:30px; font-weight:700; letter-spacing:-1px; }
+  .card-foot .big .u { font-size:16px; color:rgba(245,237,220,0.5); font-weight:400; }
+  .card-foot .cap { font-family:'SF Mono',monospace; font-size:11px; color:rgba(245,237,220,0.45); letter-spacing:1px; text-transform:uppercase; }
+
+  /* floating chips */
+  .chip {
+    position:absolute; z-index:3;
+    display:flex; align-items:center; gap:9px;
+    padding:10px 15px; border-radius:12px; font-size:13px; font-weight:500;
+    background:rgba(20,17,15,0.85); border:1px solid rgba(245,237,220,0.12);
+    box-shadow:0 16px 40px rgba(0,0,0,0.5); backdrop-filter:blur(10px);
+  }
+  .chip .ic { width:22px; height:22px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:12px; }
+  .chip-1 { top:64px; right:18px; animation:float2 6s ease-in-out infinite alternate; }
+  .chip-1 .ic { background:rgba(126,149,135,0.2); color:var(--olivier); }
+  .chip-2 { bottom:78px; left:6px; animation:float3 7.5s ease-in-out infinite alternate; }
+  .chip-2 .ic { background:rgba(201,150,63,0.2); color:var(--bronze-2); }
+  @keyframes float2 { to { transform:translateY(12px);} }
+  @keyframes float3 { to { transform:translateY(-12px);} }
+</style>
+</head>
+<body>
+<div class="stage">
+  <!-- bg -->
+  <div class="bg-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <svg class="watermark" viewBox="0 0 65 105"><rect x="0" y="18" width="62" height="14" fill="#C9963F"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z" fill="#C9963F"/></svg>
+
+  <!-- nav -->
+  <nav>
+    <div class="brand">
+      <svg viewBox="0 0 380 120" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#F5EDDC"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g>
+        <text x="66" y="100" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="100" fill="#F5EDDC" font-weight="700" letter-spacing="-4">ALOS</text>
+      </svg>
+    </div>
+    <div class="nav-links">
+      <a href="#">Produit</a>
+      <a href="#">Automatisations</a>
+      <a href="#">Le mythe</a>
+      <a href="#">Tarifs</a>
+    </div>
+    <div class="nav-cta">
+      <a class="login" href="#">Connexion</a>
+      <a class="btn btn-primary" href="#">Réserver une démo</a>
+    </div>
+  </nav>
+
+  <!-- hero -->
+  <div class="hero">
+    <div class="copy">
+      <div class="eyebrow"><span class="dot"></span> Automatisation par IA · Indés &amp; TPE</div>
+      <h1>Le travail invisible,<br><span class="accent">automatisé.</span></h1>
+      <p class="lead">Devis, relances, factures, réponses clients — Talos s'en occupe pendant que vous faites ce qui compte vraiment. Opérationnel en 6 jours. Sans formation.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg" href="#">Réserver une démo →</a>
+        <a class="btn btn-ghost btn-lg" href="#">Voir le manifeste</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="num"><span class="s">+</span>26h</div><div class="lbl">libérées / mois</div></div>
+        <div class="stat-sep"></div>
+        <div class="stat"><div class="num"><span class="s">+</span>74%</div><div class="lbl">de devis signés</div></div>
+        <div class="stat-sep"></div>
+        <div class="stat"><div class="num">8s</div><div class="lbl">de réponse client</div></div>
+      </div>
+    </div>
+
+    <!-- right product visual -->
+    <div class="visual">
+      <div class="glow-behind"></div>
+
+      <div class="chip chip-1"><span class="ic">✓</span> Devis #1042 signé</div>
+      <div class="chip chip-2"><span class="ic">⚡</span> Réponse envoyée · 8s</div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">
+            <svg viewBox="0 0 65 105"><rect x="0" y="18" width="62" height="14" fill="#C9963F"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z" fill="#C9963F"/></svg>
+            Automatisations
+          </div>
+          <div class="live"><span class="dot"></span> EN LIGNE</div>
+        </div>
+
+        <div class="auto-row">
+          <div class="auto-left">
+            <div class="auto-ic">✦</div>
+            <div><div class="auto-name">Réponses clients</div><div class="auto-sub">42 traitées aujourd'hui</div></div>
+          </div>
+          <div class="toggle"></div>
+        </div>
+        <div class="auto-row">
+          <div class="auto-left">
+            <div class="auto-ic">▤</div>
+            <div><div class="auto-name">Devis &amp; relances</div><div class="auto-sub">7 envoyés · 3 signés</div></div>
+          </div>
+          <div class="toggle"></div>
+        </div>
+        <div class="auto-row">
+          <div class="auto-left">
+            <div class="auto-ic">€</div>
+            <div><div class="auto-name">Suivi des paiements</div><div class="auto-sub">2 relances programmées</div></div>
+          </div>
+          <div class="toggle"></div>
+        </div>
+
+        <div class="card-foot">
+          <div class="big">+26h<span class="u"> / mois</span></div>
+          <div class="cap">temps rendu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vignette"></div>
+  <svg class="grain"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+</div>
+</body>
+</html>

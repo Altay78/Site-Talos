@@ -1,0 +1,255 @@
+<section class="t-roi" id="simulateur">
+<div class="orb a"></div>
+<div class="orb b"></div>
+
+<div class="wrap">
+<div class="sheet-veil" id="roiVeil" hidden></div>
+
+  <div class="head">
+    <span class="eyebrow"><i></i> Estimez vos gains</span>
+    <h2 class="roi-title">Calculez ce que Talos peut <em>vous faire gagner</em>.</h2>
+    <p>Vos chiffres, pas les nôtres. Cinq réponses, le montant apparaît. Le calcul est vérifiable ligne par ligne juste en dessous.</p>
+  </div>
+
+  <div class="grid">
+
+
+    <button type="button" class="sheet-btn" data-sheet="roiParams" aria-haspopup="dialog">
+      <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></span>
+      <span class="tx"><b>Vos chiffres</b><em id="sheetSum">15 devis · 6 signés · 3 000 €</em></span>
+      <span class="go">Ajuster
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </span>
+    </button>
+
+    <aside class="glass params sheet" id="roiParams" role="dialog" aria-modal="true" aria-label="Vos chiffres">
+      <div class="sheet-hd">
+        <span class="t">Vos chiffres</span>
+        <button type="button" class="sheet-ok" data-close>OK</button>
+      </div>
+      <h2>
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+        Vos chiffres
+      </h2>
+
+      <div class="ctrl">
+        <div class="top"><span class="nm">Devis envoyés par mois</span><span class="val" id="vV">15</span></div>
+        <div class="adj">
+          <button type="button" class="stp" data-for="V" data-dir="-1" aria-label="Moins de devis envoyés par mois"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+          <input type="range" id="V" min="1" max="50" step="1" value="15" aria-label="Devis envoyés par mois">
+          <button type="button" class="stp" data-for="V" data-dir="1" aria-label="Plus de devis envoyés par mois"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+        <div class="ends"><span>1</span><span>50</span></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="top"><span class="nm">Devis signés aujourd'hui</span><span class="val" id="vS">6</span></div>
+        <div class="adj">
+          <button type="button" class="stp" data-for="S" data-dir="-1" aria-label="Moins de devis signés"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+          <input type="range" id="S" min="1" max="30" step="1" value="6" aria-label="Devis signés par mois">
+          <button type="button" class="stp" data-for="S" data-dir="1" aria-label="Plus de devis signés"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+        <div class="ends"><span>1</span><span id="sMax">30</span></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="top"><span class="nm">Montant moyen d'un devis</span><span class="val" id="vM">3 000 €</span></div>
+        <div class="adj">
+          <button type="button" class="stp" data-for="M" data-dir="-1" aria-label="Montant moyen plus bas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+          <input type="range" id="M" min="500" max="20000" step="500" value="3000" aria-label="Montant moyen d'un devis">
+          <button type="button" class="stp" data-for="M" data-dir="1" aria-label="Montant moyen plus haut"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+        <div class="ends"><span>500 €</span><span>20 000 €</span></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="top"><span class="nm">Combien de temps passé pour un devis&nbsp;?</span></div>
+        <div class="risk tick" id="T" role="radiogroup" aria-label="Temps passé pour un devis">
+          <button type="button" role="radio" aria-checked="false" style="--c:var(--sig-vert)"
+                  data-t="0.25" data-lab="15 min">
+            <i></i><span class="l">15 min<em>Vous avez déjà un modèle bien rôdé</em></span><span class="p">0,25 h</span>
+          </button>
+          <button type="button" role="radio" aria-checked="false" style="--c:var(--sig-ambre)"
+                  data-t="0.5" data-lab="30 min">
+            <i></i><span class="l">30 min<em>Un chiffrage rapide, sans aller-retour</em></span><span class="p">0,5 h</span>
+          </button>
+          <button type="button" role="radio" aria-checked="false" style="--c:var(--sig-orange)"
+                  data-t="1" data-lab="1 h">
+            <i></i><span class="l">1 h<em>Métrés, prix, mise en forme : le cas courant</em></span><span class="p">1 h</span>
+          </button>
+          <button type="button" role="radio" aria-checked="true" class="on" style="--c:var(--sig-rouge)"
+                  data-t="1.5" data-lab="plus d'une heure">
+            <i></i><span class="l">Plus d'1 h<em>Chaque devis vous coûte une soirée entière</em></span><span class="p">1,5 h</span>
+          </button>
+        </div>
+        <div class="risk-note">Temps de préparation d'un devis, relances et mise au propre comprises.</div>
+      </div>
+
+      <div class="ctrl">
+        <div class="top"><span class="nm">Votre délai d'envoi actuel</span></div>
+        <div class="risk tick" id="D" role="radiogroup" aria-label="Délai d'envoi actuel">
+          <button type="button" role="radio" aria-checked="false" style="--c:var(--sig-vert)"
+                  data-d="0.05" data-lab="un envoi sous 2 heures">
+            <i></i><span class="l">Sous 2 heures<em>L'instant-réponse · risque minimal</em></span><span class="p">5 %</span>
+          </button>
+          <button type="button" role="radio" aria-checked="false" style="--c:var(--sig-ambre)"
+                  data-d="0.20" data-lab="un envoi sous 24 heures">
+            <i></i><span class="l">Sous 24 heures<em>Le standard élite · risque faible</em></span><span class="p">20 %</span>
+          </button>
+          <button type="button" role="radio" aria-checked="true" class="on" style="--c:var(--sig-orange)"
+                  data-d="0.50" data-lab="un envoi sous 3 à 5 jours">
+            <i></i><span class="l">Sous 3 à 5 jours<em>La moyenne du marché · zone critique</em></span><span class="p">50 %</span>
+          </button>
+          <button type="button" role="radio" aria-checked="false" style="--c:var(--sig-rouge)"
+                  data-d="0.75" data-lab="un envoi à plus de 7 jours">
+            <i></i><span class="l">Plus de 7 jours<em>La zone rouge · perte quasi certaine</em></span><span class="p">75 %</span>
+          </button>
+        </div>
+        <div class="risk-note">Part de vos devis <b>non signés</b> imputable au délai. Nous retenons le bas de chaque fourchette.</div>
+      </div>
+    </aside>
+
+    
+    <div class="results">
+
+      <div class="glass hero">
+        <div>
+          <div class="lab">Ce que Talos vous fait gagner</div>
+          <div class="big" id="chantiers">+1 chantier / mois</div>
+          <div class="sub">soit <b id="caMois">+3 000 €</b> de chiffre d'affaires chaque mois</div>
+        </div>
+        <div class="chip">
+          <span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 3 6-8"/><path d="M14 6h6v6"/></svg></span>
+          <div><div class="k">Sur douze mois</div><div class="v" id="caAn">36 000 €</div></div>
+        </div>
+      </div>
+
+      <div class="duo">
+        <div class="glass stat">
+          <div class="k">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v9l6 3"/><circle cx="12" cy="12" r="9.5"/></svg>
+            Heures récupérées
+          </div>
+          <div class="v" id="heures">22,5 h / mois</div>
+          <div class="s" id="heuresSub">Le temps que vous passez aujourd'hui à préparer et relancer vos devis.</div>
+        </div>
+        <div class="glass stat">
+          <div class="k">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+            Soirées retrouvées
+          </div>
+          <div class="v" id="soirees">11,3 h / mois</div>
+          <div class="s" id="soireesSub">La moitié de cette paperasse se fait le soir ou le week-end. Vous la récupérez.</div>
+        </div>
+      </div>
+
+      <div class="glass chart">
+        <div class="hd">
+          <div class="ttl">Cumul sur 12 mois<span>Vos chiffres actuels reportés à l'identique. Aucune hypothèse de croissance.</span></div>
+          <div class="leg">
+            <i><b style="background:rgba(var(--parch-rgb),.16)"></b> Sans Talos</i>
+            <i><b style="background:linear-gradient(180deg,#FFB27A,var(--bronze))"></b> Avec Talos</i>
+          </div>
+        </div>
+        <div class="plotwrap">
+          <div class="yax" id="yax" aria-hidden="true"></div>
+          <div class="glines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="plot" id="plot"></div>
+        </div>
+        <div class="xax" id="xax"></div>
+        <div class="chart-foot">
+          <span>Sans Talos <b id="sumSans">216 000 €</b></span>
+          <span class="up">Avec Talos <b id="sumAvec">396 000 €</b></span>
+          <span class="delta" id="sumDelta">+180 000 €</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="cta-m">
+    <a class="cta" href="reserver.html">
+      <span id="ctaMTxt">Récupérer ces 3 000 € — Réserver une démo</span>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <div class="hint">ou vérifiez le calcul juste en dessous ↓</div>
+  </div>
+
+  
+  <button type="button" class="sheet-btn detail" data-sheet="roiAudit" aria-haspopup="dialog">
+    <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
+    <span class="tx"><b>Le détail du calcul</b><em>Chaque ligne, refaisable de tête</em></span>
+    <span class="go">Lire
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </span>
+  </button>
+
+  <div class="glass audit sheet" id="roiAudit" role="dialog" aria-modal="true" aria-label="Le détail du calcul">
+    <div class="sheet-hd">
+      <span class="t">Le détail du calcul</span>
+      <button type="button" class="sheet-ok" data-close>OK</button>
+    </div>
+    <div class="hd">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+      <div>
+        <h3>Comment on arrive à ce chiffre&nbsp;?</h3>
+        <p>Reprenez chaque ligne : rien n'est caché derrière un algorithme.</p>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="st">
+        <div class="n">01</div>
+        <div class="t">Vous envoyez</div>
+        <div class="r" id="a1">15 devis</div>
+        <div class="f">par mois</div>
+      </div>
+      <div class="st">
+        <div class="n">02</div>
+        <div class="t">Vous en signez</div>
+        <div class="r" id="a2">6 devis</div>
+        <div class="f" id="a2f">taux de 40 %</div>
+      </div>
+      <div class="st">
+        <div class="n">03</div>
+        <div class="t">Vous en perdez donc</div>
+        <div class="r" id="a3">9 devis</div>
+        <div class="f" id="a3f">15 − 6</div>
+      </div>
+      <div class="st">
+        <div class="n">04</div>
+        <div class="t">Part perdue à cause du délai</div>
+        <div class="r" id="a4">1,35</div>
+        <div class="f" id="a4f">9 × 15 %</div>
+      </div>
+      <div class="st hi">
+        <div class="n">05</div>
+        <div class="t">Récupéré par Talos</div>
+        <div class="r" id="a5">+3 000 €</div>
+        <div class="f" id="a5f">1 chantier × 3 000 €</div>
+      </div>
+    </div>
+    <div class="note">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg>
+      <span id="noteTxt">Estimation volontairement plafonnée à +5 chantiers par mois, quelles que soient vos valeurs. Le gain ne peut jamais dépasser le nombre de devis que vous perdez déjà — un simulateur qui promet plus que ça vous ment.</span>
+    </div>
+  </div>
+
+
+  <div class="glass creed">
+    <p class="lead">Ces estimations sont volontairement prudentes.<br>Notre objectif est d'être crédibles, pas impressionnants.</p>
+    <p class="turn">Si Talos ne vous rapporte pas plus qu'il ne vous coûte…</p>
+    <p class="cut">Ce n'est probablement pas la bonne solution pour vous.</p>
+  </div>
+
+
+  <div class="glass synth">
+    <p id="synth"></p>
+    <a class="cta" id="cta" href="reserver.html">
+      <span id="ctaTxt">Récupérer ces 3 000 € — Réserver une démo</span>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <div class="legal">Nous préférons sous-estimer les gains plutôt que de vous promettre des résultats irréalistes.</div>
+  </div>
+
+</div>
+</section>

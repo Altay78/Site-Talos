@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talos — Section « Preuve visuelle »</title>
+<script>(function(){try{var t=localStorage.getItem('talos-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   ⚠️  BLOC DE PREVIEW UNIQUEMENT — à SUPPRIMER lors de l'intégration.
+   Ces tokens sont déjà fournis par talos-site/v2.css (L.812-830).
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --bronze:#E0631F; --bronze-2:#F4823E; --bronze-rgb:224,99,31;
+  --olivier:#B8995E; --olivier-rgb:184,153,94;
+  --parch:#F6EEE7; --parch-rgb:246,238,231;
+  --lin:#AB9F95;
+  --ink:#140F0C; --ink-2:#1C1611; --ink-3:#241B15; --graphite:#352A20;
+  --line:rgba(246,238,231,.08); --line-2:rgba(246,238,231,.15);
+  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --r:16px; --maxw:1180px; --e:cubic-bezier(.16,1,.3,1);
+}
+html[data-theme="light"]{
+  --bronze:#C5531C; --bronze-2:#E0631F; --bronze-rgb:197,83,28;
+  --olivier:#9A6A38; --olivier-rgb:154,106,56;
+  --parch:#1C1310; --parch-rgb:28,19,16;
+  --lin:#6E6058;
+  --ink:#FBF6F2; --ink-2:#FFFFFF; --ink-3:#F4EBE3; --graphite:#E7DACE;
+  --line:rgba(40,25,16,.12); --line-2:rgba(40,25,16,.22);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--parch);font-family:var(--sans);line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+.tsw{position:fixed;z-index:99;top:18px;right:18px;width:40px;height:40px;border-radius:10px;cursor:pointer;
+  background:none;border:1px solid var(--line);color:var(--parch);display:flex;align-items:center;justify-content:center}
+.tsw .sun{display:none} html[data-theme="light"] .tsw .sun{display:block}
+html[data-theme="light"] .tsw .moon{display:none}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION « PREUVE VISUELLE » — le code à conserver
+   ═══════════════════════════════════════════════════════════════ */
+.proof{
+  position:relative;padding:96px 24px 104px;border-top:1px solid var(--line);
+  /* palette de l'app (espace client) — sert au contenu du téléphone */
+  --ap-bg:#FAF8F5; --ap-card:#FFFFFF; --ap-ink:#181818;
+  --ap-mut:#8C867F; --ap-mut2:#B7B1AA; --ap-line:#ECE8E3;
+  --ap-o:#D75C24; --ap-o-soft:#FAEBE3; --ap-o-line:#F2DDD1;
+  --ap-laiton:#9A6A38; --ap-laiton-soft:#F3EDE2;
+  --ap-font:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+.proof::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 58% 46% at 50% 0%,rgba(var(--bronze-rgb),.10),transparent 62%)}
+.proof-in{position:relative;max-width:var(--maxw);margin:0 auto}
+
+/* ── titre ── */
+.proof-head{text-align:center;max-width:720px;margin:0 auto 54px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;font-weight:700;
+  color:var(--bronze);text-transform:uppercase}
+.proof-head h2{font-size:clamp(28px,4.4vw,48px);font-weight:800;letter-spacing:-1.5px;line-height:1.08;margin-top:14px}
+.proof-head h2 em{font-family:var(--sans);font-style:normal;
+  background:linear-gradient(100deg,#FFE7D4 0%,var(--bronze-2) 48%,var(--bronze) 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;animation:gradFlow 6s ease-in-out infinite}
+html[data-theme="light"] .proof-head h2 em{
+  background:linear-gradient(100deg,#B14512 0%,var(--bronze) 58%,var(--bronze-2) 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+@keyframes gradFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.proof-head p{font-size:clamp(15px,1.3vw,18px);color:rgba(var(--parch-rgb),.62);margin-top:16px}
+
+/* ── scène : téléphone + étapes ── */
+.proof-stage{display:grid;grid-template-columns:minmax(0,auto) minmax(280px,1fr);
+  gap:clamp(32px,5vw,80px);align-items:center;justify-content:center}
+
+/* étapes synchronisées */
+.steps{display:flex;flex-direction:column;gap:6px;max-width:420px}
+.step{display:flex;gap:16px;padding:18px 20px;border-radius:var(--r);border:1px solid transparent;
+  opacity:.38;transition:opacity .5s var(--e),background .5s var(--e),border-color .5s var(--e)}
+.step.on{opacity:1;background:var(--ink-2);border-color:rgba(var(--bronze-rgb),.3)}
+html[data-theme="light"] .step.on{background:#fff;box-shadow:0 14px 34px rgba(40,25,16,.09)}
+.step .n{flex:0 0 auto;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:12px;font-weight:700;
+  border:1px solid var(--line-2);color:var(--lin);transition:all .5s var(--e)}
+.step.on .n{background:var(--bronze);border-color:var(--bronze);color:var(--ink)}
+.step h3{font-size:17px;font-weight:700;letter-spacing:-.3px;line-height:1.3}
+.step p{font-size:14px;color:rgba(var(--parch-rgb),.58);margin-top:4px}
+.replay{margin-top:22px;display:inline-flex;align-items:center;gap:9px;min-height:42px;padding:0 18px;
+  border-radius:100px;border:1px solid var(--line-2);background:none;color:var(--parch);
+  font-family:var(--sans);font-size:13.5px;font-weight:700;cursor:pointer;
+  opacity:0;pointer-events:none;transition:opacity .4s,border-color .25s,background .25s}
+.replay.show{opacity:1;pointer-events:auto}
+.replay:hover{border-color:var(--bronze);background:rgba(var(--bronze-rgb),.06)}
+.replay svg{transition:transform .4s var(--e)}
+.replay:hover svg{transform:rotate(-180deg)}
+
+/* ── châssis iPhone ── */
+.dbox{transform:scale(var(--ps,.78));transform-origin:0 0}
+.device{position:relative;width:375px;height:812px;border-radius:57px;padding:3px;
+  background:linear-gradient(148deg,#9a9089 0%,#4c453f 5%,#2a2624 12%,#766c64 22%,#3b3531 33%,
+    #241f1d 46%,#574f48 58%,#938880 70%,#423b36 80%,#2b2724 88%,#7d736b 100%);
+  box-shadow:0 1px 2px rgba(0,0,0,.5),0 24px 48px -14px rgba(0,0,0,.55),
+    0 64px 120px -24px rgba(0,0,0,.7),inset 0 0 0 .5px rgba(255,255,255,.24)}
+html[data-theme="light"] .device{
+  box-shadow:0 1px 2px rgba(40,25,16,.2),0 24px 48px -14px rgba(40,25,16,.24),
+    0 64px 120px -24px rgba(40,25,16,.3),inset 0 0 0 .5px rgba(255,255,255,.24)}
+.bezel{position:relative;height:100%;border-radius:54px;background:#070605;padding:9px;
+  box-shadow:inset 0 0 3px 1px rgba(0,0,0,.95)}
+.glass{position:relative;height:100%;border-radius:46px;overflow:hidden;background:var(--ap-bg);
+  display:flex;flex-direction:column;font-family:var(--ap-font);color:var(--ap-ink)}
+.glare{position:absolute;inset:3px;border-radius:54px;pointer-events:none;z-index:60;
+  background:linear-gradient(118deg,rgba(255,255,255,.15) 0%,rgba(255,255,255,.05) 14%,
+    rgba(255,255,255,0) 32%,rgba(255,255,255,0) 76%,rgba(255,255,255,.05) 100%)}
+.k{position:absolute;border-radius:1.5px;background:linear-gradient(180deg,#8b817a,#4a433d 26%,#2b2724 72%,#6f665e)}
+.k.act{left:-2px;top:152px;width:2.5px;height:30px} .k.vu{left:-2px;top:214px;width:2.5px;height:60px}
+.k.vd{left:-2px;top:290px;width:2.5px;height:60px}  .k.pw{right:-2px;top:236px;width:2.5px;height:98px}
+.island{position:absolute;z-index:50;top:11px;left:50%;transform:translateX(-50%);
+  width:124px;height:35px;border-radius:20px;background:#000}
+.island::after{content:'';position:absolute;right:11px;top:50%;transform:translateY(-50%);
+  width:9px;height:9px;border-radius:50%;
+  background:radial-gradient(circle at 32% 30%,#243244 0%,#0c1119 60%,#05070a 100%)}
+.sbar{flex:0 0 auto;height:56px;display:flex;align-items:flex-end;justify-content:space-between;
+  padding:0 26px 6px;font-size:14px;font-weight:700;letter-spacing:-.2px}
+.sbar .ic{display:flex;align-items:center;gap:5px}
+
+/* ── en-tête de conversation ── */
+.chead{flex:0 0 auto;display:flex;align-items:center;gap:11px;padding:8px 16px 12px;
+  background:rgba(250,248,245,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--ap-line)}
+.chead .bk{color:var(--ap-o);flex:0 0 auto}
+.chead .av{width:36px;height:36px;border-radius:50%;flex:0 0 auto;
+  background:linear-gradient(180deg,#E0703A,#C94E17);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 3px 10px rgba(199,92,36,.35)}
+.chead .nm{font-size:15px;font-weight:800;letter-spacing:-.3px}
+.chead .st{font-size:11.5px;color:var(--ap-laiton);font-weight:600;display:flex;align-items:center;gap:5px}
+.chead .st i{width:6px;height:6px;border-radius:50%;background:var(--ap-laiton);display:block}
+
+/* ── fil de conversation ── */
+.convo{flex:1;min-height:0;overflow:hidden;position:relative;
+  background:var(--ap-bg)}
+.convo::before{content:'';position:absolute;inset:0;opacity:.5;
+  background-image:radial-gradient(rgba(140,134,127,.13) 1px,transparent 1px);background-size:18px 18px}
+.feed{position:relative;padding:10px 12px 12px;display:flex;flex-direction:column;gap:7px;
+  transition:transform .7s var(--e)}
+.day{align-self:center;font-size:10.5px;font-weight:700;color:var(--ap-mut);
+  background:#EFEAE3;padding:4px 12px;border-radius:100px;margin-bottom:2px}
+
+.msg{max-width:82%;opacity:0;transform:translateY(14px) scale(.96);
+  transition:opacity .45s var(--e),transform .55s var(--e)}
+.msg.in{opacity:1;transform:none}
+.msg.out{align-self:flex-end}
+.msg.from{align-self:flex-start}
+.bub{border-radius:18px;padding:9px 11px;position:relative}
+.msg.out .bub{background:var(--ap-o-soft);border:1px solid var(--ap-o-line);border-bottom-right-radius:5px}
+.msg.from .bub{background:var(--ap-card);border:1px solid var(--ap-line);border-bottom-left-radius:5px;
+  box-shadow:0 2px 8px rgba(24,20,16,.05)}
+.tm{font-size:10px;color:var(--ap-mut2);font-weight:600;text-align:right;margin-top:4px;
+  display:flex;align-items:center;justify-content:flex-end;gap:4px}
+
+/* note vocale */
+.voice{display:flex;align-items:center;gap:10px;min-width:196px}
+.voice .play{width:32px;height:32px;border-radius:50%;flex:0 0 auto;background:var(--ap-o);
+  display:flex;align-items:center;justify-content:center}
+.wave{position:relative;flex:1;height:26px}
+.wbars{display:flex;align-items:center;gap:2px;height:26px}
+.wbars span{width:2.5px;border-radius:2px;background:var(--ap-mut2)}
+.wfill{position:absolute;inset:0;width:0;overflow:hidden}
+.wfill .wbars span{background:var(--ap-o)}
+.msg.playing .wfill{transition:width 2.6s linear;width:100%}
+.voice .dur{font-size:11px;font-weight:700;color:var(--ap-mut);font-variant-numeric:tabular-nums}
+
+/* transcription */
+.trans{margin-top:7px;padding-top:7px;border-top:1px dashed var(--ap-o-line);
+  font-size:11.5px;line-height:1.45;color:#6B5347;max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .6s var(--e),opacity .4s ease,margin .5s,padding .5s}
+.msg.showtrans .trans{max-height:170px;opacity:1}
+.trans b{display:block;font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--ap-mut2);margin-bottom:3px}
+
+/* « en train d'écrire » */
+.typing{display:flex;gap:4px;padding:4px 2px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--ap-mut2);animation:bounce 1.3s infinite}
+.typing i:nth-child(2){animation-delay:.18s} .typing i:nth-child(3){animation-delay:.36s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-5px);opacity:1}}
+
+/* chiffrage */
+.calc .hd{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:800;letter-spacing:.6px;
+  text-transform:uppercase;color:var(--ap-o)}
+.calc .hd svg{animation:pulseGlow 1.6s ease-in-out infinite}
+@keyframes pulseGlow{0%,100%{opacity:.55;transform:scale(.92)}50%{opacity:1;transform:scale(1.06)}}
+.cline{display:flex;align-items:flex-start;gap:8px;margin-top:7px;font-size:12px;line-height:1.38;
+  opacity:0;transform:translateY(6px);transition:opacity .4s,transform .45s var(--e)}
+.cline.in{opacity:1;transform:none}
+.cline .ck{flex:0 0 auto;margin-top:1px;color:var(--ap-laiton)}
+.cline b{font-weight:700}
+.cline span{color:var(--ap-mut)}
+
+/* devis */
+.devis{width:250px}
+.devis .top{display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding-bottom:8px;border-bottom:1px solid var(--ap-line)}
+.devis .top b{font-size:14px;font-weight:800;letter-spacing:-.3px}
+.devis .ref{font-family:var(--mono);font-size:9.5px;color:var(--ap-mut2)}
+.devis .cli{font-size:12px;color:var(--ap-mut);margin-top:8px;line-height:1.4}
+.devis .cli b{color:var(--ap-ink);font-weight:700}
+.devis .tot{display:flex;align-items:baseline;justify-content:space-between;margin-top:8px}
+.devis .tot small{font-size:10.5px;color:var(--ap-mut);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.devis .tot .v{font-size:23px;font-weight:800;letter-spacing:-1px}
+.devis .tva{display:inline-flex;align-items:center;gap:5px;margin-top:7px;padding:4px 10px;border-radius:100px;
+  background:var(--ap-laiton-soft);color:var(--ap-laiton);font-size:10.5px;font-weight:700}
+.devis .acts{display:flex;gap:7px;margin-top:10px}
+.devis .gh{flex:0 0 auto;padding:8px 12px;border-radius:11px;border:1.5px solid var(--ap-line);
+  font-size:12px;font-weight:800}
+.devis .pr{flex:1;padding:8px;border-radius:11px;background:var(--ap-o);color:#fff;
+  font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:6px}
+.devis .safe{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:10.5px;color:var(--ap-mut);line-height:1.3}
+
+/* barre de saisie */
+.cbar{flex:0 0 auto;display:flex;align-items:center;gap:9px;padding:10px 14px 8px;
+  background:rgba(250,248,245,.94);border-top:1px solid var(--ap-line)}
+.cbar .f{flex:1;height:36px;border-radius:100px;background:#fff;border:1px solid var(--ap-line);
+  display:flex;align-items:center;padding:0 14px;font-size:12.5px;color:var(--ap-mut2)}
+.cbar .mic{width:36px;height:36px;border-radius:50%;flex:0 0 auto;background:var(--ap-o);
+  display:flex;align-items:center;justify-content:center}
+.home{width:134px;height:5px;border-radius:5px;background:rgba(24,20,16,.28);margin:6px auto 8px}
+
+/* ── puces de réassurance ── */
+.bullets{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:64px}
+.bul{padding:26px;border-radius:var(--r);background:var(--ink-2);border:1px solid var(--line);position:relative;overflow:hidden}
+html[data-theme="light"] .bul{background:#fff;box-shadow:0 12px 30px rgba(40,25,16,.06)}
+.bul::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--bronze),transparent)}
+.bul .ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:rgba(var(--bronze-rgb),.1);border:1px solid rgba(var(--bronze-rgb),.25);
+  color:var(--bronze);margin-bottom:16px}
+.bul h4{font-size:17px;font-weight:700;letter-spacing:-.3px;margin-bottom:7px}
+.bul p{font-size:14px;color:rgba(var(--parch-rgb),.6);line-height:1.6}
+
+/* ── responsive ── */
+@media (max-width:900px){
+  .proof{padding:72px 20px 80px}
+  .proof-stage{grid-template-columns:1fr;gap:34px;justify-items:center}
+  .steps{max-width:none;width:100%;flex-direction:row;gap:8px}
+  .step{flex:1;flex-direction:column;gap:10px;padding:16px 14px;text-align:left}
+  .step p{display:none}
+  .step h3{font-size:14px}
+  .replay{margin-top:0}
+  .stepwrap{width:100%;display:flex;flex-direction:column;align-items:center;gap:18px}
+  .bullets{grid-template-columns:1fr;gap:12px;margin-top:44px}
+  .bul{padding:22px}
+}
+@media (max-width:560px){
+  .proof-head{margin-bottom:38px}
+  .step{padding:13px 10px}
+  .step h3{font-size:12.5px;letter-spacing:-.2px}
+  .step .n{width:26px;height:26px;font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){
+  .msg,.cline,.feed,.step,.trans{transition:none!important}
+  .calc .hd svg,.typing i,.proof-head h2 em{animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<button class="tsw" id="tsw" type="button" aria-label="Changer de thème">
+  <svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+  <svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+</button>
+
+<!-- ══════════ SECTION PREUVE VISUELLE ══════════ -->
+<section class="proof" id="proof">
+  <div class="proof-in">
+
+    <div class="proof-head">
+      <div class="eyebrow">La preuve en 10 secondes</div>
+      <h2>Vous dictez. Talos chiffre. <em>Vous validez.</em></h2>
+      <p>Une note vocale depuis la camionnette. Un devis conforme, prêt à envoyer,
+         avant que vous ayez rangé les outils.</p>
+    </div>
+
+    <div class="proof-stage">
+
+      <!-- TÉLÉPHONE -->
+      <div class="dbox" id="dbox">
+        <div class="device">
+          <span class="k act"></span><span class="k vu"></span><span class="k vd"></span><span class="k pw"></span>
+          <div class="bezel">
+            <div class="glass">
+              <div class="island"></div>
+
+              <div class="sbar">
+                <span id="clock">21:47</span>
+                <span class="ic">
+                  <svg width="18" height="12" viewBox="0 0 18 12" fill="#181818"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="6" width="3" height="6" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                  <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="#181818" stroke-width="1.7" stroke-linecap="round"><path d="M1.2 4.1a10 10 0 0 1 13.6 0"/><path d="M3.8 6.9a6.2 6.2 0 0 1 8.4 0"/><path d="M6.4 9.6a2.5 2.5 0 0 1 3.2 0"/></svg>
+                  <svg width="25" height="12" viewBox="0 0 25 12"><rect x=".6" y=".6" width="21" height="10.8" rx="3.2" fill="none" stroke="#181818" stroke-opacity=".38"/><rect x="2.2" y="2.2" width="15" height="7.6" rx="2" fill="#181818"/><path d="M23.2 4.2v3.6a2 2 0 0 0 0-3.6z" fill="#181818" fill-opacity=".4"/></svg>
+                </span>
+              </div>
+
+              <div class="chead">
+                <span class="bk"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg></span>
+                <span class="av"><svg width="17" height="17" viewBox="0 0 380 120"><g fill="#fff"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g></svg></span>
+                <div>
+                  <div class="nm">Talos</div>
+                  <div class="st"><i></i> en ligne</div>
+                </div>
+              </div>
+
+              <div class="convo" id="convo">
+                <div class="feed" id="feed">
+                  <span class="day">Aujourd'hui</span>
+
+                  <!-- 1 · note vocale de l'artisan -->
+                  <div class="msg out" id="mVoice">
+                    <div class="bub">
+                      <div class="voice">
+                        <span class="play"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+                        <div class="wave"><div class="wbars" id="w1"></div><div class="wfill"><div class="wbars" id="w2"></div></div></div>
+                        <span class="dur" id="dur">0:14</span>
+                      </div>
+                      <div class="trans">
+                        <b>Transcription</b>
+                        <span id="transTxt"></span>
+                      </div>
+                      <div class="tm">21:47
+                        <svg width="14" height="10" viewBox="0 0 20 12" fill="none" stroke="#3E9BE8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6.5 4.5 10 11 2.5"/><path d="M8.5 8.5 10 10l6.5-7.5"/></svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 2 · Talos écrit -->
+                  <div class="msg from" id="mTyping">
+                    <div class="bub"><div class="typing"><i></i><i></i><i></i></div></div>
+                  </div>
+
+                  <!-- 3 · chiffrage -->
+                  <div class="msg from" id="mCalc">
+                    <div class="bub calc">
+                      <div class="hd">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="#D75C24"><path d="M13 2 4.5 13.5H10L9 22l9.5-12H13z"/></svg>
+                        Talos chiffre
+                      </div>
+                      <div id="calcLines"></div>
+                    </div>
+                  </div>
+
+                  <!-- 4 · devis prêt -->
+                  <div class="msg from" id="mDevis">
+                    <div class="bub devis">
+                      <div class="top"><b>Devis prêt</b><span class="ref" id="dRef">DEV-2026-0148</span></div>
+                      <div class="cli"><b id="dCli">M. Dubois</b> · <span id="dObj">Remplacement tableau électrique</span></div>
+                      <div class="tot"><small>Total TTC</small><span class="v" id="dTot">1 284,00 €</span></div>
+                      <span class="tva"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M4 12.5 9.5 18 20 6.5"/></svg> <span id="dTva">TVA 10 % — rénovation</span></span>
+                      <div class="acts">
+                        <span class="gh">Aperçu</span>
+                        <span class="pr">Valider &amp; envoyer
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 10.5 13.5M21 3l-6.8 18-3.7-7.5L3 9.8z"/></svg>
+                        </span>
+                      </div>
+                      <div class="safe">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6l7-3z"/></svg>
+                        Rien n'est envoyé sans votre validation.
+                      </div>
+                      <div class="tm">21:47</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cbar">
+                <div class="f">Message</div>
+                <span class="mic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3.5"/></svg></span>
+              </div>
+              <span class="home"></span>
+              <div class="glare"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ÉTAPES -->
+      <div class="stepwrap">
+        <div class="steps">
+          <div class="step" id="s0">
+            <span class="n">1</span>
+            <div><h3>Vous dictez</h3><p>Depuis la camionnette, entre deux chantiers. En vrac, comme vous parlez.</p></div>
+          </div>
+          <div class="step" id="s1">
+            <span class="n">2</span>
+            <div><h3>Talos chiffre</h3><p>Le matériel, les heures, la TVA — à partir de vos tarifs et de vos devis passés.</p></div>
+          </div>
+          <div class="step" id="s2">
+            <span class="n">3</span>
+            <div><h3>Vous validez</h3><p>Vous relisez, vous envoyez. Le devis part le soir même, pas quatre jours après.</p></div>
+          </div>
+        </div>
+        <button class="replay" id="replay" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 4.5V10h5.5"/></svg>
+          Rejouer
+        </button>
+      </div>
+    </div>
+
+    <!-- PUCES DE RÉASSURANCE -->
+    <div class="bullets">
+      <div class="bul">
+        <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 3 6-8"/><path d="M3 21h18"/></svg></span>
+        <h4>Vos prix, jamais les nôtres</h4>
+        <p>Talos chiffre à partir de vos tarifs et de vos devis passés. Aucun prix inventé, aucune base de données générique.</p>
+      </div>
+      <div class="bul">
+        <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <h4>Rien ne part sans vous</h4>
+        <p>Talos prépare, vous relisez, vous envoyez. Vous gardez la main sur chaque devis et chaque message client.</p>
+      </div>
+      <div class="bul">
+        <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H6.5a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8z"/><path d="M14 2.5V8h5.5"/><path d="M8.5 14.5l2 2 4-4.5"/></svg></span>
+        <h4>Conforme 2026</h4>
+        <p>Factur-X, TVA 10 % et 20 %, mentions légales obligatoires. Hébergé en France.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var dbox = document.getElementById('dbox');
+  var feed = document.getElementById('feed');
+  var convo= document.getElementById('convo');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── 3 métiers, permutés à chaque rejeu ────────────────────────── */
+  var CASES = [
+    {
+      dur:'0:14', ref:'DEV-2026-0148', cli:'M. Dubois',
+      obj:'Remplacement tableau électrique',
+      trans:"« Ouais salut Talos, fais-moi un devis pour M. Dubois, remplacement du tableau électrique, un Legrand 4 rangées, et une grosse demi-journée de main d'œuvre. »",
+      lines:[
+        ['Tableau Legrand 4 rangées','189,00 €'],
+        ["Main d'œuvre 4 h",'votre tarif habituel'],
+        ['Disjoncteurs + protection','conforme NF C 15-100']
+      ],
+      tot:'1 284,00 €', tva:'TVA 10 % — rénovation'
+    },
+    {
+      dur:'0:11', ref:'DEV-2026-0149', cli:'Mme Lefèvre',
+      obj:'Remplacement chauffe-eau',
+      trans:"« Allô Talos, devis pour Mme Lefèvre, on remplace le chauffe-eau par un 200 litres thermodynamique, plus la journée de pose. »",
+      lines:[
+        ['Chauffe-eau thermo. 200 L','1 190,00 €'],
+        ['Pose — 1 journée','votre tarif habituel'],
+        ["Évacuation ancien appareil",'inclus']
+      ],
+      tot:'2 460,00 €', tva:'TVA 10 % — rénovation'
+    },
+    {
+      dur:'0:16', ref:'DEV-2026-0150', cli:'Famille Martin',
+      obj:'Dalle terrasse 25 m²',
+      trans:"« Salut Talos, devis pour les Martin, dalle terrasse 25 m² en béton fibré avec le ferraillage, deux jours à deux. »",
+      lines:[
+        ['Béton fibré — 25 m²','1 425,00 €'],
+        ['Ferraillage + coffrage','inclus'],
+        ['2 jours × 2 compagnons','votre tarif habituel']
+      ],
+      tot:'4 850,00 €', tva:'TVA 10 % — rénovation'
+    }
+  ];
+  var caseIdx = 0;
+
+  /* ── waveform générée (évite 56 <span> dans le markup) ─────────── */
+  var HEIGHTS = [6,10,15,9,20,24,17,11,22,26,14,8,18,23,12,7,16,21,25,13,9,19,15,10,22,17,8,12];
+  function buildWave(el){
+    el.innerHTML = HEIGHTS.map(function(h){
+      return '<span style="height:'+h+'px"></span>';
+    }).join('');
+  }
+  buildWave(document.getElementById('w1'));
+  buildWave(document.getElementById('w2'));
+
+  /* ── éléments de scène ─────────────────────────────────────────── */
+  var mVoice = document.getElementById('mVoice'),
+      mTyping= document.getElementById('mTyping'),
+      mCalc  = document.getElementById('mCalc'),
+      mDevis = document.getElementById('mDevis'),
+      steps  = [document.getElementById('s0'),document.getElementById('s1'),document.getElementById('s2')],
+      replay = document.getElementById('replay'),
+      calcLines = document.getElementById('calcLines');
+
+  var timers = [];
+  function at(ms, fn){ timers.push(setTimeout(fn, ms)); }
+  function clearAll(){ timers.forEach(clearTimeout); timers = []; }
+
+  /* garde le dernier message visible, comme une vraie conversation */
+  function scrollToEnd(){
+    var over = feed.scrollHeight - convo.clientHeight;
+    feed.style.transform = 'translateY(' + (over > 0 ? -over : 0) + 'px)';
+  }
+
+  function reset(){
+    clearAll();
+    [mVoice,mTyping,mCalc,mDevis].forEach(function(m){
+      m.classList.remove('in','playing','showtrans');
+      m.style.display = '';
+    });
+    steps.forEach(function(s){ s.classList.remove('on'); });
+    replay.classList.remove('show');
+    calcLines.innerHTML = '';
+    feed.style.transform = 'translateY(0)';
+  }
+
+  function fill(c){
+    document.getElementById('dur').textContent   = c.dur;
+    document.getElementById('transTxt').textContent = c.trans;
+    document.getElementById('dRef').textContent  = c.ref;
+    document.getElementById('dCli').textContent  = c.cli;
+    document.getElementById('dObj').textContent  = c.obj;
+    document.getElementById('dTot').textContent  = c.tot;
+    document.getElementById('dTva').textContent  = c.tva;
+    calcLines.innerHTML = c.lines.map(function(l){
+      return '<div class="cline">'
+        + '<span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M4 12.5 9.5 18 20 6.5"/></svg></span>'
+        + '<span><b>' + l[0] + '</b> · <span>' + l[1] + '</span></span></div>';
+    }).join('');
+  }
+
+  function play(){
+    reset();
+    var c = CASES[caseIdx % CASES.length];
+    caseIdx++;
+    fill(c);
+
+    if (reduce){                       // pas d'animation : état final direct
+      [mVoice,mCalc,mDevis].forEach(function(m){ m.classList.add('in'); });
+      mVoice.classList.add('showtrans');
+      mTyping.style.display = 'none';
+      [].forEach.call(calcLines.children, function(l){ l.classList.add('in'); });
+      steps.forEach(function(s){ s.classList.add('on'); });
+      replay.classList.add('show');
+      scrollToEnd();
+      return;
+    }
+
+    mTyping.style.display = 'none';
+    mCalc.style.display   = 'none';
+    mDevis.style.display  = 'none';
+
+    /* ÉTAPE 1 — le vocal */
+    at(250,  function(){ mVoice.classList.add('in'); steps[0].classList.add('on'); scrollToEnd(); });
+    at(900,  function(){ mVoice.classList.add('playing'); });          // lecture 2,6 s
+    at(2100, function(){ mVoice.classList.add('showtrans'); scrollToEnd(); });
+
+    /* ÉTAPE 2 — Talos chiffre */
+    at(3100, function(){ mTyping.style.display=''; mTyping.classList.add('in'); scrollToEnd(); });
+    at(4000, function(){
+      mTyping.style.display = 'none';
+      mCalc.style.display = ''; mCalc.classList.add('in');
+      steps[0].classList.remove('on'); steps[1].classList.add('on');
+      scrollToEnd();
+    });
+    c.lines.forEach(function(_, i){
+      at(4250 + i*520, function(){
+        calcLines.children[i].classList.add('in');
+        scrollToEnd();
+      });
+    });
+
+    /* ÉTAPE 3 — le devis */
+    at(4250 + c.lines.length*520 + 700, function(){
+      mDevis.style.display = ''; mDevis.classList.add('in');
+      steps[1].classList.remove('on'); steps[2].classList.add('on');
+      scrollToEnd();
+    });
+    at(4250 + c.lines.length*520 + 1500, function(){
+      steps.forEach(function(s){ s.classList.add('on'); });
+      replay.classList.add('show');
+      scrollToEnd();
+    });
+  }
+
+  /* ── mise à l'échelle du device ────────────────────────────────── */
+  function fit(){
+    var w = window.innerWidth, ps;
+    ps = w <= 900 ? Math.min(.84, Math.max(.58, (w - 56) / 375))
+                  : Math.min(.80, Math.max(.60, (window.innerHeight - 190) / 812));
+    dbox.style.setProperty('--ps', ps);
+    dbox.style.width  = (375 * ps) + 'px';
+    dbox.style.height = (812 * ps) + 'px';
+    scrollToEnd();
+  }
+  window.addEventListener('resize', fit, {passive:true});
+  fit();
+
+  /* ── déclenchement au scroll, une seule fois ───────────────────── */
+  var fired = false;
+  new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting && !fired){ fired = true; play(); }
+    });
+  }, {threshold:.45}).observe(document.getElementById('proof'));
+
+  replay.addEventListener('click', play);
+
+  /* preview seulement */
+  document.getElementById('tsw').addEventListener('click', function(){
+    var n = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', n);
+    try { localStorage.setItem('talos-theme', n); } catch(e){}
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talos — Footer</title>
+<script>(function(){try{var t=localStorage.getItem('talos-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<style>
+/* ══════════════════════════════════════════════════════════════
+   ⚠️  BLOC DE PREVIEW — à SUPPRIMER à l'intégration.
+   Tokens déjà fournis par talos-site/v2.css.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --bronze:#E0631F; --bronze-2:#F4823E; --bronze-rgb:224,99,31;
+  --parch:#F6EEE7; --parch-rgb:246,238,231;
+  --lin:#AB9F95;
+  --ink:#140F0C; --ink-2:#1C1611; --ink-3:#241B15;
+  --line:rgba(246,238,231,.10); --line-2:rgba(246,238,231,.20);
+  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --e:cubic-bezier(.16,1,.3,1);
+}
+html[data-theme="light"]{
+  --bronze:#C5531C; --bronze-2:#E0631F; --bronze-rgb:197,83,28;
+  --parch:#1C1310; --parch-rgb:28,19,16;
+  --lin:#6E6058;
+  --ink:#FBF6F2; --ink-2:#FFFFFF; --ink-3:#F4EBE3;
+  --line:rgba(40,25,16,.11); --line-2:rgba(40,25,16,.2);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--parch);font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+.tsw{position:fixed;z-index:99;top:18px;right:18px;width:40px;height:40px;border-radius:10px;cursor:pointer;
+  background:none;border:1px solid var(--line);color:var(--parch);display:flex;align-items:center;justify-content:center}
+.tsw .sun{display:none} html[data-theme="light"] .tsw .sun{display:block}
+html[data-theme="light"] .tsw .moon{display:none}
+.spacer{height:50vh;display:flex;align-items:center;justify-content:center;color:var(--lin);
+  font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase}
+
+/* ══════════════════════════════════════════════════════════════
+   FOOTER — le code à conserver
+   ══════════════════════════════════════════════════════════════ */
+.ft{position:relative;overflow:hidden;padding:80px 40px 36px;color:#F6EEE7;
+  background:#120D0A}
+/* trame de points + lueur bronze qui monte du bas, comme la référence */
+.ft::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(246,238,231,.16) 1px,transparent 1px);
+  background-size:14px 14px;
+  -webkit-mask-image:radial-gradient(ellipse 85% 75% at 30% 105%,#000 0%,transparent 72%);
+          mask-image:radial-gradient(ellipse 85% 75% at 30% 105%,#000 0%,transparent 72%)}
+.ft::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 22% 118%,rgba(224,99,31,.85) 0%,
+    rgba(199,84,26,.4) 30%,rgba(60,32,16,.28) 55%,transparent 76%)}
+.ft-in{position:relative;z-index:2;max-width:1280px;margin:0 auto}
+
+.ft-top{display:grid;grid-template-columns:1.1fr repeat(3,minmax(0,.72fr));gap:32px;align-items:start}
+
+/* ── bloc logo ── */
+.brand{display:flex;align-items:center;gap:16px}
+.brand svg{height:46px;flex:0 0 auto}
+.brand .word{font-size:clamp(20px,2vw,26px);font-weight:800;letter-spacing:.5px;
+  text-transform:uppercase;line-height:1.12}
+
+/* ── colonnes ── */
+.col h4{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(246,238,231,.55);font-weight:700;margin-bottom:18px}
+.col ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+.col a{color:#F6EEE7;text-decoration:none;font-size:18px;font-weight:500;letter-spacing:-.2px;
+  transition:color .25s ease,transform .25s var(--e);display:inline-block}
+.col a:hover{color:var(--bronze-2);transform:translateX(2px)}
+.col.tagline p{font-size:18px;font-weight:500;line-height:1.35;letter-spacing:-.2px;
+  color:#F6EEE7;max-width:20ch}
+
+.socials{display:flex;gap:14px;margin-top:22px}
+.socials a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(246,238,231,.28);
+  display:flex;align-items:center;justify-content:center;color:#F6EEE7;
+  transition:border-color .25s ease,background .25s ease,transform .25s var(--e)}
+.socials a:hover{border-color:var(--bronze-2);background:rgba(224,99,31,.14);transform:translateY(-2px)}
+
+/* ── bande newsletter ── */
+.updates{margin-top:64px}
+.updates h4{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(246,238,231,.55);font-weight:700;margin-bottom:16px}
+.nform{display:flex;gap:0;border:1px solid rgba(246,238,231,.3);border-radius:100px;
+  padding:5px;max-width:640px;background:rgba(0,0,0,.15)}
+.nform input{flex:1;min-width:0;background:none;border:0;padding:14px 22px;color:#F6EEE7;
+  font-family:var(--sans);font-size:15px}
+.nform input::placeholder{color:rgba(246,238,231,.4);letter-spacing:1px;text-transform:uppercase;font-size:12.5px}
+.nform input:focus{outline:none}
+.nform button{flex:0 0 auto;border:0;border-radius:100px;padding:0 26px;
+  background:#F6EEE7;color:#161310;font-family:var(--mono);font-size:12px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;
+  transition:background .25s ease}
+.nform button:hover{background:var(--bronze-2);color:#fff}
+
+/* ── bas de page ── */
+.ft-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  margin-top:70px;padding-top:26px;border-top:1px solid rgba(246,238,231,.14);
+  font-size:13.5px;color:rgba(246,238,231,.55)}
+.ft-bottom .legal{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.ft-bottom a{color:rgba(246,238,231,.7);text-decoration:none}
+.ft-bottom a:hover{color:#F6EEE7}
+.ft-bottom .dot{opacity:.5}
+
+/* ── responsive ── */
+@media (max-width:900px){
+  .ft{padding:60px 24px 28px}
+  .ft-top{grid-template-columns:1fr 1fr;row-gap:44px}
+  .brand{grid-column:1 / -1}
+  .updates{margin-top:48px}
+  .ft-bottom{margin-top:48px;flex-direction:column;align-items:flex-start}
+}
+@media (max-width:520px){
+  .ft-top{grid-template-columns:1fr}
+  .brand svg{height:38px}
+  .brand .word{font-size:18px}
+  .nform{flex-direction:column;border-radius:20px;gap:8px}
+  .nform button{padding:14px 22px}
+}
+@media (prefers-reduced-motion:reduce){
+  .col a,.socials a,.nform button{transition:none}
+}
+</style>
+</head>
+<body>
+
+<button class="tsw" id="tsw" type="button" aria-label="Changer de thème">
+  <svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+  <svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+</button>
+
+<div class="spacer">↓ le footer commence en dessous</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="ft">
+  <div class="ft-in">
+
+    <div class="ft-top">
+
+      <!-- logo -->
+      <div class="brand">
+        <svg viewBox="0 0 380 120"><g fill="#F6EEE7"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g><text x="66" y="100" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="100" fill="#F6EEE7" font-weight="600" letter-spacing="-4">ALOS</text></svg>
+      </div>
+
+      <!-- navigation -->
+      <div class="col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#">Accueil</a></li>
+          <li><a href="#">Automatisations</a></li>
+          <li><a href="#">Tarifs</a></li>
+          <li><a href="#">Comment ça marche</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+
+      <!-- accès -->
+      <div class="col">
+        <h4>Accès</h4>
+        <ul>
+          <li><a href="#">Mon espace</a></li>
+          <li><a href="#">Réserver une démo</a></li>
+        </ul>
+      </div>
+
+      <!-- qui sommes-nous + réseaux -->
+      <div class="col tagline">
+        <h4>Qui sommes-nous</h4>
+        <p>L'IA qui fait la paperasse des artisans du BTP.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/talos.ai.tech/" target="_blank" rel="noopener" aria-label="Instagram — @talos.ai.tech">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- newsletter -->
+    <div class="updates">
+      <h4>Restez informé</h4>
+      <form class="nform" onsubmit="return false">
+        <input type="email" placeholder="Adresse e-mail" required>
+        <button type="submit">S'inscrire</button>
+      </form>
+    </div>
+
+    <!-- bas de page -->
+    <div class="ft-bottom">
+      <div>© <span id="yr">2026</span> · Talos SAS · Tous droits réservés.</div>
+      <div class="legal">
+        <a href="#">Politique de confidentialité</a>
+        <span class="dot">·</span>
+        <a href="#">Conditions générales</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* preview seulement */
+  var root = document.documentElement;
+  document.getElementById('tsw').addEventListener('click', function(){
+    var n = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', n);
+    try { localStorage.setItem('talos-theme', n); } catch(e){}
+  });
+</script>
+</body>
+</html>

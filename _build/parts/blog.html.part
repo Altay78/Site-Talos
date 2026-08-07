@@ -1,0 +1,75 @@
+<section class="t-blog" id="blog">
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero">
+    <span class="halo"></span>
+    <div class="wrap">
+      <span class="eyebrow"><i></i>Le carnet de chantier</span>
+      <h1>La paperasse du bâtiment, <em>démontée</em> pièce par pièce.</h1>
+      <p class="lead">
+        Devis, relances, facturation 2026, trésorerie. Des méthodes testées chez de vrais
+        artisans, avec les chiffres, les modèles et le temps que ça fait gagner.
+        Rien de théorique.
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ═══ RUBRIQUES ═══ -->
+    <section class="rub" data-rub="Derniers articles">
+      <div class="rub-hd">
+        <div>
+          <h2>Derniers articles</h2>
+          <div class="sub">Les premiers chapitres du carnet.</div>
+        </div>
+        
+      </div>
+    <div class="bigs">
+      <a class="big" href="#" data-cat="Facturation 2026">
+        <span class="cov"><img src="photos/soir-ordinateur.jpg" alt="Un artisan devant son ordinateur portable, le soir, à la lueur d'une bougie" loading="lazy" decoding="async"></span>
+        <span class="meta"><span class="tag">Facturation 2026</span><span class="dot">·</span><span>2 août 2026</span><span class="dot">·</span><span>9 min</span></span>
+        <h3>Facturation électronique 2026 : le calendrier réel, et les 4 réglages à faire avant l'échéance</h3>
+        <p>Réception obligatoire pour tout le monde, émission par vagues, plateforme agréée, format Factur-X, e-reporting. On enlève le jargon et on ne garde que ce qui change concrètement pour une entreprise du bâtiment de 1 à 20 personnes.</p>
+        <span class="go">Lire l'article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="big" href="#" data-cat="Devis &amp; chiffrage">
+        <span class="cov"><img src="photos/chantier.jpg" alt="Chantier de maison en cours : échafaudage, charpente et briques" loading="lazy" decoding="async"></span>
+        <span class="meta"><span class="tag">Devis &amp; chiffrage</span><span class="dot">·</span><span>28 juillet 2026</span><span class="dot">·</span><span>6 min</span></span>
+        <h3>Relancer un devis sans passer pour un vendeur</h3>
+        <p>Trois messages, espacés au bon moment, qui font signer sans jamais donner l'impression d'insister. Les textes exacts sont dans l'article.</p>
+        <span class="go">Lire l'article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+      </a>
+    </div>
+    </section>
+    <div class="rub-sep"></div>
+
+    <!-- ═══ LA SUITE ═══ -->
+    <div class="soon">
+      <span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3.2"/></svg></span>
+      <div>
+        <b>Le reste du carnet est en cours d'écriture.</b>
+        <span>Impayés, trésorerie, organisation de chantier, cas clients : les prochains
+              articles arrivent. Laissez votre adresse pour les recevoir.</span>
+      </div>
+    </div>
+
+    <!-- ═══ LETTRE D'INFORMATION ═══ -->
+    <div class="letter" id="letter">
+      <div>
+        <h2>Un e-mail par mois. <em>Rien à jeter.</em></h2>
+        <p>Les échéances qui arrivent, un modèle prêt à l'emploi, et ce que les artisans
+           accompagnés ont changé ce mois-ci. Désinscription en un clic.</p>
+      </div>
+      <div>
+        <form id="letter-form">
+          <input type="email" placeholder="Votre adresse e-mail" required aria-label="Votre adresse e-mail">
+          <button type="submit">Je m'inscris</button>
+        </form>
+        <p class="ok">C'est noté — vous recevrez la prochaine édition.</p>
+        <p class="fine">Pas de publicité, pas de revente d'adresse.</p>
+      </div>
+    </div>
+
+  </div>
+</section>

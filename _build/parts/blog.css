@@ -1,0 +1,146 @@
+/* ═══════════════════════════════════════════════════════════════
+   BLOG — index éditorial par rubriques
+   Une rubrique = un titre, un lien « voir tout », et deux colonnes de
+   brèves (vignette + méta + titre). Les actualités maison passent en
+   grandes cartes en bas de page.
+   ═══════════════════════════════════════════════════════════════ */
+.t-blog{position:relative;overflow:hidden;
+  background:var(--ink);color:var(--parch);font-family:var(--sans);line-height:1.6}
+.t-blog .wrap{max-width:1228px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* ── HERO ── */
+.t-blog .hero{position:relative;padding:56px 0 44px}
+.t-blog .hero .halo{position:absolute;top:-260px;left:50%;transform:translateX(-50%);
+  width:960px;height:560px;border-radius:50%;filter:blur(140px);opacity:.18;
+  background:radial-gradient(closest-side,var(--bronze),transparent);pointer-events:none}
+html[data-theme="light"] .t-blog .hero .halo{opacity:.1}
+.t-blog .eyebrow{display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--line-2);border-radius:100px;padding:6px 15px;
+  font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--bronze-2)}
+.t-blog .eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--bronze);
+  box-shadow:0 0 0 4px rgba(var(--bronze-rgb),.18)}
+.t-blog .hero h1{margin:24px 0 0;max-width:900px;font-size:clamp(36px,5vw,60px);
+  font-weight:800;letter-spacing:-2.2px;line-height:1.03}
+.t-blog .hero h1 em{font-style:normal;
+  background:linear-gradient(100deg,var(--bronze) 0%,var(--bronze-2) 55%,var(--olivier) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.t-blog .hero .lead{margin-top:20px;max-width:640px;font-size:16.5px;
+  color:rgba(var(--parch-rgb),.6)}
+
+/* ── VIGNETTES GÉNÉRÉES ─────────────────────────────────────────
+   Pas d'images externes : chaque couverture est un dégradé propre à la
+   rubrique, strié d'une trame, avec l'initiale en filigrane. */
+.t-blog .cov{position:relative;overflow:hidden;flex:0 0 auto;border-radius:12px;
+  background:linear-gradient(135deg,var(--c1,#C2531A),var(--c2,#7A2E0E));isolation:isolate}
+/* photo : elle remplit la vignette, le dégradé reste visible tant qu'elle charge */
+.t-blog .cov img{width:100%;height:100%;object-fit:cover;display:block}
+/* la trame et l'initiale ne s'appliquent qu'aux vignettes sans photo */
+.t-blog .cov:has(img)::before,.t-blog .cov:has(img)::after{content:none}
+.t-blog .cov::before{content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(115deg,rgba(255,255,255,.07) 0 1px,transparent 1px 10px)}
+/* l'initiale sert de repère de rubrique, pas de motif : elle reste discrète
+   et sort du cadre pour ne jamais concurrencer le titre à côté */
+.t-blog .cov::after{content:attr(data-mono);position:absolute;right:-8%;bottom:-34%;
+  font:800 4.2em/1 var(--sans);letter-spacing:-.08em;color:rgba(255,255,255,.13)}
+.t-blog .cov[data-c="devis"]   {--c1:#C2531A;--c2:#7A2E0E}
+.t-blog .cov[data-c="factures"]{--c1:#B8862B;--c2:#6B4A12}
+.t-blog .cov[data-c="treso"]   {--c1:#A8451A;--c2:#4A1D08}
+.t-blog .cov[data-c="chantier"]{--c1:#8C6034;--c2:#3E2916}
+.t-blog .cov[data-c="talos"]   {--c1:#E0631F;--c2:#8C2F0A}
+
+/* ── MÉTA COMMUNE ── */
+.t-blog .meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:1.2px;
+  text-transform:uppercase;color:rgba(var(--parch-rgb),.45)}
+.t-blog .meta .tag{color:var(--bronze-2)}
+.t-blog .meta .dot{opacity:.4}
+
+/* ── RUBRIQUES ── */
+.t-blog .rub{padding-bottom:64px}
+.t-blog .rub-hd{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+  padding-bottom:22px}
+.t-blog .rub-hd h2{font-size:clamp(26px,3vw,38px);font-weight:800;letter-spacing:-1.4px;
+  line-height:1.1}
+.t-blog .rub-hd .sub{margin-top:8px;font-size:13.5px;color:rgba(var(--parch-rgb),.5)}
+.t-blog .rub-hd .all{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;
+  font-size:13.5px;font-weight:600;color:rgba(var(--parch-rgb),.6);text-decoration:none;
+  transition:color .25s ease}
+.t-blog .rub-hd .all:hover{color:var(--bronze-2)}
+.t-blog .rub-hd .all svg{transition:transform .3s var(--e)}
+.t-blog .rub-hd .all:hover svg{transform:translateX(3px)}
+
+.t-blog .posts{display:grid;grid-template-columns:1fr 1fr;
+  column-gap:56px;row-gap:0;border-top:1px solid var(--line)}
+.t-blog .post{display:flex;gap:18px;align-items:flex-start;padding:22px 0;
+  border-bottom:1px solid var(--line);text-decoration:none;color:inherit}
+.t-blog .post .cov{width:120px;height:78px;font-size:24px}
+.t-blog .post .bd{min-width:0;padding-top:2px}
+.t-blog .post h3{margin-top:8px;font-size:16.5px;font-weight:700;letter-spacing:-.5px;
+  line-height:1.3;transition:color .2s ease}
+.t-blog .post:hover h3{color:var(--bronze-2)}
+.t-blog .rub-sep{height:1px;background:var(--line);margin-bottom:64px}
+
+/* ── GRANDES CARTES (rubrique de moins de trois articles) ── */
+.t-blog .bigs{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.t-blog .big{display:block;text-decoration:none;color:inherit}
+.t-blog .big .cov{display:block;width:100%;aspect-ratio:16/9;border-radius:16px;
+  transition:transform .4s var(--e)}
+.t-blog .big:hover .cov{transform:translateY(-3px)}
+.t-blog .big .meta{display:flex;margin-top:18px}
+.t-blog .big h3{margin-top:10px;font-size:clamp(19px,2vw,26px);font-weight:800;
+  letter-spacing:-1px;line-height:1.16;transition:color .2s ease}
+.t-blog .big:hover h3{color:var(--bronze-2)}
+.t-blog .big p{margin-top:12px;font-size:14.5px;color:rgba(var(--parch-rgb),.6)}
+.t-blog .big .go{margin-top:16px;display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:700;color:var(--bronze-2)}
+.t-blog .big .go svg{transition:transform .3s var(--e)}
+.t-blog .big:hover .go svg{transform:translateX(4px)}
+
+/* ── LA SUITE ARRIVE ── */
+.t-blog .soon{display:flex;align-items:flex-start;gap:16px;padding:22px 24px;
+  margin-bottom:64px;border-radius:18px;border:1px dashed var(--line-2);
+  background:rgba(var(--parch-rgb),.02)}
+.t-blog .soon .ic{display:grid;place-items:center;width:40px;height:40px;flex:0 0 auto;
+  border-radius:12px;background:rgba(var(--bronze-rgb),.12);color:var(--bronze-2)}
+.t-blog .soon b{display:block;font-size:15.5px;font-weight:700;letter-spacing:-.3px}
+.t-blog .soon span{display:block;margin-top:5px;font-size:13.5px;line-height:1.5;
+  color:rgba(var(--parch-rgb),.55)}
+
+/* ── LETTRE D'INFORMATION ── */
+.t-blog .letter{margin:8px 0 96px;padding:44px 40px;border-radius:24px;
+  border:1px solid rgba(var(--bronze-rgb),.35);
+  background:linear-gradient(140deg,rgba(var(--bronze-rgb),.16),rgba(var(--olivier-rgb),.08));
+  display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center}
+.t-blog .letter h2{font-size:clamp(24px,2.6vw,32px);font-weight:800;letter-spacing:-1.2px;
+  line-height:1.12}
+.t-blog .letter h2 em{font-style:normal;color:var(--bronze-2)}
+.t-blog .letter p{margin-top:12px;font-size:14.5px;color:rgba(var(--parch-rgb),.62)}
+.t-blog .letter form{display:flex;gap:10px;flex-wrap:wrap}
+.t-blog .letter input{flex:1 1 200px;min-width:0;height:52px;padding:0 20px;border-radius:100px;
+  border:1px solid var(--line-2);background:rgba(var(--parch-rgb),.05);color:var(--parch);
+  font:400 14.5px/1 var(--sans);outline:none;transition:border-color .25s ease}
+.t-blog .letter input:focus{border-color:var(--bronze)}
+html[data-theme="light"] .t-blog .letter input{background:#fff}
+.t-blog .letter button{height:52px;padding:0 26px;border-radius:100px;border:0;cursor:pointer;
+  background:var(--bronze);color:#fff;font:700 14.5px/1 var(--sans);
+  transition:background .25s ease}
+.t-blog .letter button:hover{background:var(--bronze-2)}
+.t-blog .letter .ok{display:none;font-size:14.5px;font-weight:600;color:var(--bronze-2)}
+.t-blog .letter.sent form{display:none}
+.t-blog .letter.sent .ok{display:block}
+.t-blog .letter .fine{margin-top:12px;font-size:11.5px;color:rgba(var(--parch-rgb),.42)}
+
+/* ── RESPONSIVE ── */
+@media (max-width:980px){
+  .t-blog .posts{grid-template-columns:1fr;column-gap:0}
+  .t-blog .bigs{grid-template-columns:1fr}
+  .t-blog .letter{grid-template-columns:1fr;padding:32px 24px}
+}
+@media (max-width:600px){
+  .t-blog .hero{padding:40px 0 32px}
+  .t-blog .post .cov{width:88px;height:62px;font-size:18px}
+  .t-blog .rub{padding-bottom:48px}
+  .t-blog .rub-sep{margin-bottom:48px}
+  .t-blog .rub-hd{flex-direction:column;align-items:flex-start;gap:10px}
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talos — 3 colorways à trancher</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#070605;color:#F5EDDC;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;padding:42px 40px;}
+  .head{text-align:center;margin-bottom:34px;}
+  .head .t{font-family:'SF Mono',monospace;font-size:12px;letter-spacing:3px;color:#A8763B;text-transform:uppercase;}
+  .head h1{font-size:34px;font-weight:700;letter-spacing:-1px;margin-top:8px;}
+  .head h1 em{font-family:Georgia,serif;font-style:italic;font-weight:400;color:#E3B264;}
+  .head p{color:#CFC2A6;font-size:14px;margin-top:8px;}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1360px;margin:0 auto;}
+
+  /* a column = a colorway, all components read its vars */
+  .col{border-radius:20px;overflow:hidden;border:1px solid rgba(245,237,220,0.10);background:var(--bg);position:relative;}
+  .col .grain{position:absolute;inset:0;opacity:0.4;mix-blend-mode:overlay;pointer-events:none;}
+  .cw-head{padding:22px 24px 0;position:relative;z-index:2;}
+  .cw-name{font-size:24px;font-weight:700;letter-spacing:-0.5px;color:var(--text);}
+  .cw-tag{font-family:'SF Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-top:4px;}
+  .cw-mood{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.4;}
+
+  .strip{display:flex;gap:0;margin:18px 24px 0;border-radius:8px;overflow:hidden;border:1px solid rgba(245,237,220,0.08);position:relative;z-index:2;}
+  .strip .s{flex:1;height:44px;}
+  .hexrow{display:flex;gap:0;margin:6px 24px 0;position:relative;z-index:2;}
+  .hexrow .h{flex:1;font-family:'SF Mono',monospace;font-size:8.5px;color:var(--muted);text-align:center;letter-spacing:0.3px;}
+
+  /* mini hero */
+  .mini-hero{margin:24px;border-radius:14px;padding:26px 22px;position:relative;z-index:2;overflow:hidden;
+    background:var(--surf);border:1px solid rgba(245,237,220,0.08);}
+  .mini-hero .glow{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% -10%, var(--glow), transparent 60%);}
+  .mini-chip{position:relative;display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:100px;font-size:11px;color:var(--muted);background:rgba(245,237,220,0.04);border:1px solid rgba(245,237,220,0.10);margin-bottom:16px;}
+  .mini-chip .d{width:6px;height:6px;border-radius:50%;background:var(--green);}
+  .mini-hero h2{position:relative;font-size:30px;font-weight:700;letter-spacing:-1.5px;line-height:1.04;color:var(--text);}
+  .mini-hero h2 em{font-family:Georgia,serif;font-style:italic;font-weight:400;color:var(--gilt);}
+  .mini-hero .lead{position:relative;font-size:12.5px;color:var(--muted);margin:12px 0 18px;line-height:1.45;}
+  .mini-btn{position:relative;display:inline-block;padding:11px 20px;border-radius:100px;font-size:13px;font-weight:600;color:var(--btn-ink);
+    background:var(--btn);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25);}
+
+  /* mini card */
+  .mini-card{margin:0 24px 24px;border-radius:14px;padding:18px 20px;position:relative;z-index:2;
+    background:var(--surf);border:1px solid rgba(245,237,220,0.08);}
+  .mini-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gilt),transparent);opacity:0.5;}
+  .mc-row{display:flex;align-items:center;gap:12px;}
+  .mc-ic{width:36px;height:36px;border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;
+    background:var(--ic-bg);border:1px solid var(--ic-bd);}
+  .mc-ic svg{width:18px;height:18px;stroke:var(--gilt);fill:none;stroke-width:1.6;}
+  .mc-tt{font-size:14.5px;font-weight:700;color:var(--text);}
+  .mc-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+  .mc-bars{display:flex;align-items:flex-end;gap:5px;height:38px;margin-top:16px;}
+  .mc-bars span{flex:1;border-radius:3px 3px 0 0;background:var(--accent);opacity:0.8;}
+  .mc-bars span.g{background:var(--green);}
+  .mono{font-family:'SF Mono',monospace;}
+
+  /* ---------- COLORWAY A — FORGE ---------- */
+  .cw-forge{
+    --bg:#0B0806; --surf:#181009; --text:#F5EDDC; --muted:#C7B795;
+    --accent:#B97A33; --gilt:#E8B45F; --green:#6E857A; --glow:rgba(185,122,51,0.20);
+    --btn:linear-gradient(180deg,#E8B45F,#B97A33); --btn-ink:#1a1006;
+    --ic-bg:rgba(185,122,51,0.14); --ic-bd:rgba(185,122,51,0.35);
+  }
+  /* ---------- COLORWAY B — PATINE ---------- */
+  .cw-patine{
+    --bg:#0A0807; --surf:#15100C; --text:#F5EDDC; --muted:#CFC2A6;
+    --accent:#A8763B; --gilt:#E3B264; --green:#6E857A; --glow:rgba(168,118,59,0.18);
+    --btn:linear-gradient(180deg,#E3B264,#A8763B); --btn-ink:#1a130d;
+    --ic-bg:rgba(168,118,59,0.12); --ic-bd:rgba(168,118,59,0.32);
+  }
+  /* ---------- COLORWAY C — OXYDE ---------- */
+  .cw-oxyde{
+    --bg:#080A09; --surf:#111512; --text:#EDE7D6; --muted:#AEB9AC;
+    --accent:#9A7339; --gilt:#CBA45A; --green:#8FA398; --glow:rgba(143,163,152,0.16);
+    --btn:linear-gradient(180deg,#A4B4A8,#7E9587); --btn-ink:#0e1410;
+    --ic-bg:rgba(143,163,152,0.14); --ic-bd:rgba(143,163,152,0.34);
+  }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="t">Direction couleur · à trancher</div>
+    <h1>Trois <em>colorways.</em> Le bronze reste le héros.</h1>
+    <p>Même composition, trois réglages. Ce qui change : la température des noirs, la richesse du bronze, et la présence du vert-de-gris.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- FORGE -->
+    <div class="col cw-forge">
+      <div class="cw-head">
+        <div class="cw-name">Forge</div>
+        <div class="cw-tag">Chaud · bronze riche · intense</div>
+        <div class="cw-mood">Le métal en fusion. Masculin, dense, dramatique. Le vert quasi absent.</div>
+      </div>
+      <div class="strip">
+        <div class="s" style="background:#0B0806"></div><div class="s" style="background:#181009"></div>
+        <div class="s" style="background:#B97A33"></div><div class="s" style="background:#E8B45F"></div>
+        <div class="s" style="background:#F5EDDC"></div><div class="s" style="background:#6E857A"></div>
+      </div>
+      <div class="hexrow"><div class="h">0B0806</div><div class="h">181009</div><div class="h">B97A33</div><div class="h">E8B45F</div><div class="h">F5EDDC</div><div class="h">6E857A</div></div>
+
+      <div class="mini-hero">
+        <div class="glow"></div>
+        <div class="mini-chip"><span class="d"></span> Bêta</div>
+        <h2>On <em>forge</em><br>le reste.</h2>
+        <div class="lead">Devis, relances, factures — dans l'ombre, pendant que vous vivez.</div>
+        <span class="mini-btn">Réserver une démo →</span>
+      </div>
+      <div class="mini-card">
+        <div class="mc-row">
+          <div class="mc-ic"><svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 3 6-8"/><path d="M3 21h18"/></svg></div>
+          <div><div class="mc-tt">On fait remonter</div><div class="mc-sub mono">+74% DE DEVIS SIGNÉS</div></div>
+        </div>
+        <div class="mc-bars"><span style="height:40%"></span><span style="height:58%"></span><span style="height:46%"></span><span style="height:72%"></span><span class="g" style="height:100%"></span><span style="height:64%"></span></div>
+      </div>
+      <svg class="grain"><filter id="ga"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer></filter><rect width="100%" height="100%" filter="url(#ga)"/></svg>
+    </div>
+
+    <!-- PATINE -->
+    <div class="col cw-patine">
+      <div class="cw-head">
+        <div class="cw-name">Patine <span style="font-size:11px;color:var(--green)" class="mono">· PROPOSÉ</span></div>
+        <div class="cw-tag">Équilibré · bronze antique · héritage</div>
+        <div class="cw-mood">Le bronze ancien, sourd. Vert-de-gris en second discret. Élégant, premium, intemporel.</div>
+      </div>
+      <div class="strip">
+        <div class="s" style="background:#0A0807"></div><div class="s" style="background:#15100C"></div>
+        <div class="s" style="background:#A8763B"></div><div class="s" style="background:#E3B264"></div>
+        <div class="s" style="background:#F5EDDC"></div><div class="s" style="background:#6E857A"></div>
+      </div>
+      <div class="hexrow"><div class="h">0A0807</div><div class="h">15100C</div><div class="h">A8763B</div><div class="h">E3B264</div><div class="h">F5EDDC</div><div class="h">6E857A</div></div>
+
+      <div class="mini-hero">
+        <div class="glow"></div>
+        <div class="mini-chip"><span class="d"></span> Bêta</div>
+        <h2>On <em>forge</em><br>le reste.</h2>
+        <div class="lead">Devis, relances, factures — dans l'ombre, pendant que vous vivez.</div>
+        <span class="mini-btn">Réserver une démo →</span>
+      </div>
+      <div class="mini-card">
+        <div class="mc-row">
+          <div class="mc-ic"><svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 3 6-8"/><path d="M3 21h18"/></svg></div>
+          <div><div class="mc-tt">On fait remonter</div><div class="mc-sub mono">+74% DE DEVIS SIGNÉS</div></div>
+        </div>
+        <div class="mc-bars"><span style="height:40%"></span><span style="height:58%"></span><span style="height:46%"></span><span style="height:72%"></span><span class="g" style="height:100%"></span><span style="height:64%"></span></div>
+      </div>
+      <svg class="grain"><filter id="gb"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer></filter><rect width="100%" height="100%" filter="url(#gb)"/></svg>
+    </div>
+
+    <!-- OXYDE -->
+    <div class="col cw-oxyde">
+      <div class="cw-head">
+        <div class="cw-name">Oxyde</div>
+        <div class="cw-tag">Froid · vert-de-gris présent · musée</div>
+        <div class="cw-mood">Le bronze oxydé d'un objet de musée. Le vert-de-gris co-star. Calme, éditorial, sophistiqué.</div>
+      </div>
+      <div class="strip">
+        <div class="s" style="background:#080A09"></div><div class="s" style="background:#111512"></div>
+        <div class="s" style="background:#9A7339"></div><div class="s" style="background:#8FA398"></div>
+        <div class="s" style="background:#EDE7D6"></div><div class="s" style="background:#CBA45A"></div>
+      </div>
+      <div class="hexrow"><div class="h">080A09</div><div class="h">111512</div><div class="h">9A7339</div><div class="h">8FA398</div><div class="h">EDE7D6</div><div class="h">CBA45A</div></div>
+
+      <div class="mini-hero">
+        <div class="glow"></div>
+        <div class="mini-chip"><span class="d"></span> Bêta</div>
+        <h2>On <em>forge</em><br>le reste.</h2>
+        <div class="lead">Devis, relances, factures — dans l'ombre, pendant que vous vivez.</div>
+        <span class="mini-btn">Réserver une démo →</span>
+      </div>
+      <div class="mini-card">
+        <div class="mc-row">
+          <div class="mc-ic"><svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 3 6-8"/><path d="M3 21h18"/></svg></div>
+          <div><div class="mc-tt">On fait remonter</div><div class="mc-sub mono">+74% DE DEVIS SIGNÉS</div></div>
+        </div>
+        <div class="mc-bars"><span style="height:40%"></span><span style="height:58%"></span><span style="height:46%"></span><span style="height:72%"></span><span class="g" style="height:100%"></span><span style="height:64%"></span></div>
+      </div>
+      <svg class="grain"><filter id="gc"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer></filter><rect width="100%" height="100%" filter="url(#gc)"/></svg>
+    </div>
+
+  </div>
+</body>
+</html>

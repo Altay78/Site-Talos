@@ -1,0 +1,25 @@
+/* le simulateur n'avait pas de conteneur : il vivait directement dans la page */
+.t-roi{position:relative;overflow:hidden;line-height:1.6;font-family:var(--sans)}
+/* halos : `fixed` dans le fichier source  ils suivaient tout le scroll */
+.t-roi .orb{position:absolute}
+/* mme largeur de contenu que .section-shell (1180 px) */
+.t-roi .wrap{max-width:1228px;padding-left:24px;padding-right:24px}
+/* raccords verticaux entre sections */
+.t-story,.t-how,.t-roi,.t-cat{border-top:1px solid var(--line)}
+
+
+/* ═══ SIMULATEUR — palette privée (flame/violet/void) remappée sur la DA ═══ */
+.t-roi{
+  --flame:var(--bronze); --primary:var(--bronze-2); --violet:var(--olivier);
+  --glass:rgba(var(--parch-rgb),.03); --glass-2:rgba(var(--parch-rgb),.055);
+  --hair:var(--line); --hair-2:var(--line-2);
+  --ink-dim:rgba(var(--parch-rgb),.62); --ink-mute:rgba(var(--parch-rgb),.42);
+  --slate:var(--graphite);
+  --display:var(--sans); --body:var(--sans); --label:var(--mono);
+  --r-md:12px; --r-lg:16px; --r-xl:24px;
+  background:var(--ink)}
+html[data-theme="light"] .t-roi .glass{box-shadow:0 12px 30px rgba(40,25,16,.05)}
+html[data-theme="light"] .t-roi .cta{box-shadow:0 12px 30px rgba(40,25,16,.22)}
+html[data-theme="light"] .t-roi .cta:hover{box-shadow:0 18px 40px rgba(40,25,16,.28)}
+html[data-theme="light"] .t-roi .orb{opacity:.09}
+

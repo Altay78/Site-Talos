@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talos — Comment ça marche</title>
+<script>(function(){try{var t=localStorage.getItem('talos-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<style>
+/* ══════════════════════════════════════════════════════════════
+   ⚠️  BLOC DE PREVIEW — à SUPPRIMER à l'intégration.
+   Tokens déjà fournis par talos-site/v2.css.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --bronze:#E0631F; --bronze-2:#F4823E; --bronze-rgb:224,99,31;
+  --parch:#F6EEE7; --parch-rgb:246,238,231;
+  --lin:#AB9F95;
+  --ink:#140F0C; --ink-2:#1C1611; --ink-3:#241B15;
+  --line:rgba(246,238,231,.10); --line-2:rgba(246,238,231,.18);
+  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --e:cubic-bezier(.16,1,.3,1);
+}
+html[data-theme="light"]{
+  --bronze:#C5531C; --bronze-2:#E0631F; --bronze-rgb:197,83,28;
+  --parch:#1C1310; --parch-rgb:28,19,16;
+  --lin:#6E6058;
+  --ink:#FBF6F2; --ink-2:#FFFFFF; --ink-3:#F4EBE3;
+  --line:rgba(40,25,16,.11); --line-2:rgba(40,25,16,.2);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--parch);font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+.tsw{position:fixed;z-index:99;top:18px;right:18px;width:40px;height:40px;border-radius:10px;cursor:pointer;
+  background:none;border:1px solid var(--line);color:var(--parch);display:flex;align-items:center;justify-content:center}
+.tsw .sun{display:none} html[data-theme="light"] .tsw .sun{display:block}
+html[data-theme="light"] .tsw .moon{display:none}
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION « COMMENT ÇA MARCHE » — le code à conserver
+   ══════════════════════════════════════════════════════════════ */
+.how{position:relative;padding:110px 32px 120px}
+.how-in{max-width:1180px;margin:0 auto}
+
+/* ── en-tête, aligné à gauche ── */
+.how-head{max-width:640px;margin-bottom:56px}
+.how-head h2{font-size:clamp(34px,4.6vw,54px);font-weight:800;letter-spacing:-2.2px;line-height:1.02}
+.how-head p{font-size:clamp(15px,1.4vw,18px);line-height:1.62;color:var(--lin);margin-top:20px}
+
+/* ── les 3 cartes ── */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{border:1px solid var(--line);border-radius:24px;overflow:hidden;
+  background:var(--ink-2);display:flex;flex-direction:column;
+  transition:border-color .45s var(--e),transform .45s var(--e)}
+html[data-theme="light"] .card{background:#fff;box-shadow:0 1px 2px rgba(40,25,16,.04)}
+.card:hover{border-color:var(--line-2);transform:translateY(-3px)}
+
+/* flex:1 → le bloc texte occupe la hauteur restante, ce qui aligne
+   les filets et les zones visuelles des 3 cartes malgré des
+   sous-textes de longueurs différentes */
+.card-txt{flex:1;padding:30px 30px 28px}
+.num{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;
+  border:1px solid var(--line-2);color:var(--lin);font-size:14px;font-weight:600;
+  font-variant-numeric:tabular-nums;margin-bottom:26px}
+.card h3{font-size:clamp(19px,1.75vw,23px);font-weight:700;letter-spacing:-.7px;line-height:1.2}
+.card-txt p{font-size:15px;line-height:1.55;color:var(--lin);margin-top:10px}
+
+/* ── zone visuelle : bord à bord, rognée par le bas de la carte ── */
+.vis{position:relative;height:300px;border-top:1px solid var(--line);overflow:hidden;
+  background:var(--ink-3)}
+html[data-theme="light"] .vis{background:#FAF7F4}
+/* coins arrondis en haut seulement : le bas est rogné par la carte.
+   L'ombre détache la capture du fond, qui est presque de la même teinte. */
+.vis img{position:absolute;left:50%;top:24px;transform:translateX(-50%);
+  /* plafond en px : sans lui, sur une carte empilée large la capture
+     est étirée et seule une mince bande du haut reste visible */
+  width:auto;max-width:min(calc(100% - 48px),280px);display:block;
+  border-radius:14px 14px 0 0;
+  box-shadow:0 8px 30px rgba(0,0,0,.42),0 0 0 1px rgba(255,255,255,.06)}
+html[data-theme="light"] .vis img{
+  box-shadow:0 8px 26px rgba(40,25,16,.13),0 0 0 1px rgba(40,25,16,.06)}
+/* gabarit affiché tant qu'aucun visuel n'est fourni */
+.vis .empty{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:9px;text-align:center;padding:24px;
+  background:repeating-linear-gradient(45deg,rgba(var(--parch-rgb),.03) 0 12px,transparent 12px 24px);
+  color:var(--lin)}
+.vis .empty b{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--bronze);font-weight:700}
+.vis .empty span{font-size:12.5px;line-height:1.5;max-width:200px}
+.vis .empty i{font-family:var(--mono);font-style:normal;font-size:10.5px;opacity:.65}
+
+/* ── badges de réassurance ── */
+.trust{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin-top:54px}
+.trust .lbl{font-size:15px;color:var(--lin);margin-right:4px}
+.trust .pill{display:inline-flex;align-items:center;gap:7px;padding:9px 17px;border-radius:100px;
+  border:1px solid var(--line);background:var(--ink-2);font-size:14px;font-weight:600;letter-spacing:-.2px}
+html[data-theme="light"] .trust .pill{background:#fff;box-shadow:0 1px 2px rgba(40,25,16,.05)}
+.trust .pill svg{color:var(--bronze);flex:0 0 auto}
+
+/* ── responsive ── */
+@media (max-width:960px){
+  .how{padding:80px 22px 88px}
+  /* empilées, on borne la largeur : une carte de 724 px avec un visuel
+     de 280 px centré laisse un vide disgracieux */
+  .cards{grid-template-columns:1fr;gap:16px;max-width:520px;margin-inline:auto}
+  .how-head{margin-bottom:40px}
+  .card-txt{padding:26px 24px 24px}
+  .num{margin-bottom:20px}
+  .vis{height:270px}
+  .trust{margin-top:40px;gap:8px}
+  .trust .lbl{width:100%;text-align:center;margin:0 0 6px}
+}
+@media (prefers-reduced-motion:reduce){ .card{transition:none} .card:hover{transform:none} }
+</style>
+</head>
+<body>
+
+<button class="tsw" id="tsw" type="button" aria-label="Changer de thème">
+  <svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+  <svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+</button>
+
+<!-- ══════════ SECTION ══════════ -->
+<section class="how" id="how">
+  <div class="how-in">
+
+    <div class="how-head">
+      <h2>Comment ça marche.</h2>
+      <p>Dictez votre message une fois, laissez Talos faire le reste — un devis prêt
+         en 30 secondes, validé et envoyé à votre client.</p>
+    </div>
+
+    <div class="cards">
+
+      <article class="card">
+        <div class="card-txt">
+          <span class="num">1</span>
+          <h3>Dictez votre note vocale</h3>
+          <p>Décrivez le travail sur WhatsApp comme vous le feriez à votre associé.</p>
+        </div>
+        <div class="vis">
+          <div class="empty"><b>Visuel 01</b><span>Dictez votre note vocale</span><i>PNG · largeur libre</i></div>
+          <img id="vis0" alt="">
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-txt">
+          <span class="num">2</span>
+          <h3>Talos chiffre et structure</h3>
+          <p>L'IA extrait les prestations, calcule la TVA BTP et génère le PDF. Vous pouvez modifier, corriger si besoin.</p>
+        </div>
+        <div class="vis">
+          <div class="empty"><b>Visuel 02</b><span>Talos chiffre et structure</span><i>PNG · largeur libre</i></div>
+          <img id="vis1" alt="">
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-txt">
+          <span class="num">3</span>
+          <h3>Validez et envoyez en 1 clic</h3>
+          <p>Votre client reçoit un devis professionnel par SMS ou email.</p>
+        </div>
+        <div class="vis">
+          <div class="empty"><b>Visuel 03</b><span>Validez et envoyez en 1 clic</span><i>PNG · largeur libre</i></div>
+          <img id="vis2" alt="">
+        </div>
+      </article>
+
+    </div>
+
+    <div class="trust">
+      <span class="lbl">Sans mauvaise surprise</span>
+      <span class="pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6.5"/></svg>
+        0 formation nécessaire
+      </span>
+      <span class="pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6l7-3z"/></svg>
+        Hébergé en France 🇫🇷
+      </span>
+      <span class="pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3.5a2.5 2.5 0 0 1 3.5 3.5L8 19.5 3 21l1.5-5z"/></svg>
+        100 % modifiable
+      </span>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function(){
+  /* ═══════════════════════════════════════════════════════════
+     👉 TES VISUELS ICI — un par carte, dans l'ordre.
+     Laisse la chaîne vide tant que tu n'as pas l'image :
+     le gabarit rayé reste affiché à la place.
+     ═══════════════════════════════════════════════════════════ */
+  var SHOTS = [
+    'shots/cm-01-note-vocale.png',    // 01 · Dictez votre note vocale
+    'shots/cm-02-edition-devis.png',  // 02 · Talos chiffre et structure
+    'shots/cm-03-devis-envoye.png'    // 03 · Validez et envoyez en 1 clic
+  ];
+
+  // on retire l'<img> sans source, sinon certains navigateurs
+  // affichent l'icône « image cassée » par-dessus le gabarit
+  SHOTS.forEach(function(src, i){
+    var img = document.getElementById('vis' + i);
+    if (src) { img.src = src; } else { img.remove(); }
+  });
+
+  /* preview seulement */
+  var root = document.documentElement;
+  document.getElementById('tsw').addEventListener('click', function(){
+    var n = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', n);
+    try { localStorage.setItem('talos-theme', n); } catch(e){}
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talos — palettes vertes (sur anthracite)</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#0e110f;color:#EEF3EF;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;padding:42px 40px;}
+  .head{text-align:center;margin-bottom:34px;}
+  .head .t{font-family:'SF Mono',monospace;font-size:12px;letter-spacing:3px;color:#34D6A0;text-transform:uppercase;}
+  .head h1{font-size:34px;font-weight:700;letter-spacing:-1px;margin-top:8px;}
+  .head h1 em{font-family:Georgia,serif;font-style:italic;font-weight:400;color:#34D6A0;}
+  .head p{color:#9FB0A6;font-size:14px;margin-top:8px;}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1360px;margin:0 auto;}
+  .col{border-radius:20px;overflow:hidden;border:1px solid rgba(238,243,239,0.10);background:var(--bg);position:relative;}
+  .col .grain{position:absolute;inset:0;opacity:0.35;mix-blend-mode:overlay;pointer-events:none;}
+  .cw-head{padding:22px 24px 0;position:relative;z-index:2;}
+  .cw-name{font-size:24px;font-weight:700;letter-spacing:-0.5px;color:var(--text);}
+  .cw-tag{font-family:'SF Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-top:4px;}
+  .cw-mood{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.4;}
+  .cw-btp{font-size:11px;color:var(--accent-hi);margin-top:8px;font-family:'SF Mono',monospace;letter-spacing:0.5px;}
+
+  .strip{display:flex;margin:16px 24px 0;border-radius:8px;overflow:hidden;border:1px solid rgba(238,243,239,0.08);position:relative;z-index:2;}
+  .strip .s{flex:1;height:44px;}
+  .hexrow{display:flex;margin:6px 24px 0;position:relative;z-index:2;}
+  .hexrow .h{flex:1;font-family:'SF Mono',monospace;font-size:8.5px;color:var(--muted);text-align:center;}
+
+  .mini-hero{margin:24px;border-radius:14px;padding:26px 22px;position:relative;z-index:2;overflow:hidden;background:var(--surf);border:1px solid rgba(238,243,239,0.08);}
+  .mini-hero .glow{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% -10%, var(--glow), transparent 60%);}
+  .mini-chip{position:relative;display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:100px;font-size:11px;color:var(--muted);background:rgba(238,243,239,0.04);border:1px solid rgba(238,243,239,0.10);margin-bottom:16px;}
+  .mini-chip .d{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 7px var(--accent);}
+  .mini-hero h2{position:relative;font-size:30px;font-weight:700;letter-spacing:-1.5px;line-height:1.04;color:var(--text);}
+  .mini-hero h2 em{font-family:Georgia,serif;font-style:italic;font-weight:400;color:var(--accent-hi);}
+  .mini-hero .lead{position:relative;font-size:12.5px;color:var(--muted);margin:12px 0 18px;line-height:1.45;}
+  .mini-btn{position:relative;display:inline-block;padding:11px 20px;border-radius:100px;font-size:13px;font-weight:600;color:var(--btn-ink);background:var(--btn);box-shadow:0 8px 22px var(--btn-glow),inset 0 1px 0 rgba(255,255,255,0.25);}
+
+  .mini-card{margin:0 24px 24px;border-radius:14px;padding:18px 20px;position:relative;z-index:2;background:var(--surf);border:1px solid rgba(238,243,239,0.08);}
+  .mini-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.6;}
+  .mc-row{display:flex;align-items:center;gap:12px;}
+  .mc-ic{width:36px;height:36px;border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--ic-bg);border:1px solid var(--ic-bd);}
+  .mc-ic svg{width:18px;height:18px;stroke:var(--accent-hi);fill:none;stroke-width:1.6;}
+  .mc-tt{font-size:14.5px;font-weight:700;color:var(--text);}
+  .mc-sub{font-size:11px;color:var(--muted);margin-top:2px;font-family:'SF Mono',monospace;letter-spacing:0.5px;}
+  .mc-bars{display:flex;align-items:flex-end;gap:5px;height:38px;margin-top:16px;}
+  .mc-bars span{flex:1;border-radius:3px 3px 0 0;background:var(--accent);opacity:0.5;}
+  .mc-bars span.hi{opacity:1;background:var(--accent-hi);}
+
+  /* A — ÉMERAUDE */
+  .cw-emeraude{
+    --bg:#121815; --surf:#1A211C; --text:#EEF3EF; --muted:#9FB0A6;
+    --accent:#10B981; --accent-hi:#3FDDA6; --glow:rgba(16,185,129,0.22);
+    --btn:linear-gradient(180deg,#34D6A0,#0E9F6E); --btn-ink:#06140d; --btn-glow:rgba(16,185,129,0.32);
+    --ic-bg:rgba(16,185,129,0.14); --ic-bd:rgba(16,185,129,0.34);
+  }
+  /* B — SAUGE */
+  .cw-sauge{
+    --bg:#16191A; --surf:#1F2422; --text:#F0F2EF; --muted:#A6AFA8;
+    --accent:#7FA88E; --accent-hi:#A6CCB2; --glow:rgba(127,168,142,0.20);
+    --btn:linear-gradient(180deg,#A6CCB2,#6E9580); --btn-ink:#0e1713; --btn-glow:rgba(127,168,142,0.28);
+    --ic-bg:rgba(127,168,142,0.16); --ic-bd:rgba(127,168,142,0.36);
+  }
+  /* C — LIME */
+  .cw-lime{
+    --bg:#14160F; --surf:#1D2018; --text:#F1F4EC; --muted:#AAB29E;
+    --accent:#A8E05F; --accent-hi:#C6F47C; --glow:rgba(168,224,95,0.20);
+    --btn:linear-gradient(180deg,#C6F47C,#8FC23E); --btn-ink:#10160a; --btn-glow:rgba(168,224,95,0.30);
+    --ic-bg:rgba(168,224,95,0.15); --ic-bd:rgba(168,224,95,0.35);
+  }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="t">Direction couleur · vert sur anthracite</div>
+    <h1>Trois <em>verts</em> premium.</h1>
+    <p>Vert = croissance, « go », devis signé, éco-construction. Et c'est crédible BTP sans tomber dans le chantier cheap.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- ÉMERAUDE -->
+    <div class="col cw-emeraude">
+      <div class="cw-head">
+        <div class="cw-name">Émeraude</div>
+        <div class="cw-tag">Vert profond · premium</div>
+        <div class="cw-mood">Le vert riche et confiant. Croissance, argent, robustesse. Premium et énergique à la fois.</div>
+        <div class="cw-btp">▸ BTP : très bon — solide & moderne</div>
+      </div>
+      <div class="strip"><div class="s" style="background:#121815"></div><div class="s" style="background:#1A211C"></div><div class="s" style="background:#0E9F6E"></div><div class="s" style="background:#10B981"></div><div class="s" style="background:#3FDDA6"></div><div class="s" style="background:#EEF3EF"></div></div>
+      <div class="hexrow"><div class="h">121815</div><div class="h">1A211C</div><div class="h">0E9F6E</div><div class="h">10B981</div><div class="h">3FDDA6</div><div class="h">EEF3EF</div></div>
+      <div class="mini-hero"><div class="glow"></div><div class="mini-chip"><span class="d"></span> Bêta</div><h2>On <em>forge</em><br>le reste.</h2><div class="lead">Devis, relances, factures — pendant que vous faites ce qui compte.</div><span class="mini-btn">Réserver une démo →</span></div>
+      <div class="mini-card"><div class="mc-row"><div class="mc-ic"><svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 3 6-8"/><path d="M3 21h18"/></svg></div><div><div class="mc-tt">On fait remonter</div><div class="mc-sub">+74% DE DEVIS SIGNÉS</div></div></div><div class="mc-bars"><span style="height:40%"></span><span style="height:58%"></span><span style="height:46%"></span><span style="height:72%"></span><span class="hi" style="height:100%"></span><span style="height:64%"></span></div></div>
+      <svg class="grain"><filter id="ga"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer></filter><rect width="100%" height="100%" filter="url(#ga)"/></svg>
+    </div>
+
+    <!-- SAUGE -->
+    <div class="col cw-sauge">
+      <div class="cw-head">
+        <div class="cw-name">Sauge</div>
+        <div class="cw-tag">Vert sourd · éditorial</div>
+        <div class="cw-mood">Le vert eucalyptus, sourd et calme. Organique, apaisant, haut de gamme (style Verdant). Le plus doux.</div>
+        <div class="cw-btp">▸ BTP : ok mais plutôt bien-être/coach</div>
+      </div>
+      <div class="strip"><div class="s" style="background:#16191A"></div><div class="s" style="background:#1F2422"></div><div class="s" style="background:#5E8570"></div><div class="s" style="background:#7FA88E"></div><div class="s" style="background:#A6CCB2"></div><div class="s" style="background:#F0F2EF"></div></div>
+      <div class="hexrow"><div class="h">16191A</div><div class="h">1F2422</div><div class="h">5E8570</div><div class="h">7FA88E</div><div class="h">A6CCB2</div><div class="h">F0F2EF</div></div>
+      <div class="mini-hero"><div class="glow"></div><div class="mini-chip"><span class="d"></span> Bêta</div><h2>On <em>forge</em><br>le reste.</h2><div class="lead">Devis, relances, factures — pendant que vous faites ce qui compte.</div><span class="mini-btn">Réserver une démo →</span></div>
+      <div class="mini-card"><div class="mc-row"><div class="mc-ic"><svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 3 6-8"/><path d="M3 21h18"/></svg></div><div><div class="mc-tt">On fait remonter</div><div class="mc-sub">+74% DE DEVIS SIGNÉS</div></div></div><div class="mc-bars"><span style="height:40%"></span><span style="height:58%"></span><span style="height:46%"></span><span style="height:72%"></span><span class="hi" style="height:100%"></span><span style="height:64%"></span></div></div>
+      <svg class="grain"><filter id="gb"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer></filter><rect width="100%" height="100%" filter="url(#gb)"/></svg>
+    </div>
+
+    <!-- LIME -->
+    <div class="col cw-lime">
+      <div class="cw-head">
+        <div class="cw-name">Lime électrique</div>
+        <div class="cw-tag">Vert vif · énergie</div>
+        <div class="cw-mood">Le lime qui claque. « Go », action, modernité. Le plus jeune et tech. Idéal pour les CTA qui convertissent.</div>
+        <div class="cw-btp">▸ BTP : dynamique, proche du « sécu/go »</div>
+      </div>
+      <div class="strip"><div class="s" style="background:#14160F"></div><div class="s" style="background:#1D2018"></div><div class="s" style="background:#7FB23E"></div><div class="s" style="background:#A8E05F"></div><div class="s" style="background:#C6F47C"></div><div class="s" style="background:#F1F4EC"></div></div>
+      <div class="hexrow"><div class="h">14160F</div><div class="h">1D2018</div><div class="h">7FB23E</div><div class="h">A8E05F</div><div class="h">C6F47C</div><div class="h">F1F4EC</div></div>
+      <div class="mini-hero"><div class="glow"></div><div class="mini-chip"><span class="d"></span> Bêta</div><h2>On <em>forge</em><br>le reste.</h2><div class="lead">Devis, relances, factures — pendant que vous faites ce qui compte.</div><span class="mini-btn">Réserver une démo →</span></div>
+      <div class="mini-card"><div class="mc-row"><div class="mc-ic"><svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 3 6-8"/><path d="M3 21h18"/></svg></div><div><div class="mc-tt">On fait remonter</div><div class="mc-sub">+74% DE DEVIS SIGNÉS</div></div></div><div class="mc-bars"><span style="height:40%"></span><span style="height:58%"></span><span style="height:46%"></span><span style="height:72%"></span><span class="hi" style="height:100%"></span><span style="height:64%"></span></div></div>
+      <svg class="grain"><filter id="gc"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer></filter><rect width="100%" height="100%" filter="url(#gc)"/></svg>
+    </div>
+
+  </div>
+</body>
+</html>

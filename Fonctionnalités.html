@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talos — Fonctionnalités</title>
+<script>(function(){try{var t=localStorage.getItem('talos-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<style>
+/* ══════════════════════════════════════════════════════════════
+   ⚠️  BLOC DE PREVIEW — à SUPPRIMER à l'intégration.
+   Tokens déjà fournis par talos-site/v2.css.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --bronze:#E0631F; --bronze-2:#F4823E; --bronze-rgb:224,99,31;
+  --olivier:#B8995E; --olivier-rgb:184,153,94;
+  --rouge:#D14B4B;
+  --parch:#F6EEE7; --parch-rgb:246,238,231;
+  --lin:#AB9F95;
+  --ink:#140F0C; --ink-2:#1C1611; --ink-3:#241B15;
+  --line:rgba(246,238,231,.10); --line-2:rgba(246,238,231,.18);
+  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --e:cubic-bezier(.16,1,.3,1);
+}
+html[data-theme="light"]{
+  --bronze:#C5531C; --bronze-2:#E0631F; --bronze-rgb:197,83,28;
+  --olivier:#9A6A38; --olivier-rgb:154,106,56;
+  --rouge:#C0392B;
+  --parch:#1C1310; --parch-rgb:28,19,16;
+  --lin:#6E6058;
+  --ink:#FBF6F2; --ink-2:#FFFFFF; --ink-3:#F4EBE3;
+  --line:rgba(40,25,16,.11); --line-2:rgba(40,25,16,.2);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--parch);font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+.tsw{position:fixed;z-index:99;top:18px;right:18px;width:40px;height:40px;border-radius:10px;cursor:pointer;
+  background:none;border:1px solid var(--line);color:var(--parch);display:flex;align-items:center;justify-content:center}
+.tsw .sun{display:none} html[data-theme="light"] .tsw .sun{display:block}
+html[data-theme="light"] .tsw .moon{display:none}
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION « FONCTIONNALITÉS » — le code à conserver
+   ══════════════════════════════════════════════════════════════ */
+.cat{position:relative;padding:110px 32px 120px;overflow:hidden}
+.cat::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 42% at 50% 0%,rgba(var(--bronze-rgb),.13),transparent 64%)}
+.cat-in{position:relative;max-width:1180px;margin:0 auto}
+
+/* ── en-tête centré ── */
+.cat-head{text-align:center;margin-bottom:56px}
+.badge{display:inline-block;padding:8px 20px;border-radius:100px;border:1px solid rgba(var(--bronze-rgb),.45);
+  color:var(--bronze);font-family:var(--mono);font-size:11px;letter-spacing:2.4px;
+  text-transform:uppercase;font-weight:700}
+.cat-head h2{font-size:clamp(30px,5vw,60px);font-weight:800;letter-spacing:-2.4px;
+  line-height:1.02;margin-top:26px;max-width:17ch;margin-inline:auto}
+.cat-head h2 em{font-family:var(--sans);font-style:normal;display:block;
+  background:linear-gradient(100deg,#FFE7D4 0%,var(--bronze-2) 46%,var(--bronze) 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;animation:gradFlow 6s ease-in-out infinite}
+html[data-theme="light"] .cat-head h2 em{
+  background:linear-gradient(100deg,#B14512 0%,var(--bronze) 56%,var(--bronze-2) 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+@keyframes gradFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.cat-head p{font-size:clamp(15px,1.35vw,18px);line-height:1.62;color:var(--lin);
+  max-width:620px;margin:22px auto 0}
+
+/* ── grille 3 cartes ── */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cell{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:20px;
+  padding:22px 24px 24px;background:var(--ink-2);
+  transition:border-color .4s var(--e),transform .4s var(--e),box-shadow .4s var(--e)}
+html[data-theme="light"] .cell{background:#fff;box-shadow:0 1px 2px rgba(40,25,16,.04),0 10px 26px rgba(40,25,16,.05)}
+.cell:hover{border-color:rgba(var(--bronze-rgb),.34);transform:translateY(-4px)}
+html[data-theme="light"] .cell:hover{box-shadow:0 1px 2px rgba(40,25,16,.05),0 18px 40px rgba(40,25,16,.09)}
+
+.cell h3{font-size:clamp(18px,1.6vw,22px);font-weight:700;letter-spacing:-.6px;line-height:1.22;
+  margin:22px 0 16px}
+
+/* puces : emoji en marqueur, libellé en gras, tenue sur 2 lignes max */
+.cell ul{list-style:none;display:flex;flex-direction:column;gap:12px;flex:1}
+.cell li{display:flex;gap:10px;font-size:14.5px;line-height:1.5;color:var(--lin)}
+.cell li .e{flex:0 0 auto;font-size:15px;line-height:1.45}
+.cell li b{color:var(--parch);font-weight:600}
+
+/* lien d'action, collé en bas grâce au flex:1 de la liste */
+.more{display:inline-flex;align-items:center;gap:8px;margin-top:22px;
+  color:var(--bronze);font-size:14.5px;font-weight:700;text-decoration:none;letter-spacing:-.2px;
+  align-self:flex-start}
+.more svg{transition:transform .35s var(--e)}
+.more:hover svg{transform:translateX(4px)}
+
+/* ══════════ les widgets d'interface ══════════ */
+.w{border-radius:14px;padding:16px;min-height:128px;display:flex;flex-direction:column;
+  justify-content:center;gap:14px;
+  background:linear-gradient(160deg,rgba(var(--bronze-rgb),.17),rgba(var(--bronze-rgb),.04));
+  border:1px solid rgba(var(--bronze-rgb),.22)}
+
+/* pastilles communes aux 3 widgets */
+.chip{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;
+  padding:6px 12px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:-.1px;
+  background:var(--ink-2);border:1px solid var(--line-2);color:var(--parch)}
+html[data-theme="light"] .chip{background:#fff}
+.chip.ok{color:var(--olivier);border-color:rgba(var(--olivier-rgb),.45)}
+.chip.warn{color:var(--rouge);border-color:rgba(209,75,75,.45)}
+.chip svg{flex:0 0 auto}
+
+/* ── widget 1 · dictée vocale ── */
+.wvoice{display:flex;align-items:center;gap:11px}
+.wmic{width:32px;height:32px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(160deg,var(--bronze-2),var(--bronze));color:#fff;
+  box-shadow:0 4px 12px rgba(var(--bronze-rgb),.35)}
+.wave{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:3px;height:26px}
+/* largeur plafonnée + groupe centré : en flex:1 pur, les barres gonflent
+   avec la carte (11 px à 768 px de large) et l'onde devient un histogramme.
+   min-width:0 les laisse se comprimer sur les petits écrans. */
+.wave i{flex:0 1 4px;min-width:0;max-width:4px;border-radius:2px;
+  background:var(--bronze);opacity:.85}
+.wdur{flex:0 0 auto;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--parch)}
+
+/* ── widget 2 · séquence de relance ── */
+.wseq{display:flex;align-items:center}
+.wseq .st{flex:0 0 auto;padding:5px 10px;border-radius:100px;font-family:var(--mono);
+  font-size:11px;font-weight:700;letter-spacing:.3px;
+  background:var(--ink-2);border:1px solid var(--line-2);color:var(--lin)}
+html[data-theme="light"] .wseq .st{background:#fff}
+.wseq .st.on{background:var(--bronze);border-color:var(--bronze);color:#fff}
+/* doit repasser devant `html[data-theme="light"] .wseq .st`, plus spécifique,
+   sinon la pastille active devient blanc sur blanc en thème clair */
+html[data-theme="light"] .wseq .st.on{background:var(--bronze);border-color:var(--bronze);color:#fff}
+.wseq .ln{flex:1;height:2px;background:var(--line-2);margin:0 6px;border-radius:2px}
+.wseq .ln.on{background:var(--bronze)}
+
+/* ── widget 3 · situations de travaux ── */
+.wbar{height:8px;border-radius:8px;background:rgba(var(--parch-rgb),.1);overflow:hidden}
+html[data-theme="light"] .wbar{background:rgba(40,25,16,.09)}
+.wbar i{display:block;height:100%;border-radius:8px;
+  background:linear-gradient(90deg,var(--bronze),var(--bronze-2))}
+.wticks{display:flex;justify-content:space-between;margin-top:8px;
+  font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--lin)}
+.wticks span.on{color:var(--bronze)}
+
+/* ── responsive ── */
+@media (max-width:940px){
+  /* 2 colonnes laisseraient une carte orpheline : on passe direct à 1 */
+  .grid{grid-template-columns:1fr;gap:14px;max-width:540px;margin-inline:auto}
+}
+@media (max-width:720px){
+  .cat{padding:76px 20px 84px}
+  .cat-head{margin-bottom:36px}
+  .cat-head h2{max-width:none;letter-spacing:-1.4px}
+  .cell{padding:18px 20px 22px}
+  .cell h3{margin:18px 0 14px}
+  .cell li{font-size:14px}
+  .w{min-height:118px;padding:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  .cell{transition:none} .cell:hover{transform:none}
+  .cat-head h2 em{animation:none} .more svg{transition:none}
+}
+</style>
+</head>
+<body>
+
+<button class="tsw" id="tsw" type="button" aria-label="Changer de thème">
+  <svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+  <svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+</button>
+
+<!-- ══════════ SECTION ══════════ -->
+<section class="cat" id="fonctionnalites">
+  <div class="cat-in">
+
+    <div class="cat-head">
+      <span class="badge">Fonctionnalités</span>
+      <h2>Tout ce que Talos gère pour vous. <em>Sans lever le petit doigt.</em></h2>
+      <p>Une suite d'automatisation complète conçue spécifiquement pour les exigences du BTP,
+         du premier message client jusqu'au dernier euro encaissé.</p>
+    </div>
+
+    <div class="grid">
+
+      <!-- ── Carte 1 · Chiffrage & Accueil ── -->
+      <article class="cell">
+        <div class="w">
+          <div class="wvoice">
+            <span class="wmic">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3.5"/></svg>
+            </span>
+            <span class="wave" aria-hidden="true">
+              <i style="height:22%"></i><i style="height:44%"></i><i style="height:66%"></i><i style="height:32%"></i>
+              <i style="height:88%"></i><i style="height:54%"></i><i style="height:74%"></i><i style="height:100%"></i>
+              <i style="height:48%"></i><i style="height:28%"></i><i style="height:62%"></i><i style="height:84%"></i>
+              <i style="height:38%"></i><i style="height:70%"></i><i style="height:52%"></i><i style="height:92%"></i>
+              <i style="height:34%"></i><i style="height:58%"></i><i style="height:78%"></i><i style="height:44%"></i>
+              <i style="height:24%"></i><i style="height:66%"></i><i style="height:48%"></i><i style="height:82%"></i>
+              <i style="height:36%"></i><i style="height:56%"></i><i style="height:30%"></i><i style="height:20%"></i>
+            </span>
+            <span class="wdur">0:42</span>
+          </div>
+          <span class="chip ok">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M4 12.5 9.5 18 20 6.5"/></svg>
+            Devis prêt · 2 640 €
+          </span>
+        </div>
+
+        <h3>Chiffrage &amp; accueil 24/7</h3>
+        <ul>
+          <li><span class="e">🎙️</span><span><b>Chiffrage vocal :</b> dictée sur le chantier, devis prêt en 30 secondes.</span></li>
+          <li><span class="e">⚡</span><span><b>Réponse 24/7 :</b> accueil et qualification automatique de vos clients.</span></li>
+          <li><span class="e">📲</span><span><b>Validation 1 clic :</b> notification Telegram ou SMS avant envoi du PDF.</span></li>
+        </ul>
+        <a class="more" href="#chiffrage-vocal">Découvrir le chiffrage vocal
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </article>
+
+      <!-- ── Carte 2 · Relances & Acomptes ── -->
+      <article class="cell">
+        <div class="w">
+          <div class="wseq">
+            <span class="st on">J+2</span><i class="ln on"></i>
+            <span class="st on">J+5</span><i class="ln"></i>
+            <span class="st">J+10</span>
+          </div>
+          <span class="chip">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="2.6"/><path d="M2.5 10h19"/></svg>
+            Acompte 30 % · 792 €
+          </span>
+        </div>
+
+        <h3>Relances &amp; acomptes</h3>
+        <ul>
+          <li><span class="e">🔄</span><span><b>Séquence auto :</b> relances courtoises par SMS et e-mail jusqu'à signature.</span></li>
+          <li><span class="e">💰</span><span><b>Acomptes intégrés :</b> demande de 30 % avec lien de paiement direct.</span></li>
+          <li><span class="e">👷</span><span><b>Sous-traitants :</b> rappels automatiques pour recevoir leurs chiffrages.</span></li>
+        </ul>
+        <a class="more" href="#relances">En savoir plus sur les relances
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </article>
+
+      <!-- ── Carte 3 · Factures & Impayés ── -->
+      <article class="cell">
+        <div class="w">
+          <div>
+            <div class="wbar"><i style="width:60%"></i></div>
+            <div class="wticks"><span>30 %</span><span class="on">60 %</span><span>100 %</span></div>
+          </div>
+          <span class="chip warn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 22 20H2z"/><path d="M12 10v4M12 17h.01"/></svg>
+            Impayé · 62 jours
+          </span>
+        </div>
+
+        <h3>Factures &amp; impayés</h3>
+        <ul>
+          <li><span class="e">📑</span><span><b>Situations BTP :</b> facturation à l'avancement 30 / 60 / 100 % en 1 clic.</span></li>
+          <li><span class="e">🚨</span><span><b>Alerte impayés :</b> suivi en temps réel et relances graduées.</span></li>
+          <li><span class="e">🛡️</span><span><b>Conforme 2026 :</b> format Factur-X et TVA BTP entièrement gérés.</span></li>
+        </ul>
+        <a class="more" href="#tresorerie">Voir la gestion financière
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  /* preview seulement */
+  var root = document.documentElement;
+  document.getElementById('tsw').addEventListener('click', function(){
+    var n = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', n);
+    try { localStorage.setItem('talos-theme', n); } catch(e){}
+  });
+</script>
+</body>
+</html>

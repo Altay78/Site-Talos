@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Talos — chaleurs premium (terracotta · cuivre · rouille)</title>
+<style>
+  :root{--font:'Neue Montreal','Geist','Inter','Helvetica Neue',Arial,sans-serif;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#0f0d0c;color:#fff;font-family:var(--font);-webkit-font-smoothing:antialiased;padding:42px 40px;}
+  .head{text-align:center;margin-bottom:30px;}
+  .head .t{font-size:12px;letter-spacing:3px;color:#C0814A;text-transform:uppercase;}
+  .head h1{font-size:32px;font-weight:600;letter-spacing:-1px;margin-top:8px;}
+  .head p{color:#9a8f88;font-size:14px;margin-top:8px;}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1360px;margin:0 auto;}
+  .col{border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,0.10);background:var(--bg);position:relative;}
+  .col .grain{position:absolute;inset:0;opacity:0.3;mix-blend-mode:overlay;pointer-events:none;}
+  .cw-head{padding:22px 24px 0;position:relative;z-index:2;}
+  .cw-name{font-size:23px;font-weight:600;color:#fff;}
+  .cw-tag{font-size:11px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-top:4px;}
+  .cw-mood{font-size:12.5px;color:#9a8f88;margin-top:10px;line-height:1.4;}
+  .strip{display:flex;margin:16px 24px 0;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);position:relative;z-index:2;}
+  .strip .s{flex:1;height:42px;}
+  .hexrow{display:flex;margin:6px 24px 0;position:relative;z-index:2;}
+  .hexrow .h{flex:1;font-size:8.5px;color:#857b75;text-align:center;}
+
+  .mini-hero{margin:24px;border-radius:14px;padding:26px 22px;position:relative;z-index:2;overflow:hidden;background:var(--surf);border:1px solid rgba(255,255,255,0.08);}
+  .mini-hero .glow{position:absolute;inset:0;background:radial-gradient(ellipse 55% 45% at 50% 112%, var(--glow), transparent 62%);}
+  .mini-chip{position:relative;display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:100px;font-size:11px;color:#b3a89f;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);margin-bottom:16px;}
+  .mini-chip .d{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+  .mini-hero h2{position:relative;font-size:30px;font-weight:600;letter-spacing:-1.5px;line-height:1.04;color:#fff;}
+  .mini-hero h2 em{font-style:normal;color:var(--accent-hi);}
+  .mini-hero .lead{position:relative;font-size:12.5px;color:#9a8f88;margin:12px 0 18px;line-height:1.45;}
+  .mini-btn{position:relative;display:inline-block;padding:11px 20px;border-radius:100px;font-size:13px;font-weight:600;color:#160d07;background:linear-gradient(180deg,var(--accent-hi),var(--accent));box-shadow:inset 0 1px 0 rgba(255,255,255,0.22);}
+
+  /* KPI corrigé : surface sombre, accent sur le chiffre seulement */
+  .kpi{margin:0 24px 24px;border-radius:14px;padding:20px;display:flex;justify-content:space-between;position:relative;z-index:2;
+    background:linear-gradient(170deg,var(--brun),var(--surf));border:1px solid rgba(255,255,255,0.08);}
+  .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.6;}
+  .kpi .k{text-align:center;}
+  .kpi .n{font-size:30px;font-weight:600;letter-spacing:-1px;color:var(--accent-hi);}
+  .kpi .l{font-size:9.5px;color:#9a8f88;margin-top:4px;letter-spacing:0.5px;}
+
+  /* TERRACOTTA */
+  .cw-terra{--bg:#16110F;--surf:#1C1714;--brun:#2C211B;--accent:#B85C38;--accent-hi:#D07A52;--glow:rgba(184,92,56,0.30);}
+  /* CUIVRE */
+  .cw-cuivre{--bg:#16120E;--surf:#1C1813;--brun:#2C231A;--accent:#BE7B45;--accent-hi:#D89B63;--glow:rgba(190,123,69,0.28);}
+  /* ROUILLE */
+  .cw-rouille{--bg:#150F0D;--surf:#1B1411;--brun:#2A1E18;--accent:#A04D2C;--accent-hi:#C26A45;--glow:rgba(160,77,44,0.30);}
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="t">Chaleur premium · orange désaturé</div>
+    <h1>Trois chaleurs, sans l'effet « néon ».</h1>
+    <p>On garde le chaud (forge), on enlève l'agressif. Et l'accent est dosé — fini les gros aplats.</p>
+  </div>
+  <div class="grid">
+
+    <div class="col cw-terra">
+      <div class="cw-head"><div class="cw-name">Terracotta</div><div class="cw-tag">Terre cuite · éditorial</div><div class="cw-mood">Chaud et terreux. Le plus « artisanal premium », doux à l'œil. Mon préféré pour ton multi-secteur.</div></div>
+      <div class="strip"><div class="s" style="background:#16110F"></div><div class="s" style="background:#2C211B"></div><div class="s" style="background:#8F4226"></div><div class="s" style="background:#B85C38"></div><div class="s" style="background:#D07A52"></div><div class="s" style="background:#FFFFFF"></div></div>
+      <div class="hexrow"><div class="h">16110F</div><div class="h">2C211B</div><div class="h">8F4226</div><div class="h">B85C38</div><div class="h">D07A52</div><div class="h">FFFFFF</div></div>
+      <div class="mini-hero"><div class="glow"></div><div class="mini-chip"><span class="d"></span> Bêta</div><h2>On <em>forge</em><br>le reste.</h2><div class="lead">Devis, relances, factures — pendant que vous faites ce qui compte.</div><span class="mini-btn">Réserver une démo →</span></div>
+      <div class="kpi"><div class="k"><div class="n">+26h</div><div class="l">/MOIS</div></div><div class="k"><div class="n">+74%</div><div class="l">DEVIS</div></div><div class="k"><div class="n">8s</div><div class="l">RÉPONSE</div></div><div class="k"><div class="n">−42%</div><div class="l">IMPAYÉS</div></div></div>
+      <svg class="grain"><filter id="ga"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer></filter><rect width="100%" height="100%" filter="url(#ga)"/></svg>
+    </div>
+
+    <div class="col cw-cuivre">
+      <div class="cw-head"><div class="cw-name">Cuivre</div><div class="cw-tag">Métal chaud · forge</div><div class="cw-mood">Le métal en fusion, version maîtrisée. Très « Talos » (cuivre = forge). Attention : proche du bronze d'avant.</div></div>
+      <div class="strip"><div class="s" style="background:#16120E"></div><div class="s" style="background:#2C231A"></div><div class="s" style="background:#946033"></div><div class="s" style="background:#BE7B45"></div><div class="s" style="background:#D89B63"></div><div class="s" style="background:#FFFFFF"></div></div>
+      <div class="hexrow"><div class="h">16120E</div><div class="h">2C231A</div><div class="h">946033</div><div class="h">BE7B45</div><div class="h">D89B63</div><div class="h">FFFFFF</div></div>
+      <div class="mini-hero"><div class="glow"></div><div class="mini-chip"><span class="d"></span> Bêta</div><h2>On <em>forge</em><br>le reste.</h2><div class="lead">Devis, relances, factures — pendant que vous faites ce qui compte.</div><span class="mini-btn">Réserver une démo →</span></div>
+      <div class="kpi"><div class="k"><div class="n">+26h</div><div class="l">/MOIS</div></div><div class="k"><div class="n">+74%</div><div class="l">DEVIS</div></div><div class="k"><div class="n">8s</div><div class="l">RÉPONSE</div></div><div class="k"><div class="n">−42%</div><div class="l">IMPAYÉS</div></div></div>
+      <svg class="grain"><filter id="gb"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer></filter><rect width="100%" height="100%" filter="url(#gb)"/></svg>
+    </div>
+
+    <div class="col cw-rouille">
+      <div class="cw-head"><div class="cw-name">Rouille</div><div class="cw-tag">Rouge brûlé · sombre</div><div class="cw-mood">Le plus profond et dramatique. Sophistiqué, presque rouge brique. Le moins « orange », le plus rare.</div></div>
+      <div class="strip"><div class="s" style="background:#150F0D"></div><div class="s" style="background:#2A1E18"></div><div class="s" style="background:#7E3B20"></div><div class="s" style="background:#A04D2C"></div><div class="s" style="background:#C26A45"></div><div class="s" style="background:#FFFFFF"></div></div>
+      <div class="hexrow"><div class="h">150F0D</div><div class="h">2A1E18</div><div class="h">7E3B20</div><div class="h">A04D2C</div><div class="h">C26A45</div><div class="h">FFFFFF</div></div>
+      <div class="mini-hero"><div class="glow"></div><div class="mini-chip"><span class="d"></span> Bêta</div><h2>On <em>forge</em><br>le reste.</h2><div class="lead">Devis, relances, factures — pendant que vous faites ce qui compte.</div><span class="mini-btn">Réserver une démo →</span></div>
+      <div class="kpi"><div class="k"><div class="n">+26h</div><div class="l">/MOIS</div></div><div class="k"><div class="n">+74%</div><div class="l">DEVIS</div></div><div class="k"><div class="n">8s</div><div class="l">RÉPONSE</div></div><div class="k"><div class="n">−42%</div><div class="l">IMPAYÉS</div></div></div>
+      <svg class="grain"><filter id="gc"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer></filter><rect width="100%" height="100%" filter="url(#gc)"/></svg>
+    </div>
+
+  </div>
+</body>
+</html>

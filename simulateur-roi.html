@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talos — Simulez votre croissance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   TALOS · SIMULATEUR DE ROI — DA « Braise Ultra »
+   Autonome : aucune dépendance hors Google Fonts.
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --void:#0B0C0C;            /* fond, quasi-noir OLED */
+  --surface:#121414;
+  --glass:rgba(255,255,255,.03);
+  --glass-2:rgba(255,255,255,.055);
+  --hair:rgba(255,255,255,.08);
+  --hair-2:rgba(255,255,255,.14);
+
+  --primary:#FFB693;         /* orange clair — texte accentué */
+  --flame:#FF6B00;           /* orange vif — remplissages */
+  --bronze:#E0631F;          /* orange de marque Talos */
+  --violet:#DDB7FF;          /* secondaire — usage très parcimonieux */
+
+  --ink:#E8E6E4;             /* texte principal */
+  --ink-dim:rgba(232,230,228,.62);
+  --ink-mute:rgba(232,230,228,.42);
+  --slate:#3B3936;           /* barres « sans Talos » */
+
+  --display:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;
+  --body:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --label:'Geist',ui-monospace,'SF Mono',Menlo,monospace;
+
+  --r-md:12px; --r-lg:16px; --r-xl:24px;
+  --e:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--void)}
+body{background:var(--void);color:var(--ink);font-family:var(--body);line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  selection-color:#fff}
+::selection{background:var(--flame);color:#fff}
+
+/* ── halos atmosphériques ── */
+.orb{position:fixed;border-radius:50%;filter:blur(110px);opacity:.16;pointer-events:none;z-index:0;
+  animation:breathe 9s ease-in-out infinite alternate}
+.orb.a{width:620px;height:620px;background:var(--flame);top:-180px;left:-220px}
+.orb.b{width:520px;height:520px;background:var(--violet);bottom:-160px;right:-160px;animation-delay:-4.5s;opacity:.1}
+@keyframes breathe{from{transform:scale(1);opacity:.1}to{transform:scale(1.16);opacity:.2}}
+
+.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:88px 64px 104px}
+
+/* ── en-tête ── */
+.head{text-align:center;max-width:760px;margin:0 auto 56px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 16px;border-radius:999px;
+  background:var(--glass);border:1px solid var(--hair);
+  font-family:var(--label);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-dim)}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--flame);
+  box-shadow:0 0 10px var(--flame);display:block}
+h1{font-family:var(--display);font-size:clamp(36px,5.4vw,64px);font-weight:700;
+  letter-spacing:-.04em;line-height:1.06;margin-top:22px;color:#fff}
+h1 em{font-style:normal;background:linear-gradient(96deg,#FFD9C2 0%,var(--flame) 46%,var(--violet) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.head p{font-size:18px;color:var(--ink-dim);margin-top:18px}
+
+/* ── carte de verre ── */
+.glass{position:relative;background:var(--glass);border:1px solid var(--hair);border-radius:var(--r-xl);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+/* filet de lumière sur l'arête haute */
+.glass::before{content:'';position:absolute;top:0;left:14%;right:14%;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent)}
+
+/* ── grille principale ── */
+.grid{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:24px;align-items:start}
+
+/* ═══ PANNEAU PARAMÈTRES ═══ */
+.params{padding:30px 28px 32px;position:sticky;top:24px}
+.params h2{font-family:var(--display);font-size:20px;font-weight:600;letter-spacing:-.02em;
+  display:flex;align-items:center;gap:11px;margin-bottom:28px}
+.params h2 svg{color:var(--flame)}
+.ctrl + .ctrl{margin-top:26px}
+.ctrl .top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:11px}
+.ctrl .nm{font-size:14px;font-weight:500;color:var(--ink-dim)}
+.ctrl .val{font-family:var(--label);font-size:16px;font-weight:600;color:#fff;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* curseur */
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:999px;
+  cursor:pointer;outline:none;
+  background:linear-gradient(90deg,var(--flame) calc(var(--pct)*1%),rgba(255,255,255,.09) calc(var(--pct)*1%))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+  width:18px;height:18px;border-radius:50%;background:#fff;cursor:pointer;
+  border:3px solid var(--flame);box-shadow:0 0 0 4px rgba(255,107,0,.16),0 2px 8px rgba(0,0,0,.5);
+  transition:box-shadow .2s,transform .2s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.12);box-shadow:0 0 0 7px rgba(255,107,0,.2),0 2px 8px rgba(0,0,0,.5)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;cursor:pointer;
+  border:3px solid var(--flame);box-shadow:0 0 0 4px rgba(255,107,0,.16)}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 7px rgba(255,107,0,.35)}
+.ctrl .ends{display:flex;justify-content:space-between;margin-top:7px;
+  font-family:var(--label);font-size:10.5px;color:var(--ink-mute)}
+
+/* échelle de risque — le vert→rouge est ici sémantique (danger), pas décoratif :
+   c'est la seule échelle qu'un artisan lit sans légende. */
+.risk{display:flex;flex-direction:column;gap:4px;
+  background:rgba(255,255,255,.03);border:1px solid var(--hair);border-radius:var(--r-md);padding:5px}
+.risk button{display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+  border:0;cursor:pointer;background:none;padding:10px 11px;border-radius:9px;
+  color:var(--ink-mute);font-family:var(--body);
+  transition:background .3s var(--e),color .3s var(--e),box-shadow .3s var(--e)}
+.risk button i{width:9px;height:9px;border-radius:50%;background:var(--c);flex:0 0 auto;
+  opacity:.4;transition:opacity .3s,box-shadow .3s}
+.risk button .l{flex:1;min-width:0;font-size:13px;font-weight:600;line-height:1.2}
+.risk button .l em{display:block;font-style:normal;font-size:10px;font-weight:400;
+  opacity:.6;margin-top:3px;line-height:1.3}
+.risk button .p{flex:0 0 auto;font-family:var(--label);font-size:13px;font-weight:600}
+.risk button:hover:not(.on){color:var(--ink-dim);background:rgba(255,255,255,.03)}
+.risk button:focus-visible{outline:2px solid var(--c);outline-offset:-2px}
+.risk button.on{background:rgba(255,255,255,.07);color:#fff;box-shadow:inset 0 0 0 1px var(--c)}
+.risk button.on i{opacity:1;box-shadow:0 0 10px var(--c)}
+.risk button.on .p{color:var(--c)}
+.risk-note{font-size:11px;line-height:1.5;color:var(--ink-mute);margin-top:10px}
+.risk-note b{color:var(--ink-dim);font-weight:600}
+
+/* ═══ RÉSULTATS ═══ */
+.results{display:flex;flex-direction:column;gap:20px}
+
+/* carte héros — le CA */
+.hero{padding:32px 34px;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;
+  background:linear-gradient(150deg,rgba(255,107,0,.13),rgba(255,255,255,.03) 52%)}
+.hero .lab{font-family:var(--label);font-size:11px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--primary)}
+.hero .big{font-family:var(--display);font-size:clamp(40px,6vw,68px);font-weight:800;letter-spacing:-.045em;
+  line-height:1.02;margin-top:10px;font-variant-numeric:tabular-nums;
+  background:linear-gradient(100deg,#FFD9C2,var(--flame) 62%,#D64F0A);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero .sub{font-size:14px;color:var(--ink-dim);margin-top:8px}
+.hero .sub b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.chip{flex:0 0 auto;display:flex;align-items:center;gap:13px;padding:16px 20px;border-radius:var(--r-lg);
+  background:rgba(255,255,255,.05);border:1px solid var(--hair-2)}
+.chip .ic{width:38px;height:38px;border-radius:11px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,107,0,.14);border:1px solid rgba(255,107,0,.3);color:var(--flame)}
+.chip .k{font-family:var(--label);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
+.chip .v{font-family:var(--display);font-size:22px;font-weight:700;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;margin-top:2px}
+
+/* deux cartes stat */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.stat{padding:24px 26px}
+.stat .k{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:500;color:var(--ink-dim)}
+.stat .k svg{color:var(--flame);flex:0 0 auto}
+.stat .v{font-family:var(--display);font-size:34px;font-weight:700;letter-spacing:-.03em;
+  margin-top:12px;font-variant-numeric:tabular-nums;color:#fff}
+.stat .s{font-size:13px;color:var(--ink-mute);margin-top:7px;line-height:1.5}
+
+/* graphe 12 mois */
+.chart{padding:26px 28px 22px}
+.chart .hd{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.chart .ttl{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-.01em}
+.chart .ttl span{display:block;font-family:var(--body);font-size:12px;font-weight:400;
+  color:var(--ink-mute);letter-spacing:0;margin-top:3px}
+.leg{display:flex;gap:16px}
+.leg i{display:flex;align-items:center;gap:7px;font-family:var(--label);font-size:11px;color:var(--ink-dim);font-style:normal}
+.leg i b{width:10px;height:10px;border-radius:3px;display:block}
+.plot{display:flex;align-items:flex-end;gap:clamp(3px,.9vw,9px);height:190px}
+.bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;gap:2px}
+.bar .up{background:linear-gradient(180deg,#FF8A34,var(--bronze));border-radius:3px 3px 0 0;
+  box-shadow:0 0 12px rgba(224,99,31,.4);transition:height .55s var(--e)}
+.bar .lo{background:var(--slate);border-radius:0 0 3px 3px;transition:height .55s var(--e)}
+.bar .up:only-child{border-radius:3px}
+.bar .lo:only-child{border-radius:3px}
+.xax{display:flex;gap:clamp(3px,.9vw,9px);margin-top:10px}
+.xax span{flex:1;text-align:center;font-family:var(--label);font-size:9.5px;color:var(--ink-mute)}
+
+/* ═══ AUDIT — la pièce qui rend le chiffre vérifiable ═══ */
+.audit{margin-top:24px;padding:30px 34px}
+.audit .hd{display:flex;align-items:center;gap:11px;margin-bottom:24px}
+.audit .hd svg{color:var(--flame);flex:0 0 auto}
+.audit .hd h3{font-family:var(--display);font-size:18px;font-weight:600;letter-spacing:-.02em}
+.audit .hd p{font-size:13px;color:var(--ink-mute)}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.st{position:relative;padding:18px 16px;border-radius:var(--r-md);
+  background:rgba(255,255,255,.025);border:1px solid var(--hair)}
+.st.hi{background:linear-gradient(160deg,rgba(255,107,0,.16),rgba(255,255,255,.03));
+  border-color:rgba(255,107,0,.34)}
+.st .n{font-family:var(--label);font-size:10px;font-weight:600;color:var(--ink-mute);letter-spacing:.1em}
+.st .t{font-size:12.5px;color:var(--ink-dim);margin-top:8px;line-height:1.4;min-height:34px}
+.st .r{font-family:var(--display);font-size:21px;font-weight:700;letter-spacing:-.02em;margin-top:10px;
+  font-variant-numeric:tabular-nums;color:#fff}
+.st.hi .r{color:var(--primary)}
+.st .f{font-family:var(--label);font-size:10.5px;color:var(--ink-mute);margin-top:5px;
+  font-variant-numeric:tabular-nums}
+.note{display:flex;gap:10px;margin-top:20px;padding-top:18px;border-top:1px solid var(--hair);
+  font-size:12.5px;color:var(--ink-mute);line-height:1.55}
+.note svg{flex:0 0 auto;margin-top:2px;color:var(--ink-mute)}
+
+/* ═══ SYNTHÈSE + CTA ═══ */
+.synth{margin-top:24px;padding:52px 48px;text-align:center;
+  background:linear-gradient(165deg,rgba(255,107,0,.14),rgba(255,255,255,.03) 58%)}
+.synth p{font-family:var(--display);font-size:clamp(21px,2.7vw,32px);font-weight:600;
+  letter-spacing:-.025em;line-height:1.34;max-width:860px;margin:0 auto;color:#fff}
+.synth p b{font-weight:700;color:var(--flame);font-variant-numeric:tabular-nums;white-space:nowrap}
+.synth p i{font-style:normal;font-weight:700;color:var(--violet);white-space:nowrap}
+.cta{display:inline-flex;align-items:center;gap:11px;min-height:56px;padding:0 32px;margin-top:30px;
+  border-radius:999px;background:#fff;color:#160E08;text-decoration:none;
+  font-family:var(--body);font-size:15.5px;font-weight:700;letter-spacing:-.01em;
+  box-shadow:0 12px 34px rgba(0,0,0,.5);transition:transform .3s var(--e),box-shadow .3s var(--e)}
+.cta:hover{transform:translateY(-2px);box-shadow:0 18px 44px rgba(0,0,0,.6)}
+.cta svg{transition:transform .3s var(--e)}
+.cta:hover svg{transform:translateX(4px)}
+.legal{font-size:12px;color:var(--ink-mute);margin-top:18px}
+
+/* CTA mobile — masqué par défaut, révélé uniquement sur téléphone */
+.cta-m{display:none}
+
+/* ── responsive ── */
+@media (max-width:1080px){
+  .wrap{padding:72px 32px 88px}
+  .grid{grid-template-columns:1fr;gap:20px}
+  .params{position:static}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .st:last-child{grid-column:1/-1}
+}
+@media (max-width:680px){
+  .wrap{padding:56px 20px 72px}
+  .head{margin-bottom:38px}
+  .params,.hero,.audit{padding:24px 20px}
+  .synth{padding:36px 22px}
+  .hero{flex-direction:column;align-items:flex-start;gap:20px}
+  .chip{width:100%}
+  .duo{grid-template-columns:1fr;gap:14px}
+  .steps{grid-template-columns:1fr}
+  .st:last-child{grid-column:auto}
+  .plot{height:140px}
+  .xax span:nth-child(even){visibility:hidden}
+  .cta{width:100%;justify-content:center;padding:0 20px;font-size:14px}
+  .cta-m{display:flex;flex-direction:column;align-items:center;margin-top:22px}
+  .cta-m .hint{font-size:12px;color:var(--ink-mute);margin-top:13px;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){
+  .orb{animation:none}
+  .bar .up,.bar .lo,.cta,.seg button{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div class="orb a"></div>
+<div class="orb b"></div>
+
+<div class="wrap">
+
+  <div class="head">
+    <span class="eyebrow"><i></i> Simulateur — 30 secondes</span>
+    <h1>Simulez votre <em>croissance</em></h1>
+    <p>Vos chiffres, pas les nôtres. Chaque étape du calcul est affichée : vous pouvez la refaire de tête.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- ════ PARAMÈTRES ════ -->
+    <aside class="glass params">
+      <h2>
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+        Vos chiffres
+      </h2>
+
+      <div class="ctrl">
+        <div class="top"><span class="nm">Devis envoyés par mois</span><span class="val" id="vV">15</span></div>
+        <input type="range" id="V" min="1" max="50" step="1" value="15" aria-label="Devis envoyés par mois">
+        <div class="ends"><span>1</span><span>50</span></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="top"><span class="nm">Devis signés aujourd'hui</span><span class="val" id="vS">6</span></div>
+        <input type="range" id="S" min="1" max="30" step="1" value="6" aria-label="Devis signés par mois">
+        <div class="ends"><span>1</span><span id="sMax">30</span></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="top"><span class="nm">Montant moyen d'un devis</span><span class="val" id="vM">3 000 €</span></div>
+        <input type="range" id="M" min="500" max="20000" step="500" value="3000" aria-label="Montant moyen d'un devis">
+        <div class="ends"><span>500 €</span><span>20 000 €</span></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="top"><span class="nm">Temps passé par devis</span><span class="val" id="vT">1,5 h</span></div>
+        <input type="range" id="T" min="0.5" max="3" step="0.25" value="1.5" aria-label="Temps moyen passé par devis">
+        <div class="ends"><span>30 min</span><span>3 h</span></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="top"><span class="nm">Votre délai d'envoi actuel</span></div>
+        <div class="risk" id="D" role="radiogroup" aria-label="Délai d'envoi actuel">
+          <button type="button" role="radio" aria-checked="false" style="--c:#5FB871"
+                  data-d="0.05" data-lab="un envoi sous 2 heures">
+            <i></i><span class="l">Sous 2 heures<em>L'instant-réponse · risque minimal</em></span><span class="p">5 %</span>
+          </button>
+          <button type="button" role="radio" aria-checked="false" style="--c:#D9A93E"
+                  data-d="0.20" data-lab="un envoi sous 24 heures">
+            <i></i><span class="l">Sous 24 heures<em>Le standard élite · risque faible</em></span><span class="p">20 %</span>
+          </button>
+          <button type="button" role="radio" aria-checked="true" class="on" style="--c:#E0631F"
+                  data-d="0.50" data-lab="un envoi sous 3 à 5 jours">
+            <i></i><span class="l">Sous 3 à 5 jours<em>La moyenne du marché · zone critique</em></span><span class="p">50 %</span>
+          </button>
+          <button type="button" role="radio" aria-checked="false" style="--c:#D14B4B"
+                  data-d="0.75" data-lab="un envoi à plus de 7 jours">
+            <i></i><span class="l">Plus de 7 jours<em>La zone rouge · perte quasi certaine</em></span><span class="p">75 %</span>
+          </button>
+        </div>
+        <div class="risk-note">Part de vos devis <b>non signés</b> imputable au délai. Nous retenons le bas de chaque fourchette.</div>
+      </div>
+    </aside>
+
+    <!-- ════ RÉSULTATS ════ -->
+    <div class="results">
+
+      <div class="glass hero">
+        <div>
+          <div class="lab">Chiffre d'affaires additionnel</div>
+          <div class="big" id="caMois">+3 000 €</div>
+          <div class="sub">par mois — soit <b id="caAn">36 000 €</b> sur douze mois</div>
+        </div>
+        <div class="chip">
+          <span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 7v5l3.5 2"/></svg></span>
+          <div><div class="k">Temps rendu</div><div class="v" id="heures">22,5 h / mois</div></div>
+        </div>
+      </div>
+
+      <div class="duo">
+        <div class="glass stat">
+          <div class="k">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 3 6-8"/><path d="M14 6h6v6"/></svg>
+            Chantiers signés en plus
+          </div>
+          <div class="v" id="chantiers">+1 chantier</div>
+          <div class="s" id="chantiersSub">Des devis que vous perdez aujourd'hui parce qu'ils partent trop tard.</div>
+        </div>
+        <div class="glass stat">
+          <div class="k">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v9l6 3"/><circle cx="12" cy="12" r="9.5"/></svg>
+            Soirées récupérées
+          </div>
+          <div class="v" id="soirees">22,5 h</div>
+          <div class="s" id="soireesSub">Soit près de 3 journées de chantier rendues chaque mois.</div>
+        </div>
+      </div>
+
+      <div class="glass chart">
+        <div class="hd">
+          <div class="ttl">Cumul sur 12 mois<span>Vos chiffres actuels reportés à l'identique. Aucune hypothèse de croissance.</span></div>
+          <div class="leg">
+            <i><b style="background:var(--slate)"></b> Sans Talos</i>
+            <i><b style="background:var(--bronze)"></b> Avec Talos</i>
+          </div>
+        </div>
+        <div class="plot" id="plot"></div>
+        <div class="xax" id="xax"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ CTA MOBILE ════
+       Sur téléphone la page fait ~3 700 px : on propose de convertir dès les
+       résultats, avant le détail du calcul qui, lui, s'adresse aux sceptiques. -->
+  <div class="cta-m">
+    <a class="cta" href="#reserver">
+      <span id="ctaMTxt">Récupérer ces 3 000 € — Réserver une démo</span>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <div class="hint">ou vérifiez le calcul juste en dessous ↓</div>
+  </div>
+
+  <!-- ════ AUDIT DU CALCUL ════ -->
+  <div class="glass audit">
+    <div class="hd">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+      <div>
+        <h3>Le détail du calcul</h3>
+        <p>Reprenez chaque ligne : rien n'est caché derrière un algorithme.</p>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="st">
+        <div class="n">01</div>
+        <div class="t">Vous envoyez</div>
+        <div class="r" id="a1">15 devis</div>
+        <div class="f">par mois</div>
+      </div>
+      <div class="st">
+        <div class="n">02</div>
+        <div class="t">Vous en signez</div>
+        <div class="r" id="a2">6 devis</div>
+        <div class="f" id="a2f">taux de 40 %</div>
+      </div>
+      <div class="st">
+        <div class="n">03</div>
+        <div class="t">Vous en perdez donc</div>
+        <div class="r" id="a3">9 devis</div>
+        <div class="f" id="a3f">15 − 6</div>
+      </div>
+      <div class="st">
+        <div class="n">04</div>
+        <div class="t">Part perdue à cause du délai</div>
+        <div class="r" id="a4">1,35</div>
+        <div class="f" id="a4f">9 × 15 %</div>
+      </div>
+      <div class="st hi">
+        <div class="n">05</div>
+        <div class="t">Récupéré par Talos</div>
+        <div class="r" id="a5">+3 000 €</div>
+        <div class="f" id="a5f">1 chantier × 3 000 €</div>
+      </div>
+    </div>
+    <div class="note">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg>
+      <span id="noteTxt">Estimation volontairement plafonnée à +5 chantiers par mois, quelles que soient vos valeurs. Le gain ne peut jamais dépasser le nombre de devis que vous perdez déjà — un simulateur qui promet plus que ça vous ment.</span>
+    </div>
+  </div>
+
+  <!-- ════ SYNTHÈSE + CTA ════ -->
+  <div class="glass synth">
+    <p id="synth"></p>
+    <a class="cta" id="cta" href="#reserver">
+      <span id="ctaTxt">Récupérer ces 3 000 € — Réserver une démo</span>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <div class="legal">Démo de 15 minutes, sans engagement. Vos chiffres ne sont pas enregistrés.</div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var eur  = new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+  var num  = new Intl.NumberFormat('fr-FR',{maximumFractionDigits:0});
+  var dec1 = new Intl.NumberFormat('fr-FR',{maximumFractionDigits:1});
+  var dec2 = new Intl.NumberFormat('fr-FR',{maximumFractionDigits:2});
+  var pct  = new Intl.NumberFormat('fr-FR',{style:'percent',maximumFractionDigits:0});
+
+  var CAP = 5;   // plafond volontaire, en chantiers/mois
+  var MOIS = 12;
+
+  var $ = function(id){ return document.getElementById(id); };
+  var elV=$('V'), elS=$('S'), elM=$('M'), elT=$('T'), segD=$('D');
+  // défaut : « sous 3 à 5 jours », le délai moyen du marché
+  var malus = 0.50;
+
+  /* remplissage de la piste du curseur */
+  function paint(el){
+    var p = (el.value - el.min) / (el.max - el.min) * 100;
+    el.style.setProperty('--pct', p);
+  }
+
+  /* ─────────────────────────────────────────────────────────
+     MODÈLE. Chaque ligne est refaisable de tête par l'artisan.
+     ───────────────────────────────────────────────────────── */
+  function model(){
+    var V = +elV.value;
+    var T = +elT.value;
+    var M = +elM.value;
+
+    // Garde-fou : on ne peut pas signer plus de devis qu'on n'en envoie.
+    // Sans ça, S=30 / V=15 afficherait un taux de conversion de 200 %.
+    var S = Math.min(+elS.value, V);
+
+    var taux   = S / V;
+    var perdus = V - S;                       // devis non signés
+    var brut   = perdus * malus;              // part imputable au délai
+    var arrondi = Math.round(brut);
+    var chantiers = Math.min(CAP, arrondi);   // plafond volontaire
+    var plafonne  = arrondi > CAP;
+
+    return {
+      V:V, S:S, M:M, T:T, malus:malus,
+      taux:taux, perdus:perdus, brut:brut,
+      chantiers:chantiers, plafonne:plafonne,
+      caMois: chantiers * M,
+      caAn:   chantiers * M * MOIS,
+      heures: V * T
+    };
+  }
+
+  /* ── graphe : cumul 12 mois, sans hypothèse de croissance ── */
+  function chart(r){
+    var plot=$('plot'), xax=$('xax'), h='', x='';
+    var maxTotal = (r.S + r.chantiers) * r.M * MOIS || 1;
+    for (var m=1; m<=MOIS; m++){
+      var base = r.S * r.M * m;
+      var add  = r.chantiers * r.M * m;
+      var lo = base / maxTotal * 100;
+      var up = add  / maxTotal * 100;
+      h += '<div class="bar" title="Mois '+m+'">'
+         + (up > 0 ? '<div class="up" style="height:'+up.toFixed(2)+'%"></div>' : '')
+         + '<div class="lo" style="height:'+lo.toFixed(2)+'%"></div></div>';
+      x += '<span>M'+m+'</span>';
+    }
+    plot.innerHTML = h; xax.innerHTML = x;
+  }
+
+  /* ── phrase de synthèse : trois cas, trois discours ── */
+  function phrase(r){
+    var hs = dec1.format(r.heures);
+    var jours = dec1.format(r.heures / 8);
+
+    if (r.chantiers === 0){
+      // Cas honnête : le calcul ne donne pas un chantier entier. On ne l'invente pas.
+      return 'À ce volume et avec ce délai, le calcul ne donne pas un chantier entier par mois — '
+           + 'on ne va pas vous vendre l\'inverse. Ce que Talos vous rend, c\'est <i>' + hs + ' h</i> '
+           + 'par mois, soit ' + jours + ' journées que vous ne passez plus sur l\'ordinateur.';
+    }
+    var plur = r.brut >= 2;
+    return 'Avec ' + r.V + ' devis par mois et ' + labelDelai() + ', vous laissez filer '
+         + dec1.format(r.brut) + ' chantier' + (plur ? 's' : '') + ' par mois. '
+         + 'Talos vous ' + (plur ? 'les' : 'le') + ' récupère — <b>' + eur.format(r.caMois) + '</b> de plus chaque mois — '
+         + 'et vous rend <i>' + hs + ' h</i>.';
+  }
+
+  function labelDelai(){
+    var b = segD.querySelector('.on');
+    return b ? b.dataset.lab : '';
+  }
+
+  /* ── rendu ── */
+  function render(){
+    var r = model();
+
+    // le curseur S ne doit jamais dépasser V : on borne le max dynamiquement
+    elS.max = Math.min(30, r.V);
+    $('sMax').textContent = elS.max;
+    if (+elS.value > +elS.max) { elS.value = elS.max; }
+    [elV, elS, elM, elT].forEach(paint);
+
+    $('vV').textContent = r.V + ' devis';
+    $('vS').textContent = r.S + ' signés';
+    $('vM').textContent = eur.format(r.M);
+    $('vT').textContent = dec1.format(r.T).replace('.',',') + ' h';
+
+    $('caMois').textContent = (r.caMois > 0 ? '+' : '') + eur.format(r.caMois);
+    $('caAn').textContent   = eur.format(r.caAn);
+    $('heures').textContent = dec1.format(r.heures) + ' h / mois';
+
+    $('chantiers').textContent = '+' + r.chantiers + ' chantier' + (r.chantiers > 1 ? 's' : '');
+    $('chantiersSub').textContent = r.chantiers > 0
+      ? 'Des devis que vous perdez aujourd\'hui parce qu\'ils partent trop tard.'
+      : 'À votre délai actuel, le simulateur ne vous en promet aucun.';
+
+    $('soirees').textContent = dec1.format(r.heures) + ' h';
+    $('soireesSub').textContent = 'Soit ' + dec1.format(r.heures / 8) + ' journées de chantier rendues chaque mois.';
+
+    // audit
+    $('a1').textContent  = r.V + ' devis';
+    $('a2').textContent  = r.S + ' devis';
+    $('a2f').textContent = 'taux de ' + pct.format(r.taux);
+    $('a3').textContent  = r.perdus + ' devis';
+    $('a3f').textContent = r.V + ' − ' + r.S;
+    $('a4').textContent  = dec2.format(r.brut);
+    $('a4f').textContent = r.perdus + ' × ' + pct.format(r.malus);
+    $('a5').textContent  = (r.caMois > 0 ? '+' : '') + eur.format(r.caMois);
+    $('a5f').textContent = r.chantiers + ' chantier' + (r.chantiers > 1 ? 's' : '') + ' × ' + eur.format(r.M);
+
+    $('noteTxt').textContent = r.plafonne
+      ? 'Votre calcul brut donne ' + Math.round(r.brut) + ' chantiers : nous l\'avons volontairement ramené à ' + CAP + ', notre plafond. Nous préférons vous sous-promettre.'
+      : 'Estimation volontairement plafonnée à +' + CAP + ' chantiers par mois. Le gain ne peut jamais dépasser le nombre de devis que vous perdez déjà — un simulateur qui promet plus que ça vous ment.';
+
+    $('synth').innerHTML = phrase(r);
+
+    // un seul libellé pour les deux CTA (bas de page + duplicata mobile)
+    var ctaLabel = r.caMois > 0
+      ? 'Récupérer ces ' + eur.format(r.caMois) + ' — Réserver une démo'
+      : 'Récupérer ces ' + dec1.format(r.heures) + ' h — Réserver une démo';
+    $('ctaTxt').textContent  = ctaLabel;
+    $('ctaMTxt').textContent = ctaLabel;
+
+    chart(r);
+  }
+
+  [elV, elS, elM, elT].forEach(function(el){
+    el.addEventListener('input', render);
+  });
+
+  segD.addEventListener('click', function(e){
+    var b = e.target.closest('button');
+    if (!b) return;
+    segD.querySelectorAll('button').forEach(function(x){
+      x.classList.remove('on');
+      x.setAttribute('aria-checked','false');
+    });
+    b.classList.add('on');
+    b.setAttribute('aria-checked','true');
+    malus = +b.dataset.d;
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

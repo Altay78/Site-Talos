@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talos — Passez aux choses simples</title>
+<script>(function(){try{var t=localStorage.getItem('talos-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<style>
+/* ══════════════════════════════════════════════════════════════
+   ⚠️  BLOC DE PREVIEW — à SUPPRIMER à l'intégration.
+   Tokens déjà fournis par talos-site/v2.css.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --bronze:#E0631F; --bronze-2:#F4823E; --bronze-rgb:224,99,31;
+  --parch:#F6EEE7; --parch-rgb:246,238,231;
+  --lin:#AB9F95;
+  --ink:#140F0C; --ink-2:#1C1611; --ink-3:#241B15;
+  --line:rgba(246,238,231,.08); --line-2:rgba(246,238,231,.15);
+  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --e:cubic-bezier(.16,1,.3,1);
+}
+html[data-theme="light"]{
+  --bronze:#C5531C; --bronze-2:#E0631F; --bronze-rgb:197,83,28;
+  --parch:#1C1310; --parch-rgb:28,19,16;
+  --lin:#6E6058;
+  --ink:#FBF6F2; --ink-2:#FFFFFF; --ink-3:#F4EBE3;
+  --line:rgba(40,25,16,.12); --line-2:rgba(40,25,16,.22);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--parch);font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+.tsw{position:fixed;z-index:99;top:18px;right:18px;width:40px;height:40px;border-radius:10px;cursor:pointer;
+  background:none;border:1px solid var(--line);color:var(--parch);display:flex;align-items:center;justify-content:center}
+.tsw .sun{display:none} html[data-theme="light"] .tsw .sun{display:block}
+html[data-theme="light"] .tsw .moon{display:none}
+.spacer{height:60vh;display:flex;align-items:center;justify-content:center;color:var(--lin);font-size:13px;
+  font-family:var(--mono);letter-spacing:2px;text-transform:uppercase}
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION « STORY SCROLL » — le code à conserver
+   ══════════════════════════════════════════════════════════════ */
+.story{position:relative;height:420vh}          /* piste de défilement */
+.pin{position:sticky;top:0;height:100vh;height:100dvh;overflow:hidden}
+.pin-in{max-width:1180px;height:100%;margin:0 auto;padding:0 32px;
+  display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1fr);
+  gap:clamp(32px,5vw,88px);align-items:center}
+
+/* ── colonne gauche : le téléphone ── */
+.stage{position:relative;display:flex;align-items:center;justify-content:center;height:100%}
+.stage::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 46% at 50% 50%,rgba(var(--bronze-rgb),.16),transparent 68%)}
+.phones{position:relative}
+
+/* les 3 mockups sont superposés : un seul visible à la fois */
+.ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;transform:translateY(22px) scale(.97);
+  transition:opacity .55s var(--e),transform .7s var(--e),visibility 0s linear .55s}
+.ph.is-on{opacity:1;visibility:visible;transform:none;transition:opacity .55s var(--e),transform .7s var(--e),visibility 0s}
+.ph:first-child{position:relative}   /* le 1er dicte la hauteur du bloc */
+
+/* châssis iPhone */
+.device{position:relative;width:340px;height:736px;border-radius:52px;padding:3px;
+  background:linear-gradient(148deg,#9a9089 0%,#4c453f 5%,#2a2624 12%,#766c64 22%,#3b3531 33%,
+    #241f1d 46%,#574f48 58%,#938880 70%,#423b36 80%,#2b2724 88%,#7d736b 100%);
+  box-shadow:0 1px 2px rgba(0,0,0,.5),0 24px 48px -14px rgba(0,0,0,.55),
+    0 64px 120px -24px rgba(0,0,0,.7),inset 0 0 0 .5px rgba(255,255,255,.24)}
+html[data-theme="light"] .device{
+  box-shadow:0 1px 2px rgba(40,25,16,.2),0 24px 48px -14px rgba(40,25,16,.22),
+    0 64px 120px -24px rgba(40,25,16,.28),inset 0 0 0 .5px rgba(255,255,255,.24)}
+.bezel{position:relative;height:100%;border-radius:49px;background:#070605;padding:8px;
+  box-shadow:inset 0 0 3px 1px rgba(0,0,0,.95)}
+.glass{position:relative;height:100%;border-radius:42px;overflow:hidden;background:#0E0B09}
+.island{position:absolute;z-index:5;top:10px;left:50%;transform:translateX(-50%);
+  width:112px;height:32px;border-radius:18px;background:#000}
+.island::after{content:'';position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  width:8px;height:8px;border-radius:50%;
+  background:radial-gradient(circle at 32% 30%,#243244 0%,#0c1119 60%,#05070a 100%)}
+.glare{position:absolute;inset:3px;border-radius:49px;pointer-events:none;z-index:6;
+  background:linear-gradient(118deg,rgba(255,255,255,.15) 0%,rgba(255,255,255,.05) 14%,
+    rgba(255,255,255,0) 32%,rgba(255,255,255,0) 76%,rgba(255,255,255,.05) 100%)}
+.k{position:absolute;border-radius:1.5px;background:linear-gradient(180deg,#8b817a,#4a433d 26%,#2b2724 72%,#6f665e)}
+.k.act{left:-2px;top:138px;width:2.5px;height:28px} .k.vu{left:-2px;top:194px;width:2.5px;height:54px}
+.k.vd{left:-2px;top:262px;width:2.5px;height:54px}  .k.pw{right:-2px;top:214px;width:2.5px;height:88px}
+.home{position:absolute;z-index:5;left:50%;bottom:8px;transform:translateX(-50%);
+  width:120px;height:5px;border-radius:5px;background:rgba(255,255,255,.32)}
+
+/* barre d'état iOS — les captures de l'app n'en ont pas : sans elle,
+   le contenu passe derrière la Dynamic Island */
+.sbar{position:absolute;z-index:4;top:0;left:0;right:0;height:44px;background:#FAF8F5;
+  display:flex;align-items:flex-end;justify-content:space-between;padding:0 22px 5px;
+  color:#181818;font-size:12.5px;font-weight:700;letter-spacing:-.2px}
+.sbar .ic{display:flex;align-items:center;gap:4px}
+.sbar svg{display:block}
+
+/* ── slot image : c'est ici que tes PNG viennent ── */
+.shot{position:absolute;left:0;right:0;top:44px;bottom:0;background:#FAF8F5}
+.shot img{position:relative;z-index:2;width:100%;height:100%;object-fit:cover;display:block}
+.shot .empty{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;text-align:center;padding:24px;
+  background:
+    repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 12px,transparent 12px 24px),
+    linear-gradient(165deg,#3A2C22,#1E1815 60%,#2A211A);
+  color:rgba(246,238,231,.62)}
+.shot .empty b{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--bronze);font-weight:700}
+.shot .empty span{font-size:12.5px;line-height:1.5}
+.shot .empty i{font-family:var(--mono);font-style:normal;font-size:10.5px;opacity:.6}
+
+/* ── colonne droite : le texte ── */
+.script{position:relative}
+
+/* le chapeau part vers le haut quand le 1er item s'installe */
+.lede{transform:translateY(calc(var(--t) * -64px));
+  opacity:clamp(0,calc(1 - var(--t) * 1.9),1)}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;
+  letter-spacing:2.4px;text-transform:uppercase;font-weight:700;color:var(--bronze)}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--bronze);display:block}
+.lede h2{font-size:clamp(30px,4.4vw,56px);font-weight:800;letter-spacing:-2px;line-height:1.04;margin-top:18px}
+.lede p{font-size:clamp(16px,1.5vw,21px);color:rgba(var(--parch-rgb),.6);margin-top:18px;max-width:420px}
+
+/* la pile d'items — remonte pour prendre la place du chapeau */
+.steps{position:absolute;left:0;right:0;top:0;
+  transform:translateY(calc(210px - var(--t) * 210px));
+  opacity:clamp(0,calc((var(--t) - .35) * 2.2),1);
+  pointer-events:none}
+.st{padding:14px 0;transition:opacity .5s var(--e)}
+.st + .st{border-top:1px solid var(--line)}
+/* l'écart de contraste actif/inactif est la signature de l'effet :
+   les items en attente doivent presque disparaître */
+.st h3{font-size:clamp(21px,2.5vw,32px);font-weight:700;letter-spacing:-1px;line-height:1.15;
+  color:rgba(var(--parch-rgb),.26);transition:color .5s var(--e)}
+.st .body{max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .6s var(--e),opacity .4s ease,margin .55s var(--e)}
+.st p{font-size:clamp(14px,1.25vw,16.5px);line-height:1.6;color:rgba(var(--parch-rgb),.62);max-width:430px}
+.st.is-on h3{color:var(--parch)}
+.st.is-on .body{max-height:180px;opacity:1;margin-top:12px}
+/* barre de progression de l'item actif */
+.st .rail{height:2px;background:var(--line);margin-top:16px;overflow:hidden;opacity:0;
+  transition:opacity .4s}
+.st.is-on .rail{opacity:1}
+.st .rail i{display:block;height:100%;background:var(--bronze);width:0}
+
+/* ── responsive ── */
+@media (max-width:940px){
+  .story{height:380vh}
+  .pin-in{grid-template-columns:1fr;gap:0;padding:0 20px;align-content:center}
+  .stage{height:auto;margin-bottom:26px}
+  .device{width:230px;height:498px;border-radius:38px;padding:2.5px}
+  .bezel{border-radius:36px;padding:6px} .glass{border-radius:30px}
+  .glare{border-radius:36px} .island{width:56px;height:22px;top:8px}
+  .island::after{width:6px;height:6px;right:8px}
+  .k.act{top:92px;height:20px} .k.vu{top:130px;height:38px}
+  .k.vd{top:176px;height:38px}  .k.pw{top:144px;height:62px}
+  .home{width:88px;height:4px;bottom:6px}
+  /* l'île mobile descend à 32px (top 8 + hauteur 24) : le slot doit démarrer après */
+  .sbar{height:34px;padding:0 15px 4px;font-size:9.5px}
+  .sbar svg{transform:scale(.78);transform-origin:center}
+  .shot{top:34px}
+  .lede h2{font-size:26px;letter-spacing:-1.1px}
+  .lede p{font-size:15px;margin-top:12px}
+  .steps{transform:translateY(calc(150px - var(--t) * 150px))}
+  .st{padding:11px 0}
+  .st h3{font-size:19px;letter-spacing:-.6px}
+  .st p{font-size:14px}
+  .st.is-on .body{max-height:200px;margin-top:9px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ph,.st,.st .body,.st h3{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<button class="tsw" id="tsw" type="button" aria-label="Changer de thème">
+  <svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+  <svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+</button>
+
+<div class="spacer">↓ défilez</div>
+
+<!-- ══════════ SECTION ══════════ -->
+<section class="story" id="story">
+  <div class="pin">
+    <div class="pin-in">
+
+      <!-- GAUCHE · téléphone -->
+      <div class="stage">
+        <div class="phones" id="phones">
+
+          <div class="ph is-on">
+            <div class="device">
+              <span class="k act"></span><span class="k vu"></span><span class="k vd"></span><span class="k pw"></span>
+              <div class="bezel"><div class="glass">
+                <div class="island"></div>
+                <div class="sbar">
+                  <span>9:41</span>
+                  <span class="ic">
+                    <svg width="16" height="11" viewBox="0 0 18 12" fill="#181818"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="6" width="3" height="6" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                    <svg width="14" height="11" viewBox="0 0 16 12" fill="none" stroke="#181818" stroke-width="1.7" stroke-linecap="round"><path d="M1.2 4.1a10 10 0 0 1 13.6 0"/><path d="M3.8 6.9a6.2 6.2 0 0 1 8.4 0"/><path d="M6.4 9.6a2.5 2.5 0 0 1 3.2 0"/></svg>
+                    <svg width="22" height="11" viewBox="0 0 25 12"><rect x=".6" y=".6" width="21" height="10.8" rx="3.2" fill="none" stroke="#181818" stroke-opacity=".38"/><rect x="2.2" y="2.2" width="15" height="7.6" rx="2" fill="#181818"/><path d="M23.2 4.2v3.6a2 2 0 0 0 0-3.6z" fill="#181818" fill-opacity=".4"/></svg>
+                  </span>
+                </div>
+                <div class="shot">
+                  <div class="empty"><b>Écran 01</b><span>Une fin de journée</span><i>340 × 720 px · PNG</i></div>
+                  <img id="shot0" alt="">
+                </div>
+                <span class="home"></span><div class="glare"></div>
+              </div></div>
+            </div>
+          </div>
+
+          <div class="ph">
+            <div class="device">
+              <span class="k act"></span><span class="k vu"></span><span class="k vd"></span><span class="k pw"></span>
+              <div class="bezel"><div class="glass">
+                <div class="island"></div>
+                <div class="sbar">
+                  <span>9:41</span>
+                  <span class="ic">
+                    <svg width="16" height="11" viewBox="0 0 18 12" fill="#181818"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="6" width="3" height="6" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                    <svg width="14" height="11" viewBox="0 0 16 12" fill="none" stroke="#181818" stroke-width="1.7" stroke-linecap="round"><path d="M1.2 4.1a10 10 0 0 1 13.6 0"/><path d="M3.8 6.9a6.2 6.2 0 0 1 8.4 0"/><path d="M6.4 9.6a2.5 2.5 0 0 1 3.2 0"/></svg>
+                    <svg width="22" height="11" viewBox="0 0 25 12"><rect x=".6" y=".6" width="21" height="10.8" rx="3.2" fill="none" stroke="#181818" stroke-opacity=".38"/><rect x="2.2" y="2.2" width="15" height="7.6" rx="2" fill="#181818"/><path d="M23.2 4.2v3.6a2 2 0 0 0 0-3.6z" fill="#181818" fill-opacity=".4"/></svg>
+                  </span>
+                </div>
+                <div class="shot">
+                  <div class="empty"><b>Écran 02</b><span>La réactivité client</span><i>340 × 720 px · PNG</i></div>
+                  <img id="shot1" alt="">
+                </div>
+                <span class="home"></span><div class="glare"></div>
+              </div></div>
+            </div>
+          </div>
+
+          <div class="ph">
+            <div class="device">
+              <span class="k act"></span><span class="k vu"></span><span class="k vd"></span><span class="k pw"></span>
+              <div class="bezel"><div class="glass">
+                <div class="island"></div>
+                <div class="sbar">
+                  <span>9:41</span>
+                  <span class="ic">
+                    <svg width="16" height="11" viewBox="0 0 18 12" fill="#181818"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="6" width="3" height="6" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                    <svg width="14" height="11" viewBox="0 0 16 12" fill="none" stroke="#181818" stroke-width="1.7" stroke-linecap="round"><path d="M1.2 4.1a10 10 0 0 1 13.6 0"/><path d="M3.8 6.9a6.2 6.2 0 0 1 8.4 0"/><path d="M6.4 9.6a2.5 2.5 0 0 1 3.2 0"/></svg>
+                    <svg width="22" height="11" viewBox="0 0 25 12"><rect x=".6" y=".6" width="21" height="10.8" rx="3.2" fill="none" stroke="#181818" stroke-opacity=".38"/><rect x="2.2" y="2.2" width="15" height="7.6" rx="2" fill="#181818"/><path d="M23.2 4.2v3.6a2 2 0 0 0 0-3.6z" fill="#181818" fill-opacity=".4"/></svg>
+                  </span>
+                </div>
+                <div class="shot">
+                  <div class="empty"><b>Écran 03</b><span>Trésorerie &amp; relances</span><i>340 × 720 px · PNG</i></div>
+                  <img id="shot2" alt="">
+                </div>
+                <span class="home"></span><div class="glare"></div>
+              </div></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- DROITE · texte -->
+      <div class="script">
+        <div class="lede">
+          <span class="eyebrow"><i></i> Votre semaine, autrement</span>
+          <h2>Passez aux choses simples avec Talos</h2>
+          <p>Le temps devient votre allié.</p>
+        </div>
+
+        <div class="steps" id="steps">
+          <div class="st is-on">
+            <h3>Une fin de journée</h3>
+            <div class="body">
+              <p>Ouvrez Talos, et rédigez un devis, suivez vos clients, vérifiez votre trésorerie en 1 clic.</p>
+              <div class="rail"><i></i></div>
+            </div>
+          </div>
+          <div class="st">
+            <h3>La réactivité client</h3>
+            <div class="body">
+              <p>Le devis est dans la boîte mail du client 15 minutes après votre visite. Vous verrouillez le chantier avant la concurrence.</p>
+              <div class="rail"><i></i></div>
+            </div>
+          </div>
+          <div class="st">
+            <h3>Trésorerie &amp; relances</h3>
+            <div class="body">
+              <p>Relances automatiques et courtoises par SMS et e-mail. Vos paiements rentrent sans que vous ayez jamais à faire la police.</p>
+              <div class="rail"><i></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="spacer">fin de section</div>
+
+<script>
+(function(){
+  /* ═══════════════════════════════════════════════════════════
+     👉 TES IMAGES ICI — un PNG par écran, dans l'ordre des items.
+     Laisse la chaîne vide tant que tu n'as pas le visuel :
+     le gabarit rayé reste affiché à la place.
+     ═══════════════════════════════════════════════════════════ */
+  var SHOTS = [
+    'shots/ecran-01-accueil.png',   // 01 · La fin de journée
+    'shots/ecran-02-devis.png',     // 02 · La réactivité client
+    'shots/ecran-03-relance.png'    // 03 · Trésorerie & relances
+  ];
+
+  var root   = document.documentElement;
+  var story  = document.getElementById('story');
+  var phones = [].slice.call(document.querySelectorAll('.ph'));
+  var steps  = [].slice.call(document.querySelectorAll('.st'));
+  var rails  = steps.map(function(s){ return s.querySelector('.rail i'); });
+  var N = steps.length, last = -1, ticking = false;
+
+  // branche les PNG fournis ; sinon on laisse le gabarit visible
+  SHOTS.forEach(function(src, i){
+    var img = document.getElementById('shot' + i);
+    if (src) { img.src = src; } else { img.remove(); }
+  });
+
+  function clamp(v,a,b){ return v<a?a:(v>b?b:v); }
+
+  function update(){
+    ticking = false;
+    var r     = story.getBoundingClientRect();
+    var total = story.offsetHeight - window.innerHeight;
+    var p     = clamp(-r.top / total, 0, 1);
+
+    // 0 → 0.16 : le chapeau s'efface, la pile d'items monte à sa place
+    root.style.setProperty('--t', clamp(p / 0.16, 0, 1).toFixed(4));
+
+    // 0.20 → 0.96 : les 3 items s'enchaînent
+    var f   = clamp((p - 0.20) / 0.76, 0, 1) * N;
+    var idx = clamp(Math.floor(f), 0, N - 1);
+    var sub = clamp(f - idx, 0, 1);
+
+    rails[idx].style.width = (sub * 100) + '%';
+
+    if (idx === last) return;
+    last = idx;
+
+    steps.forEach(function(s,i){
+      s.classList.toggle('is-on', i === idx);
+      if (i !== idx) rails[i].style.width = i < idx ? '100%' : '0%';
+    });
+    phones.forEach(function(el,i){ el.classList.toggle('is-on', i === idx); });
+  }
+
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', function(){ last = -1; onScroll(); }, {passive:true});
+  update();
+
+  /* preview seulement */
+  document.getElementById('tsw').addEventListener('click', function(){
+    var n = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', n);
+    try { localStorage.setItem('talos-theme', n); } catch(e){}
+  });
+})();
+</script>
+</body>
+</html>

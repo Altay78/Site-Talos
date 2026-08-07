@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talos — Système de marque v2 « Patine »</title>
+<style>
+  :root{
+    --obsidienne:#0A0807; --espresso:#15100C; --bistre:#211811; --suie:#2E2419;
+    --antique:#A8763B; --bronze:#C9963F; --gilt:#E3B264; --laiton:#7C5E2E;
+    --parchemin:#F5EDDC; --os:#E7DBC3; --lin:#CFC2A6;
+    --verdegris:#6E857A; --patine:#8FA398; --terracotta:#C56A4A;
+    --hair:rgba(245,237,220,0.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--obsidienne);color:var(--parchemin);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+  .board{width:1440px;padding:64px 72px;position:relative;overflow:hidden;}
+  .grain{position:absolute;inset:0;opacity:0.4;pointer-events:none;mix-blend-mode:overlay;}
+  .glow{position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 85% 5%,rgba(168,118,59,0.18),transparent 60%);pointer-events:none;}
+
+  header{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--hair);padding-bottom:28px;margin-bottom:48px;position:relative;}
+  header .t{font-size:15px;font-family:'SF Mono',monospace;letter-spacing:3px;color:var(--antique);text-transform:uppercase;}
+  header h1{font-size:46px;font-weight:700;letter-spacing:-1.5px;margin-top:10px;}
+  header h1 em{font-family:Georgia,serif;font-style:italic;font-weight:400;color:var(--gilt);}
+  header .logo svg{height:30px;}
+
+  h2{font-family:'SF Mono',monospace;font-size:13px;letter-spacing:3px;color:var(--antique);text-transform:uppercase;margin:0 0 22px;}
+  section{margin-bottom:52px;position:relative;}
+
+  /* palette */
+  .pal-group{margin-bottom:26px;}
+  .pal-label{font-size:13px;color:var(--lin);letter-spacing:0.5px;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+  .pal-label::after{content:'';flex:1;height:1px;background:var(--hair);}
+  .swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .sw{border-radius:14px;overflow:hidden;border:1px solid var(--hair);background:var(--espresso);}
+  .sw .chip{height:96px;}
+  .sw .meta{padding:12px 14px;}
+  .sw .nm{font-size:14.5px;font-weight:600;letter-spacing:-0.2px;}
+  .sw .hex{font-family:'SF Mono',monospace;font-size:11.5px;color:var(--lin);letter-spacing:1px;margin-top:3px;}
+  .sw .role{font-size:11.5px;color:rgba(245,237,220,0.45);margin-top:6px;line-height:1.3;}
+
+  /* type */
+  .type-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;}
+  .type-card{background:var(--espresso);border:1px solid var(--hair);border-radius:16px;padding:30px 32px;}
+  .specimen{font-size:88px;font-weight:700;letter-spacing:-3px;line-height:1;margin-bottom:6px;}
+  .specimen em{font-family:Georgia,serif;font-style:italic;font-weight:400;color:var(--gilt);}
+  .type-meta{font-family:'SF Mono',monospace;font-size:12px;color:var(--lin);letter-spacing:1px;margin-top:18px;line-height:1.7;}
+  .type-meta b{color:var(--parchemin);font-family:'Helvetica Neue',sans-serif;font-weight:600;}
+  .mono-card .m{font-family:'SF Mono',monospace;font-size:22px;letter-spacing:2px;color:var(--patine);}
+
+  /* principes */
+  .principes{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .pr{background:var(--espresso);border:1px solid var(--hair);border-left:2px solid var(--antique);border-radius:12px;padding:20px 24px;}
+  .pr .n{font-family:'SF Mono',monospace;font-size:12px;color:var(--antique);letter-spacing:2px;margin-bottom:8px;}
+  .pr .h{font-size:18px;font-weight:700;letter-spacing:-0.5px;margin-bottom:6px;}
+  .pr .h em{font-family:Georgia,serif;font-style:italic;font-weight:400;color:var(--gilt);}
+  .pr p{font-size:13.5px;color:rgba(245,237,220,0.6);line-height:1.5;}
+</style>
+</head>
+<body>
+<div class="board">
+  <div class="glow"></div>
+
+  <header>
+    <div>
+      <div class="t">Système de marque · v2</div>
+      <h1>Talos — <em>Patine.</em></h1>
+    </div>
+    <div class="logo">
+      <svg viewBox="0 0 380 120" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#F5EDDC"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g>
+        <text x="66" y="100" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="100" fill="#F5EDDC" font-weight="700" letter-spacing="-4">ALOS</text>
+      </svg>
+    </div>
+  </header>
+
+  <!-- PALETTE -->
+  <section>
+    <h2>01 — Palette élevée</h2>
+
+    <div class="pal-group">
+      <div class="pal-label">Noirs chauds · profondeur</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip" style="background:#0A0807"></div><div class="meta"><div class="nm">Obsidienne</div><div class="hex">#0A0807</div><div class="role">Fond principal</div></div></div>
+        <div class="sw"><div class="chip" style="background:#15100C"></div><div class="meta"><div class="nm">Espresso</div><div class="hex">#15100C</div><div class="role">Surfaces, cartes</div></div></div>
+        <div class="sw"><div class="chip" style="background:#211811"></div><div class="meta"><div class="nm">Bistre</div><div class="hex">#211811</div><div class="role">Cartes surélevées</div></div></div>
+        <div class="sw"><div class="chip" style="background:#2E2419"></div><div class="meta"><div class="nm">Suie</div><div class="hex">#2E2419</div><div class="role">Bordures chaudes</div></div></div>
+      </div>
+    </div>
+
+    <div class="pal-group">
+      <div class="pal-label">Bronze · de l'antique au gilt (l'accent se mérite)</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip" style="background:#A8763B"></div><div class="meta"><div class="nm">Bronze antique</div><div class="hex">#A8763B</div><div class="role">Accent principal — sourd, premium</div></div></div>
+        <div class="sw"><div class="chip" style="background:#C9963F"></div><div class="meta"><div class="nm">Bronze</div><div class="hex">#C9963F</div><div class="role">Accent secondaire</div></div></div>
+        <div class="sw"><div class="chip" style="background:#E3B264"></div><div class="meta"><div class="nm">Gilt</div><div class="hex">#E3B264</div><div class="role">Reflet — petites touches only</div></div></div>
+        <div class="sw"><div class="chip" style="background:#7C5E2E"></div><div class="meta"><div class="nm">Laiton vieilli</div><div class="hex">#7C5E2E</div><div class="role">Filets, profondeur</div></div></div>
+      </div>
+    </div>
+
+    <div class="pal-group">
+      <div class="pal-label">Parchemin · le texte respire</div>
+      <div class="swatches" style="grid-template-columns:repeat(4,1fr)">
+        <div class="sw"><div class="chip" style="background:#F5EDDC"></div><div class="meta"><div class="nm">Parchemin</div><div class="hex">#F5EDDC</div><div class="role">Texte principal</div></div></div>
+        <div class="sw"><div class="chip" style="background:#E7DBC3"></div><div class="meta"><div class="nm">Os</div><div class="hex">#E7DBC3</div><div class="role">Texte secondaire</div></div></div>
+        <div class="sw"><div class="chip" style="background:#CFC2A6"></div><div class="meta"><div class="nm">Lin</div><div class="hex">#CFC2A6</div><div class="role">Légendes, labels</div></div></div>
+        <div class="sw"><div class="chip" style="background:#6E857A"></div><div class="meta"><div class="nm">Vert-de-gris</div><div class="hex">#6E857A</div><div class="role">Secondaire · patine du bronze</div></div></div>
+      </div>
+    </div>
+
+    <div class="pal-group">
+      <div class="pal-label">Patine & alerte · à doser</div>
+      <div class="swatches" style="grid-template-columns:repeat(4,1fr)">
+        <div class="sw"><div class="chip" style="background:#8FA398"></div><div class="meta"><div class="nm">Patine claire</div><div class="hex">#8FA398</div><div class="role">Gains, succès, signaux ✓</div></div></div>
+        <div class="sw"><div class="chip" style="background:#C56A4A"></div><div class="meta"><div class="nm">Terracotta</div><div class="hex">#C56A4A</div><div class="role">Alertes, pertes évitées (rare)</div></div></div>
+        <div class="sw" style="opacity:0.5"><div class="chip" style="background:linear-gradient(90deg,#A8763B,#E3B264)"></div><div class="meta"><div class="nm">Dégradé gilt</div><div class="hex">à éviter en aplat</div><div class="role">Réservé reflets/glints fins</div></div></div>
+        <div class="sw" style="opacity:0.5"><div class="chip" style="background:#0A0807"></div><div class="meta"><div class="nm">Vide</div><div class="hex">l'espace négatif</div><div class="role">La respiration = le luxe</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPO -->
+  <section>
+    <h2>02 — Typographie</h2>
+    <div class="type-grid">
+      <div class="type-card">
+        <div class="specimen">Forgé <em>main.</em></div>
+        <div class="type-meta">
+          <b>Helvetica Neue</b> — 700 / titres, chiffres, nav<br>
+          <b>Georgia italique</b> — le mot d'impact uniquement<br>
+          Letter-spacing serré (-2 à -4) sur les grands titres
+        </div>
+      </div>
+      <div class="type-card mono-card">
+        <div class="m">SF MONO · 0123456789</div>
+        <div class="type-meta">
+          <b>SF Mono</b> — labels, URL, timestamps, chiffres techniques<br>
+          Letter-spacing large (+2 à +4), toujours en CAPS<br>
+          Couleur Lin ou Bronze antique
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPES -->
+  <section>
+    <h2>03 — Les 4 règles « pas IA, mais marque »</h2>
+    <div class="principes">
+      <div class="pr"><div class="n">I</div><div class="h">L'accent se <em>mérite.</em></div><p>Bronze antique sourd au quotidien. Le gilt brillant ne sert que pour de petits reflets. Jamais de dégradé doré en aplat — c'est la signature « SaaS IA générique ».</p></div>
+      <div class="pr"><div class="n">II</div><div class="h">De la <em>matière.</em></div><p>Texture de bronze forgé, pierre, grain, patine. Une marque premium se touche. On bannit les fonds plats et le glassmorphism partout.</p></div>
+      <div class="pr"><div class="n">III</div><div class="h">Noirs <em>chauds.</em></div><p>4 niveaux d'obscur du obsidienne au suie. La profondeur se construit en couches, pas avec des glows néon.</p></div>
+      <div class="pr"><div class="n">IV</div><div class="h">Éditorial, pas <em>tech.</em></div><p>Serif italique + grotesque, filets fins, espace négatif généreux. On vise le magazine de luxe, pas la landing de startup.</p></div>
+    </div>
+  </section>
+
+  <svg class="grain"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer></filter><rect width="100%" height="100%" filter="url(#g)"/></svg>
+</div>
+</body>
+</html>
