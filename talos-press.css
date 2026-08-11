@@ -1,0 +1,57 @@
+/* ══════════════════════════════════════════════════════════════════
+   TALOS · ÉTAT PRESSÉ
+   Tout ce qui se clique doit répondre à l'appui. Une seule feuille
+   partagée : le jour où l'on change la valeur, elle change partout.
+
+   scale(.97) sur :active, transition courte en sortie. Le geste doit
+   revenir plus vite qu'il ne s'enfonce — c'est le système qui répond,
+   pas l'utilisateur qui décide.
+   ══════════════════════════════════════════════════════════════════ */
+
+.tnav-cta,
+.tnav-esp,
+.m-cta,
+.m-esp,
+.t-price .pcta,
+.t-price .tpick-head,
+.t-price .seg button,
+.t-roi .cta,
+.t-roi .sheet-btn,
+.t-roi .sheet-ok,
+.t-cmp .cmp-cta .go,
+.t-ft .nform button{
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* la transition de sortie : rapide, sans à-coup. On ne touche pas aux
+   transitions déjà déclarées ailleurs — transform y figure toujours. */
+.tnav-cta:active,
+.tnav-esp:active,
+.m-cta:active,
+.m-esp:active,
+.t-price .pcta:active,
+.t-price .tpick-head:active,
+.t-price .seg button:active,
+.t-roi .cta:active,
+.t-roi .sheet-btn:active,
+.t-roi .sheet-ok:active,
+.t-cmp .cmp-cta .go:active,
+.t-ft .nform button:active{
+  transform:scale(.97);
+  transition-duration:100ms;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .tnav-cta:active,
+  .tnav-esp:active,
+  .m-cta:active,
+  .m-esp:active,
+  .t-price .pcta:active,
+  .t-price .tpick-head:active,
+  .t-price .seg button:active,
+  .t-roi .cta:active,
+  .t-roi .sheet-btn:active,
+  .t-roi .sheet-ok:active,
+  .t-cmp .cmp-cta .go:active,
+  .t-ft .nform button:active{ transform:none }
+}

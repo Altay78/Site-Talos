@@ -1797,7 +1797,7 @@ html[data-theme="light"] .t-cat .cat-head h2 em{background:linear-gradient(100de
 .t-cat .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .t-cat .cell{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:20px;
   padding:22px 24px 24px;background:var(--ink-2);
-  transition:border-color .4s var(--e),transform .4s var(--e),box-shadow .4s var(--e)}
+  transition:border-color .2s var(--e),transform .2s var(--e),box-shadow .4s var(--e)}
 html[data-theme="light"] .t-cat .cell{background:#fff;box-shadow:0 1px 2px rgba(40,25,16,.04),0 10px 26px rgba(40,25,16,.05)}
 .t-cat .cell:hover{border-color:rgba(var(--bronze-rgb),.34);transform:translateY(-4px)}
 html[data-theme="light"] .t-cat .cell:hover{box-shadow:0 1px 2px rgba(40,25,16,.05),0 18px 40px rgba(40,25,16,.09)}
@@ -2106,10 +2106,14 @@ html[data-theme="light"] .t-price .price-head h2 em{background:linear-gradient(1
 .t-price .seg{position:relative;display:flex;gap:2px;padding:5px;border-radius:100px;
   background:var(--ink-2);border:1px solid var(--line)}
 html[data-theme="light"] .t-price .seg{background:#fff;box-shadow:0 1px 2px rgba(40,25,16,.05)}
-.t-price .seg .thumb{position:absolute;top:5px;bottom:5px;left:0;width:0;border-radius:100px;
+/*  la pastille ne change pas de largeur : elle garde une largeur de
+    référence de 100px et se met à l'échelle. transform seul = GPU,
+    et 200 ms parce qu'on clique ces boutons en rafale.  */
+.t-price .seg .thumb{position:absolute;top:5px;bottom:5px;left:0;width:100px;border-radius:100px;
   background:var(--bronze);box-shadow:0 8px 22px rgba(var(--bronze-rgb),.34);
-  transform:translateX(0);pointer-events:none;z-index:0;opacity:0;
-  transition:transform .44s var(--e),width .44s var(--e),opacity .2s}
+  transform-origin:left center;transform:translateX(0) scaleX(1);
+  pointer-events:none;z-index:0;opacity:0;
+  transition:transform .2s var(--e),opacity .2s}
 .t-price .seg .thumb.ready{opacity:1}
 .t-price .seg button{position:relative;z-index:1;
   display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border:0;border-radius:100px;
@@ -2132,16 +2136,18 @@ html[data-theme="light"] .t-price .seg{background:#fff;box-shadow:0 1px 2px rgba
 .t-price .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
 .t-price .plan{position:relative;display:flex;flex-direction:column;padding:26px 24px 28px;
   border:1px solid var(--line);border-radius:22px;background:var(--ink-2);
-  transition:border-color .4s var(--e),transform .4s var(--e)}
+  transition:border-color .2s var(--e),transform .2s var(--e)}
 html[data-theme="light"] .t-price .plan{background:#fff;box-shadow:0 1px 2px rgba(40,25,16,.04),0 10px 26px rgba(40,25,16,.05)}
-.t-price .plan:hover{border-color:var(--line-2);transform:translateY(-3px)}
+@media (hover:hover) and (pointer:fine){
+.t-price .plan:hover{border-color:var(--line-2);transform:translateY(-3px)}}
 .t-price .plan.best{border-color:rgba(var(--bronze-rgb),.4);background:
   radial-gradient(ellipse 90% 55% at 78% 0%,rgba(var(--bronze-rgb),.22),transparent 62%),
   var(--ink-2)}
 html[data-theme="light"] .t-price .plan.best{background:
   radial-gradient(ellipse 90% 55% at 78% 0%,rgba(var(--bronze-rgb),.16),transparent 62%),#fff;
   box-shadow:0 1px 2px rgba(40,25,16,.05),0 18px 40px rgba(40,25,16,.09)}
-.t-price .plan.best:hover{border-color:rgba(var(--bronze-rgb),.6)}
+@media (hover:hover) and (pointer:fine){
+.t-price .plan.best:hover{border-color:rgba(var(--bronze-rgb),.6)}}
 .t-price .tag{position:absolute;z-index:3;top:-11px;left:24px;display:inline-flex;align-items:center;gap:6px;
   padding:4px 12px;border-radius:100px;background:var(--bronze);color:#fff;
   font-size:11.5px;font-weight:700;letter-spacing:-.1px;
@@ -2156,7 +2162,8 @@ html[data-theme="light"] .t-price .plan.best{background:
   -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 52%,transparent 100%);
           mask-image:linear-gradient(180deg,#000 0%,#000 52%,transparent 100%);
   transition:transform .6s var(--e),filter .4s var(--e)}
-.t-price .plan:hover .shot img{transform:scale(1.04)}
+@media (hover:hover) and (pointer:fine){
+.t-price .plan:hover .shot img{transform:scale(1.04)}}
 .t-price .plan.best .shot img{filter:grayscale(.1) saturate(1.2) brightness(.82) contrast(1.03)}
 html[data-theme="light"] .t-price .plan .shot img{filter:grayscale(.15) saturate(1.05) brightness(1) contrast(1)}
 @media (prefers-reduced-motion:reduce){.t-price .plan:hover .shot img{transform:none}}
@@ -2218,10 +2225,14 @@ html[data-theme="light"] .t-price .tpick-head{background:#fff}
   letter-spacing:1.2px;text-transform:uppercase;color:var(--bronze)}
 .t-price .tpick-chev{flex:0 0 auto;transition:transform .3s var(--e);color:var(--lin)}
 .t-price .tpick.open .tpick-chev{transform:rotate(180deg)}
-.t-price .tpick-panel{overflow:hidden;max-height:0;visibility:hidden;
-  transition:max-height .38s var(--e),visibility 0s linear .38s}
-.t-price .tpick.open .tpick-panel{max-height:640px;visibility:visible;
-  transition:max-height .38s var(--e),visibility 0s}
+/*  grid-template-rows 0fr → 1fr : le navigateur anime jusqu'à la hauteur
+    réelle du contenu. Avec un max-height forfaitaire, la moitié de la
+    transition animait du vide — l'ouverture paraissait molle.  */
+.t-price .tpick-panel{display:grid;grid-template-rows:0fr;visibility:hidden;
+  transition:grid-template-rows .32s var(--e),visibility 0s linear .32s}
+.t-price .tpick-panel-in{overflow:hidden;min-height:0}
+.t-price .tpick.open .tpick-panel{grid-template-rows:1fr;visibility:visible;
+  transition:grid-template-rows .32s var(--e),visibility 0s}
 .t-price .tpick-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:8px;
   margin-top:10px;padding:14px;border-radius:16px;border:1px solid var(--line);background:var(--ink-2)}
 html[data-theme="light"] .t-price .tpick-list{background:#fff}
@@ -2628,7 +2639,7 @@ html[data-theme="light"] .t-cat .cat-head h2 em{background:linear-gradient(100de
 .t-cat .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .t-cat .cell{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:20px;
   padding:22px 24px 24px;background:var(--ink-2);
-  transition:border-color .4s var(--e),transform .4s var(--e),box-shadow .4s var(--e)}
+  transition:border-color .2s var(--e),transform .2s var(--e),box-shadow .4s var(--e)}
 html[data-theme="light"] .t-cat .cell{background:#fff;box-shadow:0 1px 2px rgba(40,25,16,.04),0 10px 26px rgba(40,25,16,.05)}
 .t-cat .cell:hover{border-color:rgba(var(--bronze-rgb),.34);transform:translateY(-4px)}
 html[data-theme="light"] .t-cat .cell:hover{box-shadow:0 1px 2px rgba(40,25,16,.05),0 18px 40px rgba(40,25,16,.09)}
@@ -2868,7 +2879,7 @@ html[data-theme="light"] .t-roi{--sig-vert:#3D7C55;--sig-ambre:#B8862B;--sig-ora
 }
 
 </style>
-<link rel="stylesheet" href="talos-fold.css">
+<link rel="stylesheet" href="talos-fold.css"><link rel="stylesheet" href="talos-press.css">
 </head>
 <body>
 <header class="tnav-wrap" id="tnav-wrap"><nav class="tnav" id="tnav" aria-label="Navigation principale"><a class="tnav-logo" href="index.html#top" aria-label="Talos — accueil"><svg viewBox="0 16 62 92" width="18" height="27" aria-hidden="true"><g fill="currentColor"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g></svg><span>Talos</span></a><div class="tnav-links"><a href="fonctionnalites.html">Fonctionnalités</a><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html" aria-current="page">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html">Pourquoi Talos</a><a href="blog.html">Blog</a></div><div class="tnav-act"><button type="button" class="theme-toggle grid h-10 w-10 shrink-0 place-items-center rounded-lg" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg></button><a class="tnav-esp" href="espace-client.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="10" r="3.2"/><path d="M5.6 19a7 7 0 0 1 12.8 0"/></svg>Espace client</a><a class="tnav-cta" href="reserver.html">Réserver une démo</a><button class="tnav-burger" id="tnav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="tnav-menu"><i></i><i></i><i></i></button></div></nav><div class="tnav-menu" id="tnav-menu"><a href="fonctionnalites.html">Fonctionnalités</a><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html" aria-current="page">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html">Pourquoi Talos</a><a href="blog.html">Blog</a><a class="m-esp" href="espace-client.html">Espace client</a><button type="button" class="theme-toggle m-theme" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg><span class="lbl-dark">Mode clair</span><span class="lbl-light">Mode sombre</span></button><a class="m-cta" href="reserver.html">Réserver une démo</a></div></header>
@@ -2900,8 +2911,10 @@ html[data-theme="light"] .t-roi{--sig-vert:#3D7C55;--sig-ambre:#B8862B;--sig-ora
         <svg class="tpick-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg>
       </button>
       <div class="tpick-panel" id="tpickPanel">
-        <ul class="tpick-list" id="tpickList"></ul>
-        <div class="tpick-foot"><button type="button" class="tpick-clear" id="tpickClear">Tout décocher</button></div>
+        <div class="tpick-panel-in">
+          <ul class="tpick-list" id="tpickList"></ul>
+          <div class="tpick-foot"><button type="button" class="tpick-clear" id="tpickClear">Tout décocher</button></div>
+        </div>
       </div>
       <p class="tpick-reco" id="tpickReco" role="status" hidden></p>
     </div>
@@ -3567,15 +3580,18 @@ html[data-theme="light"] .t-roi{--sig-vert:#3D7C55;--sig-ambre:#B8862B;--sig-ora
 
   /* la pastille se cale sur le bouton actif — mesurée, jamais devinée,
      pour survivre au retour à la ligne du segmenté sur petit écran */
+  var THUMB_W = 100;   /* largeur de référence, cf. .seg .thumb */
   function moveThumb(){
     if (!segThumb) return;
     var on = seg.querySelector('button.on');
     if (!on) return;
-    segThumb.style.width = on.offsetWidth + 'px';
-    segThumb.style.transform = 'translateX(' + (on.offsetLeft - 5) + 'px)';
-    segThumb.style.top = (on.offsetTop) + 'px';
+    /* on ne touche ni à width ni à height pendant l'animation : tout passe
+       par transform, seule propriété qui ne repasse pas par le layout */
+    segThumb.style.top = on.offsetTop + 'px';
     segThumb.style.height = on.offsetHeight + 'px';
     segThumb.style.bottom = 'auto';
+    segThumb.style.transform = 'translateX(' + (on.offsetLeft - 5) + 'px) '
+                             + 'scaleX(' + (on.offsetWidth / THUMB_W) + ')';
     segThumb.classList.add('ready');
   }
   window.addEventListener('resize', moveThumb, {passive:true});
