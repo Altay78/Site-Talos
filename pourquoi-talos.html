@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <script>(function(){try{var t=localStorage.getItem('talos-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pourquoi Talos</title>
+<title>Pourquoi Talos — l'assistant IA qui gère votre administratif 24/7</title>
 <meta name="author" content="Talos">
 <meta name="description" content="Nous avons grandi avec des artisans. Nous avons vu nos parents finir leurs journées sur les chantiers, puis en recommencer une deuxième derrière un ordinateur. C'est de là que Talos est né.">
-<meta property="og:title" content="Pourquoi Talos">
+<meta property="og:title" content="Pourquoi Talos — l'assistant IA qui gère votre administratif 24/7">
 <meta property="og:description" content="Le temps est le plus beau chantier que nous pouvions vous rendre.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -443,21 +443,52 @@ html[data-theme="light"] .t-why .shot video{filter:grayscale(.18) sepia(.16) sat
   51%{transform:scaleY(1);transform-origin:bottom}
   100%{transform:scaleY(0);transform-origin:bottom}}
 
-/* ══ LA BOUCLE SANS FIN ══ la deuxième journée qui ne s'arrête jamais */
+/* ══ LA BOUCLE SANS FIN ══ la deuxième journée qui ne s'arrête jamais.
+   Trois bandes superposées : une en avant, pleine et lourde ; une en
+   creux, juste contourée ; une en retrait, presque effacée. Elles
+   avancent lentement et en sens contraires — la lenteur est le sujet. */
+.t-why .loops{width:100%;position:relative;padding:clamp(8px,1.6vw,18px) 0}
+/* léger halo central : l'œil se pose sur la bande principale */
+.t-why .loops::after{content:'';position:absolute;inset:-14% -10%;pointer-events:none;z-index:2;
+  background:radial-gradient(60% 70% at 50% 50%,transparent 42%,rgba(20,15,12,.72) 100%)}
+html[data-theme="light"] .t-why .loops::after{
+  background:radial-gradient(60% 70% at 50% 50%,transparent 42%,rgba(251,246,242,.8) 100%)}
+
 .t-why .loop{position:relative;width:100%;overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
-          mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
-.t-why .loops{width:100%}
-.t-why .loop + .loop{margin-top:clamp(6px,1vw,14px)}
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 16%,#000 84%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 16%,#000 84%,transparent)}
+.t-why .loop + .loop{margin-top:clamp(2px,.6vw,10px)}
 .t-why .loop .track{display:flex;width:max-content;will-change:transform;
-  animation:loopL var(--sp,34s) linear infinite}
+  animation:loopL var(--sp,76s) linear infinite}
 .t-why .loop.rev .track{animation-name:loopR}
+
 .t-why .loop span{display:inline-flex;align-items:center;white-space:nowrap;
-  font-size:clamp(19px,2.6vw,34px);font-weight:500;letter-spacing:-.03em;line-height:1.3;
-  color:var(--lin);padding:6px 0}
-.t-why .loop span::after{content:'';display:inline-block;width:clamp(28px,4vw,54px);height:1px;
-  background:var(--bronze);opacity:.5;margin:0 clamp(18px,2.6vw,34px)}
-.t-why .loop.dim span{color:var(--lin)}
+  font-family:var(--sans);
+  font-size:clamp(24px,4.2vw,58px);font-weight:700;letter-spacing:-.045em;line-height:1.18;
+  color:var(--parch);padding:4px 0}
+/* séparateur : un point de bronze, pas un tiret qui traîne */
+.t-why .loop span::after{content:'';display:inline-block;flex:0 0 auto;
+  width:clamp(5px,.6vw,8px);height:clamp(5px,.6vw,8px);border-radius:50%;
+  background:var(--bronze);margin:0 clamp(22px,3vw,44px)}
+
+/* la bande de tête : plein cadre, c'est elle qu'on lit */
+.t-why .loop.lead{--sp:78s}
+/* la bande en creux : contour seul, elle donne la profondeur */
+.t-why .loop.hollow{--sp:96s}
+.t-why .loop.hollow span{
+  color:transparent;
+  -webkit-text-stroke:1px rgba(var(--parch-rgb),.34);
+  opacity:.9}
+.t-why .loop.hollow span::after{background:rgba(var(--bronze-rgb),.45)}
+/* sur fond clair, un contour clair disparaît : on l'appuie */
+html[data-theme="light"] .t-why .loop.hollow span{
+  -webkit-text-stroke-color:rgba(var(--parch-rgb),.5)}
+/* la bande du fond : plus petite, presque un souvenir */
+.t-why .loop.back{--sp:112s}
+.t-why .loop.back span{font-size:clamp(17px,2.6vw,34px);font-weight:500;
+  color:var(--lin);opacity:.55;letter-spacing:-.03em}
+.t-why .loop.back span::after{width:clamp(4px,.4vw,6px);height:clamp(4px,.4vw,6px);
+  background:rgba(var(--bronze-rgb),.4)}
 @keyframes loopL{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 @keyframes loopR{from{transform:translate3d(-50%,0,0)}to{transform:translate3d(0,0,0)}}
 
@@ -583,9 +614,15 @@ html[data-theme="light"] .t-why .band figure{box-shadow:0 40px 90px rgba(40,25,1
   .t-why .cry{font-size:clamp(30px,9.4vw,44px);max-width:none}
   .t-why .cry.sm{font-size:clamp(27px,8.2vw,40px);max-width:none}
   .t-why .say.big{font-size:clamp(25px,7.4vw,34px);max-width:none}
-  /* la boucle défile plus vite : l'écran est plus étroit */
-  .t-why .loop{--sp:20s}
-  .t-why .loop span{font-size:clamp(17px,5vw,22px)}
+  /* la boucle reste lente : c'est une masse qui avance, pas un bandeau.
+     L'écran est plus étroit, on raccourcit à peine. */
+  .t-why .loop.lead{--sp:56s}
+  .t-why .loop.hollow{--sp:68s}
+  .t-why .loop.back{--sp:80s}
+  .t-why .loop span{font-size:clamp(27px,8.4vw,40px)}
+  .t-why .loop.back span{font-size:clamp(18px,5.4vw,26px)}
+  .t-why .loop.hollow span{-webkit-text-stroke-width:.9px}
+  .t-why .loop span::after{margin:0 clamp(16px,4.6vw,26px)}
   .t-why .num{flex-wrap:wrap;line-height:1.7;letter-spacing:2px}
   .t-why .never li{padding:20px 0;gap:14px}
   .t-why .phones figure{width:33%}
@@ -594,6 +631,76 @@ html[data-theme="light"] .t-why .band figure{box-shadow:0 40px 90px rgba(40,25,1
   .t-why .out{padding-bottom:80px}
   .t-why .acts .btn{width:100%}
 }
+/* ══════════════════════════════════════════════════════════════
+   LECTURE EN SLIDES — sur téléphone et tablette, le récit se lit
+   un tableau à la fois : le pouce fait défiler, l'écran s'arrête
+   pile sur l'idée suivante. Snap « proximity » : on cale la lecture
+   sans jamais bloquer le doigt.
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width:900px){
+  /* `mandatory` + `always` : un geste = un tableau, jamais deux.
+     C'est ce qui donne la sensation de swipe d'un fil vertical. */
+  html{
+    scroll-snap-type:y mandatory;
+    overscroll-behavior-y:contain;
+  }
+
+  .t-why .act,
+  .t-why .band,
+  .t-why .end,
+  .t-why .out{
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+  }
+  /* un tableau plus haut que l'écran ne doit jamais piéger le pouce :
+     le script lui retire son point d'accroche (voir data-nosnap) */
+  .t-why [data-nosnap]{scroll-snap-align:none;scroll-snap-stop:normal}
+
+  /* un tableau = un écran. Le texte est centré, l'air est constant. */
+  .t-why .act{
+    min-height:100svh;
+    padding:96px 0 76px;
+    justify-content:center;
+  }
+  .t-why .act.mid,
+  .t-why .act.full{min-height:100svh;padding:96px 0 76px}
+  .t-why .act.open{min-height:100svh;padding-bottom:96px}
+
+  /* les tableaux qui portent une vraie grille gardent le même cadre
+     mais respirent moins : ils sont déjà denses. Si le contenu
+     dépasse l'écran, le bloc s'étire — rien n'est jamais coupé. */
+  .t-why .act:has(.work),
+  .t-why .act:has(.split-two),
+  .t-why .act:has(.grid4),
+  .t-why .act:has(.never){padding:72px 0}
+
+  .t-why .band{scroll-margin-top:0}
+
+  /* repère de progression : on sait toujours où on en est */
+  .wy-prog{
+    position:fixed;
+    top:0;left:0;right:0;
+    height:2px;
+    z-index:60;
+    background:transparent;
+    pointer-events:none;
+  }
+  .wy-prog i{
+    display:block;height:100%;width:0;
+    background:var(--bronze);
+    transform-origin:left center;
+    transition:width .18s linear;
+  }
+
+  /* invitation à faire défiler, sur le premier tableau seulement */
+  .t-why .scroll{display:block;bottom:22px}
+  .t-why .scroll.gone{opacity:0;transition:opacity .4s ease}
+}
+
+@media (max-width:900px) and (prefers-reduced-motion:reduce){
+  html{scroll-snap-type:none;overscroll-behavior-y:auto}
+}
+
 /* ── mouvement réduit : tout reste lisible, rien ne bouge ── */
 @media (prefers-reduced-motion:reduce){
   .t-why em,.t-why .end::before,.t-why .scroll i{animation:none}
@@ -603,6 +710,9 @@ html[data-theme="light"] .t-why .band figure{box-shadow:0 40px 90px rgba(40,25,1
   .t-why .loop{-webkit-mask-image:none;mask-image:none}
   .t-why .loop .track{animation:none;width:auto;flex-wrap:wrap;justify-content:center}
   .t-why .loop .dup{display:none}
+  /* sans mouvement, le contour n'a plus de sens : on remet du plein */
+  .t-why .loop.hollow span{color:var(--lin);-webkit-text-stroke:0}
+  .t-why .loops::after{display:none}
   .t-why .btn{transition:none}
   .t-why .btn:hover{transform:none}
 }
@@ -613,6 +723,8 @@ html[data-theme="light"] .t-why .band figure{box-shadow:0 40px 90px rgba(40,25,1
 
 <!-- ═══ NAVIGATION — identique aux autres pages du site ═══ -->
 <header class="tnav-wrap" id="tnav-wrap"><nav class="tnav" id="tnav" aria-label="Navigation principale"><a class="tnav-logo" href="index.html#top" aria-label="Talos — accueil"><svg viewBox="0 16 62 92" width="18" height="27" aria-hidden="true"><g fill="currentColor"><rect x="0" y="18" width="62" height="14"/><path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g></svg><span>Talos</span></a><div class="tnav-links"><a href="fonctionnalites.html">Fonctionnalités</a><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html" aria-current="page">Pourquoi Talos</a><a href="blog.html">Blog</a></div><div class="tnav-act"><button type="button" class="theme-toggle grid h-10 w-10 shrink-0 place-items-center rounded-lg" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg></button><a class="tnav-esp" href="espace-client.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="10" r="3.2"/><path d="M5.6 19a7 7 0 0 1 12.8 0"/></svg>Espace client</a><a class="tnav-cta" href="reserver.html">Réserver une démo</a><button class="tnav-burger" id="tnav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="tnav-menu"><i></i><i></i><i></i></button></div></nav><div class="tnav-menu" id="tnav-menu"><a href="fonctionnalites.html">Fonctionnalités</a><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html" aria-current="page">Pourquoi Talos</a><a href="blog.html">Blog</a><a class="m-esp" href="espace-client.html">Espace client</a><button type="button" class="theme-toggle m-theme" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg><span class="lbl-dark">Mode clair</span><span class="lbl-light">Mode sombre</span></button><a class="m-cta" href="reserver.html">Réserver une démo</a></div></header>
+
+<div class="wy-prog" id="wyProg" aria-hidden="true"><i></i></div>
 
 <nav class="t-rail" id="rail" aria-label="Chapitres">
   <a href="#c1"><i></i><span>1 · Notre histoire</span></a>
@@ -649,12 +761,29 @@ html[data-theme="light"] .t-why .band figure{box-shadow:0 40px 90px rgba(40,25,1
   </div>
 
   <!-- la deuxième journée : une boucle qui ne s'arrête jamais -->
+  <!-- la deuxième journée : trois bandes qui ne s'arrêtent jamais.
+       Elles avancent lentement et en sens contraires — c'est une masse
+       qui se referme, pas un bandeau publicitaire qui défile. -->
   <div class="act mid">
-   <div class="loops">
-    <div class="loop">
+   <div class="loops" aria-label="Les devis, les factures, les relances, les rendez-vous — la deuxième journée qui recommence">
+    <div class="loop back">
       <div class="track">
-        <span>Les devis.</span><span>Les factures.</span><span>Les relances.</span><span>Les rendez-vous...</span>
-        <span class="dup" aria-hidden="true">Les devis.</span><span class="dup" aria-hidden="true">Les factures.</span><span class="dup" aria-hidden="true">Les relances.</span><span class="dup" aria-hidden="true">Les rendez-vous...</span>
+        <span>Les acomptes.</span><span>La TVA.</span><span>Les situations.</span><span>Le pointage.</span>
+        <span class="dup" aria-hidden="true">Les acomptes.</span><span class="dup" aria-hidden="true">La TVA.</span><span class="dup" aria-hidden="true">Les situations.</span><span class="dup" aria-hidden="true">Le pointage.</span>
+      </div>
+    </div>
+
+    <div class="loop lead">
+      <div class="track">
+        <span>Les devis.</span><span>Les factures.</span><span>Les relances.</span><span>Les rendez-vous.</span>
+        <span class="dup" aria-hidden="true">Les devis.</span><span class="dup" aria-hidden="true">Les factures.</span><span class="dup" aria-hidden="true">Les relances.</span><span class="dup" aria-hidden="true">Les rendez-vous.</span>
+      </div>
+    </div>
+
+    <div class="loop hollow rev">
+      <div class="track">
+        <span>Les mails.</span><span>Le planning.</span><span>Les devis.</span><span>Les relances.</span>
+        <span class="dup" aria-hidden="true">Les mails.</span><span class="dup" aria-hidden="true">Le planning.</span><span class="dup" aria-hidden="true">Les devis.</span><span class="dup" aria-hidden="true">Les relances.</span>
       </div>
     </div>
    </div>
@@ -927,6 +1056,53 @@ html[data-theme="light"] .t-why .band figure{box-shadow:0 40px 90px rgba(40,25,1
 </main>
 
 <script>
+/* garde-fou du snap : un tableau plus haut que l'écran perdrait le pouce
+   dans un aller-retour permanent. On lui retire son point d'accroche. */
+(function(){
+  var slides = document.querySelectorAll('.t-why .act, .t-why .band, .t-why .end, .t-why .out');
+  if (!slides.length) return;
+
+  function audit(){
+    var max = window.innerHeight * 1.04;
+    for (var i = 0; i < slides.length; i++){
+      var tall = slides[i].getBoundingClientRect().height > max;
+      if (tall) slides[i].setAttribute('data-nosnap','');
+      else slides[i].removeAttribute('data-nosnap');
+    }
+  }
+
+  var t;
+  window.addEventListener('resize', function(){
+    clearTimeout(t);
+    t = setTimeout(audit, 180);
+  });
+  window.addEventListener('load', audit);
+  audit();
+})();
+
+/* progression de lecture + disparition de l'invitation à défiler.
+   Purement décoratif : si le script ne tourne pas, la page se lit pareil. */
+(function(){
+  var bar = document.querySelector('#wyProg i');
+  var cue = document.querySelector('.t-why .scroll');
+  if (!bar) return;
+
+  var ticking = false;
+  function paint(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var p = h > 0 ? Math.min(1, window.scrollY / h) : 0;
+    bar.style.width = (p * 100).toFixed(2) + '%';
+    if (cue) cue.classList.toggle('gone', window.scrollY > 80);
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(paint);
+  }, {passive:true});
+  paint();
+})();
+
 /* bascule de thème — même clé de stockage que le reste du site */
 (function(){
   var root = document.documentElement;
