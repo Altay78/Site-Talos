@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <script>(function(){try{var t=localStorage.getItem('talos-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Simulateur — Talos | Ce que votre administratif vous coûte vraiment</title>
+<title>Simulateur — Talos, l'assistant IA qui gère votre administratif 24/7</title>
 <meta name="author" content="Talos">
 <meta name="description" content="Calculez en 30 secondes le temps et l'argent que vous perdez chaque mois sur vos devis, relances et factures — et ce que Talos vous rend.">
-<meta property="og:title" content="Combien vous coûte votre paperasse ? — Simulateur Talos">
+<meta property="og:title" content="Simulateur — Talos, l'assistant IA qui gère votre administratif 24/7">
 <meta property="og:description" content="Vos chiffres, pas les nôtres. Deux simulateurs : le coût réel de votre administratif, et le chiffre d'affaires que vos devis laissent filer.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -651,6 +651,143 @@ html[data-theme="light"] .t-gains .g-out .tile.hot em{color:#fff}
   .t-gains .vs .mid{padding:2px 0}
   }
 
+/* ═══════════════════════════════════════════════════════════════
+   CALCULATEUR — AFFINAGES
+   1 · chiffres tabulaires : sans eux la colonne « coût » danse à
+       chaque frappe et le tableau devient illisible pendant la saisie
+   2 · barres de proportion : le tableau dit combien, pas « qu'est-ce
+       qui mange ma semaine » — la barre répond d'un coup d'œil
+   3 · verdict : une seule figure héroïque au lieu de huit tuiles
+       de poids égal (l'ancienne grille affichait deux fois le coût annuel)
+   ═══════════════════════════════════════════════════════════════ */
+.t-gains .tile b,.t-gains td.tim,.t-gains td.cst,.t-gains .vs .v,
+.t-gains .save .v,.t-gains .save .pct b,.t-gains .cost-hero .v,
+.t-gains .mini b,.t-gains tfoot .tt,.t-gains tfoot .tc,
+.t-gains td.qty input,.t-gains .g-rate input,.t-gains .g-reinv .verdict b{
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+
+/* ── taux horaire : saisie + repères ── */
+.t-gains .g-rate .rate-in{flex-direction:column;align-items:stretch;
+  justify-content:center;gap:13px}
+.t-gains .rate-top{display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:space-between;gap:14px}
+.t-gains .presets{display:flex;flex-wrap:wrap;gap:6px}
+.t-gains .presets button{min-height:40px;padding:0 15px;border-radius:100px;
+  border:1px solid var(--line-2);background:none;
+  color:rgba(var(--parch-rgb),.6);font:600 13px/1 var(--sans);letter-spacing:-.2px;
+  transition:border-color .2s ease,background .2s ease,color .2s ease}
+.t-gains .presets button:hover{border-color:var(--bronze);color:var(--bronze-2)}
+.t-gains .presets button[aria-pressed="true"]{border-color:var(--bronze);
+  background:rgba(var(--bronze-rgb),.13);color:var(--bronze-2)}
+
+/* ── tableau : états de ligne ── */
+/* toute la cellule « tâche » bascule la ligne : viser une case de 18 px
+   au doigt est un pari, la cellule fait 300 px de large */
+.t-gains td.task{cursor:pointer;position:relative}
+.t-gains tbody tr:not(.off) td.task::before{content:'';position:absolute;
+  left:0;top:8px;bottom:8px;width:2px;border-radius:0 3px 3px 0;
+  background:var(--bronze);opacity:.55}
+.t-gains tbody tr.off .tk .ic{background:rgba(var(--parch-rgb),.05);
+  color:rgba(var(--parch-rgb),.4)}
+
+/* ── réglage de quantité au bouton ── */
+/* injecté en JS : on tape « 15 » à la souris, on incrémente au doigt */
+/* les deux boutons volent ~70 px à la colonne « fonctionnalité » : sans
+   réservation explicite, « Création et envoi » se casse en deux lignes */
+.t-gains thead th:first-child,.t-gains td.task{min-width:236px}
+.t-gains td.qty input{width:52px}
+.t-gains .qwrap{display:inline-flex;align-items:center;gap:4px}
+.t-gains .qwrap button{display:grid;place-items:center;width:31px;height:32px;
+  flex:0 0 auto;border-radius:9px;border:1px solid var(--line-2);
+  background:rgba(var(--parch-rgb),.03);color:rgba(var(--parch-rgb),.7);
+  font:600 17px/1 var(--sans);cursor:pointer;
+  transition:border-color .2s ease,background .2s ease,color .2s ease}
+.t-gains .qwrap button:hover{border-color:var(--bronze);color:var(--bronze-2);
+  background:rgba(var(--bronze-rgb),.1)}
+html[data-theme="light"] .t-gains .qwrap button{background:#fff}
+
+/* ── part de la tâche dans la semaine ── */
+.t-gains .shr{width:70px;height:3px;margin:7px 0 0 auto;border-radius:99px;
+  background:rgba(var(--parch-rgb),.09);overflow:hidden}
+.t-gains .shr i{display:block;width:0;height:100%;border-radius:99px;
+  background:var(--bronze);transition:width .55s var(--e)}
+.t-gains tr.off .shr i{background:rgba(var(--parch-rgb),.25)}
+
+/* ── total du tableau ── */
+.t-gains tfoot td{padding:16px 12px;text-align:right;
+  border-top:1px solid var(--line-2);background:rgba(var(--parch-rgb),.022)}
+.t-gains tfoot td:first-child{text-align:left;padding-left:22px}
+.t-gains tfoot td:last-child{padding-right:22px}
+.t-gains tfoot .lb{font:700 9.5px/1 var(--mono);letter-spacing:1.4px;
+  text-transform:uppercase;color:rgba(var(--parch-rgb),.45)}
+.t-gains tfoot .tt{font-size:15px;font-weight:800;color:var(--bronze-2);white-space:nowrap}
+.t-gains tfoot .tc{font-size:17px;font-weight:800;letter-spacing:-.5px;white-space:nowrap}
+
+/* ── verdict : une figure dominante ── */
+.t-gains .cost-hero{padding:18px 20px 17px;border-radius:16px;
+  border:1px solid rgba(var(--bronze-rgb),.42);
+  background:linear-gradient(145deg,rgba(var(--bronze-rgb),.24),rgba(var(--bronze-rgb),.05))}
+.t-gains .cost-hero .k{display:block;font:700 9px/1 var(--mono);letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--bronze-2)}
+.t-gains .cost-hero .v{display:block;margin-top:7px;line-height:1;
+  font-size:clamp(30px,3.4vw,40px);font-weight:800;letter-spacing:-2px}
+.t-gains .cost-hero .s{display:block;margin-top:8px;font-size:12px;
+  color:rgba(var(--parch-rgb),.55)}
+.t-gains .mini{margin-top:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+html[data-theme="light"] .t-gains .g-out .cost-hero .s{color:rgba(246,238,231,.5)}
+
+/* ── comparaison : la barre dit l'écart avant le chiffre ── */
+.t-gains .vs .mtr{margin-top:10px;height:4px;border-radius:99px;
+  background:rgba(var(--parch-rgb),.1);overflow:hidden}
+.t-gains .vs .mtr i{display:block;height:100%;border-radius:99px;
+  transition:width .6s var(--e)}
+.t-gains .vs .bad .mtr i{width:100%;background:var(--rouille)}
+.t-gains .vs .good .mtr i{background:var(--bronze)}
+
+/* ── passage à zéro : on ne laisse pas une carte vide sans explication ── */
+.t-gains .save.nil{border-color:var(--line-2);background:rgba(var(--parch-rgb),.03)}
+.t-gains .save.nil .pct{background:rgba(var(--parch-rgb),.1)}
+
+/* le panneau verdict reste sombre en thème clair : les fonds tirés de
+   --parch-rgb y deviennent du sombre sur sombre. On les rebascule. */
+html[data-theme="light"] .t-gains .g-out .vs .mtr,
+html[data-theme="light"] .t-gains .g-out .save.nil .pct{
+  background:rgba(246,238,231,.13)}
+html[data-theme="light"] .t-gains .g-out .save.nil{
+  background:rgba(246,238,231,.04);border-color:rgba(246,238,231,.14)}
+
+/* écran tactile : 31 px se rate au doigt, on repasse à la cible minimale
+   sans attendre le point de rupture téléphone (tablettes, 2-en-1) */
+@media (pointer:coarse){
+  .t-gains .qwrap button{width:44px;height:44px}
+  .t-gains td.qty input{height:44px}
+  .t-gains thead th:first-child,.t-gains td.task{min-width:0}
+}
+@media (max-width:780px){
+  .t-gains .qwrap button{width:44px;height:44px}
+  .t-gains td.qty input{width:56px;height:44px}
+  /* le « / sem » est un ::after : sans ordre explicite il passe derrière
+     la barre, qui se retrouve coincée entre le montant et son unité */
+  .t-gains td.cst{display:flex;flex-direction:column;align-items:flex-end}
+  .t-gains td.cst::after{order:1}
+  /* piste de largeur fixe, jamais 100 % : en pile la cellule se dimensionne
+     sur son montant, et « 450 € » donnerait une piste plus courte que
+     « 1 220 € » — les proportions ne seraient plus comparables entre lignes */
+  .t-gains .shr{order:2;width:72px;margin:9px 0 0}
+  /* le tableau est empilé en cartes : le pied reprend la même grille */
+  .t-gains tfoot tr{display:grid;grid-template-columns:1fr auto;gap:6px 12px;
+    padding:16px 18px;align-items:center;border-top:1px solid var(--line-2)}
+  .t-gains tfoot td{padding:0;border:0;background:none;text-align:left}
+  .t-gains tfoot td:first-child{padding-left:0}
+  .t-gains tfoot td:last-child{padding-right:0;text-align:right}
+  .t-gains tfoot td.ftime{display:none}
+  /* trois tuiles sur 320 px de large : sans réduction, « 14 640 € »
+     déborde de sa carte (les montants sont en white-space:nowrap) */
+  .t-gains .mini .tile{padding:11px 6px}
+  .t-gains .mini .tile b{font-size:15px;letter-spacing:-.6px}
+  .t-gains .mini .tile em{font-size:9.5px}
+}
+
 /*  simulateur-roi.html  */
 .t-roi .orb{position:fixed;border-radius:50%;filter:blur(110px);opacity:.16;pointer-events:none;z-index:0;
   animation:ro_breathe 9s ease-in-out infinite alternate}
@@ -676,6 +813,16 @@ html[data-theme="light"] .t-gains .g-out .tile.hot em{color:#fff}
   background:linear-gradient(90deg,transparent,rgba(var(--parch-rgb),.22),transparent)}
 .t-roi .grid{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:24px;align-items:start}
 .t-roi .params{padding:30px 28px 32px;position:sticky;top:24px}
+.t-roi .pcol{display:flex;flex-direction:column;gap:16px;min-width:0}
+.t-roi .quick{padding:26px 26px 22px}
+.t-roi .quick h2{font-family:var(--display);font-size:20px;font-weight:600;letter-spacing:-.02em;
+  display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.t-roi .quick h2 svg{color:var(--flame)}
+.t-roi .quick .ctrl + .ctrl{margin-top:22px}
+@media (min-width:1081px){
+  .t-roi .pcol{position:sticky;top:24px}
+  .t-roi .params{position:static;top:auto}
+}
 .t-roi .params h2{font-family:var(--display);font-size:20px;font-weight:600;letter-spacing:-.02em;
   display:flex;align-items:center;gap:11px;margin-bottom:28px}
 .t-roi .params h2 svg{color:var(--flame)}
@@ -684,19 +831,25 @@ html[data-theme="light"] .t-gains .g-out .tile.hot em{color:#fff}
 .t-roi .ctrl .nm{font-size:14px;font-weight:500;color:var(--ink-dim)}
 .t-roi .ctrl .val{font-family:var(--label);font-size:16px;font-weight:600;color:var(--parch);
   font-variant-numeric:tabular-nums;white-space:nowrap}
-.t-roi input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:999px;
-  cursor:pointer;outline:none;
-  background:linear-gradient(90deg,var(--flame) calc(var(--pct)*1%),rgba(var(--parch-rgb),.09) calc(var(--pct)*1%))}
+/*  curseurs taille pouce : piste épaisse, poignée large, zone de saisie
+    généreuse — on doit pouvoir les bouger au doigt sans viser  */
+.t-roi input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:10px;border-radius:999px;
+  cursor:pointer;outline:none;margin:6px 0;touch-action:pan-y;
+  background:linear-gradient(90deg,var(--flame) calc(var(--pct)*1%),rgba(var(--parch-rgb),.10) calc(var(--pct)*1%))}
 .t-roi input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
-  width:18px;height:18px;border-radius:50%;background:#fff;cursor:pointer;
-  border:3px solid var(--flame);box-shadow:0 0 0 4px rgba(var(--bronze-rgb),.16),0 2px 8px rgba(0,0,0,.5);
-  transition:box-shadow .2s,transform .2s}
-.t-roi input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.12);box-shadow:0 0 0 7px rgba(var(--bronze-rgb),.2),0 2px 8px rgba(0,0,0,.5)}
-.t-roi input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;cursor:pointer;
-  border:3px solid var(--flame);box-shadow:0 0 0 4px rgba(var(--bronze-rgb),.16)}
-.t-roi input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 7px rgba(var(--bronze-rgb),.35)}
-.t-roi .ctrl .ends{display:flex;justify-content:space-between;margin-top:7px;
+  width:30px;height:30px;border-radius:50%;background:#fff;cursor:grab;
+  border:0;box-shadow:0 1px 2px rgba(0,0,0,.28),0 6px 16px rgba(0,0,0,.4);
+  transition:box-shadow .2s,transform .18s var(--e)}
+.t-roi input[type=range]:active::-webkit-slider-thumb{cursor:grabbing;transform:scale(1.08)}
+.t-roi input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 1px 2px rgba(0,0,0,.28),0 6px 16px rgba(0,0,0,.4),0 0 0 9px rgba(var(--bronze-rgb),.16)}
+.t-roi input[type=range]::-moz-range-thumb{width:30px;height:30px;border-radius:50%;background:#fff;cursor:grab;
+  border:0;box-shadow:0 1px 2px rgba(0,0,0,.28),0 6px 16px rgba(0,0,0,.4)}
+.t-roi input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 9px rgba(var(--bronze-rgb),.35)}
+.t-roi .ctrl .ends{display:flex;justify-content:space-between;margin-top:10px;
   font-family:var(--label);font-size:10.5px;color:var(--ink-mute)}
+.t-roi .ctrl .top .val{font-size:19px;font-weight:800;letter-spacing:-.5px;
+  font-variant-numeric:tabular-nums;color:var(--flame)}
+.t-roi .ctrl{padding-block:4px}
 .t-roi .risk{display:flex;flex-direction:column;gap:4px;
   background:rgba(var(--parch-rgb),.03);border:1px solid var(--hair);border-radius:var(--r-md);padding:5px}
 .t-roi .risk button{display:flex;align-items:center;gap:11px;width:100%;text-align:left;
@@ -995,6 +1148,7 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
 
 
 </style>
+<link rel="stylesheet" href="talos-fold.css">
 </head>
 <body>
 <main>
@@ -1069,11 +1223,19 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
     <div>
       <div class="g-rate">
         <div class="panel rate-in">
-          <span class="lb">Combien vaut votre heure de travail&nbsp;?</span>
-          <span class="fld">
-            <input type="number" id="gRate" min="10" max="500" step="5" value="60" aria-label="Taux horaire en euros">
-            <span class="cur">€</span>
-          </span>
+          <div class="rate-top">
+            <span class="lb">Combien vaut votre heure de travail&nbsp;?</span>
+            <span class="fld">
+              <input type="number" id="gRate" min="10" max="500" step="5" value="60" aria-label="Taux horaire en euros">
+              <span class="cur">€</span>
+            </span>
+          </div>
+          <div class="presets" id="gPresets" role="group" aria-label="Taux horaires courants">
+            <button type="button" data-rate="40">40 €</button>
+            <button type="button" data-rate="60">60 €</button>
+            <button type="button" data-rate="80">80 €</button>
+            <button type="button" data-rate="100">100 €</button>
+          </div>
         </div>
         <p class="panel note">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5l3 1.8"/></svg>
@@ -1198,12 +1360,19 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
         <td class="cst" data-role="cost">—</td>
       </tr>
           </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3"><span class="lb">Total des tâches cochées</span></td>
+              <td class="ftime"><span class="tt" id="gTotT">—</span></td>
+              <td><span class="tc" id="gTotC">—</span></td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
 
     <!-- ── colonne verdict ── -->
-    <aside class="panel g-out">
+    <aside class="panel g-out" aria-live="polite">
       <div class="lgd">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5l3 1.8"/></svg>
         Votre estimation
@@ -1219,11 +1388,15 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/><path d="M12 3v18"/></svg>
         Coût de votre administratif
       </div>
-      <div class="tiles">
+      <div class="cost-hero">
+        <span class="k">Coût annuel</span>
+        <b class="v" id="gCy2">—</b>
+        <span class="s">soit <span id="gCd">—</span> par jour travaillé.</span>
+      </div>
+      <div class="mini tiles">
         <div class="tile"><b id="gCw">—</b><em>par semaine</em></div>
         <div class="tile"><b id="gCm">—</b><em>par mois</em></div>
-        <div class="tile"><b id="gCy">—</b><em>par an</em></div>
-        <div class="tile hot"><b id="gCy2">—</b><em>coût annuel</em></div>
+        <div class="tile"><b id="gCq">—</b><em>par trimestre</em></div>
       </div>
 
       <div class="lgd">
@@ -1234,12 +1407,14 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
         <div class="side bad">
           <div class="k">Sans Talos</div>
           <div class="v" id="gNoTalos">—</div>
+          <div class="mtr"><i></i></div>
           <div class="s">Coût de votre administratif</div>
         </div>
         <div class="mid">VS</div>
         <div class="side good">
           <div class="k">Avec Talos</div>
           <div class="v">199&nbsp;€ <span style="font-size:.55em;font-weight:600">/ mois</span></div>
+          <div class="mtr"><i id="gMtr" style="width:4%"></i></div>
           <div class="s">Abonnement Pro, 3 tâches prises en charge</div>
         </div>
       </div>
@@ -1305,24 +1480,15 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
   <div class="grid">
 
 
-    <button type="button" class="sheet-btn" data-sheet="roiParams" aria-haspopup="dialog">
-      <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></span>
-      <span class="tx"><b>Vos chiffres</b><em id="sheetSum">15 devis · 6 signés · 3 000 €</em></span>
-      <span class="go">Ajuster
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-      </span>
-    </button>
+    <div class="pcol">
 
-    <aside class="glass params sheet" id="roiParams" role="dialog" aria-modal="true" aria-label="Vos chiffres">
-      <div class="sheet-hd">
-        <span class="t">Vos chiffres</span>
-        <button type="button" class="sheet-ok" data-close>OK</button>
-      </div>
-      <h2>
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
-        Vos chiffres
-      </h2>
-
+      <!-- les trois curseurs restent en clair, y compris sur téléphone :
+           c'est ce qu'on bouge le plus souvent -->
+      <div class="glass quick">
+        <h2>
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+          Vos chiffres
+        </h2>
       <div class="ctrl">
         <div class="top"><span class="nm">Devis envoyés par mois</span><span class="val" id="vV">15</span></div>
         <div class="adj">
@@ -1352,6 +1518,26 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
         </div>
         <div class="ends"><span>500 €</span><span>20 000 €</span></div>
       </div>
+
+      </div>
+
+    <button type="button" class="sheet-btn" data-sheet="roiParams" aria-haspopup="dialog">
+      <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></span>
+      <span class="tx"><b>Vos habitudes</b><em id="sheetSum">plus d'1 h par devis · envoi sous 3 à 5 jours</em></span>
+      <span class="go">Ajuster
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </span>
+    </button>
+
+    <aside class="glass params sheet" id="roiParams" role="dialog" aria-modal="true" aria-label="Vos habitudes">
+      <div class="sheet-hd">
+        <span class="t">Vos habitudes</span>
+        <button type="button" class="sheet-ok" data-close>OK</button>
+      </div>
+      <h2>
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+        Vos habitudes
+      </h2>
 
       <div class="ctrl">
         <div class="top"><span class="nm">Combien de temps passé pour un devis&nbsp;?</span></div>
@@ -1399,6 +1585,8 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
         <div class="risk-note">Part de vos devis <b>non signés</b> imputable au délai. Nous retenons le bas de chaque fourchette.</div>
       </div>
     </aside>
+
+    </div>
 
     
     <div class="results">
@@ -1716,12 +1904,107 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
   var rate = document.getElementById('gRate');
   var rows = [].slice.call(table.querySelectorAll('tbody tr'));
   var out  = {};
-  ['gHw','gHm','gHy','gDy','gCw','gCm','gCy','gCy2','gNoTalos','gSave','gPct',
-   'gJobs','gCa','gHours'].forEach(function(id){ out[id] = document.getElementById(id); });
+  ['gHw','gHm','gHy','gDy','gCw','gCm','gCq','gCy2','gCd','gNoTalos','gSave','gPct',
+   'gJobs','gCa','gHours','gTotT','gTotC','gMtr'].forEach(function(id){
+    out[id] = document.getElementById(id);
+  });
+
+  /* ── compteurs animés ────────────────────────────────────────────
+     Un chiffre qui saute de 4 880 à 6 100 se lit comme un remplacement ;
+     le même chiffre qui monte se lit comme une conséquence de ce qu'on
+     vient de cocher. On interpole la valeur, jamais la chaîne formatée. */
+  var REDUCE = window.matchMedia
+    && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  function setNum(el, v, fmt){
+    if (!el) return;
+    if (REDUCE || el._v == null){ el._v = v; el.innerHTML = fmt(v); return; }
+    var from = el._v;
+    if (from === v) return;
+    el._v = v;
+    if (el._raf) cancelAnimationFrame(el._raf);
+    var t0 = performance.now(), D = 420;
+    function step(t){
+      var p = Math.min(1, (t - t0) / D);
+      var e = 1 - Math.pow(1 - p, 3);          /* ease-out : entrée franche */
+      el.innerHTML = fmt(from + (v - from) * e);
+      if (p < 1) el._raf = requestAnimationFrame(step);
+    }
+    el._raf = requestAnimationFrame(step);
+  }
+  /* suffixe d'unité : plus petit et moins gras, il ne doit pas concurrencer
+     le nombre — c'est le nombre qu'on vient lire */
+  function sfx(s, size){ return ' <span style="font-size:' + size +
+    'em;font-weight:600">' + s + '</span>'; }
 
   function val(input, fallback){
     var v = parseFloat(input.value);
     return isNaN(v) || v < 0 ? fallback : v;
+  }
+
+  /* ── enrichissement des lignes ───────────────────────────────────
+     Fait en JS et non dans le HTML : ces commandes n'ont aucun sens
+     sans le script, autant qu'elles n'existent pas quand il ne tourne pas. */
+  rows.forEach(function(tr){
+    /* part de la tâche dans la semaine : le tableau donne des montants,
+       la barre donne le classement — « c'est ça qui mange ma semaine » */
+    var cst = tr.querySelector('[data-role="cost"]');
+    var shr = document.createElement('div');
+    shr.className = 'shr';
+    shr.innerHTML = '<i></i>';
+    cst.appendChild(shr);
+    tr._shr = shr.firstChild;
+
+    /* boutons − / + : au doigt on incrémente, on ne sélectionne pas un
+       champ numérique de 64 px pour retaper une valeur */
+    var qty  = tr.querySelector('[data-role="qty"]');
+    var wrap = document.createElement('div');
+    wrap.className = 'qwrap';
+    qty.parentNode.insertBefore(wrap, qty);
+    var lbl = qty.getAttribute('aria-label') || '';
+    [-1, 1].forEach(function(d){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = d < 0 ? '−' : '+';
+      b.setAttribute('aria-label', (d < 0 ? 'Diminuer : ' : 'Augmenter : ') + lbl);
+      b.addEventListener('click', function(){
+        var max = parseFloat(qty.max), min = parseFloat(qty.min);
+        var v = Math.min(max, Math.max(min, val(qty, 0) + d));
+        qty.value = v;
+        /* on ne coche pas la ligne à la place de l'utilisateur, sauf s'il
+           remonte une quantité depuis une ligne décochée : l'intention
+           est alors sans ambiguïté */
+        if (d > 0) tr.querySelector('[data-role="on"]').checked = true;
+        update();
+      });
+      wrap[d < 0 ? 'insertBefore' : 'appendChild'](b, wrap.firstChild || null);
+    });
+    wrap.insertBefore(qty, wrap.lastChild);
+
+    /* toute la cellule bascule la ligne — la case fait 18 px, la cellule 300 */
+    tr.querySelector('td.task').addEventListener('click', function(e){
+      if (e.target.closest('input,label')) return;
+      var chk = tr.querySelector('[data-role="on"]');
+      chk.checked = !chk.checked;
+      update();
+    });
+  });
+
+  /* ── taux horaires courants ── */
+  var presets = document.getElementById('gPresets');
+  if (presets){
+    presets.addEventListener('click', function(e){
+      var b = e.target.closest('button[data-rate]');
+      if (!b) return;
+      rate.value = b.dataset.rate;
+      update();
+    });
+  }
+  function syncPresets(r){
+    if (!presets) return;
+    [].forEach.call(presets.querySelectorAll('button'), function(b){
+      b.setAttribute('aria-pressed', parseFloat(b.dataset.rate) === r ? 'true' : 'false');
+    });
   }
 
   function update(){
@@ -1737,8 +2020,18 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
 
       tr.classList.toggle('off', !on);
       tr.querySelector('[data-role="time"]').textContent = hm(h);
-      tr.querySelector('[data-role="cost"]').textContent = eur(h * r);
+      tr._h = h;
       if (on) hWeek += h;
+    });
+
+    /* la barre se lit relativement à la tâche la plus lourde : rapportée
+       au total, aucune ligne ne dépasse 30 % et tout se ressemble */
+    var peak = 0;
+    rows.forEach(function(tr){ if (tr._h > peak) peak = tr._h; });
+    rows.forEach(function(tr){
+      var cst = tr.querySelector('[data-role="cost"]');
+      cst.firstChild.nodeValue = eur(tr._h * r);
+      tr._shr.style.width = (peak > 0 ? tr._h / peak * 100 : 0) + '%';
     });
 
     var hMonth = hWeek * WEEKS_M, hYear = hWeek * WEEKS_Y;
@@ -1749,25 +2042,41 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
     out.gHy.textContent = hm(hYear);
     out.gDy.textContent = num(Math.round(hYear / DAY_H)) + ' j';
 
-    out.gCw.textContent  = eur(cWeek);
-    out.gCm.textContent  = eur(cMonth);
-    out.gCy.textContent  = eur(cYear);
-    out.gCy2.textContent = eur(cYear);
+    out.gTotT.textContent = hm(hWeek);
+    setNum(out.gTotC, cWeek, eur);
 
-    out.gNoTalos.innerHTML = eur(cMonth) + ' <span style="font-size:.55em;font-weight:600">/ mois</span>';
+    setNum(out.gCw,  cWeek,      eur);
+    setNum(out.gCm,  cMonth,     eur);
+    setNum(out.gCq,  cMonth * 3, eur);
+    setNum(out.gCy2, cYear,      eur);
+    /* 48 semaines × 5 jours : la même convention que la mention légale */
+    setNum(out.gCd,  cYear / (WEEKS_Y * 5), eur);
+
+    setNum(out.gNoTalos, cMonth, function(v){ return eur(v) + sfx('/ mois', .55); });
 
     /* si l'administratif coûte moins que l'abonnement, on ne maquille pas :
        on affiche une économie nulle plutôt qu'un nombre négatif */
     var save = Math.max(0, cMonth - TALOS);
-    out.gSave.innerHTML = eur(save) + ' <span style="font-size:.5em;font-weight:600">/ mois</span>';
-    out.gPct.textContent = (cMonth > 0 ? '-' + Math.round(save / cMonth * 100) : '0') + '%';
+    setNum(out.gSave, save, function(v){ return eur(v) + sfx('/ mois', .5); });
+    setNum(out.gPct, cMonth > 0 ? save / cMonth * 100 : 0,
+           /* pas de « -0 % » : le signe n'a de sens que sur une économie réelle */
+           function(v){ var p = Math.round(v); return (p > 0 ? '-' : '') + p + '%'; });
+    /* la barre « avec Talos » se lit contre celle du haut : elle dit
+       l'écart avant même qu'on ait lu les deux montants */
+    if (out.gMtr) out.gMtr.style.width =
+      (cMonth > 0 ? Math.min(100, TALOS / cMonth * 100) : 100) + '%';
+    /* économie nulle : la carte perd son accent plutôt que de célébrer 0 € */
+    var box = out.gSave.closest('.save');
+    if (box) box.classList.toggle('nil', save <= 0);
 
     /* on garde la demi-décimale : arrondir « 4,5 chantiers » à 4 efface
        près d'un chantier de marge, et à 5 promet ce qu'on ne tient pas */
     var jobs = Math.round(hMonth / JOB_H * 2) / 2;
     out.gJobs.textContent  = jobs.toLocaleString('fr-FR');
-    out.gCa.textContent    = eur(jobs * JOB_EUR);
+    setNum(out.gCa, jobs * JOB_EUR, eur);
     out.gHours.textContent = hm(hMonth) + ' / mois';
+
+    syncPresets(r);
   }
 
   table.addEventListener('input',  update);
@@ -1881,10 +2190,10 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
            + 'par mois, soit ' + jours + ' journées que vous ne passez plus sur l\'ordinateur.';
     }
     var plur = r.brut >= 2;
-    return 'Avec votre activité actuelle, Talos pourrait vous permettre de récupérer jusqu\'à '
+    return 'Avec votre activité actuelle, Talos pourrait vous faire récupérer jusqu\'à '
          + '<b>' + dec1.format(r.brut) + ' chantier' + (plur ? 's' : '') + ' par mois</b>, '
-         + 'soit environ <b>' + eur.format(r.caMois) + '</b> de chiffre d\'affaires potentiel '
-         + 'tout en vous faisant économiser <i>' + hs + ' heures</i> d\'administratif.';
+         + 'soit <b>' + eur.format(r.caMois) + '</b> de plus '
+         + 'et <i>' + hs + ' h</i> d\'administratif en moins.';
   }
 
   function labelDelai(){
@@ -1906,9 +2215,11 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
     $('vS').textContent = r.S + ' signé' + (r.S > 1 ? 's' : '');
     $('vM').textContent = eur.format(r.M);
 
-    var sum = $('sheetSum');
-    if (sum) sum.textContent = r.V + ' devis · ' + r.S + ' signé' + (r.S > 1 ? 's' : '')
-                             + ' · ' + eur.format(r.M);
+    /* le bouton ne résume plus les curseurs — ils sont visibles — mais les
+       deux réglages restés dans la feuille */
+    var sum = $('sheetSum'), bT = segT.querySelector('.on');
+    if (sum) sum.textContent = (bT ? bT.dataset.lab + ' par devis' : '')
+                             + ' · ' + labelDelai();
 
     // 1. ce qu'on gagne : des chantiers. 2. ce que ça pèse : des euros.
     $('chantiers').textContent = r.chantiers > 0
@@ -2065,5 +2376,6 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
 })();
 
 </script>
+<script src="talos-fold.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,82 @@
+/* ══════════════════════════════════════════════════════════════════
+   TALOS · PASTILLE DÉPLIANTE
+   Le paragraphe d'intro d'une section n'est plus imposé : il se lit
+   à la demande, en touchant la pastille. Sur téléphone la page
+   respire, sur ordinateur le texte reste visible par défaut.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* la pastille devient un bouton — on garde son habillage d'origine
+   (.eyebrow / .fx-eyebrow) et on n'ajoute que ce qui manque */
+button.tf-trigger{
+  cursor:pointer;
+  font:inherit;
+  color:inherit;
+  -webkit-appearance:none;
+  appearance:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:border-color .25s cubic-bezier(.16,1,.3,1),
+             background-color .25s cubic-bezier(.16,1,.3,1),
+             opacity .25s ease;
+}
+button.tf-trigger:hover{opacity:.82}
+button.tf-trigger:focus-visible{
+  outline:2px solid currentColor;
+  outline-offset:3px;
+}
+/* zone tactile confortable sans déformer la pastille */
+button.tf-trigger{position:relative}
+button.tf-trigger::after{
+  content:'';
+  position:absolute;
+  inset:-8px -6px;
+}
+
+.tf-chev{
+  flex:0 0 auto;
+  margin-left:2px;
+  transition:transform .32s cubic-bezier(.16,1,.3,1);
+}
+button.tf-trigger[aria-expanded="true"] .tf-chev{transform:rotate(180deg)}
+
+/* le panneau : ouverture par grid-template-rows, aucun reflow brutal */
+.tf-panel{
+  display:grid;
+  grid-template-rows:0fr;
+  opacity:0;
+}
+/* l'animation ne démarre qu'après le premier rendu */
+.tf-ready .tf-panel{
+  transition:grid-template-rows .38s cubic-bezier(.16,1,.3,1),
+             opacity .26s ease;
+}
+.tf-ready details[data-fold-mobile][open] > *:not(summary){
+  animation:tfReveal .34s cubic-bezier(.16,1,.3,1) both;
+}
+.tf-panel > .tf-panel-in{
+  overflow:hidden;
+  min-height:0;
+}
+.tf-panel.tf-open{
+  grid-template-rows:1fr;
+  opacity:1;
+}
+/* on ne mange pas l'espace quand c'est replié */
+.tf-panel:not(.tf-open) > .tf-panel-in > *{margin-bottom:0}
+
+/* ── replis « détails » sur téléphone (blocs longs) ── */
+details[data-fold-mobile] > summary{
+  cursor:pointer;
+  list-style:none;
+  -webkit-tap-highlight-color:transparent;
+}
+details[data-fold-mobile] > summary::-webkit-details-marker{display:none}
+details[data-fold-mobile][open] > summary .tf-chev{transform:rotate(180deg)}
+@keyframes tfReveal{
+  from{opacity:0;transform:translateY(-6px)}
+  to{opacity:1;transform:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .tf-panel,.tf-ready .tf-panel,.tf-chev,button.tf-trigger{transition:none}
+  .tf-ready details[data-fold-mobile][open] > *:not(summary){animation:none}
+}
