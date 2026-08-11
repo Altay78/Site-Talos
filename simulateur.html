@@ -814,11 +814,38 @@ html[data-theme="light"] .t-gains .g-out .save.nil{
 .t-roi .grid{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:24px;align-items:start}
 .t-roi .params{padding:30px 28px 32px;position:sticky;top:24px}
 .t-roi .pcol{display:flex;flex-direction:column;gap:16px;min-width:0}
-.t-roi .quick{padding:26px 26px 22px}
-.t-roi .quick h2{font-family:var(--display);font-size:20px;font-weight:600;letter-spacing:-.02em;
-  display:flex;align-items:center;gap:10px;margin-bottom:22px}
-.t-roi .quick h2 svg{color:var(--flame)}
+.t-roi .quick{padding:14px 16px}
+/*  même tête que « Vos habitudes » : c'est le même geste, il doit se
+    reconnaître. Seul le chevron dit qu'on replie au lieu d'ouvrir.  */
+.t-roi .quick-hd{display:flex;align-items:center;gap:13px;width:100%;
+  padding:1px 0;border:0;background:none;color:inherit;cursor:pointer;text-align:left}
+.t-roi .quick-hd:focus-visible{outline:2px solid var(--flame);outline-offset:4px;border-radius:10px}
+.t-roi .quick-hd .ic{flex:0 0 auto;width:38px;height:38px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(var(--bronze-rgb),.12);color:var(--flame)}
+.t-roi .quick-hd .tx{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px}
+.t-roi .quick-hd .tx b{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.t-roi .quick-hd .tx em{font-style:normal;font-size:12.5px;color:var(--ink-mute);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  opacity:0;transition:opacity .2s var(--e)}
+/*  le résumé n'a de sens qu'une fois replié : sinon il répète les curseurs  */
+.t-roi .quick:not(.open) .quick-hd .tx em{opacity:1}
+.t-roi .quick-chev{flex:0 0 auto;color:var(--ink-mute);
+  transform:rotate(-90deg);transition:transform .3s var(--e)}
+.t-roi .quick.open .quick-chev{transform:rotate(0deg)}
+/*  0fr -> 1fr : on anime la hauteur réelle du contenu, pas un forfait  */
+.t-roi .quick-panel{display:grid;grid-template-rows:0fr;visibility:hidden;
+  transition:grid-template-rows .32s var(--e),visibility 0s linear .32s}
+.t-roi .quick-panel-in{overflow:hidden;min-height:0}
+/*  l'espace sous l'en-tête vit sur le premier contrôle : sur le conteneur,
+    son padding empêchait la rangée de retomber à zéro une fois repliée  */
+.t-roi .quick-panel-in .ctrl:first-child{padding-top:20px}
+.t-roi .quick.open .quick-panel{grid-template-rows:1fr;visibility:visible;
+  transition:grid-template-rows .32s var(--e),visibility 0s}
 .t-roi .quick .ctrl + .ctrl{margin-top:22px}
+@media (prefers-reduced-motion:reduce){
+  .t-roi .quick-panel,.t-roi .quick-chev{transition-duration:0s}
+}
 @media (min-width:1081px){
   .t-roi .pcol{position:sticky;top:24px}
   .t-roi .params{position:static;top:auto}
@@ -1484,11 +1511,17 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
 
       <!-- les trois curseurs restent en clair, y compris sur téléphone :
            c'est ce qu'on bouge le plus souvent -->
-      <div class="glass quick">
-        <h2>
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
-          Vos chiffres
-        </h2>
+      <div class="glass quick open" id="roiQuick">
+        <button type="button" class="quick-hd" id="roiQuickBtn"
+                aria-expanded="true" aria-controls="roiQuickPanel">
+          <span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></span>
+          <span class="tx"><b>Vos chiffres</b><em id="quickSum">15 devis · 6 signés · 3 000 €</em></span>
+          <svg class="quick-chev" width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="3" stroke-linecap="round"
+               stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg>
+        </button>
+        <div class="quick-panel" id="roiQuickPanel">
+          <div class="quick-panel-in">
       <div class="ctrl">
         <div class="top"><span class="nm">Devis envoyés par mois</span><span class="val" id="vV">15</span></div>
         <div class="adj">
@@ -1519,6 +1552,8 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
         <div class="ends"><span>500 €</span><span>20 000 €</span></div>
       </div>
 
+          </div>
+        </div>
       </div>
 
     <button type="button" class="sheet-btn" data-sheet="roiParams" aria-haspopup="dialog">
@@ -2217,6 +2252,11 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
 
     /* le bouton ne résume plus les curseurs — ils sont visibles — mais les
        deux réglages restés dans la feuille */
+    /* le résumé du bloc replié : il remplace les curseurs quand ils sont cachés */
+    var qs = $('quickSum');
+    if (qs) qs.textContent = r.V + ' devis · ' + r.S + ' signé' + (r.S > 1 ? 's' : '')
+                           + ' · ' + eur.format(r.M);
+
     var sum = $('sheetSum'), bT = segT.querySelector('.on');
     if (sum) sum.textContent = (bT ? bT.dataset.lab + ' par devis' : '')
                              + ' · ' + labelDelai();
@@ -2309,6 +2349,18 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
   puces(segD, function(b){ malus = +b.dataset.d; });
   puces(segT, function(b){ tps   = +b.dataset.t; });
 
+
+  /* « Vos chiffres » se replie comme « Vos habitudes » s'ouvre : même
+     bouton, même geste. Ouvert par défaut — c'est ce qu'on vient régler. */
+  (function quickToggle(){
+    var box = document.getElementById('roiQuick'),
+        btn = document.getElementById('roiQuickBtn');
+    if (!box || !btn) return;
+    btn.addEventListener('click', function(){
+      var open = box.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  })();
   render();
 })();
 
