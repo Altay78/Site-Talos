@@ -16,7 +16,7 @@ EQUIPE = [
      u'Rédige vos devis, les envoie à la signature avec l’acompte et les relance '
      u'jusqu’à la réponse du client.',
      'assistant-commercial.html'),
-    ('administratif', u'Vos emails &amp; demandes', u'Assistant administratif',
+    ('administratif', u'Vos emails &amp; demandes', u'Assistante administrative',
      u'Plus besoin de passer votre journée dans vos mails.',
      u'Trie vos emails, extrait les informations importantes et vous alerte uniquement '
      u'lorsque votre attention est nécessaire.',
@@ -26,12 +26,12 @@ EQUIPE = [
      u'Génère vos factures après signature, gère vos acomptes et situations et garde '
      u'votre facturation à jour.',
      'assistant-facturation.html'),
-    ('tresorerie', u'Trésorerie', u'Assistant trésorerie',
+    ('tresorerie', u'Trésorerie', u'Assistante trésorerie',
      u'Vous savez ce qui doit rentrer.',
      u'Suit vos factures non encaissées, anticipe vos entrées d’argent et vous alerte '
      u'sur votre trésorerie.',
      'assistant-tresorerie.html'),
-    ('client', u'Clients &amp; rendez-vous', u'Assistant client',
+    ('client', u'Clients &amp; rendez-vous', u'Assistante client',
      u'Vos clients ont toujours quelqu’un pour leur répondre.',
      u'Répond aux demandes, prend les rendez-vous et rappelle automatiquement vos '
      u'clients avant leurs interventions.',

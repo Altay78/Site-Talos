@@ -586,14 +586,14 @@ FACTURATION = dict(
 
 ADMINISTRATIF = dict(
  slug='administratif', pw=411, ph=1400,
- alt="L'assistant administratif de Talos",
- titre=u"Assistant administratif — Talos | Votre boîte mail triée avant votre café",
- desc=u"L'assistant administratif de Talos trie votre boîte mail en six catégories, résume les "
+ alt="L'assistante administrative de Talos",
+ titre=u"Assistante administrative — Talos | Votre boîte mail triée avant votre café",
+ desc=u"L'assistante administrative de Talos trie votre boîte mail en six catégories, résume les "
       u"longs échanges, remonte les urgences et classe chaque pièce au bon chantier.",
  role=u"Assistant Emails &amp; Demandes",
- role_bas=u"votre assistant administratif",
- h1=u"Découvrez votre assistant administratif",
- pitch=u"Votre Assistant Administratif trie vos emails, en extrait ce qui compte — un devis à "
+ role_bas=u"votre assistante administrative",
+ h1=u"Découvrez votre assistante administrative",
+ pitch=u"Votre Assistante Administrative trie vos emails, en extrait ce qui compte — un devis à "
        u"faire, une facture fournisseur, une urgence chantier — et ne vous sollicite que "
        u"lorsque votre attention est vraiment nécessaire.",
  caps=[('inbox', u"Trie votre boîte en six catégories"), ('bulle', u"Résume les longs échanges"),
@@ -637,15 +637,15 @@ ADMINISTRATIF = dict(
   ]),
  ],
  faq_missions=[
-  (u"Est-ce qu'il répond à mes mails à ma place ?", u"Il prépare, vous relisez, vous envoyez. Seul l'accusé de réception part automatiquement, et vous en fixez le texte."),
-  (u"Est-ce qu'il peut supprimer un mail important par erreur ?", u"Il ne supprime rien. Il range — et tout reste consultable, y compris la catégorie « sans suite »."),
-  (u"Comment il sait à quel chantier rattacher un mail ?", u"Par le client, l'adresse, la référence du devis ou le nom du fichier. En cas de doute, il vous demande plutôt que de deviner."),
-  (u"Est-ce qu'il lit toute ma boîte mail ?", u"Il traite la boîte que vous lui confiez. Vous pouvez en exclure des expéditeurs ou des dossiers entiers."),
+  (u"Est-ce qu'elle répond à mes mails à ma place ?", u"Elle prépare, vous relisez, vous envoyez. Seul l'accusé de réception part automatiquement, et vous en fixez le texte."),
+  (u"Est-ce qu'elle peut supprimer un mail important par erreur ?", u"Elle ne supprime rien. Il range — et tout reste consultable, y compris la catégorie « sans suite »."),
+  (u"Comment sait-elle à quel chantier rattacher un mail ?", u"Par le client, l'adresse, la référence du devis ou le nom du fichier. En cas de doute, elle vous demande plutôt que de deviner."),
+  (u"Est-ce qu'elle lit toute ma boîte mail ?", u"Elle traite la boîte que vous lui confiez. Vous pouvez en exclure des expéditeurs ou des dossiers entiers."),
   (u"Et mes mails personnels ?", u"Ils n'ont rien à faire là : on branche votre adresse professionnelle, pas votre boîte privée."),
-  (u"Est-ce qu'il prend aussi mes rendez-vous ?", u"Non, il trie et classe. Les réponses aux clients et l'agenda sont le travail de l'assistant client."),
+  (u"Est-ce qu'elle prend aussi mes rendez-vous ?", u"Non, elle trie et classe. Les réponses aux clients et l'agenda sont le travail de l'assistante client."),
  ],
  faq_fonctionnement=[
-  (u"Est-ce que je peux corriger un classement ?", u"Oui, et il le retient. Un dossier déplacé une fois ne se retrouve pas au mauvais endroit la fois suivante."),
+  (u"Est-ce que je peux corriger un classement ?", u"Oui, et elle le retient. Un dossier déplacé une fois ne se retrouve pas au mauvais endroit la fois suivante."),
  ] + FAQ_FONCTIONNEMENT,
 )
 
@@ -672,7 +672,7 @@ PROMESSE = {
 }
 COURT = {'commercial': u"Assistant commercial", 'tresorerie': u"Assistante trésorerie",
          'client': u"Assistante client", 'facturation': u"Assistant facturation",
-         'administratif': u"Assistant administratif"}
+         'administratif': u"Assistante administrative"}
 
 A_VENIR = []   # les cinq assistants ont leur page
 
