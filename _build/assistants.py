@@ -517,7 +517,139 @@ CLIENT = dict(
  ] + FAQ_FONCTIONNEMENT,
 )
 
-ASSISTANTS = [COMMERCIAL, TRESORERIE, CLIENT]
+
+FACTURATION = dict(
+ slug='facturation', pw=402, ph=1400,
+ alt="L'assistant facturation de Talos",
+ titre=u"Assistant facturation — Talos | Vos factures partent sans que vous y pensiez",
+ desc=u"L'assistant facturation de Talos transforme chaque devis signé en facture conforme : "
+      u"acomptes, situations, TVA, numérotation continue, format électronique 2026 et archivage.",
+ role=u"Assistant Factures &amp; Encaissements",
+ role_bas=u"votre assistant facturation",
+ h1=u"Découvrez votre assistant facturation",
+ pitch=u"Votre Assistant Facturation reprend le devis au moment de la signature et sort la "
+       u"facture : acompte, situations de travaux, TVA au bon taux, numérotation continue. "
+       u"Au format électronique attendu en 2026, archivé, prêt pour votre comptable.",
+ caps=[('doc', u"Facture dès le devis signé"), ('euro', u"Acomptes et situations de travaux"),
+       ('balance', u"TVA, mentions et numérotation"), ('carte', u"Format électronique 2026")],
+ b2h2=u"Du devis signé<br>jusqu'à la <em>facture conforme</em>.",
+ b2lede=u"Le client signe. La facture d'acompte part dans la foulée, les situations suivent "
+        u"l'avancement, et le solde tombe à la réception du chantier.",
+ b2kicker=u"Vous facturez sans y penser. Et sans erreur.",
+ parcours=[
+  (u"Signature", 'stylo', u"La facture démarre toute seule.",
+   u"Dès que le devis est signé, la facture d'acompte est générée avec le bon montant et les "
+   u"bonnes mentions. Vous n'avez rien à ressaisir.", u"Le devis signé qui bascule en facture"),
+  (u"Avancement", 'euro', u"Chaque situation à son moment.",
+   u"Sur un chantier long, les situations de travaux suivent l'avancement que vous déclarez. "
+   u"Le reste à facturer est toujours juste.", u"La situation de travaux"),
+  (u"Conformité", 'balance', u"Conforme, sans y penser.",
+   u"Numérotation continue, TVA au bon taux, mentions obligatoires et format électronique "
+   u"attendu en 2026 : la facture est carrée avant de partir.", u"La facture au format 2026"),
+  (u"Archivage", 'doc', u"Tout est rangé, tout est retrouvable.",
+   u"Chaque facture est archivée avec son devis et son chantier, et exportée pour votre "
+   u"comptable. Fini le classeur du mois de janvier.", u"L'archive et l'export comptable"),
+ ],
+ douleur=u"Refaire vos factures le dimanche n'est plus votre problème.",
+ demandees=u"la facture d'acompte qui part le jour de la signature, les situations de travaux "
+           u"qui suivent l'avancement, et l'export prêt pour le comptable.",
+ missions=[
+  (u"Émission des factures", [
+   (u"Facture depuis le devis signé", u"Le devis devient facture sans ressaisie : mêmes lignes, mêmes prix, même client."),
+   (u"Facture d'acompte", u"Le pourcentage convenu à la commande, facturé le jour de la signature."),
+   (u"Situations de travaux", u"Sur les chantiers longs, chaque situation suit l'avancement que vous déclarez, avec le reste à facturer."),
+   (u"Facture de solde", u"À la réception du chantier, le solde tient compte de tout ce qui a déjà été facturé."),
+   (u"Avoirs et corrections", u"Une erreur, un geste commercial : l'avoir est émis proprement, rattaché à la facture d'origine."),
+  ]),
+  (u"Conformité &amp; classement", [
+   (u"Numérotation continue", u"Une seule série, sans trou ni doublon. C'est la première chose que regarde un contrôle."),
+   (u"TVA et mentions obligatoires", u"Taux applicable, autoliquidation, mentions légales : posés automatiquement selon le type de chantier."),
+   (u"Format électronique 2026", u"Les factures sont émises au format attendu par la réforme, prêtes à être transmises."),
+   (u"Archivage pendant dix ans", u"Chaque facture est conservée avec son devis et son chantier, et retrouvable en deux clics."),
+   (u"Export pour votre comptable", u"Un export mensuel propre, dans le format que votre cabinet attend."),
+  ]),
+ ],
+ faq_missions=[
+  (u"Est-ce qu'il envoie mes factures sans mon accord ?", u"Non. Il les prépare, vous relisez, vous envoyez. Comme pour les devis."),
+  (u"Et la facturation électronique de 2026, je dois faire quoi ?", u"Rien de votre côté : les factures sortent déjà au format attendu. C'est la raison d'être de cet assistant."),
+  (u"Est-ce qu'il gère les situations de travaux ?", u"Oui. Vous déclarez l'avancement, il calcule la situation et le reste à facturer."),
+  (u"Et si je facture hors Talos, sur un logiciel à moi ?", u"Il reprend votre numérotation là où elle en est, pour ne pas casser la série."),
+  (u"Est-ce qu'il relance mes impayés ?", u"Non, il émet et archive. Le recouvrement est le travail de l'assistant trésorerie."),
+  (u"Est-ce que mon comptable peut y accéder ?", u"Oui, avec un accès en lecture ou un export mensuel dans son format."),
+ ],
+ faq_fonctionnement=[
+  (u"Comment il sait qu'un devis est signé ?", u"Par la signature en ligne, ou parce que vous le marquez comme signé. La facture d'acompte suit dans la foulée."),
+ ] + FAQ_FONCTIONNEMENT,
+)
+
+
+ADMINISTRATIF = dict(
+ slug='administratif', pw=411, ph=1400,
+ alt="L'assistant administratif de Talos",
+ titre=u"Assistant administratif — Talos | Votre boîte mail triée avant votre café",
+ desc=u"L'assistant administratif de Talos trie votre boîte mail en six catégories, résume les "
+      u"longs échanges, remonte les urgences et classe chaque pièce au bon chantier.",
+ role=u"Assistant Emails &amp; Demandes",
+ role_bas=u"votre assistant administratif",
+ h1=u"Découvrez votre assistant administratif",
+ pitch=u"Votre Assistant Administratif trie vos emails, en extrait ce qui compte — un devis à "
+       u"faire, une facture fournisseur, une urgence chantier — et ne vous sollicite que "
+       u"lorsque votre attention est vraiment nécessaire.",
+ caps=[('inbox', u"Trie votre boîte en six catégories"), ('bulle', u"Résume les longs échanges"),
+       ('alerte', u"Remonte les urgences"), ('doc', u"Classe les pièces au bon chantier")],
+ b2h2=u"De la boîte pleine<br>à la <em>pile du matin</em>.",
+ b2lede=u"Deux cents mails par semaine, et trois qui comptent vraiment. Votre assistant fait le "
+        u"tri pendant la nuit et vous montre les trois.",
+ b2kicker=u"Vous ouvrez votre boîte une fois par jour, pas vingt.",
+ parcours=[
+  (u"Tri", 'inbox', u"Six catégories, plus une boîte fourre-tout.",
+   u"Demande client, facture fournisseur, administratif, chantier, publicité, sans suite : "
+   u"chaque mail est rangé dès son arrivée, avec ce qu'il contient.", u"La boîte triée du matin"),
+  (u"Résumé", 'bulle', u"Vingt échanges tiennent en trois lignes.",
+   u"Un fil qui traîne depuis dix jours est résumé : ce qui a été décidé, ce qui bloque, et ce "
+   u"qu'on attend de vous.", u"Le résumé d'un long fil"),
+  (u"Urgences", 'alerte', u"Ce qui ne peut pas attendre remonte.",
+   u"Un chantier bloqué, une relance de l'assurance, une échéance qui tombe : ces mails-là "
+   u"passent devant, avec le motif de l'alerte.", u"L'alerte remontée en haut de pile"),
+  (u"Classement", 'doc', u"Chaque pièce à son chantier.",
+   u"Facture fournisseur, PV de réception, attestation : le document est détaché, nommé et "
+   u"rangé dans le dossier du bon chantier.", u"La pièce classée au bon dossier"),
+ ],
+ douleur=u"Passer vos soirées dans votre boîte mail n'est plus votre problème.",
+ demandees=u"le tri automatique dès la réception, le résumé des fils qui s'éternisent, et le "
+           u"classement des factures fournisseurs au bon chantier.",
+ missions=[
+  (u"Tri de la boîte mail", [
+   (u"Tri en six catégories", u"Demande client, facture fournisseur, administratif, chantier, publicité, sans suite. Chaque mail est rangé dès son arrivée."),
+   (u"Résumé des longs échanges", u"Un fil de vingt messages tient en trois lignes : ce qui a été décidé, ce qui bloque, ce qu'on attend de vous."),
+   (u"Extraction des informations", u"Adresse, dates, montants, références : sorties du corps du mail et posées à côté du dossier."),
+   (u"Détection des urgences", u"Un chantier bloqué ou une échéance qui tombe remonte en haut de la pile, avec le motif."),
+   (u"Accusé de réception", u"Le client sait que son message est arrivé, même quand vous êtes sur un toit."),
+   (u"Mise à l'écart des publicités", u"Les newsletters et démarchages sortent de la boîte principale sans être supprimés."),
+  ]),
+  (u"Classement &amp; suivi", [
+   (u"Classement au bon chantier", u"Chaque mail et chaque pièce jointe rejoint le dossier du chantier concerné."),
+   (u"Factures fournisseurs", u"Détachées, nommées, rangées, et prêtes pour le comptable en fin de mois."),
+   (u"Pièces du dossier", u"Devis, PV de réception, attestations, plans : rangés au même endroit que le reste du chantier."),
+   (u"Rappel des pièces manquantes", u"Une attestation qui manque au dossier vous est signalée avant que ce soit un problème."),
+   (u"Recherche dans l'historique", u"« Le mail où le client parlait de la porte de garage » se retrouve en une question."),
+  ]),
+ ],
+ faq_missions=[
+  (u"Est-ce qu'il répond à mes mails à ma place ?", u"Il prépare, vous relisez, vous envoyez. Seul l'accusé de réception part automatiquement, et vous en fixez le texte."),
+  (u"Est-ce qu'il peut supprimer un mail important par erreur ?", u"Il ne supprime rien. Il range — et tout reste consultable, y compris la catégorie « sans suite »."),
+  (u"Comment il sait à quel chantier rattacher un mail ?", u"Par le client, l'adresse, la référence du devis ou le nom du fichier. En cas de doute, il vous demande plutôt que de deviner."),
+  (u"Est-ce qu'il lit toute ma boîte mail ?", u"Il traite la boîte que vous lui confiez. Vous pouvez en exclure des expéditeurs ou des dossiers entiers."),
+  (u"Et mes mails personnels ?", u"Ils n'ont rien à faire là : on branche votre adresse professionnelle, pas votre boîte privée."),
+  (u"Est-ce qu'il prend aussi mes rendez-vous ?", u"Non, il trie et classe. Les réponses aux clients et l'agenda sont le travail de l'assistant client."),
+ ],
+ faq_fonctionnement=[
+  (u"Est-ce que je peux corriger un classement ?", u"Oui, et il le retient. Un dossier déplacé une fois ne se retrouve pas au mauvais endroit la fois suivante."),
+ ] + FAQ_FONCTIONNEMENT,
+)
+
+
+ASSISTANTS = [COMMERCIAL, ADMINISTRATIF, FACTURATION, TRESORERIE, CLIENT]
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -532,26 +664,22 @@ PROMESSE = {
                u"en demeure, et vous dit ce qui va rentrer.",
  'client':     u"Répond à vos clients 24 h/24, qualifie leurs demandes, remplit votre agenda et "
                u"envoie confirmations et rappels.",
+ 'facturation': u"Transforme chaque devis signé en facture conforme : acomptes, situations, TVA, "
+                u"numérotation, format 2026 et archivage.",
+ 'administratif': u"Trie votre boîte mail, résume les longs échanges, remonte les urgences et "
+                  u"classe chaque pièce au bon chantier.",
 }
 COURT = {'commercial': u"Assistant commercial", 'tresorerie': u"Assistante trésorerie",
-         'client': u"Assistante client"}
+         'client': u"Assistante client", 'facturation': u"Assistant facturation",
+         'administratif': u"Assistant administratif"}
 
-# Les deux qui n'ont pas encore de personnage ni de page.
-A_VENIR = [
- ('facturation', 402, 1400,
-  u"Assistant Facturation", u"Assistant facturation",
-  u"Transforme chaque devis signé en facture conforme à l'obligation 2026 : numérotation, TVA, "
-  u"acomptes, situations, archivage.", 2, 10),
- ('administratif', 411, 1400,
-  u"Assistant Administratif", u"Assistant administratif",
-  u"Trie votre boîte mail en six catégories, résume, remonte les urgences et classe vos factures "
-  u"fournisseurs au bon chantier.", 2, 11),
-]
+A_VENIR = []   # les cinq assistants ont leur page
+
 
 def hub():
     """Le corps de la page Offres — l'équipe présentée en carrousel."""
-    tot_m = sum(len(a['missions']) for a in ASSISTANTS) + sum(x[6] for x in A_VENIR)
-    tot_f = sum(sum(len(f) for _, f in a['missions']) for a in ASSISTANTS) + sum(x[7] for x in A_VENIR)
+    tot_m = sum(len(a['missions']) for a in ASSISTANTS) 
+    tot_f = sum(sum(len(f) for _, f in a['missions']) for a in ASSISTANTS) 
 
     return u'''<section class="t-asst">
   <div class="of">

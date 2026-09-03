@@ -66,8 +66,8 @@ EQUIPE = [
     ('commercial',    u'Assistant commercial',    u'Devis, signature, relances',    'assistant-commercial.html'),
     ('tresorerie',    u'Assistante trésorerie',   u'Impayés et prévision',          'assistant-tresorerie.html'),
     ('client',        u'Assistante client',       u'Réponses et rendez-vous',       'assistant-client.html'),
-    ('facturation',   u'Assistant facturation',   u'Factures conformes 2026',       'reserver.html'),
-    ('administratif', u'Assistant administratif', u'Tri des mails et classement',   'reserver.html'),
+    ('facturation',   u'Assistant facturation',   u'Factures conformes 2026',       'assistant-facturation.html'),
+    ('administratif', u'Assistant administratif', u'Tri des mails et classement',   'assistant-administratif.html'),
 ]
 BIENTOT = set()   # les cinq assistants sont disponibles
 

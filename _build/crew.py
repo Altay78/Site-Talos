@@ -20,12 +20,12 @@ EQUIPE = [
      u'Plus besoin de passer votre journée dans vos mails.',
      u'Trie vos emails, extrait les informations importantes et vous alerte uniquement '
      u'lorsque votre attention est nécessaire.',
-     'reserver.html'),
+     'assistant-administratif.html'),
     ('facturation', u'Factures &amp; encaissements', u'Assistant facturation',
      u'Vos factures sont créées et suivies sans y penser.',
      u'Génère vos factures après signature, gère vos acomptes et situations et garde '
      u'votre facturation à jour.',
-     'reserver.html'),
+     'assistant-facturation.html'),
     ('tresorerie', u'Trésorerie', u'Assistant trésorerie',
      u'Vous savez ce qui doit rentrer.',
      u'Suit vos factures non encaissées, anticipe vos entrées d’argent et vous alerte '
