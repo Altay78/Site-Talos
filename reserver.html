@@ -370,19 +370,6 @@ html[data-theme="light"] .t-book::before{background:radial-gradient(circle,rgba(
   padding-top:3px;color:var(--bronze)}
 .t-book .bk-lede-i svg{width:17px;height:17px}
 
-.t-book .bk-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  border-top:1px solid var(--line);border-left:1px solid var(--line)}
-.t-book .bk-fact{padding:22px 24px 20px;
-  border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.t-book .bk-fact b{display:block;margin:0 0 8px;font-size:26px;line-height:1.05;
-  letter-spacing:-1px;font-weight:800;color:var(--parch)}
-.t-book .bk-fact b sup{font-size:.5em;vertical-align:super;letter-spacing:0}
-.t-book .bk-fact span{display:block;font-size:14px;line-height:1.55;color:var(--lin)}
-.t-book .bk-fact strong{color:var(--parch);font-weight:600}
-.t-book .bk-fact cite{display:block;margin-top:10px;font-family:var(--mono);
-  font-style:normal;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--bronze)}
-
 .t-book .bk-team{margin:40px 0 0}
 .t-book .bk-team figcaption b{display:block;margin:0 0 8px;font-size:20px;
   letter-spacing:-.6px;font-weight:800;color:var(--parch)}
@@ -495,13 +482,17 @@ html[data-theme="light"] .t-book .dd-pan{box-shadow:0 24px 60px -28px rgba(40,25
 @media (max-width:960px){
   .t-book{padding:24px 0 72px}
   .t-book .bk-in{grid-template-columns:1fr}
-  .t-book .bk-left{padding:0 0 34px;border-right:0;border-bottom:1px solid var(--line)}
-  .t-book .bk-right{padding:34px 0 0}
-  .t-book .bk-team{margin-top:30px}
+  /* sur téléphone on ne fait pas défiler l'argumentaire avant de pouvoir
+     répondre : le titre, puis les questions, puis les chiffres et l'équipe.
+     `display:contents` dissout la colonne pour pouvoir ordonner ses blocs. */
+  .t-book .bk-left{display:contents}
+  .t-book h1{order:1}
+  .t-book .bk-lede{order:2;margin-bottom:26px}
+  .t-book .bk-right{order:3;padding:0 0 34px;border-bottom:1px solid var(--line)}
+  .t-book .bk-team{order:4;margin-top:34px}
 }
 @media (max-width:560px){
   .t-book .bk-in{padding:0 18px}
-  .t-book .bk-facts{grid-template-columns:1fr}
   .t-book .fld-row{grid-template-columns:1fr}
   .t-book .bk-agents{grid-template-columns:repeat(3,minmax(0,1fr))}
   .t-book .bk-go{align-self:stretch;width:100%}
@@ -600,34 +591,6 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
           Talos à travers les fonctionnalités et le plan qui correspond à votre entreprise.</span>
       </p>
 
-      <!-- ── les chiffres : des faits vérifiables, pas des promesses ── -->
-      <div class="bk-facts">
-        <div class="bk-fact">
-          <b>1<sup>er</sup> sept. 2026</b>
-          <span>Toutes les entreprises doivent être en mesure de <strong>recevoir une facture
-            électronique</strong>.</span>
-          <cite>impots.gouv.fr</cite>
-        </div>
-        <div class="bk-fact">
-          <b>60 jours</b>
-          <span>Le délai de paiement maximal entre professionnels, <strong>45 jours fin de
-            mois</strong> si c'est écrit au contrat.</span>
-          <cite>Code de commerce, art. L441-10</cite>
-        </div>
-        <div class="bk-fact">
-          <b>40 €</b>
-          <span>L'indemnité forfaitaire due <strong>de plein droit sur chaque facture en
-            retard</strong>. Encore faut-il la réclamer.</span>
-          <cite>Code de commerce, art. D441-5</cite>
-        </div>
-        <div class="bk-fact">
-          <b>+30 artisans</b>
-          <span>accompagnés, <strong>mise en place incluse</strong> — vous n'avez rien à
-            paramétrer.</span>
-          <cite>Talos</cite>
-        </div>
-      </div>
-
       <!-- ── l'équipe ── -->
       <figure class="bk-team">
         <figcaption>
@@ -715,7 +678,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         </label>
 
         <button class="bk-go" id="bkGo" type="submit">
-          <span class="bk-go-lb" id="bkGoLb">Parler à Talos</span>
+          <span class="bk-go-lb" id="bkGoLb">Être recontacté</span>
           <span class="bk-go-ic" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </span>
