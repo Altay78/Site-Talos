@@ -558,9 +558,10 @@ def hub():
     <div class="shell">
 
       <div class="of-head">
-        <h1>Votre équipe <em>sur mesure</em></h1>
-        <p>Cinq assistants qui travaillent pendant que vous êtes sur le chantier.
-          Chacun a ses missions ; vous prenez ceux dont vous avez besoin.</p>
+        <h1>Une équipe <em>sur mesure</em></h1>
+        <p>Choisissez les assistants dont vous avez besoin. Ils prennent en charge les
+          tâches qui vous prennent du temps, pendant que vous vous concentrez sur vos
+          chantiers.</p>
         <ul class="of-stats">
           <li><span class="of-ic" aria-hidden="true">%s</span>
             <span><b>%d</b><small>assistants</small></span></li>

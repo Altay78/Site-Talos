@@ -634,9 +634,10 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     <div class="shell">
 
       <div class="of-head">
-        <h1>Votre équipe <em>sur mesure</em></h1>
-        <p>Cinq assistants qui travaillent pendant que vous êtes sur le chantier.
-          Chacun a ses missions ; vous prenez ceux dont vous avez besoin.</p>
+        <h1>Une équipe <em>sur mesure</em></h1>
+        <p>Choisissez les assistants dont vous avez besoin. Ils prennent en charge les
+          tâches qui vous prennent du temps, pendant que vous vous concentrez sur vos
+          chantiers.</p>
         <ul class="of-stats">
           <li><span class="of-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20v-1.6a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4V20"/><circle cx="9" cy="7.5" r="3.4"/><path d="M22 20v-1.6a4 4 0 0 0-3-3.9M16.5 4.3a4 4 0 0 1 0 7.4"/></svg></span>
             <span><b>5</b><small>assistants</small></span></li>
@@ -681,7 +682,7 @@ html[data-theme="light"] .crew-head h2 em{
 .crew-head p{margin:0 auto;max-width:52ch;font-size:16.5px;line-height:1.6;color:var(--lin)}
 
 /* la scène : les cartes tournent autour de celle du centre */
-.crew-stage{position:relative;height:clamp(430px,42vw,500px);
+.crew-stage{position:relative;height:clamp(470px,46vw,540px);
   perspective:1500px;perspective-origin:50% 45%}
 .crew-track{list-style:none;margin:0;padding:0;position:absolute;inset:0;
   transform-style:preserve-3d}
@@ -697,7 +698,7 @@ html[data-theme="light"] .crew-c a{box-shadow:0 30px 70px -34px rgba(40,25,16,.3
 .crew-c[data-act] a{border-color:rgba(var(--bronze-rgb),.42);
   box-shadow:0 34px 80px -26px rgba(var(--bronze-rgb),.42)}
 
-.crew-vis{position:relative;display:block;height:58%;overflow:hidden;
+.crew-vis{position:relative;display:block;height:50%;overflow:hidden;
   background:radial-gradient(120% 84% at 50% 4%,rgba(var(--bronze-rgb),.20) 0%,transparent 70%)}
 .crew-vis img{position:absolute;left:50%;top:10px;transform:translateX(-50%);
   height:640px;width:auto;max-width:none}
@@ -714,9 +715,12 @@ html[data-theme="light"] .crew-c a{box-shadow:0 30px 70px -34px rgba(40,25,16,.3
 .crew-txt{display:flex;flex-direction:column;flex:1;padding:18px 20px 20px}
 .crew-txt small{font-family:ui-monospace,"SF Mono",Menlo,monospace;
   font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze)}
-.crew-txt b{margin:7px 0 8px;font-size:19px;line-height:1.15;letter-spacing:-.6px;
+.crew-txt b{margin:7px 0 6px;font-size:18.5px;line-height:1.15;letter-spacing:-.6px;
   font-weight:800;color:var(--parch)}
-.crew-p{flex:1;font-size:13.5px;line-height:1.5;color:var(--lin)}
+/* l'accroche : la phrase qu'on retient, au-dessus de l'explication */
+.crew-h{margin:0 0 7px;font-size:14px;line-height:1.35;font-weight:600;
+  letter-spacing:-.2px;color:var(--parch)}
+.crew-p{flex:1;font-size:13px;line-height:1.48;color:var(--lin)}
 .crew-go{display:inline-flex;align-items:center;gap:7px;margin-top:14px;
   font-size:13.5px;font-weight:700;color:var(--bronze)}
 .crew-go svg{width:14px;height:14px}
@@ -766,63 +770,68 @@ html[data-theme="light"] .crew-c a{box-shadow:0 30px 70px -34px rgba(40,25,16,.3
           <span class="crew-txt">
             <small>Devis &amp; relances</small>
             <b>Assistant commercial</b>
-            <span class="crew-p">Rédige vos devis, les fait signer et relance jusqu’à la réponse.</span>
+            <span class="crew-h">Vos devis partent. Vos clients sont relancés.</span>
+            <span class="crew-p">Rédige vos devis, les envoie à la signature avec l’acompte et les relance jusqu’à la réponse du client.</span>
             <span class="crew-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
         </a>
       </li>
       <li class="crew-c" data-i="1">
-        <a href="assistant-tresorerie.html">
-          <span class="crew-vis">
-            <img src="perso/assistant-tresorerie.webp" alt="" width="430" height="1400"
-                 loading="lazy" decoding="async">
-          </span>
-          <span class="crew-txt">
-            <small>Impayés &amp; prévision</small>
-            <b>Assistante trésorerie</b>
-            <span class="crew-p">Repère les factures en retard, relance et prévoit vos encaissements.</span>
-            <span class="crew-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </span>
-        </a>
-      </li>
-      <li class="crew-c" data-i="2">
-        <a href="assistant-client.html">
-          <span class="crew-vis">
-            <img src="perso/assistant-client.webp" alt="" width="430" height="1400"
-                 loading="lazy" decoding="async">
-          </span>
-          <span class="crew-txt">
-            <small>Réponses &amp; rendez-vous</small>
-            <b>Assistante client</b>
-            <span class="crew-p">Répond 24 h/24, qualifie la demande et remplit votre agenda.</span>
-            <span class="crew-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </span>
-        </a>
-      </li>
-      <li class="crew-c" data-i="3">
-        <a href="reserver.html">
-          <span class="crew-vis">
-            <img src="perso/assistant-facturation.webp" alt="" width="430" height="1400"
-                 loading="lazy" decoding="async">
-          </span>
-          <span class="crew-txt">
-            <small>Conformité 2026</small>
-            <b>Assistant facturation</b>
-            <span class="crew-p">Transforme chaque devis signé en facture conforme et archivée.</span>
-            <span class="crew-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </span>
-        </a>
-      </li>
-      <li class="crew-c" data-i="4">
         <a href="reserver.html">
           <span class="crew-vis">
             <img src="perso/assistant-administratif.webp" alt="" width="430" height="1400"
                  loading="lazy" decoding="async">
           </span>
           <span class="crew-txt">
-            <small>Boîte mail &amp; classement</small>
+            <small>Vos emails &amp; demandes</small>
             <b>Assistant administratif</b>
-            <span class="crew-p">Trie vos mails, remonte les urgences et classe au bon chantier.</span>
+            <span class="crew-h">Plus besoin de passer votre journée dans vos mails.</span>
+            <span class="crew-p">Trie vos emails, extrait les informations importantes et vous alerte uniquement lorsque votre attention est nécessaire.</span>
+            <span class="crew-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </span>
+        </a>
+      </li>
+      <li class="crew-c" data-i="2">
+        <a href="reserver.html">
+          <span class="crew-vis">
+            <img src="perso/assistant-facturation.webp" alt="" width="430" height="1400"
+                 loading="lazy" decoding="async">
+          </span>
+          <span class="crew-txt">
+            <small>Factures &amp; encaissements</small>
+            <b>Assistant facturation</b>
+            <span class="crew-h">Vos factures sont créées et suivies sans y penser.</span>
+            <span class="crew-p">Génère vos factures après signature, gère vos acomptes et situations et garde votre facturation à jour.</span>
+            <span class="crew-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </span>
+        </a>
+      </li>
+      <li class="crew-c" data-i="3">
+        <a href="assistant-tresorerie.html">
+          <span class="crew-vis">
+            <img src="perso/assistant-tresorerie.webp" alt="" width="430" height="1400"
+                 loading="lazy" decoding="async">
+          </span>
+          <span class="crew-txt">
+            <small>Trésorerie</small>
+            <b>Assistant trésorerie</b>
+            <span class="crew-h">Vous savez ce qui doit rentrer.</span>
+            <span class="crew-p">Suit vos factures non encaissées, anticipe vos entrées d’argent et vous alerte sur votre trésorerie.</span>
+            <span class="crew-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </span>
+        </a>
+      </li>
+      <li class="crew-c" data-i="4">
+        <a href="assistant-client.html">
+          <span class="crew-vis">
+            <img src="perso/assistant-client.webp" alt="" width="430" height="1400"
+                 loading="lazy" decoding="async">
+          </span>
+          <span class="crew-txt">
+            <small>Clients &amp; rendez-vous</small>
+            <b>Assistant client</b>
+            <span class="crew-h">Vos clients ont toujours quelqu’un pour leur répondre.</span>
+            <span class="crew-p">Répond aux demandes, prend les rendez-vous et rappelle automatiquement vos clients avant leurs interventions.</span>
             <span class="crew-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
         </a>
@@ -831,7 +840,7 @@ html[data-theme="light"] .crew-c a{box-shadow:0 30px 70px -34px rgba(40,25,16,.3
     <button class="crew-nav n" type="button" aria-label="Assistant suivant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
   </div>
 
-  <div class="crew-dots" role="tablist" aria-label="Choisir un assistant"><button type="button" role="tab" aria-label="Assistant commercial" aria-selected="true"></button><button type="button" role="tab" aria-label="Assistante trésorerie" aria-selected="false"></button><button type="button" role="tab" aria-label="Assistante client" aria-selected="false"></button><button type="button" role="tab" aria-label="Assistant facturation" aria-selected="false"></button><button type="button" role="tab" aria-label="Assistant administratif" aria-selected="false"></button></div>
+  <div class="crew-dots" role="tablist" aria-label="Choisir un assistant"><button type="button" role="tab" aria-label="Assistant commercial" aria-selected="true"></button><button type="button" role="tab" aria-label="Assistant administratif" aria-selected="false"></button><button type="button" role="tab" aria-label="Assistant facturation" aria-selected="false"></button><button type="button" role="tab" aria-label="Assistant trésorerie" aria-selected="false"></button><button type="button" role="tab" aria-label="Assistant client" aria-selected="false"></button></div>
 </section>
 
 <script>
