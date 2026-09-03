@@ -137,6 +137,20 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 @media (prefers-reduced-motion:reduce){.tnav-pan,.tnav-chev{transition:none}}
 </style>"""
 
+LEGAL_LINKS = (u'<a href="mentions-legales.html">Mentions légales</a>'
+               u'<span class="dot">·</span>'
+               u'<a href="cgu.html">CGU</a>'
+               u'<span class="dot">·</span>'
+               u'<a href="cgv.html">CGV</a>'
+               u'<span class="dot">·</span>'
+               u'<a href="confidentialite.html">Politique de confidentialité</a>')
+RGPD_NOTE = (u'<p class="nform-rgpd">Votre adresse sert uniquement à vous envoyer nos '
+             u'actualités. Désinscription en un clic — '
+             u'<a href="confidentialite.html">politique de confidentialité</a>.</p>')
+COPYRIGHT = (u'\u00a9 <span id="yr">2026</span> \u00b7 Talos \u2014 Altay Sakalli, '
+             u'entrepreneur individuel \u00b7 SIREN 920 171 774')
+
+
 def cur(href, page):
     return u' aria-current="page"' if href == page else u''
 
@@ -198,7 +212,19 @@ def sync(page):
     if n:
         notes.append('pied')
 
-    # 4 · la feuille du menu déroulant, une fois par page
+    # 4 · les liens juridiques du pied de page — obligation légale, ils
+    #     doivent figurer sur chaque page, pas seulement sur l'accueil
+    s, n = re.subn(r'(<div class="legal">).*?(</div>)',
+                   lambda m: m.group(1) + LEGAL_LINKS + m.group(2), s, flags=re.S)
+    if n:
+        notes.append('juridique')
+    s = re.sub(r'© <span id="yr">2026</span>[^<]*', COPYRIGHT, s)
+
+    # la finalité du formulaire d'inscription doit être annoncée sur place
+    if 'nform-rgpd' not in s and '</form>' in s:
+        s = s.replace('</form>', '</form>\n      ' + RGPD_NOTE, 1)
+
+    # 5 · la feuille du menu déroulant, une fois par page
     if '<div class="tnav-links">' in before:
         s = re.sub(r'<style id="tnav-drop-css">.*?</style>', '', s, flags=re.S)
         s = s.replace('</head>', PANEL_CSS + '</head>', 1)

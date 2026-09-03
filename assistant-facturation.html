@@ -67,7 +67,7 @@ html[data-theme="light"]{
 
 /* 2 · tokens v2.css pour les sections (mêmes noms qu'en production) */
 .t-story,.t-how,.t-how2,.t-roi,.t-cat,.t-price,.t-faq,.t-ft,.t-feat,
-.t-simhero,.t-gains,.t-simcta,.t-blog,.t-404,.t-asst{
+.t-simhero,.t-gains,.t-simcta,.t-blog,.t-404,.t-asst,.t-legal{
   --bronze:#E0631F; --bronze-2:#F4823E; --bronze-rgb:224,99,31;
   --antique:#A8451A; --antique-rgb:168,69,26;
   --olivier:#D69A66; --olivier-rgb:214,154,102;
@@ -82,7 +82,8 @@ html[data-theme="light"]{
   color:var(--parch);
 }
 html[data-theme="light"] .t-story,html[data-theme="light"] .t-how,html[data-theme="light"] .t-how2,html[data-theme="light"] .t-roi,html[data-theme="light"] .t-cat,html[data-theme="light"] .t-price,html[data-theme="light"] .t-faq,html[data-theme="light"] .t-ft,html[data-theme="light"] .t-feat,
-html[data-theme="light"] .t-simhero,html[data-theme="light"] .t-gains,html[data-theme="light"] .t-simcta,html[data-theme="light"] .t-blog,html[data-theme="light"] .t-404,html[data-theme="light"] .t-asst{
+html[data-theme="light"] .t-simhero,html[data-theme="light"] .t-gains,html[data-theme="light"] .t-simcta,html[data-theme="light"] .t-blog,html[data-theme="light"] .t-404,html[data-theme="light"] .t-asst,
+html[data-theme="light"] .t-legal{
   --bronze:#C5531C; --bronze-2:#E0631F; --bronze-rgb:197,83,28;
   --antique:#9A3F12; --antique-rgb:154,63,18;
   --olivier:#9A6A38; --olivier-rgb:154,106,56;
@@ -259,6 +260,13 @@ main > section,main > footer{scroll-margin-top:110px}
 .t-ft .updates{margin-top:64px}
 .t-ft .updates h4{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;
   color:rgba(246,238,231,.55);font-weight:700;margin-bottom:16px}
+/* la mention de finalité sous le formulaire : consentement éclairé, RGPD */
+.t-ft .nform-rgpd{max-width:640px;margin:10px 0 0;font-size:12.5px;line-height:1.5;
+  color:rgba(246,238,231,.5)}
+.t-ft .nform-rgpd a{color:rgba(246,238,231,.78);text-decoration:underline;
+  text-underline-offset:3px}
+html[data-theme="light"] .t-ft .nform-rgpd{color:rgba(28,19,16,.55)}
+html[data-theme="light"] .t-ft .nform-rgpd a{color:rgba(28,19,16,.8)}
 .t-ft .nform{display:flex;gap:0;border:1px solid rgba(246,238,231,.3);border-radius:100px;
   padding:5px;max-width:640px;background:rgba(0,0,0,.15)}
 .t-ft .nform input{flex:1;min-width:0;background:none;border:0;padding:14px 22px;color:#F6EEE7;
@@ -1499,15 +1507,13 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <input type="email" placeholder="Adresse e-mail" required>
         <button type="submit">S'inscrire</button>
       </form>
+      <p class="nform-rgpd">Votre adresse sert uniquement à vous envoyer nos actualités.
+        Désinscription en un clic — <a href="confidentialite.html">politique de confidentialité</a>.</p>
     </div>
 
     <div class="ft-bottom">
-      <div>© <span id="yr">2026</span> · Talos SAS · Tous droits réservés.</div>
-      <div class="legal">
-        <a href="#">Politique de confidentialité</a>
-        <span class="dot">·</span>
-        <a href="#">Conditions générales</a>
-      </div>
+      <div>© <span id="yr">2026</span> · Talos — Altay Sakalli, entrepreneur individuel · SIREN 920 171 774</div>
+      <div class="legal"><a href="mentions-legales.html">Mentions légales</a><span class="dot">·</span><a href="cgu.html">CGU</a><span class="dot">·</span><a href="cgv.html">CGV</a><span class="dot">·</span><a href="confidentialite.html">Politique de confidentialité</a></div>
     </div>
   </div>
 </footer>

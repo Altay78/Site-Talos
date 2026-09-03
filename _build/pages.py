@@ -174,10 +174,27 @@ for _a in assistants.ASSISTANTS:
          ASSIST_CSS, assistants.corps(_a), ASSIST_JS)
 
 
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  5 · LES PAGES JURIDIQUES — mentions légales, CGU, CGV, confidentialité.
+#      Le texte vient du Markdown de talos-app/legal/ : une seule source pour
+#      le site, l'espace client et les PDF.
+# ═══════════════════════════════════════════════════════════════════════════
+
+import legal
+
+LEGAL_CSS = part('legal.css')
+
+for _f, _md, _t, _d in legal.DOCS:
+    page(_f, _t, _d, LEGAL_CSS, legal.corps(_f, _md, _t), u'')
+
+
 # ═══════════════════════════════════════════════════════════════════════════
 #  4 · les menus de tout le site sont réalignés dans la foulée : sans ça les
 #      pages qu'on vient d'écrire n'auraient pas leur aria-current="page"
 # ═══════════════════════════════════════════════════════════════════════════
 import nav_sync
-for _p in nav_sync.PAGES + ['assistant-%s.html' % a['slug'] for a in assistants.ASSISTANTS]:
+for _p in (nav_sync.PAGES
+          + ['assistant-%s.html' % a['slug'] for a in assistants.ASSISTANTS]
+          + [d[0] for d in legal.DOCS]):
     print(u'%-24s %s' % nav_sync.sync(_p))
