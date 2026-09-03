@@ -96,6 +96,36 @@ def offres_html(page):
 
 # La feuille du menu est injectée dans chaque page : index.html embarque sa
 # propre copie compilée du style, elle ne lit pas parts/shell.css.
+JOINTS_CSS = u'''<style id="joints-css">
+/* ── Les raccords entre sections ─────────────────────────────────────────
+   Les sections partagent le même fond : le filet d'1 px qui les séparait
+   coupait la page en tranches, et les lueurs de braise butaient dessus.
+   Deux corrections, aucune couleur en dur :
+     · le filet s'éteint vers les bords (border-image) au lieu de traverser
+       l'écran d'un trait ;
+     · chaque section démarre par un voile très léger qui se dissout sur
+       220 px, ce qui relie visuellement le haut de la section à celle
+       d'au-dessus.                                                        */
+.int-band,.t-feat,.t-story,.t-how,.t-how2,.t-roi,.t-cat,.t-price,.t-faq{
+  border-top:1px solid transparent;
+  border-image:linear-gradient(90deg,transparent 0%,
+      color-mix(in oklab,var(--border) 55%,transparent) 34%,
+      color-mix(in oklab,var(--border) 55%,transparent) 66%,
+      transparent 100%) 1;
+  background-image:linear-gradient(180deg,
+      color-mix(in oklab,var(--ink) 5%,transparent) 0,
+      color-mix(in oklab,var(--ink) 2%,transparent) 90px,
+      color-mix(in oklab,var(--ink) 0%,transparent) 300px)}
+.int-band{border-bottom-color:transparent}
+/* le carrousel n'a pas de filet : sa lueur fait déjà la jonction */
+.t-crew{border-top:0}
+/* et cette lueur ne doit plus s'arrêter net sur la couture */
+.t-crew::before{-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 96%);
+                        mask-image:linear-gradient(180deg,#000 62%,transparent 96%)}
+@media (prefers-reduced-motion:reduce){.t-crew::before{mask-image:none}}
+</style>'''
+
+
 PANEL_CSS = u"""<style id="tnav-drop-css">
 .tnav-drop{position:relative;display:inline-flex}
 .tnav-drop-t{display:inline-flex;align-items:center;gap:5px}
@@ -227,7 +257,8 @@ def sync(page):
     # 5 · la feuille du menu déroulant, une fois par page
     if '<div class="tnav-links">' in before:
         s = re.sub(r'<style id="tnav-drop-css">.*?</style>', '', s, flags=re.S)
-        s = s.replace('</head>', PANEL_CSS + '</head>', 1)
+        s = re.sub(r'<style id="joints-css">.*?</style>', '', s, flags=re.S)
+        s = s.replace('</head>', JOINTS_CSS + PANEL_CSS + '</head>', 1)
         notes.append('menu offres')
 
     if not notes:

@@ -54,11 +54,10 @@ for i, (slug, role, nom, accroche, promesse, href) in enumerate(EQUIPE):
             <small>%s</small>
             <b>%s</b>
             <span class="crew-h">%s</span>
-            <span class="crew-p">%s</span>
             <span class="crew-go">Découvrir %s</span>
           </span>
         </a>
-      </li>''' % (i, href, slug, role, nom, accroche, promesse, FLECHE))
+      </li>''' % (i, href, slug, role, nom, accroche, FLECHE))
 
 dots = u''.join(u'<button type="button" role="tab" aria-label="%s"%s></button>'
                 % (e[2], u' aria-selected="true"' if i == 0 else u' aria-selected="false"')
@@ -109,7 +108,7 @@ html[data-theme="light"] .crew-c a{box-shadow:0 30px 70px -34px rgba(40,25,16,.3
 .crew-c[data-act] a{border-color:rgba(var(--bronze-rgb),.42);
   box-shadow:0 34px 80px -26px rgba(var(--bronze-rgb),.42)}
 
-.crew-vis{position:relative;display:block;height:50%;overflow:hidden;
+.crew-vis{position:relative;display:block;height:60%;overflow:hidden;
   background:radial-gradient(120% 84% at 50% 4%,rgba(var(--bronze-rgb),.20) 0%,transparent 70%)}
 .crew-vis img{position:absolute;left:50%;top:10px;transform:translateX(-50%);
   height:640px;width:auto;max-width:none}
@@ -129,9 +128,8 @@ html[data-theme="light"] .crew-c a{box-shadow:0 30px 70px -34px rgba(40,25,16,.3
 .crew-txt b{margin:7px 0 6px;font-size:18.5px;line-height:1.15;letter-spacing:-.6px;
   font-weight:800;color:var(--parch)}
 /* l'accroche : la phrase qu'on retient, au-dessus de l'explication */
-.crew-h{margin:0 0 7px;font-size:14px;line-height:1.35;font-weight:600;
+.crew-h{flex:1;margin:0;font-size:14.5px;line-height:1.4;font-weight:600;
   letter-spacing:-.2px;color:var(--parch)}
-.crew-p{flex:1;font-size:13px;line-height:1.48;color:var(--lin)}
 .crew-go{display:inline-flex;align-items:center;gap:7px;margin-top:14px;
   font-size:13.5px;font-weight:700;color:var(--bronze)}
 .crew-go svg{width:14px;height:14px}
@@ -270,7 +268,7 @@ html[data-theme="light"] .t-crew{--bronze:#C5531C;--bronze-2:#E0631F;--bronze-rg
   -webkit-text-fill-color:transparent;color:transparent;
   animation:crewGrad 6s ease-in-out infinite}
 html[data-theme="light"] .crew-head h2 em{
-  background:linear-gradient(100deg,#B14512 0%,var(--bronze) 58%,var(--bronze-2) 100%);
+  background:linear-gradient(100deg,#8E3208 0%,var(--bronze) 50%,#F0873F 100%);
   background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
   -webkit-text-fill-color:transparent}
 @keyframes crewGrad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
@@ -293,7 +291,7 @@ html[data-theme="light"] .crew-c a{box-shadow:0 30px 70px -34px rgba(40,25,16,.3
 .crew-c[data-act] a{border-color:rgba(var(--bronze-rgb),.42);
   box-shadow:0 34px 80px -26px rgba(var(--bronze-rgb),.42)}
 
-.crew-vis{position:relative;display:block;height:50%;overflow:hidden;
+.crew-vis{position:relative;display:block;height:60%;overflow:hidden;
   background:radial-gradient(120% 84% at 50% 4%,rgba(var(--bronze-rgb),.20) 0%,transparent 70%)}
 .crew-vis img{position:absolute;left:50%;top:10px;transform:translateX(-50%);
   height:640px;width:auto;max-width:none}
@@ -313,9 +311,8 @@ html[data-theme="light"] .crew-c a{box-shadow:0 30px 70px -34px rgba(40,25,16,.3
 .crew-txt b{margin:7px 0 6px;font-size:18.5px;line-height:1.15;letter-spacing:-.6px;
   font-weight:800;color:var(--parch)}
 /* l'accroche : la phrase qu'on retient, au-dessus de l'explication */
-.crew-h{margin:0 0 7px;font-size:14px;line-height:1.35;font-weight:600;
+.crew-h{flex:1;margin:0;font-size:14.5px;line-height:1.4;font-weight:600;
   letter-spacing:-.2px;color:var(--parch)}
-.crew-p{flex:1;font-size:13px;line-height:1.48;color:var(--lin)}
 .crew-go{display:inline-flex;align-items:center;gap:7px;margin-top:14px;
   font-size:13.5px;font-weight:700;color:var(--bronze)}
 .crew-go svg{width:14px;height:14px}
