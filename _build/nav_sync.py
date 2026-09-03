@@ -30,7 +30,7 @@ LINKS = [
     (u'Blog',               'blog.html'),
 ]
 
-PAGES = ['index.html', 'offres.html', 'fonctionnalites.html', 'comment-ca-marche.html',
+PAGES = ['index.html', 'offres.html', 'comment-ca-marche.html',
          'tarifs.html', 'pourquoi-talos.html', 'reserver.html',
          'espace-client.html', 'simulateur.html', 'blog.html']
 

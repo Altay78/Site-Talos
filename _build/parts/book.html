@@ -1,0 +1,147 @@
+<section class="t-book" id="reserver-top">
+  <div class="bk-in">
+
+    <!-- ══ GAUCHE · la valeur ══════════════════════════════════════════════ -->
+    <div class="bk-left">
+
+      <h1>Ayez une démo pratique <em>pour votre entreprise</em>.</h1>
+
+      <p class="bk-lede">
+        <span class="bk-lede-i" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16.9v2.6a2 2 0 0 1-2.2 2 18.6 18.6 0 0 1-8.1-2.9 18.3 18.3 0 0 1-5.6-5.6A18.6 18.6 0 0 1 2.2 4.8 2 2 0 0 1 4.2 2.6h2.6a2 2 0 0 1 2 1.7c.13.95.36 1.88.7 2.77a2 2 0 0 1-.46 2.1l-1.1 1.1a14.6 14.6 0 0 0 5.5 5.5l1.1-1.1a2 2 0 0 1 2.1-.45c.89.33 1.82.57 2.77.7a2 2 0 0 1 1.7 2z"/></svg>
+        </span>
+        <span><b>Une démo sur mesure.</b> Un de nos commerciaux vous explique la valeur de
+          Talos à travers les fonctionnalités et le plan qui correspond à votre entreprise.</span>
+      </p>
+
+      <!-- ── les chiffres : des faits vérifiables, pas des promesses ── -->
+      <div class="bk-facts">
+        <div class="bk-fact">
+          <b>1<sup>er</sup> sept. 2026</b>
+          <span>Toutes les entreprises doivent être en mesure de <strong>recevoir une facture
+            électronique</strong>.</span>
+          <cite>impots.gouv.fr</cite>
+        </div>
+        <div class="bk-fact">
+          <b>60 jours</b>
+          <span>Le délai de paiement maximal entre professionnels, <strong>45 jours fin de
+            mois</strong> si c'est écrit au contrat.</span>
+          <cite>Code de commerce, art. L441-10</cite>
+        </div>
+        <div class="bk-fact">
+          <b>40 €</b>
+          <span>L'indemnité forfaitaire due <strong>de plein droit sur chaque facture en
+            retard</strong>. Encore faut-il la réclamer.</span>
+          <cite>Code de commerce, art. D441-5</cite>
+        </div>
+        <div class="bk-fact">
+          <b>+30 artisans</b>
+          <span>accompagnés, <strong>mise en place incluse</strong> — vous n'avez rien à
+            paramétrer.</span>
+          <cite>Talos</cite>
+        </div>
+      </div>
+
+      <!-- ── l'équipe ── -->
+      <figure class="bk-team">
+        <figcaption>
+          <b>Découvrez vite notre équipe.</b>
+          <span>Cinq assistants qui travaillent pendant que vous êtes sur le chantier :
+            devis, facturation, trésorerie, relation client, administratif. Pendant la démo,
+            on branche ceux dont vous avez besoin sur vos vrais documents.</span>
+        </figcaption>
+        <img src="perso/equipe-groupe.webp" width="1200" height="661" loading="lazy"
+             decoding="async" alt="Les cinq assistants Talos">
+      </figure>
+
+    </div>
+
+    <!-- ══ DROITE · le formulaire ══════════════════════════════════════════ -->
+    <div class="bk-right">
+      <form class="bk-form" id="bookForm" novalidate>
+
+        <div class="fld">
+          <label for="bkCompany">Nom de l'entreprise</label>
+          <input id="bkCompany" name="entreprise" type="text" required
+                 autocomplete="organization" placeholder="Bâtiments Mercier">
+        </div>
+
+        <div class="fld-row">
+          <div class="fld">
+            <label for="bkName">Nom et prénom</label>
+            <input id="bkName" name="nom" type="text" required
+                   autocomplete="name" placeholder="David Mercier">
+          </div>
+          <div class="fld">
+            <label for="bkTel">Téléphone</label>
+            <input id="bkTel" name="tel" type="tel" required
+                   autocomplete="tel" inputmode="tel" placeholder="06 12 34 56 78">
+          </div>
+        </div>
+
+        <div class="fld">
+          <label for="bkEmail">E-mail professionnel</label>
+          <input id="bkEmail" name="email" type="email" required
+                 autocomplete="email" inputmode="email" placeholder="david@batiments-mercier.fr">
+        </div>
+
+        <div class="fld">
+          <label id="bkPaysLb">Pays</label>
+          <div class="dd" data-dd="pays" data-default="France"></div>
+        </div>
+
+        <div class="fld-row">
+          <div class="fld">
+            <label for="bkSite">Site de la société <span class="opt">facultatif</span></label>
+            <input id="bkSite" name="site" type="url" autocomplete="url"
+                   placeholder="https://…">
+          </div>
+          <div class="fld">
+            <label id="bkTailleLb">Taille de la société</label>
+            <div class="dd" data-dd="taille"></div>
+          </div>
+        </div>
+
+        <div class="fld">
+          <label id="bkSpecLb">Spécialisation</label>
+          <div class="dd" data-dd="spec"></div>
+        </div>
+
+        <div class="fld">
+          <label for="bkPain">Problème rencontré <span class="opt">facultatif</span></label>
+          <textarea id="bkPain" name="probleme" rows="4"
+                    placeholder="Ce qui vous mange vos soirées : les devis, les relances, la boîte mail…"></textarea>
+        </div>
+
+        <!-- ── les assistants souhaités ── -->
+        <div class="fld">
+          <label id="bkAgLb">Assistants souhaités
+            <span class="opt">facultatif, mais ça nous aide</span></label>
+          <div class="bk-agents" id="bkAgents" role="group" aria-labelledby="bkAgLb"></div>
+          <p class="bk-agents-hint" id="bkAgentsHint">Aucun sélectionné — on en parlera ensemble.</p>
+        </div>
+
+        <label class="bk-rgpd">
+          <input type="checkbox" id="bkOk" required>
+          <span>J'accepte d'être recontacté au sujet de ma demande. Mes données servent
+            uniquement à préparer et tenir ce rendez-vous —
+            <a href="confidentialite.html">politique de confidentialité</a>.</span>
+        </label>
+
+        <button class="bk-go" id="bkGo" type="submit">
+          <span class="bk-go-lb" id="bkGoLb">Parler à Talos</span>
+          <span class="bk-go-ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </button>
+
+        <p class="bk-note" id="bkNote" role="status">
+          30 minutes, en visio, sans engagement. Vous choisissez votre créneau à l'étape
+          suivante — le formulaire part avec vous, rien à ressaisir.
+        </p>
+
+      </form>
+    </div>
+
+  </div>
+</section>

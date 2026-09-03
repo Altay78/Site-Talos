@@ -11,13 +11,26 @@
       "source": "/espace-client",
       "destination": "https://app.talos-ai.tech",
       "permanent": false
+    },
+    {
+      "source": "/fonctionnalites.html",
+      "destination": "/offres.html",
+      "permanent": true
+    },
+    {
+      "source": "/fonctionnalites",
+      "destination": "/offres.html",
+      "permanent": true
     }
   ],
   "headers": [
     {
       "source": "/(.*).(css|js|svg|png|jpg|jpeg|webp|woff2)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=604800, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, must-revalidate"
+        }
       ]
     }
   ]

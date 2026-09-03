@@ -1,0 +1,172 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAGE RÉSERVER — deux colonnes : la valeur à gauche, le formulaire à droite.
+
+   Le gabarit vient du modèle « demande de démo » des éditeurs SaaS : on lit
+   d'abord pourquoi on remplit, on remplit ensuite. Le trait vertical du milieu
+   sépare sans cloisonner. Tokens de shell.css : aucune couleur en dur.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.t-book{background:var(--ink);color:var(--parch);font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;position:relative;overflow:hidden;
+  padding:36px 0 88px}
+.t-book::before{content:"";position:absolute;inset:auto auto 0 -12%;
+  width:64%;aspect-ratio:1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(var(--bronze-rgb),.16) 0%,transparent 64%);
+  transform:translateY(34%)}
+html[data-theme="light"] .t-book::before{background:radial-gradient(circle,rgba(var(--bronze-rgb),.10) 0%,transparent 64%)}
+
+.t-book .bk-in{position:relative;width:100%;max-width:1180px;margin:0 auto;padding:0 24px;
+  display:grid;grid-template-columns:1fr 1fr;gap:0}
+.t-book .bk-left{padding:16px 56px 40px 0;border-right:1px solid var(--line)}
+.t-book .bk-right{padding:16px 0 0 56px}
+
+/* ── colonne gauche ───────────────────────────────────────────────────────── */
+.t-book h1{margin:0 0 20px;font-size:clamp(32px,3.6vw,46px);line-height:1.05;
+  letter-spacing:-1.8px;font-weight:800;color:var(--parch)}
+.t-book .bk-lede{display:grid;grid-template-columns:22px 1fr;gap:12px;
+  margin:0 0 36px;font-size:16px;line-height:1.65;color:var(--lin);max-width:46ch}
+.t-book .bk-lede b{color:var(--parch);font-weight:700}
+.t-book .bk-lede-i{display:flex;align-items:flex-start;justify-content:center;
+  padding-top:3px;color:var(--bronze)}
+.t-book .bk-lede-i svg{width:17px;height:17px}
+
+.t-book .bk-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.t-book .bk-fact{padding:22px 24px 20px;
+  border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.t-book .bk-fact b{display:block;margin:0 0 8px;font-size:26px;line-height:1.05;
+  letter-spacing:-1px;font-weight:800;color:var(--parch)}
+.t-book .bk-fact b sup{font-size:.5em;vertical-align:super;letter-spacing:0}
+.t-book .bk-fact span{display:block;font-size:14px;line-height:1.55;color:var(--lin)}
+.t-book .bk-fact strong{color:var(--parch);font-weight:600}
+.t-book .bk-fact cite{display:block;margin-top:10px;font-family:var(--mono);
+  font-style:normal;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--bronze)}
+
+.t-book .bk-team{margin:40px 0 0}
+.t-book .bk-team figcaption b{display:block;margin:0 0 8px;font-size:20px;
+  letter-spacing:-.6px;font-weight:800;color:var(--parch)}
+.t-book .bk-team figcaption span{display:block;font-size:14.5px;line-height:1.6;
+  color:var(--lin);max-width:48ch}
+.t-book .bk-team img{display:block;width:100%;height:auto;margin-top:6px;
+  -webkit-mask-image:linear-gradient(180deg,#000 76%,transparent 99%);
+          mask-image:linear-gradient(180deg,#000 76%,transparent 99%)}
+
+/* ── le formulaire ────────────────────────────────────────────────────────── */
+.t-book .bk-form{display:flex;flex-direction:column;gap:18px}
+.t-book .fld{display:flex;flex-direction:column;gap:8px;min-width:0}
+.t-book .fld-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.t-book .fld label{font-size:13.5px;font-weight:600;letter-spacing:-.1px;color:var(--parch)}
+.t-book .fld .opt{margin-left:6px;font-weight:400;color:var(--lin)}
+.t-book .fld input,.t-book .fld textarea{width:100%;min-height:48px;padding:13px 16px;
+  border-radius:14px;font-family:var(--sans);font-size:15px;color:var(--parch);
+  background:var(--ink-2);border:1px solid var(--line-2);
+  transition:border-color .2s var(--e),background .2s var(--e)}
+.t-book .fld textarea{min-height:auto;line-height:1.55;resize:vertical}
+.t-book .fld input::placeholder,.t-book .fld textarea::placeholder{color:var(--lin);opacity:.8}
+.t-book .fld input:focus,.t-book .fld textarea:focus{outline:none;
+  border-color:rgba(var(--bronze-rgb),.55);background:var(--ink-3)}
+.t-book .fld input:focus-visible,.t-book .fld textarea:focus-visible{
+  outline:3px solid rgba(var(--bronze-rgb),.35);outline-offset:1px}
+.t-book .fld [aria-invalid="true"]{border-color:var(--rouille)}
+
+/* ── le menu déroulant : panneau arrondi qui glisse vers le bas ───────────── */
+.t-book .dd{position:relative}
+.t-book .dd-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  width:100%;min-height:48px;padding:13px 16px;border-radius:14px;cursor:pointer;
+  font-family:var(--sans);font-size:15px;text-align:left;color:var(--parch);
+  background:var(--ink-2);border:1px solid var(--line-2);
+  transition:border-color .2s var(--e),background .2s var(--e)}
+.t-book .dd-btn[data-empty="1"]{color:var(--lin)}
+.t-book .dd-btn:hover{border-color:rgba(var(--bronze-rgb),.4)}
+.t-book .dd-btn[aria-expanded="true"]{border-color:rgba(var(--bronze-rgb),.55);
+  background:var(--ink-3)}
+.t-book .dd-btn:focus-visible{outline:3px solid rgba(var(--bronze-rgb),.35);outline-offset:1px}
+.t-book .dd-chev{flex:0 0 auto;width:15px;height:15px;color:var(--lin);
+  transition:transform .28s var(--e)}
+.t-book .dd-btn[aria-expanded="true"] .dd-chev{transform:rotate(180deg)}
+
+.t-book .dd-pan{position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:40;
+  max-height:274px;overflow-y:auto;padding:6px;border-radius:18px;
+  background:var(--ink-2);border:1px solid var(--line-2);
+  box-shadow:0 24px 60px -24px rgba(0,0,0,.7);
+  /* entrée : glissement vers le bas, sortie plus courte que l'entrée */
+  opacity:0;transform:translateY(-10px) scale(.99);visibility:hidden;
+  transition:opacity .16s var(--e),transform .16s var(--e),visibility .16s}
+html[data-theme="light"] .t-book .dd-pan{box-shadow:0 24px 60px -28px rgba(40,25,16,.28)}
+.t-book .dd.on .dd-pan{opacity:1;transform:none;visibility:visible;
+  transition-duration:.26s}
+.t-book .dd-opt{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  width:100%;padding:11px 13px;border:0;border-radius:12px;cursor:pointer;
+  font-family:var(--sans);font-size:14.5px;text-align:left;color:var(--parch);
+  background:none;transition:background .16s var(--e)}
+.t-book .dd-opt:hover,.t-book .dd-opt.cur{background:rgba(var(--bronze-rgb),.12)}
+.t-book .dd-opt[aria-selected="true"]{color:var(--bronze);font-weight:600}
+.t-book .dd-opt svg{width:15px;height:15px;flex:0 0 auto;opacity:0}
+.t-book .dd-opt[aria-selected="true"] svg{opacity:1}
+
+/* ── les assistants : grisés tant qu'ils ne sont pas choisis ──────────────── */
+.t-book .bk-agents{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.t-book .ag{display:flex;flex-direction:column;align-items:center;gap:8px;
+  padding:12px 6px 11px;border-radius:16px;cursor:pointer;
+  background:var(--ink-2);border:1px solid var(--line);
+  transition:border-color .2s var(--e),background .2s var(--e),transform .2s var(--e)}
+.t-book .ag img{width:44px;height:44px;border-radius:50%;object-fit:cover;
+  filter:grayscale(1);opacity:.42;transition:filter .25s var(--e),opacity .25s var(--e)}
+.t-book .ag span{font-size:11px;line-height:1.25;text-align:center;color:var(--lin);
+  letter-spacing:-.1px}
+.t-book .ag:hover{transform:translateY(-2px);border-color:var(--line-2)}
+.t-book .ag[aria-pressed="true"]{border-color:rgba(var(--bronze-rgb),.5);
+  background:rgba(var(--bronze-rgb),.10)}
+.t-book .ag[aria-pressed="true"] img{filter:none;opacity:1}
+.t-book .ag[aria-pressed="true"] span{color:var(--parch);font-weight:600}
+.t-book .ag:focus-visible{outline:3px solid var(--bronze);outline-offset:2px}
+.t-book .bk-agents-hint{margin:2px 0 0;font-size:12.5px;color:var(--lin)}
+
+/* ── consentement et envoi ────────────────────────────────────────────────── */
+.t-book .bk-rgpd{display:grid;grid-template-columns:20px 1fr;gap:11px;align-items:start;
+  margin-top:2px;font-size:13px;line-height:1.55;color:var(--lin);cursor:pointer}
+.t-book .bk-rgpd input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--bronze);cursor:pointer}
+.t-book .bk-rgpd a{color:var(--bronze);text-decoration:underline;text-underline-offset:3px}
+
+/* le bouton s'étire à la largeur de son libellé : une seule pastille qui
+   s'allonge, pas un bouton qui saute d'une taille à l'autre */
+.t-book .bk-go{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  align-self:flex-start;min-height:52px;padding:0 26px;border:0;border-radius:100px;
+  cursor:pointer;font-family:var(--sans);font-size:15.5px;font-weight:700;
+  letter-spacing:-.2px;color:#fff;white-space:nowrap;
+  background:linear-gradient(100deg,var(--bronze-2),var(--bronze));
+  box-shadow:0 12px 32px -12px rgba(var(--bronze-rgb),.8);
+  transition:transform .25s var(--e),box-shadow .25s var(--e),opacity .2s var(--e)}
+.t-book .bk-go:hover{transform:translateY(-2px);
+  box-shadow:0 18px 40px -12px rgba(var(--bronze-rgb),.9)}
+.t-book .bk-go:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.t-book .bk-go:focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
+.t-book .bk-go-lb{display:inline-block;transition:opacity .18s var(--e)}
+.t-book .bk-go-ic{display:flex}
+.t-book .bk-go-ic svg{width:16px;height:16px}
+.t-book .bk-go.busy .bk-go-ic svg{animation:bkGoSpin 1s linear infinite}
+@keyframes bkGoSpin{to{transform:rotate(360deg)}}
+
+.t-book .bk-note{margin:0;font-size:12.5px;line-height:1.6;color:var(--lin);max-width:46ch}
+.t-book .bk-note.err{color:var(--rouille)}
+
+/* ═══ RESPONSIVE ═════════════════════════════════════════════════════════ */
+@media (max-width:960px){
+  .t-book{padding:24px 0 72px}
+  .t-book .bk-in{grid-template-columns:1fr}
+  .t-book .bk-left{padding:0 0 34px;border-right:0;border-bottom:1px solid var(--line)}
+  .t-book .bk-right{padding:34px 0 0}
+  .t-book .bk-team{margin-top:30px}
+}
+@media (max-width:560px){
+  .t-book .bk-in{padding:0 18px}
+  .t-book .bk-facts{grid-template-columns:1fr}
+  .t-book .fld-row{grid-template-columns:1fr}
+  .t-book .bk-agents{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .t-book .bk-go{align-self:stretch;width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .t-book .dd-pan,.t-book .dd-chev,.t-book .ag,.t-book .bk-go{transition:none}
+  .t-book .bk-go.busy .bk-go-ic svg{animation:none}
+}

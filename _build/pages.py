@@ -189,6 +189,21 @@ for _f, _md, _t, _d in legal.DOCS:
     page(_f, _t, _d, LEGAL_CSS, legal.corps(_f, _md, _t), u'')
 
 
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  6 · LA PAGE RÉSERVER — la valeur à gauche, le formulaire à droite.
+#      Le formulaire ouvre l'agenda Calendly déjà pré-rempli.
+# ═══════════════════════════════════════════════════════════════════════════
+
+page('reserver.html',
+     u"Réserver une démo — Talos | 30 minutes, sur vos vrais documents",
+     u"Une démo pratique pour votre entreprise : un commercial vous montre la valeur de "
+     u"Talos sur vos devis, vos factures et vos relances. 30 minutes, sans engagement.",
+     part('book.css'), part('book.html'), part('book.js'),
+     og_title=u"Réserver une démo Talos",
+     og_desc=u"30 minutes en visio, sur vos vrais documents. Sans carte bancaire, sans engagement.")
+
+
 # ═══════════════════════════════════════════════════════════════════════════
 #  4 · les menus de tout le site sont réalignés dans la foulée : sans ça les
 #      pages qu'on vient d'écrire n'auraient pas leur aria-current="page"

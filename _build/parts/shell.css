@@ -52,7 +52,7 @@ html[data-theme="light"]{
 
 /* 2 · tokens v2.css pour les sections (mêmes noms qu'en production) */
 .t-story,.t-how,.t-how2,.t-roi,.t-cat,.t-price,.t-faq,.t-ft,.t-feat,
-.t-simhero,.t-gains,.t-simcta,.t-blog,.t-404,.t-asst,.t-legal{
+.t-simhero,.t-gains,.t-simcta,.t-blog,.t-404,.t-asst,.t-legal,.t-book{
   --bronze:#E0631F; --bronze-2:#F4823E; --bronze-rgb:224,99,31;
   --antique:#A8451A; --antique-rgb:168,69,26;
   --olivier:#D69A66; --olivier-rgb:214,154,102;
@@ -68,7 +68,7 @@ html[data-theme="light"]{
 }
 html[data-theme="light"] .t-story,html[data-theme="light"] .t-how,html[data-theme="light"] .t-how2,html[data-theme="light"] .t-roi,html[data-theme="light"] .t-cat,html[data-theme="light"] .t-price,html[data-theme="light"] .t-faq,html[data-theme="light"] .t-ft,html[data-theme="light"] .t-feat,
 html[data-theme="light"] .t-simhero,html[data-theme="light"] .t-gains,html[data-theme="light"] .t-simcta,html[data-theme="light"] .t-blog,html[data-theme="light"] .t-404,html[data-theme="light"] .t-asst,
-html[data-theme="light"] .t-legal{
+html[data-theme="light"] .t-legal,html[data-theme="light"] .t-book{
   --bronze:#C5531C; --bronze-2:#E0631F; --bronze-rgb:197,83,28;
   --antique:#9A3F12; --antique-rgb:154,63,18;
   --olivier:#9A6A38; --olivier-rgb:154,106,56;
@@ -81,13 +81,14 @@ html[data-theme="light"] .t-legal{
 
 /* 3 · mot d'impact — signature obligatoire du brand book.
    Helvetica, jamais de serif italique (DA v2). */
-.t-story em,.t-how em,.t-how2 em,.t-roi em,.t-cat em,.t-price em,.t-faq em,.t-ft em,.t-feat em,.t-asst em{
+.t-story em,.t-how em,.t-how2 em,.t-roi em,.t-cat em,.t-price em,.t-faq em,.t-ft em,.t-feat em,.t-asst em,.t-book em{
   font-family:var(--sans);font-style:normal;font-weight:inherit;
   background:linear-gradient(100deg,#FFE7D4 0%,var(--bronze-2) 48%,var(--bronze) 100%);
   background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
   -webkit-text-fill-color:transparent;color:transparent;
   animation:daGradFlow 6s ease-in-out infinite}
-html[data-theme="light"] .t-story em,html[data-theme="light"] .t-how em,html[data-theme="light"] .t-how2 em,html[data-theme="light"] .t-roi em,html[data-theme="light"] .t-cat em,html[data-theme="light"] .t-price em,html[data-theme="light"] .t-faq em,html[data-theme="light"] .t-ft em,html[data-theme="light"] .t-feat em,html[data-theme="light"] .t-asst em,html[data-theme="light"] .t-legal em,html[data-theme="light"] .t-crew em,html[data-theme="light"] .t-price h1 em{
+html[data-theme="light"] .t-story em,html[data-theme="light"] .t-how em,html[data-theme="light"] .t-how2 em,html[data-theme="light"] .t-roi em,html[data-theme="light"] .t-cat em,html[data-theme="light"] .t-price em,html[data-theme="light"] .t-faq em,html[data-theme="light"] .t-ft em,html[data-theme="light"] .t-feat em,html[data-theme="light"] .t-asst em,html[data-theme="light"] .t-legal em,html[data-theme="light"] .t-crew em,
+html[data-theme="light"] .t-book em,html[data-theme="light"] .t-price h1 em{
   background:linear-gradient(100deg,#8E3208 0%,var(--bronze) 50%,#F0873F 100%);
   background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
   -webkit-text-fill-color:transparent}
