@@ -251,8 +251,13 @@ def sync(page):
     s = re.sub(r'© <span id="yr">2026</span>[^<]*', COPYRIGHT, s)
 
     # la finalité du formulaire d'inscription doit être annoncée sur place
-    if 'nform-rgpd' not in s and '</form>' in s:
-        s = s.replace('</form>', '</form>\n      ' + RGPD_NOTE, 1)
+    # On vise le formulaire du pied de page (class="nform"), pas le premier
+    # </form> de la page : sur l'accueil, c'est celui de la capture d'e-mail.
+    if 'nform-rgpd' not in s:
+        i = s.find('class="nform"')
+        j = s.find('</form>', i) if i >= 0 else -1
+        if j >= 0:
+            s = s[:j + 7] + '\n      ' + RGPD_NOTE + s[j + 7:]
 
     # 5 · la feuille du menu déroulant, une fois par page
     if '<div class="tnav-links">' in before:
