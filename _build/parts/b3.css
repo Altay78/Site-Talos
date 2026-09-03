@@ -1,0 +1,88 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   BLOC 3 · LA DOULEUR QUI DISPARAÎT + LE DÉTAIL DES MISSIONS
+   Gabarit Limova : à gauche la promesse et les deux boutons, à droite une
+   carte de synthèse, puis trois colonnes de missions dépliables en dessous.
+   Couleurs prises sur les tokens .t-asst — aucune valeur en dur.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.t-asst .b3{position:relative;overflow:hidden;padding:104px 0 110px;
+  border-top:1px solid var(--line)}
+.t-asst .b3::before{content:"";position:absolute;inset:-30% -20% auto auto;
+  width:58%;aspect-ratio:1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(var(--bronze-rgb),.16) 0%,transparent 62%)}
+html[data-theme="light"] .t-asst .b3::before{background:radial-gradient(circle,rgba(var(--bronze-rgb),.10) 0%,transparent 62%)}
+
+/* ── haut : promesse à gauche, carte de synthèse à droite ─────────────── */
+.t-asst .b3-top{position:relative;display:grid;grid-template-columns:1.08fr .92fr;
+  gap:56px;align-items:center;margin:0 0 74px}
+.t-asst .b3-tag{display:inline-flex;align-items:center;margin:0 0 24px;
+  padding:9px 17px;border-radius:10px;
+  background:rgba(var(--bronze-rgb),.12);border:1px solid rgba(var(--bronze-rgb),.32);
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--bronze)}
+.t-asst .b3 h2{margin:0 0 34px;font-size:clamp(34px,4.1vw,58px);line-height:1.03;
+  letter-spacing:-2.1px;font-weight:800;color:var(--parch);max-width:14ch}
+
+/* ── la carte de synthèse ─────────────────────────────────────────────── */
+.t-asst .synth{background:var(--ink-2);border:1px solid var(--line-2);
+  border-radius:26px;padding:32px 30px 28px;
+  box-shadow:0 30px 70px -34px rgba(0,0,0,.6)}
+html[data-theme="light"] .t-asst .synth{box-shadow:0 30px 70px -34px rgba(40,25,16,.24)}
+.t-asst .synth-h{display:flex;align-items:baseline;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;margin:0 0 22px;padding:0 0 20px;border-bottom:1px solid var(--line)}
+.t-asst .synth-h b{font-size:19px;font-weight:800;letter-spacing:-.5px;color:var(--parch)}
+.t-asst .synth-h span{font-family:var(--mono);font-size:12px;letter-spacing:.06em;
+  color:var(--bronze);white-space:nowrap}
+.t-asst .synth ol{list-style:none;margin:0;padding:0;display:grid;gap:14px;counter-reset:m}
+.t-asst .synth li{display:flex;align-items:center;gap:14px;counter-increment:m}
+.t-asst .synth li::before{content:counter(m,decimal-leading-zero);flex:0 0 auto;
+  width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+  border-radius:11px;background:rgba(var(--bronze-rgb),.12);
+  border:1px solid rgba(var(--bronze-rgb),.3);
+  font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--bronze)}
+.t-asst .synth li b{flex:1;font-size:15.5px;font-weight:600;letter-spacing:-.2px;color:var(--parch)}
+.t-asst .synth li i{font-family:var(--mono);font-style:normal;font-size:12px;color:var(--lin)}
+.t-asst .synth-f{margin:24px 0 0;padding:18px 0 0;border-top:1px solid var(--line);
+  font-size:14px;line-height:1.55;color:var(--lin)}
+.t-asst .synth-f b{color:var(--parch);font-weight:700}
+
+/* ── bas : trois colonnes de missions ─────────────────────────────────── */
+.t-asst .b3-grid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);
+  gap:26px;align-items:start}
+.t-asst .mh{display:flex;align-items:center;justify-content:center;gap:10px;
+  margin:0 0 16px;padding:12px 18px;border-radius:11px;
+  background:rgba(var(--bronze-rgb),.10);border:1px solid rgba(var(--bronze-rgb),.28);
+  font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--bronze);text-align:center;white-space:nowrap}
+.t-asst .mh .mh-n{opacity:.72;letter-spacing:.06em;font-weight:400}
+
+/* une fonctionnalité : pastille fermée, rectangle arrondi une fois ouverte */
+.t-asst .f{margin:0 0 10px;border-radius:100px;background:var(--ink-2);
+  border:1px solid var(--line);
+  transition:border-color .25s var(--e),border-radius .25s var(--e),background .25s var(--e)}
+.t-asst .f:hover{border-color:rgba(var(--bronze-rgb),.42)}
+.t-asst .f[open]{border-radius:22px;border-color:rgba(var(--bronze-rgb),.42);background:var(--ink-3)}
+.t-asst .f summary{list-style:none;cursor:pointer;min-height:56px;
+  padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  font-size:15.5px;font-weight:600;letter-spacing:-.2px;color:var(--parch)}
+.t-asst .f summary::-webkit-details-marker{display:none}
+.t-asst .f summary:focus-visible{outline:3px solid var(--bronze);outline-offset:2px;border-radius:100px}
+.t-asst .f-chev{flex:0 0 auto;width:15px;height:15px;color:var(--lin);
+  transition:transform .3s var(--e),color .25s var(--e)}
+.t-asst .f[open] .f-chev{transform:rotate(180deg);color:var(--bronze)}
+.t-asst .f p{margin:0;padding:0 22px 20px;font-size:14.5px;line-height:1.58;color:var(--lin)}
+
+/* ═══ RESPONSIVE ═════════════════════════════════════════════════════════ */
+@media (max-width:960px){
+  .t-asst .b3{padding:76px 0 84px}
+  .t-asst .b3-top{grid-template-columns:1fr;gap:38px;margin:0 0 52px}
+  .t-asst .b3 h2{max-width:none}
+  .t-asst .b3-grid{grid-template-columns:1fr;gap:34px}
+}
+@media (max-width:560px){
+  .t-asst .synth{padding:26px 22px 24px;border-radius:22px}
+  .t-asst .f summary{padding:15px 20px;font-size:15px}
+}
+@media (prefers-reduced-motion:reduce){
+  .t-asst .f,.t-asst .f-chev{transition:none}
+}

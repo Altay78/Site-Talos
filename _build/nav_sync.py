@@ -22,7 +22,7 @@ WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/'
 
 # (libellé, href) — l'ordre fait foi partout
 LINKS = [
-    (u'Fonctionnalités',    'fonctionnalites.html'),
+    (u'Offres',             'offres.html'),
     (u'Comment ça marche',  'comment-ca-marche.html'),
     (u'Tarifs',             'tarifs.html'),
     (u'Simulateur',         'simulateur.html'),
@@ -30,13 +30,16 @@ LINKS = [
     (u'Blog',               'blog.html'),
 ]
 
-PAGES = ['index.html', 'fonctionnalites.html', 'comment-ca-marche.html',
+PAGES = ['index.html', 'offres.html', 'fonctionnalites.html', 'comment-ca-marche.html',
          'tarifs.html', 'pourquoi-talos.html', 'reserver.html',
          'espace-client.html', 'simulateur.html', 'blog.html']
 
-LOGO_SVG = ('<svg viewBox="0 16 62 92" width="18" height="27" aria-hidden="true">'
-            '<g fill="currentColor"><rect x="0" y="18" width="62" height="14"/>'
-            '<path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z"/></g></svg>')
+LOGO_SVG = ('<svg viewBox="253 302 472 550" width="23" height="27" aria-hidden="true">'
+            '<mask id="navsync-marteau" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550">'
+            '<rect x="253" y="302" width="472" height="550" fill="#fff"/>'
+            '<path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#000" stroke="#000" stroke-width="32" stroke-linejoin="round"/></mask>'
+            '<g mask="url(#navsync-marteau)"><path d="M 494 536 L 642 536 L 399 852 L 459 684 Z" fill="#C75C24"/></g>'
+            '<path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="currentColor"/></svg>')
 
 
 # Bascule de thème du menu mobile : sous 600px la pastille de la barre est
@@ -55,12 +58,97 @@ M_THEME = (
     u'<span class="lbl-light">Mode sombre</span></button>')
 
 
+# ── Le menu « Offres » ────────────────────────────────────────────────────
+# Au survol (ou au focus clavier) il déploie l'équipe : un visage, un nom,
+# une mission. Aucun <div> ici — sync() découpe la barre jusqu'au premier
+# </div> rencontré, un conteneur de plus casserait le remplacement.
+EQUIPE = [
+    ('commercial',    u'Assistant commercial',    u'Devis, signature, relances',    'assistant-commercial.html'),
+    ('tresorerie',    u'Assistante trésorerie',   u'Impayés et prévision',          'assistant-tresorerie.html'),
+    ('client',        u'Assistante client',       u'Réponses et rendez-vous',       'assistant-client.html'),
+    ('facturation',   u'Assistant facturation',   u'Factures conformes 2026',       'reserver.html'),
+    ('administratif', u'Assistant administratif', u'Tri des mails et classement',   'reserver.html'),
+]
+BIENTOT = set()   # les cinq assistants sont disponibles
+
+CHEV = (u'<svg class="tnav-chev" width="11" height="11" viewBox="0 0 24 24" fill="none" '
+        u'stroke="currentColor" stroke-width="2.6" stroke-linecap="round" '
+        u'stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg>')
+FLECHE = (u'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+          u'stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+          u'<path d="M5 12h14M13 6l6 6-6 6"/></svg>')
+
+
+def offres_html(page):
+    items = []
+    for slug, nom, mission, href in EQUIPE:
+        soon = (u'<i class="tnav-soon">Bientôt</i>' if slug in BIENTOT else u'')
+        items.append(
+            u'<a class="tnav-ag" href="%s">'
+            u'<img src="perso/avatar-%s.webp" alt="" width="36" height="36" loading="lazy" decoding="async">'
+            u'<b>%s%s</b><small>%s</small></a>' % (href, slug, nom, soon, mission))
+    return (u'<span class="tnav-drop">'
+            u'<a class="tnav-drop-t" href="offres.html"%s>Offres%s</a>'
+            u'<span class="tnav-pan">%s'
+            u'<a class="tnav-pan-all" href="offres.html">Voir toutes les offres%s</a>'
+            u'</span></span>' % (cur('offres.html', page), CHEV, u''.join(items), FLECHE))
+
+
+# La feuille du menu est injectée dans chaque page : index.html embarque sa
+# propre copie compilée du style, elle ne lit pas parts/shell.css.
+PANEL_CSS = u"""<style id="tnav-drop-css">
+.tnav-drop{position:relative;display:inline-flex}
+.tnav-drop-t{display:inline-flex;align-items:center;gap:5px}
+.tnav-chev{transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.tnav-drop:hover .tnav-chev,.tnav-drop:focus-within .tnav-chev{transform:rotate(180deg)}
+.tnav-pan{position:absolute;top:100%;left:-18px;z-index:60;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;
+  width:min(560px,86vw);margin-top:16px;padding:10px;border-radius:20px;
+  background:color-mix(in oklab,var(--surface-tint) 96%,transparent);
+  border:1px solid var(--border);box-shadow:0 24px 60px rgba(0,0,0,.42);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:opacity .22s ease,transform .22s cubic-bezier(.16,1,.3,1),visibility .22s}
+html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
+/* la zone de survol court jusqu'au panneau : sans ça le curseur le perd */
+.tnav-drop::after{content:"";position:absolute;top:100%;left:0;right:0;height:18px}
+.tnav-drop:hover .tnav-pan,.tnav-drop:focus-within .tnav-pan{
+  opacity:1;visibility:visible;transform:translateY(0)}
+.tnav-ag{display:grid;grid-template-columns:36px 1fr;column-gap:11px;
+  align-items:center;padding:9px 11px;border-radius:14px;
+  transition:background .2s ease}
+.tnav-ag:hover{background:color-mix(in oklab,var(--ink) 7%,transparent)}
+.tnav-ag::after{display:none}
+.tnav-ag img{grid-row:1/3;width:36px;height:36px;border-radius:50%;object-fit:cover;
+  background:color-mix(in oklab,var(--ink) 8%,transparent)}
+.tnav-ag b{display:flex;align-items:center;gap:7px;
+  font-size:14px;font-weight:600;letter-spacing:-.2px;color:var(--ink)}
+.tnav-ag small{font-size:12.5px;color:var(--ink-soft);letter-spacing:-.1px}
+.tnav-soon{font-style:normal;font-size:10px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;padding:2px 7px;border-radius:100px;
+  color:var(--indigo);border:1px solid color-mix(in oklab,var(--indigo) 40%,transparent)}
+.tnav-pan-all{grid-column:1/-1;display:inline-flex;align-items:center;justify-content:center;
+  gap:8px;margin-top:4px;padding:11px;border-radius:14px;
+  background:color-mix(in oklab,var(--ink) 5%,transparent);
+  font-size:13.5px;font-weight:600;color:var(--ink)}
+.tnav-pan-all::after{display:none}
+.tnav-pan-all:hover{background:color-mix(in oklab,var(--indigo) 14%,transparent);color:var(--indigo)}
+@media (max-width:1060px){.tnav-pan{display:none}}
+@media (prefers-reduced-motion:reduce){.tnav-pan,.tnav-chev{transition:none}}
+</style>"""
+
 def cur(href, page):
     return u' aria-current="page"' if href == page else u''
 
 
 def links_html(page):
-    return u''.join(u'<a href="%s"%s>%s</a>' % (h, cur(h, page), t) for t, h in LINKS)
+    out = []
+    for t, h in LINKS:
+        if h == 'offres.html':
+            out.append(offres_html(page))
+        else:
+            out.append(u'<a href="%s"%s>%s</a>' % (h, cur(h, page), t))
+    return u''.join(out)
 
 
 def menu_html(page):
@@ -109,6 +197,12 @@ def sync(page):
                    s, flags=re.S)
     if n:
         notes.append('pied')
+
+    # 4 · la feuille du menu déroulant, une fois par page
+    if '<div class="tnav-links">' in before:
+        s = re.sub(r'<style id="tnav-drop-css">.*?</style>', '', s, flags=re.S)
+        s = s.replace('</head>', PANEL_CSS + '</head>', 1)
+        notes.append('menu offres')
 
     if not notes:
         return page, 'AUCUN REPÈRE — à traiter à la main'

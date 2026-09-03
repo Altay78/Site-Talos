@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<script>(function(){try{var t=localStorage.getItem('talos-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assistant commercial — Talos | Vos devis partent le soir même</title>
+<meta name="author" content="Talos">
+<meta name="description" content="L'assistant commercial de Talos chiffre vos devis depuis un mail, un vocal ou une photo, les fait signer avec acompte, puis les relance jusqu'à la réponse.">
+<meta property="og:title" content="Assistant commercial — Talos | Vos devis partent le soir même">
+<meta property="og:description" content="L'assistant commercial de Talos chiffre vos devis depuis un mail, un vocal ou une photo, les fait signer avec acompte, puis les relance jusqu'à la réponse.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   RÉINITIALISATION — les pages composées n'embarquent pas l'export
+   Tailwind d'index.html : elles ont besoin de leur propre base.
+   ══════════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;border:0 solid}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--background);color:var(--foreground);
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;line-height:1.6;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+h1,h2,h3,h4{font-size:inherit;font-weight:700;letter-spacing:-.035em}
+ul,ol{list-style:none}
+[hidden]{display:none !important}
+a{color:inherit;text-decoration:none}
+img,svg,video,canvas{display:block;max-width:100%}
+img,video{height:auto}
+button,input,select,textarea{font:inherit;letter-spacing:inherit;color:inherit;
+  background:none;border-radius:0}
+button{cursor:pointer}
+table{border-collapse:collapse;text-indent:0}
+:where(a,button,input,textarea,select):focus-visible{outline:2px solid var(--indigo);
+  outline-offset:2px}
+/* la barre flotte au-dessus : sans marge, une ancre cadre sous elle */
+main > section,main > footer{scroll-margin-top:110px}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   TOKENS DA — repris de talos-site/v2.css (palette « Braise »)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* 1 · alias attendus par l'export Tailwind du hero.
+   L'export nomme --ink le TEXTE, v2.css nomme --ink le FOND :
+   les deux jeux cohabitent, chacun dans sa portée. */
+:root{
+  --ink:#F6EEE7; --ink-soft:#AB9F95;
+  --background:#140F0C; --foreground:#F6EEE7;
+  --surface:#140F0C; --surface-tint:#1C1611; --midnight:#140F0C;
+  --border:rgba(246,238,231,.08);
+  --indigo:#E0631F; --indigo-light:#F4823E;
+}
+html[data-theme="light"]{
+  --ink:#1C1310; --ink-soft:#6E6058;
+  --background:#FBF6F2; --foreground:#1C1310;
+  --surface:#FBF6F2; --surface-tint:#F4EBE3; --midnight:#1C1310;
+  --border:rgba(40,25,16,.12);
+  --indigo:#C5531C; --indigo-light:#E0631F;
+}
+
+/* 2 · tokens v2.css pour les sections (mêmes noms qu'en production) */
+.t-story,.t-how,.t-how2,.t-roi,.t-cat,.t-price,.t-faq,.t-ft,.t-feat,
+.t-simhero,.t-gains,.t-simcta,.t-blog,.t-404,.t-asst{
+  --bronze:#E0631F; --bronze-2:#F4823E; --bronze-rgb:224,99,31;
+  --antique:#A8451A; --antique-rgb:168,69,26;
+  --olivier:#D69A66; --olivier-rgb:214,154,102;
+  --rouille:#C0432A; --rouille-rgb:192,67,42;
+  --parch:#F6EEE7; --parch-rgb:246,238,231;
+  --lin:#AB9F95;
+  --ink:#140F0C; --ink-2:#1C1611; --ink-3:#241B15; --graphite:#352A20;
+  --line:rgba(246,238,231,.08); --line-2:rgba(246,238,231,.15);
+  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --r:16px; --maxw:1180px; --e:cubic-bezier(.16,1,.3,1);
+  color:var(--parch);
+}
+html[data-theme="light"] .t-story,html[data-theme="light"] .t-how,html[data-theme="light"] .t-how2,html[data-theme="light"] .t-roi,html[data-theme="light"] .t-cat,html[data-theme="light"] .t-price,html[data-theme="light"] .t-faq,html[data-theme="light"] .t-ft,html[data-theme="light"] .t-feat,
+html[data-theme="light"] .t-simhero,html[data-theme="light"] .t-gains,html[data-theme="light"] .t-simcta,html[data-theme="light"] .t-blog,html[data-theme="light"] .t-404,html[data-theme="light"] .t-asst{
+  --bronze:#C5531C; --bronze-2:#E0631F; --bronze-rgb:197,83,28;
+  --antique:#9A3F12; --antique-rgb:154,63,18;
+  --olivier:#9A6A38; --olivier-rgb:154,106,56;
+  --rouille:#B0432A; --rouille-rgb:176,67,42;
+  --parch:#1C1310; --parch-rgb:28,19,16;
+  --lin:#6E6058;
+  --ink:#FBF6F2; --ink-2:#FFFFFF; --ink-3:#F4EBE3; --graphite:#E7DACE;
+  --line:rgba(40,25,16,.12); --line-2:rgba(40,25,16,.22);
+}
+
+/* 3 · mot d'impact — signature obligatoire du brand book.
+   Helvetica, jamais de serif italique (DA v2). */
+.t-story em,.t-how em,.t-how2 em,.t-roi em,.t-cat em,.t-price em,.t-faq em,.t-ft em,.t-feat em,.t-asst em{
+  font-family:var(--sans);font-style:normal;font-weight:inherit;
+  background:linear-gradient(100deg,#FFE7D4 0%,var(--bronze-2) 48%,var(--bronze) 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  animation:daGradFlow 6s ease-in-out infinite}
+html[data-theme="light"] .t-story em,html[data-theme="light"] .t-how em,html[data-theme="light"] .t-roi em,html[data-theme="light"] .t-cat em,html[data-theme="light"] .t-price em,html[data-theme="light"] .t-faq em,html[data-theme="light"] .t-ft em,html[data-theme="light"] .t-feat em,html[data-theme="light"] .t-asst em{
+  background:linear-gradient(100deg,#B14512 0%,var(--bronze) 58%,var(--bronze-2) 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent}
+@keyframes daGradFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@media (prefers-reduced-motion:reduce){.t-story em,.t-how em,.t-how2 em,.t-roi em,.t-cat em,.t-price em,.t-faq em,.t-ft em{animation:none}}
+
+/* ═══ BARRE DE NAVIGATION — pilule flottante ═══ */
+/* le wrapper garde la hauteur dans le flux : la barre est fixed, sans lui
+   le contenu du hero remonterait sous la barre */
+.tnav-wrap{position:relative;z-index:60;height:92px}
+.tnav{position:fixed;top:14px;left:50%;transform:translateX(-50%);
+  width:calc(100% - 32px);max-width:1400px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:12px 12px 12px 22px;border-radius:100px;
+  /* le conteneur doit se détacher aussi bien de la photo du hero que des
+     sections plates : teinte quasi opaque + filet plus marqué que --border */
+  background:color-mix(in oklab,var(--surface-tint) 90%,transparent);
+  border:1px solid color-mix(in oklab,var(--ink) 13%,transparent);
+  box-shadow:0 10px 34px rgba(0,0,0,.34);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  transition:padding .3s cubic-bezier(.16,1,.3,1),box-shadow .3s ease,background .3s ease}
+html[data-theme="light"] .tnav{
+  background:color-mix(in oklab,#fff 88%,transparent);
+  border-color:rgba(40,25,16,.1);
+  box-shadow:0 1px 2px rgba(40,25,16,.05),0 14px 38px rgba(40,25,16,.1)}
+.tnav.scrolled{padding-top:8px;padding-bottom:8px;
+  box-shadow:0 14px 40px rgba(0,0,0,.4)}
+html[data-theme="light"] .tnav.scrolled{box-shadow:0 14px 40px rgba(40,25,16,.12)}
+
+.tnav-logo{display:inline-flex;align-items:center;gap:9px;flex:0 0 auto;
+  text-decoration:none;color:var(--ink)}
+.tnav-logo span{font-size:19px;font-weight:700;letter-spacing:-.5px}
+
+.tnav-links{display:flex;align-items:center;gap:24px;min-width:0}
+.tnav-links a{position:relative;color:var(--ink);text-decoration:none;
+  font-size:14.5px;font-weight:500;letter-spacing:-.2px;white-space:nowrap;
+  transition:color .25s ease}
+.tnav-links a::after{content:'';position:absolute;left:0;right:0;bottom:-6px;height:1.5px;
+  border-radius:2px;background:var(--indigo);transform:scaleX(0);transform-origin:left;
+  transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.tnav-links a:hover{color:var(--indigo)}
+.tnav-links a:hover::after{transform:scaleX(1)}
+.tnav-links a[aria-current="page"]{color:var(--indigo)}
+.tnav-links a[aria-current="page"]::after{transform:scaleX(1)}
+.tnav-menu a[aria-current="page"]{color:var(--indigo)}
+
+.tnav-act{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.tnav-esp{display:inline-flex;align-items:center;gap:7px;color:var(--ink);text-decoration:none;
+  font-size:14.5px;font-weight:500;letter-spacing:-.2px;white-space:nowrap;
+  transition:opacity .25s ease}
+.tnav-esp:hover{opacity:.62}
+.tnav-cta{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 24px;
+  border-radius:100px;background:var(--indigo);color:#fff;text-decoration:none;
+  font-size:14.5px;font-weight:700;letter-spacing:-.2px;white-space:nowrap;
+  transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s ease,background .3s ease}
+.tnav-cta:hover{background:var(--indigo-light);transform:translateY(-2px);
+  box-shadow:0 14px 32px color-mix(in oklab,var(--indigo) 42%,transparent)}
+.tnav .theme-toggle{width:40px;height:40px;border-radius:50%;flex:0 0 auto;
+  display:grid;place-items:center}
+
+/* ── burger + panneau mobile ── */
+.tnav-burger{display:none;width:42px;height:42px;flex:0 0 auto;border-radius:50%;
+  align-items:center;justify-content:center;gap:4.5px;flex-direction:column;
+  background:none;border:1px solid var(--border);color:var(--ink);cursor:pointer}
+.tnav-burger i{display:block;width:16px;height:1.8px;border-radius:2px;background:currentColor;
+  transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .2s ease}
+.tnav-wrap.open .tnav-burger i:nth-child(1){transform:translateY(6.3px) rotate(45deg)}
+.tnav-wrap.open .tnav-burger i:nth-child(2){opacity:0}
+.tnav-wrap.open .tnav-burger i:nth-child(3){transform:translateY(-6.3px) rotate(-45deg)}
+
+.tnav-menu{position:fixed;top:84px;left:50%;transform:translateX(-50%) translateY(-10px);
+  width:calc(100% - 32px);max-width:1400px;z-index:59;
+  display:flex;flex-direction:column;gap:2px;padding:14px;border-radius:26px;
+  background:var(--surface-tint);border:1px solid var(--border);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .3s ease,transform .35s cubic-bezier(.16,1,.3,1),visibility 0s linear .3s}
+html[data-theme="light"] .tnav-menu{background:#fff;
+  box-shadow:0 18px 50px rgba(40,25,16,.14)}
+.tnav-wrap.open .tnav-menu{opacity:1;visibility:visible;pointer-events:auto;
+  transform:translateX(-50%) translateY(0);transition-delay:0s}
+.tnav-menu a{padding:14px 16px;border-radius:14px;color:var(--ink);text-decoration:none;
+  font-size:16px;font-weight:600;letter-spacing:-.2px}
+.tnav-menu a:hover{background:color-mix(in oklab,var(--indigo) 8%,transparent)}
+.tnav-menu .m-esp{margin-top:8px;border-top:1px solid var(--border);border-radius:0;padding-top:18px}
+.tnav-menu .m-cta{margin-top:8px;text-align:center;background:var(--indigo);color:#fff;
+  border-radius:100px;padding:15px 16px;font-weight:700}
+.tnav-menu .m-cta:hover{background:var(--indigo-light)}
+/* bascule de thème du menu mobile : sous 600px la pastille de la barre n'a
+   plus la place de s'afficher, le réglage ne vivait alors nulle part */
+.tnav-menu .m-theme{display:none;align-items:center;gap:10px;width:100%;
+  padding:14px 16px;border:0;border-radius:14px;background:none;color:var(--ink);
+  font-family:inherit;font-size:16px;font-weight:600;letter-spacing:-.2px;
+  text-align:left;cursor:pointer}
+.tnav-menu .m-theme:hover{background:color-mix(in oklab,var(--indigo) 8%,transparent)}
+/* l'icône et le libellé annoncent le thème vers lequel on bascule */
+.tnav-menu .m-theme .moon,.tnav-menu .m-theme .lbl-light{display:none}
+.tnav-menu .m-theme .sun{display:block}
+html[data-theme="light"] .tnav-menu .m-theme .moon{display:block}
+html[data-theme="light"] .tnav-menu .m-theme .sun{display:none}
+html[data-theme="light"] .tnav-menu .m-theme .lbl-light{display:inline}
+html[data-theme="light"] .tnav-menu .m-theme .lbl-dark{display:none}
+
+/* la barre flotte au-dessus : sans marge, un lien d'ancre cadre sous elle */
+main > section,main > footer{scroll-margin-top:110px}
+
+@media (max-width:1240px){
+  .tnav-links,.tnav-esp{display:none}
+  .tnav-burger{display:flex}
+}
+@media (max-width:600px){
+  .tnav-wrap{height:80px}
+  .tnav{top:10px;width:calc(100% - 20px);padding:9px 9px 9px 16px}
+  .tnav-logo span{font-size:17px}
+  .tnav-cta{min-height:40px;padding:0 16px;font-size:13.5px}
+  .tnav .theme-toggle{display:none}
+  .tnav-menu .m-theme{display:flex}
+  .tnav-menu{top:74px;width:calc(100% - 20px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .tnav,.tnav-cta,.tnav-links a::after,.tnav-burger i,.tnav-menu{transition:none}
+  .tnav-cta:hover{transform:none}
+}
+
+
+/*  section-footer.html  */
+.t-ft{position:relative;overflow:hidden;padding:80px 40px 36px;color:#F6EEE7;
+  background:#120D0A}
+.t-ft::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(246,238,231,.16) 1px,transparent 1px);
+  background-size:14px 14px;
+  -webkit-mask-image:radial-gradient(ellipse 85% 75% at 30% 105%,#000 0%,transparent 72%);
+          mask-image:radial-gradient(ellipse 85% 75% at 30% 105%,#000 0%,transparent 72%)}
+.t-ft::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 22% 118%,rgba(224,99,31,.85) 0%,
+    rgba(199,84,26,.4) 30%,rgba(60,32,16,.28) 55%,transparent 76%)}
+.t-ft .ft-in{position:relative;z-index:2;max-width:1280px;margin:0 auto}
+.t-ft .ft-top{display:grid;grid-template-columns:1.1fr repeat(3,minmax(0,.72fr));gap:32px;align-items:start}
+.t-ft .brand{display:flex;align-items:center;gap:16px}
+.t-ft .brand svg{height:46px;flex:0 0 auto}
+.t-ft .brand .word{font-size:clamp(20px,2vw,26px);font-weight:800;letter-spacing:.5px;
+  text-transform:uppercase;line-height:1.12}
+.t-ft .col h4{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(246,238,231,.55);font-weight:700;margin-bottom:18px}
+.t-ft .col ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+.t-ft .col a{color:#F6EEE7;text-decoration:none;font-size:18px;font-weight:500;letter-spacing:-.2px;
+  transition:color .25s ease,transform .25s var(--e);display:inline-block}
+.t-ft .col a:hover{color:var(--bronze-2);transform:translateX(2px)}
+.t-ft .col.tagline p{font-size:18px;font-weight:500;line-height:1.35;letter-spacing:-.2px;
+  color:#F6EEE7;max-width:20ch}
+.t-ft .socials{display:flex;gap:14px;margin-top:22px}
+.t-ft .socials a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(246,238,231,.28);
+  display:flex;align-items:center;justify-content:center;color:#F6EEE7;
+  transition:border-color .25s ease,background .25s ease,transform .25s var(--e)}
+.t-ft .socials a:hover{border-color:var(--bronze-2);background:rgba(224,99,31,.14);transform:translateY(-2px)}
+.t-ft .updates{margin-top:64px}
+.t-ft .updates h4{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(246,238,231,.55);font-weight:700;margin-bottom:16px}
+.t-ft .nform{display:flex;gap:0;border:1px solid rgba(246,238,231,.3);border-radius:100px;
+  padding:5px;max-width:640px;background:rgba(0,0,0,.15)}
+.t-ft .nform input{flex:1;min-width:0;background:none;border:0;padding:14px 22px;color:#F6EEE7;
+  font-family:var(--sans);font-size:15px}
+.t-ft .nform input::placeholder{color:rgba(246,238,231,.4);letter-spacing:1px;text-transform:uppercase;font-size:12.5px}
+.t-ft .nform input:focus{outline:none}
+.t-ft .nform button{flex:0 0 auto;border:0;border-radius:100px;padding:0 26px;
+  background:#F6EEE7;color:#161310;font-family:var(--mono);font-size:12px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;
+  transition:background .25s ease}
+.t-ft .nform button:hover{background:var(--bronze-2);color:#fff}
+.t-ft .ft-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  margin-top:70px;padding-top:26px;border-top:1px solid rgba(246,238,231,.14);
+  font-size:13.5px;color:rgba(246,238,231,.55)}
+.t-ft .ft-bottom .legal{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.t-ft .ft-bottom a{color:rgba(246,238,231,.7);text-decoration:none}
+.t-ft .ft-bottom a:hover{color:#F6EEE7}
+.t-ft .ft-bottom .dot{opacity:.5}
+@media (max-width:900px){
+.t-ft{padding:60px 24px 28px}
+.t-ft .ft-top{grid-template-columns:1fr 1fr;row-gap:44px}
+.t-ft .brand{grid-column:1 / -1}
+.t-ft .updates{margin-top:48px}
+.t-ft .ft-bottom{margin-top:48px;flex-direction:column;align-items:flex-start}
+}
+@media (max-width:520px){
+.t-ft .ft-top{grid-template-columns:1fr}
+.t-ft .brand svg{height:38px}
+.t-ft .brand .word{font-size:18px}
+.t-ft .nform{flex-direction:column;border-radius:20px;gap:8px}
+.t-ft .nform button{padding:14px 22px}
+}
+@media (prefers-reduced-motion:reduce){
+.t-ft .col a,.t-ft .socials a,.t-ft .nform button{transition:none}
+}
+
+
+/* bascule de thème (même comportement qu'en production) */
+.theme-toggle{border:1px solid var(--border);color:var(--ink);background:none;cursor:pointer;
+  transition:border-color .25s ease,background .25s ease}
+.theme-toggle:hover{border-color:var(--indigo);background:color-mix(in oklab,var(--indigo) 8%,transparent)}
+.theme-toggle .sun{display:none}
+html[data-theme="light"] .theme-toggle .sun{display:block}
+html[data-theme="light"] .theme-toggle .moon{display:none}
+
+
+/* ═══ FOOTER — il n'existait qu'en sombre ═══ */
+.t-ft{background:var(--ink);color:var(--parch)}
+html[data-theme="light"] .t-ft::before{
+  background-image:radial-gradient(rgba(40,25,16,.16) 1px,transparent 1px)}
+html[data-theme="light"] .t-ft::after{
+  background:radial-gradient(ellipse 70% 60% at 22% 118%,rgba(197,83,28,.5) 0%,
+    rgba(197,83,28,.2) 30%,rgba(231,218,206,.35) 55%,transparent 76%)}
+html[data-theme="light"] .t-ft .col a,
+html[data-theme="light"] .t-ft .col.tagline p,
+html[data-theme="light"] .t-ft .brand .word{color:var(--parch)}
+html[data-theme="light"] .t-ft .col h4,
+html[data-theme="light"] .t-ft .updates h4{color:rgba(var(--parch-rgb),.55)}
+html[data-theme="light"] .t-ft .socials a{border-color:rgba(var(--parch-rgb),.28);color:var(--parch)}
+html[data-theme="light"] .t-ft .nform{border-color:rgba(var(--parch-rgb),.28);background:rgba(255,255,255,.55)}
+html[data-theme="light"] .t-ft .nform input{color:var(--parch)}
+html[data-theme="light"] .t-ft .nform input::placeholder{color:rgba(var(--parch-rgb),.45)}
+html[data-theme="light"] .t-ft .nform button{background:var(--parch);color:var(--ink)}
+html[data-theme="light"] .t-ft .nform button:hover{background:var(--bronze);color:#fff}
+html[data-theme="light"] .t-ft .ft-bottom{border-top-color:rgba(var(--parch-rgb),.14);
+  color:rgba(var(--parch-rgb),.55)}
+html[data-theme="light"] .t-ft .ft-bottom a{color:rgba(var(--parch-rgb),.7)}
+html[data-theme="light"] .t-ft .ft-bottom a:hover{color:var(--parch)}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAGE ASSISTANT — construite bloc par bloc, sur le gabarit Limova.
+
+   BLOC 1 · PRÉSENTATION
+   Deux colonnes sur ordinateur (visuel à gauche, discours à droite),
+   empilées sur téléphone avec le visuel en premier, à fond perdu.
+
+   Aucune classe Tailwind : la feuille compilée du site ignore silencieusement
+   les classes arbitraires. Toutes les couleurs viennent des tokens posés par
+   shell.css sur .t-asst, donc le bloc suit le thème clair/sombre sans une
+   seule valeur en dur.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.t-asst{background:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.t-asst .shell{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+/* ── le bloc et sa lueur de braise ─────────────────────────────────────── */
+.t-asst .b1{position:relative;overflow:hidden;padding:36px 0 92px}
+.t-asst .b1::before{content:"";position:absolute;inset:auto auto 0 -16%;
+  width:74%;aspect-ratio:1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(var(--bronze-rgb),.20) 0%,transparent 64%);
+  transform:translateY(18%)}
+html[data-theme="light"] .t-asst .b1::before{background:radial-gradient(circle,rgba(var(--bronze-rgb),.12) 0%,transparent 64%)}
+/* le voile du bas : au lieu d'une coupe nette, le personnage s'efface dans le
+   fond. Peint après le personnage, mais sous le texte (qui monte en z-index). */
+.t-asst .b1::after{content:"";position:absolute;left:0;right:0;bottom:0;height:44%;
+  pointer-events:none;
+  background:linear-gradient(180deg,
+    color-mix(in srgb,var(--ink),transparent 100%) 0%,
+    color-mix(in srgb,var(--ink),transparent 58%) 34%,
+    color-mix(in srgb,var(--ink),transparent 16%) 64%,
+    var(--ink) 88%)}
+.t-asst .b1-grid{position:relative;display:grid;grid-template-columns:.78fr 1.22fr;
+  gap:48px;align-items:center;min-height:clamp(520px,46vw,640px)}
+
+/* ── le personnage ────────────────────────────────────────────────────────
+   Gabarit Limova : il n'est pas « posé » dans une colonne, il fait partie du
+   décor. Il sort du bord gauche de la fenêtre, il est coupé par le bas du
+   bloc, et rien ne l'encadre — ni cadre, ni ombre de contact. La colonne de
+   gauche de la grille ne sert plus qu'à lui réserver la place. */
+.t-asst .b1-media{grid-column:1;position:relative;align-self:stretch;pointer-events:none;user-select:none}
+.t-asst .b1-txt{grid-column:2;position:relative;z-index:3}
+/* il est calé sur le bord droit de sa colonne — donc toujours à la même
+   distance du discours, quelle que soit la largeur de l'écran — et il déborde
+   vers la gauche, jusqu'à sortir du cadre. */
+.t-asst .perso{position:absolute;right:-16px;top:34px;
+  width:min(46vw,560px);height:auto;max-width:none;display:block}
+
+/* ── la pastille de rôle ──────────────────────────────────────────────── */
+.t-asst .role{display:inline-flex;align-items:center;margin:0 0 20px;
+  padding:9px 19px;border-radius:100px;
+  background:var(--ink-3);border:1px solid var(--line-2);
+  font-size:14px;font-weight:600;letter-spacing:-.1px;color:var(--parch)}
+
+/* ── le titre ─────────────────────────────────────────────────────────── */
+.t-asst .b1 h1{margin:0 0 20px;font-size:clamp(36px,4vw,56px);line-height:1.04;
+  letter-spacing:-1.9px;font-weight:800;color:var(--parch)}
+
+/* ── la barre de confiance ────────────────────────────────────────────── */
+.t-asst .proof{display:inline-flex;align-items:center;flex-wrap:wrap;gap:10px 14px;
+  margin:0 0 26px;padding:10px 18px;border-radius:12px;
+  background:var(--ink-2);border:1px solid var(--line-2);
+  font-size:14.5px;color:var(--lin)}
+.t-asst .proof b{color:var(--parch);font-weight:700}
+.t-asst .proof-i{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.t-asst .proof-i svg{width:16px;height:16px;color:var(--bronze);flex:0 0 auto}
+.t-asst .proof-sep{width:1px;height:16px;background:var(--line-2)}
+
+/* ── le paragraphe ────────────────────────────────────────────────────── */
+.t-asst .b1 .pitch{margin:0 0 30px;font-size:17.5px;line-height:1.62;
+  color:var(--lin);max-width:42ch}
+
+/* ── la liste de capacités : deux colonnes sur large, une sur étroit ──── */
+.t-asst .caps{list-style:none;margin:0 0 34px;padding:0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 30px}
+.t-asst .caps li{display:flex;align-items:center;gap:11px;
+  font-size:15.5px;font-weight:600;line-height:1.35;letter-spacing:-.2px;color:var(--parch)}
+/* pastille d'icône : même idiome que les cartes de fonctionnalités du site */
+.t-asst .caps i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:50%;
+  border:1px solid rgba(var(--bronze-rgb),.42);background:rgba(var(--bronze-rgb),.10);
+  color:var(--bronze)}
+.t-asst .caps svg{width:15px;height:15px}
+
+/* ── les deux appels à l'action ───────────────────────────────────────── */
+.t-asst .actions{display:flex;flex-wrap:wrap;gap:12px}
+.t-asst .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:52px;padding:15px 28px;border-radius:100px;
+  font-size:15.5px;font-weight:700;letter-spacing:-.2px;text-decoration:none;
+  border:1px solid transparent;cursor:pointer;
+  transition:transform .25s var(--e),box-shadow .25s var(--e),
+             background .25s var(--e),border-color .25s var(--e)}
+.t-asst .btn svg{width:16px;height:16px;flex:0 0 auto}
+.t-asst .btn-1{color:#fff;
+  background:linear-gradient(100deg,var(--bronze-2),var(--bronze));
+  box-shadow:0 10px 30px -10px rgba(var(--bronze-rgb),.75)}
+.t-asst .btn-1:hover{transform:translateY(-2px);
+  box-shadow:0 16px 38px -10px rgba(var(--bronze-rgb),.85)}
+.t-asst .btn-2{background:var(--ink-3);color:var(--parch);border-color:var(--line-2)}
+.t-asst .btn-2:hover{transform:translateY(-2px);border-color:rgba(var(--bronze-rgb),.5)}
+.t-asst .btn:focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
+
+/* ═══ RESPONSIVE ═════════════════════════════════════════════════════════ */
+@media (max-width:960px){
+  /* le visuel passe au-dessus, à fond perdu, comme sur la maquette */
+  .t-asst .b1{padding:0 0 72px}
+  .t-asst .b1-grid{grid-template-columns:1fr;gap:30px;min-height:0}
+  .t-asst .b1-media{grid-column:1;order:-1;position:relative;
+    height:clamp(250px,50vw,330px);overflow:hidden;
+    -webkit-mask-image:linear-gradient(180deg,#000 74%,transparent 99%);
+            mask-image:linear-gradient(180deg,#000 74%,transparent 99%)}
+  .t-asst .b1-txt{grid-column:1}
+  .t-asst .perso{left:50%;top:14px;transform:translateX(-50%);
+    width:min(58vw,300px)}
+  .t-asst .phone{width:min(268px,68%)}
+  .t-asst .b1 h1{letter-spacing:-1.6px}
+  .t-asst .caps{grid-template-columns:1fr;gap:14px}
+}
+@media (max-width:560px){
+  .t-asst .shell{padding:0 18px}
+  .t-asst .b1-media{margin:0 -18px}
+  /* empilée sur deux lignes, la barre laissait traîner un séparateur en
+     bout de ligne : on l'enlève et on passe en colonne */
+  .t-asst .proof{width:100%;flex-direction:column;align-items:flex-start;gap:8px}
+  .t-asst .proof-sep{display:none}
+  .t-asst .actions{flex-direction:column}
+  .t-asst .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .t-asst .btn{transition:none}
+  .t-asst .btn-1:hover,.t-asst .btn-2:hover{transform:none}
+}
+
+/* ═══ BLOC 2 · repris tel quel du composant « Comment Talos travaille »
+   de la page d'accueil : mêmes classes .t-feat / .fx-*, donc même rendu.
+   Extrait automatiquement, non réécrit. ═══ */
+
+
+
+/* 2 · tokens v2.css pour les sections (mêmes noms qu'en production) */
+.t-story,.t-how,.t-how2,.t-roi,.t-cat,.t-price,.t-faq,.t-ft,.t-feat{
+  --bronze:#E0631F; --bronze-2:#F4823E; --bronze-rgb:224,99,31;
+  --antique:#A8451A; --antique-rgb:168,69,26;
+  --olivier:#D69A66; --olivier-rgb:214,154,102;
+  --rouille:#C0432A;
+  --parch:#F6EEE7; --parch-rgb:246,238,231;
+  --lin:#AB9F95;
+  --ink:#140F0C; --ink-2:#1C1611; --ink-3:#241B15; --graphite:#352A20;
+  --line:rgba(246,238,231,.08); --line-2:rgba(246,238,231,.15);
+  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --r:16px; --maxw:1180px; --e:cubic-bezier(.16,1,.3,1);
+  color:var(--parch);
+}
+
+html[data-theme="light"] .t-story,html[data-theme="light"] .t-how,html[data-theme="light"] .t-how2,html[data-theme="light"] .t-roi,html[data-theme="light"] .t-cat,html[data-theme="light"] .t-price,html[data-theme="light"] .t-faq,html[data-theme="light"] .t-ft,html[data-theme="light"] .t-feat{
+  --bronze:#C5531C; --bronze-2:#E0631F; --bronze-rgb:197,83,28;
+  --antique:#9A3F12; --antique-rgb:154,63,18;
+  --olivier:#9A6A38; --olivier-rgb:154,106,56;
+  --rouille:#B0432A;
+  --parch:#1C1310; --parch-rgb:28,19,16;
+  --lin:#6E6058;
+  --ink:#FBF6F2; --ink-2:#FFFFFF; --ink-3:#F4EBE3; --graphite:#E7DACE;
+  --line:rgba(40,25,16,.12); --line-2:rgba(40,25,16,.22);
+}
+
+
+/* 3 · mot d'impact — signature obligatoire du brand book.
+   Helvetica, jamais de serif italique (DA v2). */
+.t-story em,.t-how em,.t-how2 em,.t-roi em,.t-cat em,.t-price em,.t-faq em,.t-ft em,.t-feat em{
+  font-family:var(--sans);font-style:normal;font-weight:inherit;
+  background:linear-gradient(100deg,#FFE7D4 0%,var(--bronze-2) 48%,var(--bronze) 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  animation:daGradFlow 6s ease-in-out infinite}
+
+html[data-theme="light"] .t-story em,html[data-theme="light"] .t-how em,html[data-theme="light"] .t-roi em,html[data-theme="light"] .t-cat em,html[data-theme="light"] .t-price em,html[data-theme="light"] .t-faq em,html[data-theme="light"] .t-ft em,html[data-theme="light"] .t-feat em{
+  background:linear-gradient(100deg,#B14512 0%,var(--bronze) 58%,var(--bronze-2) 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent}
+
+
+/*  section fonctionnalités — carrousel swipé à toutes les tailles.
+    4 étapes de la journée, puis une tuile qui envoie sur la page complète.  */
+.t-feat{position:relative;padding:104px 0 112px;border-top:1px solid var(--line);
+  background:var(--ink)}
+
+.t-feat .fx-in{max-width:1180px;margin:0 auto}
+
+.t-feat .fx-head{max-width:760px;margin:0 auto 56px;text-align:center;padding-inline:32px}
+
+.t-feat .fx-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 15px;border-radius:100px;
+  border:1px solid var(--line-2);font-family:var(--mono);font-size:10.5px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:var(--bronze)}
+
+.t-feat .fx-eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--bronze);flex:0 0 auto}
+
+.t-feat .fx-head h2{margin-top:24px;font-size:clamp(32px,4.4vw,54px);font-weight:800;
+  letter-spacing:-2.2px;line-height:1.04}
+
+.t-feat .fx-head p{margin-top:18px;font-size:clamp(15px,1.35vw,18px);line-height:1.6;color:var(--lin)}
+
+.t-feat .fx-kicker{margin-top:14px;color:var(--parch);font-weight:700;letter-spacing:-.4px}
+
+
+/* le rail : même comportement partout, on swipe, on ne scrolle pas la page */
+.t-feat .fx-rail{display:flex;gap:22px;align-items:stretch;
+  overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  padding:4px 32px 10px;scroll-padding-left:32px}
+
+.t-feat .fx-rail::-webkit-scrollbar{display:none}
+
+.t-feat .fx-card{flex:0 0 31.5%;scroll-snap-align:start}
+
+
+/* deux temps : décrocher le chantier (bronze), puis encaisser (olivier) */
+.t-feat .fx-card{--acc:var(--bronze);--acc-rgb:var(--bronze-rgb)}
+
+.t-feat .fx-card.act2{--acc:var(--olivier);--acc-rgb:var(--olivier-rgb)}
+
+
+.t-feat .fx-card{position:relative;display:flex;flex-direction:column;overflow:hidden;
+  border:1px solid var(--line);border-radius:28px;background:var(--ink-2);
+  transition:border-color .45s var(--e),transform .45s var(--e)}
+
+.t-feat .fx-card::before{content:"";position:absolute;inset:0 0 auto;height:200px;pointer-events:none;z-index:0;
+  background:linear-gradient(180deg,rgba(var(--acc-rgb),.08),transparent)}
+
+.t-feat .fx-card::after{content:"";position:absolute;inset:auto 0 0;height:58%;pointer-events:none;z-index:0;
+  background:radial-gradient(120% 78% at 50% 100%,rgba(var(--acc-rgb),.15),transparent 70%)}
+
+html[data-theme="light"] .t-feat .fx-card{background:#fff;box-shadow:0 1px 2px rgba(40,25,16,.05)}
+@media (hover:hover){
+.t-feat .fx-card:hover{border-color:var(--line-2)}
+}
+
+
+.t-feat .fx-txt{position:relative;z-index:2;padding:34px 30px 26px}
+
+/* titre en un mot, comme la référence : c'est l'étape, pas la phrase */
+.t-feat .fx-card h3{font-size:clamp(30px,2.7vw,40px);font-weight:800;letter-spacing:-1.6px;line-height:1.02}
+
+
+/* l'avantage : une icône thématique propre à l'étape, pas une coche générique */
+.t-feat .fx-win{display:flex;align-items:flex-start;gap:13px;margin-top:18px;
+  font-size:16px;font-weight:600;line-height:1.42;color:var(--parch);letter-spacing:-.3px}
+
+.t-feat .fx-win .fx-ic{display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+  width:38px;height:38px;margin-top:-3px;border-radius:12px;
+  border:1px solid rgba(var(--acc-rgb),.34);background:rgba(var(--acc-rgb),.1);color:var(--acc)}
+
+
+/* le détail est replié : la carte reste visuelle, l'artisan ouvre s'il veut */
+.t-feat .fx-info{margin-top:18px}
+
+.t-feat .fx-info>summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;
+  padding:7px 13px 7px 8px;border-radius:100px;border:1px solid rgba(var(--acc-rgb),.34);
+  background:rgba(var(--acc-rgb),.08);color:var(--acc);
+  font-size:12.5px;font-weight:600;letter-spacing:-.1px;
+  transition:background .3s var(--e),border-color .3s var(--e)}
+
+.t-feat .fx-info>summary::-webkit-details-marker{display:none}
+
+.t-feat .fx-info>summary::marker{content:""}
+@media (hover:hover){
+.t-feat .fx-info>summary:hover{background:rgba(var(--acc-rgb),.15);
+  border-color:rgba(var(--acc-rgb),.6)}
+}
+
+.t-feat .fx-info>summary:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+
+.t-feat .fx-info .fx-i{display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+  width:20px;height:20px;border-radius:50%;background:rgba(var(--acc-rgb),.2)}
+
+.t-feat .fx-info .fx-chev{margin-left:2px;transition:transform .35s var(--e)}
+
+.t-feat .fx-info[open]>summary .fx-chev{transform:rotate(180deg)}
+
+.t-feat .fx-info[open]>summary .fx-lbl-off{display:none}
+
+.t-feat .fx-info:not([open])>summary .fx-lbl-on{display:none}
+
+.t-feat .fx-info>p{margin-top:13px;font-size:14px;line-height:1.58;color:var(--lin)}
+
+.t-feat .fx-info[open]>p{animation:fxReveal .42s var(--e) both}
+
+
+/* align-items:flex-start — c'est le bas du téléphone qui doit être rogné,
+   jamais le haut : l'encoche et les angles doivent rester visibles */
+.t-feat .fx-vis{position:relative;z-index:1;margin-top:auto;height:300px;
+  display:flex;justify-content:center;align-items:flex-start;overflow:hidden}
+
+/* châssis titane : mêmes rayons concentriques et même dégradé de tranche que
+   le device de la section story, pour que les deux mockups soient le même objet */
+.t-feat .fx-phone{position:relative;width:232px;flex:0 0 auto;padding:2.5px 2.5px 0;
+  border-radius:38px 38px 0 0;
+  background:linear-gradient(148deg,#9a9089 0%,#4c453f 5%,#2a2624 12%,#766c64 22%,#3b3531 33%,
+    #241f1d 46%,#574f48 58%,#938880 70%,#423b36 80%,#2b2724 88%,#7d736b 100%);
+  box-shadow:0 1px 2px rgba(0,0,0,.5),0 22px 44px -14px rgba(0,0,0,.6),
+    0 54px 100px -30px rgba(0,0,0,.7),inset 0 0 0 .5px rgba(255,255,255,.24)}
+
+html[data-theme="light"] .t-feat .fx-phone{box-shadow:0 1px 2px rgba(40,25,16,.2),
+    0 22px 44px -14px rgba(40,25,16,.22),0 54px 100px -30px rgba(40,25,16,.26),
+    inset 0 0 0 .5px rgba(255,255,255,.24)}
+
+.t-feat .fx-bezel{position:relative;border-radius:36px 36px 0 0;background:#070605;
+  padding:6px 6px 0;box-shadow:inset 0 0 3px 1px rgba(0,0,0,.95)}
+
+/* reflet de vitre en diagonale, par-dessus l'écran */
+.t-feat .fx-glare{position:absolute;inset:2.5px 2.5px 0;z-index:6;pointer-events:none;
+  border-radius:36px 36px 0 0;
+  background:linear-gradient(118deg,rgba(255,255,255,.15) 0%,rgba(255,255,255,.05) 14%,
+    rgba(255,255,255,0) 32%,rgba(255,255,255,0) 76%,rgba(255,255,255,.05) 100%)}
+
+/* tranches latérales : action, volumes, veille */
+.t-feat .fx-k{position:absolute;z-index:2;border-radius:1.5px;
+  background:linear-gradient(180deg,#8b817a,#4a433d 26%,#2b2724 72%,#6f665e)}
+
+.t-feat .fx-k.act{left:-2px;top:92px;width:2.5px;height:20px}
+
+.t-feat .fx-k.vu{left:-2px;top:130px;width:2.5px;height:38px}
+
+.t-feat .fx-k.vd{left:-2px;top:176px;width:2.5px;height:38px}
+
+.t-feat .fx-k.pw{right:-2px;top:144px;width:2.5px;height:62px}
+
+/* l'écran dépasse .fx-vis : le téléphone est volontairement coupé par le bas de la carte */
+.t-feat .fx-screen{position:relative;height:352px;border-radius:30px 30px 0 0;overflow:hidden;
+  background:var(--ink-3)}
+
+.t-feat .fx-screen img{display:none}
+
+.t-feat .fx-screen img[src]{display:block;width:100%;height:auto}
+
+.t-feat .fx-screen:has(img[src]) .fx-ph{display:none}
+
+.t-feat .fx-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:8px;text-align:center;padding:38px 18px 120px;color:var(--lin);
+  background:repeating-linear-gradient(45deg,rgba(var(--parch-rgb),.03) 0 12px,transparent 12px 24px)}
+
+.t-feat .fx-ph b{font-family:var(--mono);font-size:10.5px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--acc);font-weight:700}
+
+.t-feat .fx-ph span{font-size:12.5px;line-height:1.45;max-width:165px}
+
+.t-feat .fx-ph i{font-family:var(--mono);font-style:normal;font-size:10px;opacity:.6}
+
+.t-feat .fx-home{display:none}
+
+
+/* la capture est rognée par la carte : bouton pour l'ouvrir en entier.
+   Vrai <button> posé par-dessus le châssis plutôt qu'un role=button sur le
+   téléphone, qui n'a pas le droit d'être un enfant de <button>. */
+.t-feat .fx-open{position:absolute;inset:0;z-index:4;padding:0;border:0;background:none;
+  cursor:zoom-in;-webkit-tap-highlight-color:transparent}
+
+.t-feat .fx-open .fx-mag{position:absolute;right:14px;bottom:16px;
+  display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;
+  border:1px solid var(--line-2);background:rgba(20,15,12,.72);color:var(--parch);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  box-shadow:0 4px 14px rgba(0,0,0,.35);
+  transition:transform .35s var(--e),background .35s var(--e),border-color .35s var(--e)}
+
+html[data-theme="light"] .t-feat .fx-open .fx-mag{background:rgba(255,255,255,.86);color:#1C1310;
+  box-shadow:0 4px 14px rgba(40,25,16,.18)}
+@media (hover:hover){
+
+.t-feat .fx-open:hover .fx-mag{transform:scale(1.1);border-color:var(--bronze);color:var(--bronze)}
+}
+
+.t-feat .fx-open:focus-visible{outline:2px solid var(--bronze);outline-offset:-4px;border-radius:20px}
+
+
+/* visionneuse plein écran : <dialog> natif pour le focus, Échap et le top layer */
+.t-feat .fx-zoom{--acc:var(--bronze);--acc-rgb:var(--bronze-rgb);
+  width:100%;height:100%;max-width:100vw;max-height:100svh;
+  margin:0;padding:0;border:0;background:none;overflow:visible;
+  place-items:center;color:var(--parch)}
+
+.t-feat .fx-zoom:not([open]){display:none}
+
+.t-feat .fx-zoom[open]{display:grid}
+
+.t-feat .fx-zoom::backdrop{background:rgba(8,6,5,.86);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+
+html[data-theme="light"] .t-feat .fx-zoom::backdrop{background:rgba(28,19,16,.68)}
+
+.t-feat .fx-zoom figure{display:flex;flex-direction:column;align-items:center;gap:18px;
+  animation:fxZoomIn .34s var(--e) both}
+
+.t-feat .fx-zoom figcaption{text-align:center;max-width:min(420px,84vw)}
+
+.t-feat .fx-zoom figcaption b{display:block;font-size:19px;font-weight:800;letter-spacing:-.7px}
+
+.t-feat .fx-zoom figcaption span{display:block;margin-top:5px;font-size:13.5px;line-height:1.45;color:var(--lin)}
+
+.t-feat .fx-zoom-x{position:fixed;top:20px;right:20px;z-index:2;
+  display:flex;align-items:center;justify-content:center;width:44px;height:44px;
+  padding:0;border-radius:50%;cursor:pointer;
+  border:1px solid var(--line-2);background:var(--ink-2);color:var(--parch);
+  transition:border-color .3s var(--e),color .3s var(--e)}
+@media (hover:hover){
+.t-feat .fx-zoom-x:hover{border-color:var(--bronze);color:var(--bronze)}
+}
+
+.t-feat .fx-zoom-x:focus-visible{outline:2px solid var(--bronze);outline-offset:3px}
+
+
+/* le châssis reprend les mêmes pièces, mais refermé en bas et dimensionné par l'image */
+.t-feat .fx-zoom .fx-phone{width:auto;padding:2.5px;border-radius:38px}
+
+.t-feat .fx-zoom .fx-bezel{padding:6px;border-radius:36px}
+
+.t-feat .fx-zoom .fx-glare{inset:2.5px;border-radius:36px}
+
+.t-feat .fx-zoom .fx-screen{height:auto;border-radius:30px;background:#0E0B09}
+
+.t-feat .fx-zoom .fx-screen img[src]{width:auto;height:auto;
+  max-height:min(78svh,860px);max-width:min(330px,80vw)}
+
+.t-feat .fx-zoom .fx-home{display:block;position:absolute;z-index:5;left:50%;bottom:9px;
+  transform:translateX(-50%);width:96px;height:4px;border-radius:4px;background:rgba(255,255,255,.34)}
+
+/* boutons latéraux en pourcentage : la hauteur du châssis dépend de l'image */
+.t-feat .fx-zoom .fx-k.act{top:18.5%;height:4%}
+
+.t-feat .fx-zoom .fx-k.vu{top:26%;height:7.6%}
+
+.t-feat .fx-zoom .fx-k.vd{top:35.3%;height:7.6%}
+
+.t-feat .fx-zoom .fx-k.pw{top:28.9%;height:12.4%}
+
+html.fx-locked,html.fx-locked body{overflow:hidden}
+
+
+/* tuile de fin de rail : la journée continue sur la page fonctionnalités */
+.t-feat .fx-more{text-decoration:none}
+
+.t-feat .fx-more .fx-txt{display:flex;flex-direction:column;align-items:flex-start;
+  justify-content:center;height:100%;gap:15px;padding:48px 30px}
+
+.t-feat .fx-more .fx-ico{display:flex;align-items:center;justify-content:center;width:52px;height:52px;
+  border-radius:50%;border:1px solid rgba(var(--acc-rgb),.5);background:rgba(var(--acc-rgb),.1);
+  color:var(--acc);transition:transform .35s var(--e)}
+@media (hover:hover){
+.t-feat .fx-more:hover .fx-ico{transform:translateX(4px)}
+}
+
+.t-feat .fx-more b{font-size:30px;font-weight:800;letter-spacing:-1.4px;line-height:1.05}
+
+.t-feat .fx-more span{font-size:15px;line-height:1.55;color:var(--lin)}
+
+.t-feat .fx-more .fx-next{margin-top:4px;font-family:var(--mono);font-size:10.5px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:var(--acc)}
+
+
+/* commandes du carrousel : flèches (souris) + pastilles (repère de position) */
+.t-feat .fx-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:28px}
+
+.t-feat .fx-arrow{display:flex;align-items:center;justify-content:center;width:42px;height:42px;
+  flex:0 0 auto;padding:0;border-radius:50%;cursor:pointer;
+  border:1px solid var(--line-2);background:var(--ink-2);color:var(--parch);
+  transition:border-color .3s var(--e),background .3s var(--e),opacity .3s var(--e)}
+
+html[data-theme="light"] .t-feat .fx-arrow{background:#fff;box-shadow:0 1px 2px rgba(40,25,16,.05)}
+@media (hover:hover){
+.t-feat .fx-arrow:hover:not(:disabled){border-color:var(--bronze);color:var(--bronze)}
+}
+
+.t-feat .fx-arrow:disabled{opacity:.3;cursor:default}
+
+.t-feat .fx-arrow:focus-visible{outline:2px solid var(--bronze);outline-offset:3px}
+
+.t-feat .fx-dots{display:flex;justify-content:center;gap:7px}
+
+.t-feat .fx-dots button{width:7px;height:7px;padding:0;border:0;border-radius:50%;cursor:pointer;
+  background:var(--line-2);transition:width .35s var(--e),background .35s var(--e)}
+
+.t-feat .fx-dots button[aria-current="true"]{width:22px;border-radius:100px;background:var(--bronze)}
+
+.t-feat .fx-dots button:focus-visible{outline:2px solid var(--bronze);outline-offset:3px}
+@media (max-width:1120px){
+
+.t-feat{padding:92px 0 100px}
+
+.t-feat .fx-rail{gap:18px;padding-inline:26px;scroll-padding-left:26px}
+
+.t-feat .fx-card{flex:0 0 46%}
+}
+@media (max-width:760px){
+
+.t-feat{padding:76px 0 84px}
+
+.t-feat .fx-head{margin-bottom:34px;padding-inline:22px}
+
+.t-feat .fx-head h2{letter-spacing:-1.4px}
+
+.t-feat .fx-rail{gap:14px;padding:4px 22px 10px;scroll-padding-left:22px}
+
+.t-feat .fx-card{flex:0 0 84%;max-width:340px}
+
+.t-feat .fx-txt{padding:30px 24px 24px}
+
+.t-feat .fx-card h3{font-size:32px}
+
+.t-feat .fx-vis{height:274px}
+
+.t-feat .fx-arrow{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+
+.t-feat .fx-card,.t-feat .fx-arrow,.t-feat .fx-dots button,
+.t-feat .fx-info>summary,.t-feat .fx-info .fx-chev,.t-feat .fx-more .fx-ico{transition:none}
+
+.t-feat .fx-info[open]>p,.t-feat .fx-zoom figure{animation:none}
+
+.t-feat .fx-open .fx-mag,.t-feat .fx-zoom-x{transition:none}
+
+.t-feat .fx-open:hover .fx-mag{transform:none}
+
+.t-feat .fx-more:hover .fx-ico{transform:none}
+}
+
+
+@keyframes daGradFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+@keyframes fxReveal{from{opacity:0;transform:translateY(-7px)}to{opacity:1;transform:none}}
+
+@keyframes fxZoomIn{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BLOC 3 · LA DOULEUR QUI DISPARAÎT + LE DÉTAIL DES MISSIONS
+   Gabarit Limova : à gauche la promesse et les deux boutons, à droite une
+   carte de synthèse, puis trois colonnes de missions dépliables en dessous.
+   Couleurs prises sur les tokens .t-asst — aucune valeur en dur.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.t-asst .b3{position:relative;overflow:hidden;padding:104px 0 110px;
+  border-top:1px solid var(--line)}
+.t-asst .b3::before{content:"";position:absolute;inset:-30% -20% auto auto;
+  width:58%;aspect-ratio:1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(var(--bronze-rgb),.16) 0%,transparent 62%)}
+html[data-theme="light"] .t-asst .b3::before{background:radial-gradient(circle,rgba(var(--bronze-rgb),.10) 0%,transparent 62%)}
+
+/* ── haut : promesse à gauche, carte de synthèse à droite ─────────────── */
+.t-asst .b3-top{position:relative;display:grid;grid-template-columns:1.08fr .92fr;
+  gap:56px;align-items:center;margin:0 0 74px}
+.t-asst .b3-tag{display:inline-flex;align-items:center;margin:0 0 24px;
+  padding:9px 17px;border-radius:10px;
+  background:rgba(var(--bronze-rgb),.12);border:1px solid rgba(var(--bronze-rgb),.32);
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--bronze)}
+.t-asst .b3 h2{margin:0 0 34px;font-size:clamp(34px,4.1vw,58px);line-height:1.03;
+  letter-spacing:-2.1px;font-weight:800;color:var(--parch);max-width:14ch}
+
+/* ── la carte de synthèse ─────────────────────────────────────────────── */
+.t-asst .synth{background:var(--ink-2);border:1px solid var(--line-2);
+  border-radius:26px;padding:32px 30px 28px;
+  box-shadow:0 30px 70px -34px rgba(0,0,0,.6)}
+html[data-theme="light"] .t-asst .synth{box-shadow:0 30px 70px -34px rgba(40,25,16,.24)}
+.t-asst .synth-h{display:flex;align-items:baseline;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;margin:0 0 22px;padding:0 0 20px;border-bottom:1px solid var(--line)}
+.t-asst .synth-h b{font-size:19px;font-weight:800;letter-spacing:-.5px;color:var(--parch)}
+.t-asst .synth-h span{font-family:var(--mono);font-size:12px;letter-spacing:.06em;
+  color:var(--bronze);white-space:nowrap}
+.t-asst .synth ol{list-style:none;margin:0;padding:0;display:grid;gap:14px;counter-reset:m}
+.t-asst .synth li{display:flex;align-items:center;gap:14px;counter-increment:m}
+.t-asst .synth li::before{content:counter(m,decimal-leading-zero);flex:0 0 auto;
+  width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+  border-radius:11px;background:rgba(var(--bronze-rgb),.12);
+  border:1px solid rgba(var(--bronze-rgb),.3);
+  font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--bronze)}
+.t-asst .synth li b{flex:1;font-size:15.5px;font-weight:600;letter-spacing:-.2px;color:var(--parch)}
+.t-asst .synth li i{font-family:var(--mono);font-style:normal;font-size:12px;color:var(--lin)}
+.t-asst .synth-f{margin:24px 0 0;padding:18px 0 0;border-top:1px solid var(--line);
+  font-size:14px;line-height:1.55;color:var(--lin)}
+.t-asst .synth-f b{color:var(--parch);font-weight:700}
+
+/* ── bas : trois colonnes de missions ─────────────────────────────────── */
+.t-asst .b3-grid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);
+  gap:26px;align-items:start}
+.t-asst .mh{display:flex;align-items:center;justify-content:center;gap:10px;
+  margin:0 0 16px;padding:12px 18px;border-radius:11px;
+  background:rgba(var(--bronze-rgb),.10);border:1px solid rgba(var(--bronze-rgb),.28);
+  font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--bronze);text-align:center;white-space:nowrap}
+.t-asst .mh .mh-n{opacity:.72;letter-spacing:.06em;font-weight:400}
+
+/* une fonctionnalité : pastille fermée, rectangle arrondi une fois ouverte */
+.t-asst .f{margin:0 0 10px;border-radius:100px;background:var(--ink-2);
+  border:1px solid var(--line);
+  transition:border-color .25s var(--e),border-radius .25s var(--e),background .25s var(--e)}
+.t-asst .f:hover{border-color:rgba(var(--bronze-rgb),.42)}
+.t-asst .f[open]{border-radius:22px;border-color:rgba(var(--bronze-rgb),.42);background:var(--ink-3)}
+.t-asst .f summary{list-style:none;cursor:pointer;min-height:56px;
+  padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  font-size:15.5px;font-weight:600;letter-spacing:-.2px;color:var(--parch)}
+.t-asst .f summary::-webkit-details-marker{display:none}
+.t-asst .f summary:focus-visible{outline:3px solid var(--bronze);outline-offset:2px;border-radius:100px}
+.t-asst .f-chev{flex:0 0 auto;width:15px;height:15px;color:var(--lin);
+  transition:transform .3s var(--e),color .25s var(--e)}
+.t-asst .f[open] .f-chev{transform:rotate(180deg);color:var(--bronze)}
+.t-asst .f p{margin:0;padding:0 22px 20px;font-size:14.5px;line-height:1.58;color:var(--lin)}
+
+/* ═══ RESPONSIVE ═════════════════════════════════════════════════════════ */
+@media (max-width:960px){
+  .t-asst .b3{padding:76px 0 84px}
+  .t-asst .b3-top{grid-template-columns:1fr;gap:38px;margin:0 0 52px}
+  .t-asst .b3 h2{max-width:none}
+  .t-asst .b3-grid{grid-template-columns:1fr;gap:34px}
+}
+@media (max-width:560px){
+  .t-asst .synth{padding:26px 22px 24px;border-radius:22px}
+  .t-asst .f summary{padding:15px 20px;font-size:15px}
+}
+@media (prefers-reduced-motion:reduce){
+  .t-asst .f,.t-asst .f-chev{transition:none}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BLOC 4 · FAQ
+   Deux pastilles de catégorie qui filtrent, puis les questions dépliables.
+   Le dépliant réutilise .f du bloc 3 : même composant, donc même rendu.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.t-asst .b4{position:relative;padding:100px 0 110px;border-top:1px solid var(--line)}
+.t-asst .b4-head{text-align:center;max-width:640px;margin:0 auto 34px}
+.t-asst .b4-tag{display:inline-flex;align-items:center;margin:0 0 20px;
+  padding:8px 16px;border-radius:10px;
+  background:rgba(var(--bronze-rgb),.12);border:1px solid rgba(var(--bronze-rgb),.32);
+  font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--bronze)}
+.t-asst .b4 h2{margin:0 0 16px;font-size:clamp(30px,3.6vw,48px);line-height:1.05;
+  letter-spacing:-1.8px;font-weight:800;color:var(--parch)}
+.t-asst .b4-head p{margin:0;font-size:16.5px;line-height:1.6;color:var(--lin)}
+
+/* ── les deux pastilles de catégorie ──────────────────────────────────── */
+.t-asst .b4-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;
+  margin:0 0 34px}
+.t-asst .tab{min-height:48px;padding:13px 26px;border-radius:100px;cursor:pointer;
+  background:var(--ink-2);border:1px solid var(--line-2);color:var(--lin);
+  font-family:var(--sans);font-size:15px;font-weight:600;letter-spacing:-.2px;
+  transition:background .25s var(--e),color .25s var(--e),border-color .25s var(--e)}
+.t-asst .tab:hover{color:var(--parch);border-color:rgba(var(--bronze-rgb),.42)}
+.t-asst .tab[aria-selected="true"]{background:var(--bronze);border-color:var(--bronze);
+  color:#fff}
+.t-asst .tab:focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
+
+/* ── la liste de questions ────────────────────────────────────────────── */
+.t-asst .b4-list{max-width:820px;margin:0 auto}
+.t-asst .b4-list[hidden]{display:none}
+.t-asst .b4-list .f summary{font-size:16px}
+
+/* ── le pied : il reste une question ──────────────────────────────────── */
+.t-asst .b4-foot{max-width:820px;margin:38px auto 0;padding:26px 28px;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;
+  background:var(--ink-2);border:1px solid var(--line-2);border-radius:22px}
+/* sans base flexible, le bloc de texte prenait toute la largeur et poussait
+   le bouton à la ligne suivante */
+.t-asst .b4-foot > div{flex:1 1 340px;min-width:0}
+.t-asst .b4-foot > .btn{flex:0 0 auto}
+.t-asst .b4-foot b{display:block;font-size:17px;font-weight:700;letter-spacing:-.3px;
+  color:var(--parch);margin:0 0 4px}
+.t-asst .b4-foot span{font-size:14.5px;line-height:1.5;color:var(--lin)}
+
+@media (max-width:960px){
+  .t-asst .b4{padding:76px 0 84px}
+}
+@media (max-width:560px){
+  .t-asst .b4-tabs{flex-direction:column}
+  .t-asst .tab{width:100%}
+  .t-asst .b4-foot{flex-direction:column;align-items:stretch;text-align:center;
+    padding:24px 22px}
+  .t-asst .b4-foot .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .t-asst .tab{transition:none}
+}
+
+</style>
+<style id="tnav-drop-css">
+.tnav-drop{position:relative;display:inline-flex}
+.tnav-drop-t{display:inline-flex;align-items:center;gap:5px}
+.tnav-chev{transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.tnav-drop:hover .tnav-chev,.tnav-drop:focus-within .tnav-chev{transform:rotate(180deg)}
+.tnav-pan{position:absolute;top:100%;left:-18px;z-index:60;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;
+  width:min(560px,86vw);margin-top:16px;padding:10px;border-radius:20px;
+  background:color-mix(in oklab,var(--surface-tint) 96%,transparent);
+  border:1px solid var(--border);box-shadow:0 24px 60px rgba(0,0,0,.42);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:opacity .22s ease,transform .22s cubic-bezier(.16,1,.3,1),visibility .22s}
+html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
+/* la zone de survol court jusqu'au panneau : sans ça le curseur le perd */
+.tnav-drop::after{content:"";position:absolute;top:100%;left:0;right:0;height:18px}
+.tnav-drop:hover .tnav-pan,.tnav-drop:focus-within .tnav-pan{
+  opacity:1;visibility:visible;transform:translateY(0)}
+.tnav-ag{display:grid;grid-template-columns:36px 1fr;column-gap:11px;
+  align-items:center;padding:9px 11px;border-radius:14px;
+  transition:background .2s ease}
+.tnav-ag:hover{background:color-mix(in oklab,var(--ink) 7%,transparent)}
+.tnav-ag::after{display:none}
+.tnav-ag img{grid-row:1/3;width:36px;height:36px;border-radius:50%;object-fit:cover;
+  background:color-mix(in oklab,var(--ink) 8%,transparent)}
+.tnav-ag b{display:flex;align-items:center;gap:7px;
+  font-size:14px;font-weight:600;letter-spacing:-.2px;color:var(--ink)}
+.tnav-ag small{font-size:12.5px;color:var(--ink-soft);letter-spacing:-.1px}
+.tnav-soon{font-style:normal;font-size:10px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;padding:2px 7px;border-radius:100px;
+  color:var(--indigo);border:1px solid color-mix(in oklab,var(--indigo) 40%,transparent)}
+.tnav-pan-all{grid-column:1/-1;display:inline-flex;align-items:center;justify-content:center;
+  gap:8px;margin-top:4px;padding:11px;border-radius:14px;
+  background:color-mix(in oklab,var(--ink) 5%,transparent);
+  font-size:13.5px;font-weight:600;color:var(--ink)}
+.tnav-pan-all::after{display:none}
+.tnav-pan-all:hover{background:color-mix(in oklab,var(--indigo) 14%,transparent);color:var(--indigo)}
+@media (max-width:1060px){.tnav-pan{display:none}}
+@media (prefers-reduced-motion:reduce){.tnav-pan,.tnav-chev{transition:none}}
+</style></head>
+<body>
+<main>
+
+<header class="tnav-wrap" id="tnav-wrap"><nav class="tnav" id="tnav" aria-label="Navigation principale"><a class="tnav-logo" href="index.html#top" aria-label="Talos — accueil"><svg viewBox="253 302 472 550" width="23" height="27" aria-hidden="true"><mask id="tnav-marteau" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550"><rect x="253" y="302" width="472" height="550" fill="#fff"/><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#000" stroke="#000" stroke-width="32" stroke-linejoin="round"/></mask><g mask="url(#tnav-marteau)"><path d="M 494 536 L 642 536 L 399 852 L 459 684 Z" fill="#C75C24"/></g><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="currentColor"/></svg><span>Talos</span></a><div class="tnav-links"><span class="tnav-drop"><a class="tnav-drop-t" href="offres.html">Offres<svg class="tnav-chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></a><span class="tnav-pan"><a class="tnav-ag" href="assistant-commercial.html"><img src="perso/avatar-commercial.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant commercial</b><small>Devis, signature, relances</small></a><a class="tnav-ag" href="assistant-tresorerie.html"><img src="perso/avatar-tresorerie.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante trésorerie</b><small>Impayés et prévision</small></a><a class="tnav-ag" href="assistant-client.html"><img src="perso/avatar-client.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante client</b><small>Réponses et rendez-vous</small></a><a class="tnav-ag" href="reserver.html"><img src="perso/avatar-facturation.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant facturation</b><small>Factures conformes 2026</small></a><a class="tnav-ag" href="reserver.html"><img src="perso/avatar-administratif.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant administratif</b><small>Tri des mails et classement</small></a><a class="tnav-pan-all" href="offres.html">Voir toutes les offres<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></span><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html">Pourquoi Talos</a><a href="blog.html">Blog</a></div><div class="tnav-act"><button type="button" class="theme-toggle grid h-10 w-10 shrink-0 place-items-center rounded-lg" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg></button><a class="tnav-esp" href="espace-client.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="10" r="3.2"/><path d="M5.6 19a7 7 0 0 1 12.8 0"/></svg>Espace client</a><a class="tnav-cta" href="reserver.html">Réserver une démo</a><button class="tnav-burger" id="tnav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="tnav-menu"><i></i><i></i><i></i></button></div></nav><div class="tnav-menu" id="tnav-menu"><span class="tnav-drop"><a class="tnav-drop-t" href="offres.html">Offres<svg class="tnav-chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></a><span class="tnav-pan"><a class="tnav-ag" href="assistant-commercial.html"><img src="perso/avatar-commercial.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant commercial</b><small>Devis, signature, relances</small></a><a class="tnav-ag" href="assistant-tresorerie.html"><img src="perso/avatar-tresorerie.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante trésorerie</b><small>Impayés et prévision</small></a><a class="tnav-ag" href="assistant-client.html"><img src="perso/avatar-client.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante client</b><small>Réponses et rendez-vous</small></a><a class="tnav-ag" href="reserver.html"><img src="perso/avatar-facturation.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant facturation</b><small>Factures conformes 2026</small></a><a class="tnav-ag" href="reserver.html"><img src="perso/avatar-administratif.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant administratif</b><small>Tri des mails et classement</small></a><a class="tnav-pan-all" href="offres.html">Voir toutes les offres<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></span><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html">Pourquoi Talos</a><a href="blog.html">Blog</a><a class="m-esp" href="espace-client.html">Espace client</a><button type="button" class="theme-toggle m-theme" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg><span class="lbl-dark">Mode clair</span><span class="lbl-light">Mode sombre</span></button><a class="m-cta" href="reserver.html">Réserver une démo</a></div></header>
+
+<section class="t-asst">
+
+  <!-- ═══ BLOC 1 · PRÉSENTATION ═══════════════════════════════════════════ -->
+  <div class="b1">
+    <div class="shell b1-grid">
+
+      <div class="b1-media">
+        <picture>
+          <source srcset="perso/assistant-commercial.webp" type="image/webp">
+          <img class="perso" src="perso/assistant-commercial.png" width="530" height="1400"
+               decoding="async" fetchpriority="high" alt="L'assistant commercial de Talos">
+        </picture>
+      </div>
+
+      <div class="b1-txt">
+        <p class="role">Assistant Devis &amp; Relances</p>
+        <h1>Découvrez votre assistant commercial</h1>
+
+        <p class="proof">
+          <span class="proof-i">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <b>+30 artisans</b> accompagnés
+          </span>
+          <span class="proof-sep" aria-hidden="true"></span>
+          <span class="proof-i">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            Mise en place <b>incluse</b>
+          </span>
+        </p>
+
+        <p class="pitch">Votre Assistant Commercial rédige vos devis à partir d'un mail, d'une note vocale ou d'une photo, les chiffre sur votre grille tarifaire, les envoie à la signature avec l'acompte, puis les relance jusqu'à la réponse du client.</p>
+
+        <ul class="caps">
+          <li>
+            <i aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></i>
+            Rédige vos devis en minutes</li>
+          <li>
+            <i aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 7a7 7 0 1 0 0 10"/><path d="M3 10h9M3 14h9"/></svg></i>
+            Chiffre sur votre grille tarifaire</li>
+          <li>
+            <i aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></i>
+            Fait signer et encaisse l'acompte</li>
+          <li>
+            <i aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></i>
+            Relance à J+3, J+7 et J+14</li>
+        </ul>
+
+        <div class="actions">
+          <a class="btn btn-1" href="reserver.html">Je veux mon assistant <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-2" href="reserver.html">Réserver une démo</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+  <!-- ═══ BLOC 2 · LE PARCOURS ════════════════════════════════════════════ -->
+  <section class="t-feat" id="parcours">
+    <div class="fx-in">
+      <div class="fx-head">
+        <span class="fx-eyebrow"><i></i>Comment votre assistant travaille</span>
+        <h2>De la demande du soir<br>jusqu'à la <em>signature</em>.</h2>
+        <p>Un client vous écrit hors horaires. Le lendemain matin, le devis est chiffré, envoyé, et il se relance tout seul jusqu'à la réponse.</p>
+        <p class="fx-kicker">Vous faites votre métier. Il s'occupe des devis.</p>
+      </div>
+
+      <div class="fx-rail" id="fxRail">
+      <article class="fx-card">
+        <div class="fx-txt">
+          <h3>Demande</h3>
+          <p class="fx-win">
+            <span class="fx-ic" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13.5h4.2l1.6 2.8h6.4l1.6-2.8H21"/><path d="M5.4 5.2 3 13.5v3.8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3.8l-2.4-8.3a2 2 0 0 0-1.9-1.4H7.3a2 2 0 0 0-1.9 1.4z"/></svg></span>
+            Ne laissez plus passer une demande.
+          </p>
+          <details class="fx-info">
+            <summary>
+              <span class="fx-i" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 10.5v6"/><path d="M12 6.9v.2"/></svg></span>
+              <span class="fx-lbl-off">Comment ça marche</span>
+              <span class="fx-lbl-on">Réduire</span>
+              <svg class="fx-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg>
+            </summary>
+            <p>Un client écrit à 22 h : votre assistant répond, pose les bonnes questions et remonte une demande complète — chantier, adresse, délai, budget évoqué.</p>
+          </details>
+        </div>
+        <div class="fx-vis">
+          <div class="fx-phone">
+            <span class="fx-k act"></span><span class="fx-k vu"></span><span class="fx-k vd"></span><span class="fx-k pw"></span>
+            <div class="fx-bezel">
+              <div class="fx-screen">
+                <div class="fx-ph"><b>Écran 01</b><span>La demande client qui arrive</span><i>780 × 1688 px · PNG</i></div>
+                <img width="780" height="1688" loading="lazy" decoding="async" alt="La demande client qui arrive">
+              </div>
+            </div>
+            <div class="fx-glare"></div>
+          </div>
+          <button class="fx-open" type="button" aria-label="Voir l'écran en entier">
+            <span class="fx-mag" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8.5v5M8.5 11h5"/></svg></span>
+          </button>
+        </div>
+      </article>
+      <article class="fx-card">
+        <div class="fx-txt">
+          <h3>Devis</h3>
+          <p class="fx-win">
+            <span class="fx-ic" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></span>
+            Vos devis en quelques minutes.
+          </p>
+          <details class="fx-info">
+            <summary>
+              <span class="fx-i" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 10.5v6"/><path d="M12 6.9v.2"/></svg></span>
+              <span class="fx-lbl-off">Comment ça marche</span>
+              <span class="fx-lbl-on">Réduire</span>
+              <svg class="fx-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg>
+            </summary>
+            <p>Depuis ce mail, une note vocale ou une photo prise sur place, le devis est chiffré sur votre grille tarifaire, avec ses variantes et ses conditions de paiement.</p>
+          </details>
+        </div>
+        <div class="fx-vis">
+          <div class="fx-phone">
+            <span class="fx-k act"></span><span class="fx-k vu"></span><span class="fx-k vd"></span><span class="fx-k pw"></span>
+            <div class="fx-bezel">
+              <div class="fx-screen">
+                <div class="fx-ph"><b>Écran 02</b><span>Le devis chiffré, prêt à relire</span><i>780 × 1688 px · PNG</i></div>
+                <img width="780" height="1688" loading="lazy" decoding="async" alt="Le devis chiffré, prêt à relire">
+              </div>
+            </div>
+            <div class="fx-glare"></div>
+          </div>
+          <button class="fx-open" type="button" aria-label="Voir l'écran en entier">
+            <span class="fx-mag" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8.5v5M8.5 11h5"/></svg></span>
+          </button>
+        </div>
+      </article>
+      <article class="fx-card">
+        <div class="fx-txt">
+          <h3>Signature</h3>
+          <p class="fx-win">
+            <span class="fx-ic" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>
+            Signé et encaissé sans courir.
+          </p>
+          <details class="fx-info">
+            <summary>
+              <span class="fx-i" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 10.5v6"/><path d="M12 6.9v.2"/></svg></span>
+              <span class="fx-lbl-off">Comment ça marche</span>
+              <span class="fx-lbl-on">Réduire</span>
+              <svg class="fx-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg>
+            </summary>
+            <p>Le client signe depuis son téléphone et règle l'acompte dans la foulée. Vous démarrez le chantier avec de la trésorerie.</p>
+          </details>
+        </div>
+        <div class="fx-vis">
+          <div class="fx-phone">
+            <span class="fx-k act"></span><span class="fx-k vu"></span><span class="fx-k vd"></span><span class="fx-k pw"></span>
+            <div class="fx-bezel">
+              <div class="fx-screen">
+                <div class="fx-ph"><b>Écran 03</b><span>La signature et l'acompte</span><i>780 × 1688 px · PNG</i></div>
+                <img width="780" height="1688" loading="lazy" decoding="async" alt="La signature et l'acompte">
+              </div>
+            </div>
+            <div class="fx-glare"></div>
+          </div>
+          <button class="fx-open" type="button" aria-label="Voir l'écran en entier">
+            <span class="fx-mag" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8.5v5M8.5 11h5"/></svg></span>
+          </button>
+        </div>
+      </article>
+      <article class="fx-card">
+        <div class="fx-txt">
+          <h3>Relance</h3>
+          <p class="fx-win">
+            <span class="fx-ic" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span>
+            Plus de devis signés, moins d'oublis.
+          </p>
+          <details class="fx-info">
+            <summary>
+              <span class="fx-i" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 10.5v6"/><path d="M12 6.9v.2"/></svg></span>
+              <span class="fx-lbl-off">Comment ça marche</span>
+              <span class="fx-lbl-on">Réduire</span>
+              <svg class="fx-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg>
+            </summary>
+            <p>Sans réponse, le devis est relancé à J+3, J+7 puis J+14. Dès que le client répond ou signe, tout s'arrête.</p>
+          </details>
+        </div>
+        <div class="fx-vis">
+          <div class="fx-phone">
+            <span class="fx-k act"></span><span class="fx-k vu"></span><span class="fx-k vd"></span><span class="fx-k pw"></span>
+            <div class="fx-bezel">
+              <div class="fx-screen">
+                <div class="fx-ph"><b>Écran 04</b><span>Le suivi des devis en attente</span><i>780 × 1688 px · PNG</i></div>
+                <img width="780" height="1688" loading="lazy" decoding="async" alt="Le suivi des devis en attente">
+              </div>
+            </div>
+            <div class="fx-glare"></div>
+          </div>
+          <button class="fx-open" type="button" aria-label="Voir l'écran en entier">
+            <span class="fx-mag" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8.5v5M8.5 11h5"/></svg></span>
+          </button>
+        </div>
+      </article>
+
+        <a class="fx-card act2 fx-more" href="offres.html">
+          <div class="fx-txt">
+            <span class="fx-next">Et ce n'est pas tout</span>
+            <b>Découvrir<br>les autres assistants.</b>
+            <span>Chaque assistant a ses missions. Voir toute l'équipe Talos.</span>
+            <span class="fx-ico" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+          </div>
+        </a>
+      </div>
+
+      <div class="fx-nav">
+        <button class="fx-arrow" id="fxPrev" type="button" aria-label="Étape précédente" aria-controls="fxRail"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5l-7 7 7 7"/></svg></button>
+        <div class="fx-dots" id="fxDots" role="tablist" aria-label="Navigation des étapes"></div>
+        <button class="fx-arrow" id="fxNext" type="button" aria-label="Étape suivante" aria-controls="fxRail"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <dialog class="fx-zoom" id="fxZoom" aria-label="Aperçu de l'écran en entier">
+      <button class="fx-zoom-x" id="fxZoomClose" type="button" aria-label="Fermer l'aperçu"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+      <figure>
+        <div class="fx-phone">
+          <span class="fx-k act"></span><span class="fx-k vu"></span><span class="fx-k vd"></span><span class="fx-k pw"></span>
+          <div class="fx-bezel"><div class="fx-screen"><img id="fxZoomImg" alt=""></div></div>
+        </div>
+      </figure>
+    </dialog>
+  </section>
+
+  <!-- ═══ BLOC 3 · LA DOULEUR QUI DISPARAÎT + LE DÉTAIL ═══════════════════ -->
+  <section class="t-asst">
+    <div class="b3" id="missions">
+      <div class="shell">
+
+        <div class="b3-top">
+          <div>
+            <p class="b3-tag">Talos, votre assistant commercial 24/7</p>
+            <h2>Faire vos devis le soir n'est plus votre problème.</h2>
+            <div class="actions">
+              <a class="btn btn-1" href="reserver.html">Je veux mon assistant <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+              <a class="btn btn-2" href="reserver.html">Réserver une démo</a>
+            </div>
+          </div>
+
+          <div class="synth">
+            <div class="synth-h">
+              <b>Ce qu'il prend en charge</b>
+              <span>3 missions · 17 fonctionnalités</span>
+            </div>
+            <ol>
+          <li><b>Génération de devis</b><i>5</i></li>
+          <li><b>Envoi &amp; signature</b><i>5</i></li>
+          <li><b>Relance &amp; suivi</b><i>7</i></li>
+            </ol>
+            <p class="synth-f"><b>Les plus demandées :</b> le devis dicté depuis le chantier, la signature en ligne avec acompte, et la relance qui s'arrête toute seule dès que le client répond.</p>
+          </div>
+        </div>
+
+        <div class="b3-grid">
+      <div>
+        <p class="mh">Génération de devis <span class="mh-n">· 5</span></p>
+        <details class="f">
+          <summary>Depuis un e-mail<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Le client décrit son besoin par mail : le devis en sort chiffré, sans une seule ressaisie de votre part.</p>
+        </details>
+        <details class="f">
+          <summary>Depuis un formulaire<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Les demandes reçues via votre site arrivent déjà structurées — chantier, adresse, délai, budget évoqué.</p>
+        </details>
+        <details class="f">
+          <summary>Depuis une note vocale<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Vous dictez ce que vous avez vu sur place : pièces, mesures, contraintes d'accès. Talos transcrit puis structure.</p>
+        </details>
+        <details class="f">
+          <summary>Depuis une photo<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Un plan, un état des lieux, le devis papier d'un concurrent : la photo suffit à lancer le chiffrage.</p>
+        </details>
+        <details class="f">
+          <summary>Chiffrage sur votre grille tarifaire<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Vos prix, vos prestations, vos marges. Jamais un tarif sorti de nulle part.</p>
+        </details>
+      </div>
+      <div>
+        <p class="mh">Envoi &amp; signature <span class="mh-n">· 5</span></p>
+        <details class="f">
+          <summary>Trois variantes Éco, Standard, Premium<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Le client choisit son niveau au lieu de choisir entre vous et un concurrent. Vous signez plus souvent, et plus cher.</p>
+        </details>
+        <details class="f">
+          <summary>Signature en ligne<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Il signe depuis son téléphone, sans imprimer ni scanner. Vous êtes prévenu à la seconde.</p>
+        </details>
+        <details class="f">
+          <summary>Demande d'acompte<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>30 % à la commande, encaissés par carte au moment de la signature. Le chantier démarre avec de la trésorerie.</p>
+        </details>
+        <details class="f">
+          <summary>Date de validité<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Chaque devis porte sa date limite. C'est elle qui crée l'urgence — pas vous.</p>
+        </details>
+        <details class="f">
+          <summary>Conditions de paiement<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Échéances, retenue de garantie, modalités de règlement : posées automatiquement.</p>
+        </details>
+      </div>
+      <div>
+        <p class="mh">Relance &amp; suivi <span class="mh-n">· 7</span></p>
+        <details class="f">
+          <summary>Relance à J+3<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Un premier rappel court, trois jours après l'envoi. Celui que personne ne pense à faire.</p>
+        </details>
+        <details class="f">
+          <summary>Relance à J+7<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Une semaine plus tard, on reformule la proposition et on propose d'en discuter de vive voix.</p>
+        </details>
+        <details class="f">
+          <summary>Relance à J+14<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Dernière relance, avec la date de validité en rappel. Après, on laisse le dossier tranquille.</p>
+        </details>
+        <details class="f">
+          <summary>Arrêt après réponse<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Le client répond ? La séquence s'arrête immédiatement. Personne n'est harcelé en votre nom.</p>
+        </details>
+        <details class="f">
+          <summary>Arrêt après signature<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Devis signé, relances terminées — et la facture s'enclenche toute seule derrière.</p>
+        </details>
+        <details class="f">
+          <summary>Détection des ouvertures répétées<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Un devis relu trois fois, c'est un client qui hésite. Talos le repère et vous le signale.</p>
+        </details>
+        <details class="f">
+          <summary>Relance « chaude »<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Ces dossiers-là remontent en haut de la pile, avec le montant en jeu.</p>
+        </details>
+      </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BLOC 4 · FAQ ════════════════════════════════════════════════════ -->
+  <section class="t-asst">
+    <div class="b4" id="faq">
+      <div class="shell">
+
+        <div class="b4-head">
+          <p class="b4-tag">F.A.Q</p>
+          <h2>Les questions qu'on nous pose</h2>
+          <p>Celles qui reviennent à chaque rendez-vous. Si la vôtre n'y est pas,
+            posez-la — on répond vite.</p>
+        </div>
+
+        <div class="b4-tabs" role="tablist" aria-label="Catégories de questions">
+          <button class="tab" type="button" role="tab" id="faqT1" aria-selected="true" aria-controls="faqP1">Quelles missions ?</button>
+          <button class="tab" type="button" role="tab" id="faqT2" aria-selected="false" aria-controls="faqP2">Fonctionnement</button>
+        </div>
+
+        <div class="b4-list" id="faqP1" role="tabpanel" aria-labelledby="faqT1">
+        <details class="f">
+          <summary>Est-ce qu'il chiffre vraiment le devis tout seul ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Oui, à partir de votre grille tarifaire — vos prestations, vos prix, vos marges. Il ne sort jamais un tarif inventé. Si une prestation manque à la grille, il vous la signale au lieu de deviner.</p>
+        </details>
+        <details class="f">
+          <summary>Est-ce qu'il envoie les devis sans mon accord ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Jamais. Il prépare, vous relisez, vous envoyez. C'est vrai pour les devis comme pour les relances.</p>
+        </details>
+        <details class="f">
+          <summary>Et s'il se trompe sur un chiffrage ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Vous corrigez avant l'envoi, comme sur un brouillon. Et il retient vos corrections : plus vous le reprenez, moins vous avez à le reprendre.</p>
+        </details>
+        <details class="f">
+          <summary>Que se passe-t-il quand le client répond à une relance ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>La séquence s'arrête immédiatement et le dossier remonte dans votre pile du matin.</p>
+        </details>
+        <details class="f">
+          <summary>Est-ce qu'il gère aussi mes factures et mes impayés ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Pas celui-ci : l'assistant commercial s'arrête à la signature. La facturation et le recouvrement sont le travail de deux autres assistants.</p>
+        </details>
+        <details class="f">
+          <summary>Est-ce qu'il travaille la nuit et le week-end ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>C'est même là qu'il sert le plus. Une demande reçue à 22 h le samedi est qualifiée dans la foulée.</p>
+        </details>
+        </div>
+
+        <div class="b4-list" id="faqP2" role="tabpanel" aria-labelledby="faqT2" hidden>
+        <details class="f">
+          <summary>Comment il connaît mes prix ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Vous nous transmettez votre grille tarifaire, même sous forme d'un vieux tableur ou de vos derniers devis. On la met en forme pour lui, et vous la modifiez ensuite depuis votre espace.</p>
+        </details>
+        <details class="f">
+          <summary>Combien de temps pour le mettre en place ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Comptez une semaine. On récupère vos documents et vos règles, on branche votre boîte mail, et il commence à travailler. La mise en place est incluse — vous n'avez rien à paramétrer.</p>
+        </details>
+        <details class="f">
+          <summary>Est-ce que je dois changer de logiciel ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Non. Il se branche sur ce que vous utilisez déjà : votre messagerie, votre agenda, votre logiciel de gestion s'il y en a un.</p>
+        </details>
+        <details class="f">
+          <summary>Qu'est-ce que je vois, concrètement, tous les matins ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Une pile : ce qu'il a préparé pendant la nuit, avec le montant en jeu et le temps que ça vous prendra de tout valider. En général deux minutes.</p>
+        </details>
+        <details class="f">
+          <summary>Où sont hébergées mes données ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>En France. Votre banque est consultée en lecture seule, et chaque action est horodatée dans un journal que vous pouvez relire.</p>
+        </details>
+        <details class="f">
+          <summary>Et si je veux arrêter ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+          <p>Vous partez avec vos données : clients, documents, historique, tout est exportable. Sans engagement et sans frais de sortie.</p>
+        </details>
+        </div>
+
+        <div class="b4-foot">
+          <div>
+            <b>Il vous reste une question ?</b>
+            <span>Quinze minutes au téléphone, sans engagement. On répond, même si
+              vous ne travaillez pas avec nous.</span>
+          </div>
+          <a class="btn btn-1" href="reserver.html">Réserver une démo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+<footer class="t-ft" id="reserver">
+  <div class="ft-in">
+    <div class="ft-top">
+      <div class="brand">
+        <svg viewBox="0 0 380 120"><g transform="translate(0,18) scale(0.15636) translate(-253,-302)"><mask id="ftr-marteau" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550"><rect x="253" y="302" width="472" height="550" fill="#fff"/><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#000" stroke="#000" stroke-width="32" stroke-linejoin="round"/></mask><g mask="url(#ftr-marteau)"><path d="M 494 536 L 642 536 L 399 852 L 459 684 Z" fill="#C75C24"/></g><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="currentColor"/></g><text x="84" y="100" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="100" fill="currentColor" font-weight="600" letter-spacing="-4">ALOS</text></svg>
+      </div>
+
+      <div class="col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html#top">Accueil</a></li>
+          <li><a href="offres.html">Offres</a></li>
+          <li><a href="comment-ca-marche.html">Comment ça marche</a></li>
+          <li><a href="tarifs.html">Tarifs</a></li>
+          <li><a href="simulateur.html">Simulateur</a></li>
+          <li><a href="pourquoi-talos.html">Pourquoi Talos</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <h4>Accès</h4>
+        <ul>
+          <li><a href="espace-client.html">Mon espace</a></li>
+          <li><a href="reserver.html">Réserver une démo</a></li>
+        </ul>
+      </div>
+
+      <div class="col tagline">
+        <p>Le temps est le plus beau chantier que nous pouvions vous rendre.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/talos.ai.tech/" target="_blank" rel="noopener" aria-label="Instagram — @talos.ai.tech">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="updates">
+      <h4>Restez informé</h4>
+      <form class="nform" onsubmit="return false">
+        <input type="email" placeholder="Adresse e-mail" required>
+        <button type="submit">S'inscrire</button>
+      </form>
+    </div>
+
+    <div class="ft-bottom">
+      <div>© <span id="yr">2026</span> · Talos SAS · Tous droits réservés.</div>
+      <div class="legal">
+        <a href="#">Politique de confidentialité</a>
+        <span class="dot">·</span>
+        <a href="#">Conditions générales</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</main>
+
+<script>
+
+/* bascule de thème — même clé de stockage que le reste du site */
+(function(){
+  var root = document.documentElement;
+  /* la barre et le menu mobile en portent chacun une : les deux doivent agir */
+  var btns = document.querySelectorAll('.theme-toggle');
+  if (!btns.length) return;
+  function flip(){
+    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('talos-theme', next); } catch(e){}
+  }
+  for (var i = 0; i < btns.length; i++) btns[i].addEventListener('click', flip);
+})();
+
+/* barre flottante : compacte au scroll + menu mobile */
+(function(){
+  var wrap = document.getElementById('tnav-wrap');
+  var bar  = document.getElementById('tnav');
+  var btn  = document.getElementById('tnav-burger');
+  if (!wrap || !bar) return;
+
+  var ticking = false;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      bar.classList.toggle('scrolled', window.scrollY > 20);
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  function close(){
+    wrap.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+  }
+  btn.addEventListener('click', function(){
+    var open = !wrap.classList.contains('open');
+    wrap.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.getElementById('tnav-menu').addEventListener('click', function(e){
+    if (e.target.closest('a')) close();
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+  document.addEventListener('click', function(e){
+    if (wrap.classList.contains('open') && !wrap.contains(e.target)) close();
+  });
+})();
+
+
+/* année du pied de page */
+(function(){
+  var yr = document.getElementById('yr');
+  if (yr) yr.textContent = new Date().getFullYear();
+})();
+
+/* section fonctionnalités — carrousel swipé : pastilles + flèches (souris) */
+(function(){
+  var rail = document.getElementById('fxRail');
+  var dots = document.getElementById('fxDots');
+  var prev = document.getElementById('fxPrev');
+  var next = document.getElementById('fxNext');
+  if (!rail || !dots) return;
+
+  var cards = Array.prototype.slice.call(rail.children);
+  var stops = [], buttons = [];
+
+  function maxScroll(){ return Math.max(0, rail.scrollWidth - rail.clientWidth); }
+
+  /* Les cartes sont calées en scroll-snap-align:start : le repère est leur bord
+     gauche, décalé du padding du rail. En fin de rail plusieurs cartes tombent
+     sur la même position (le rail ne peut plus avancer) : on dédoublonne, sinon
+     on afficherait des pastilles qu'aucun swipe ne peut atteindre. */
+  function buildStops(){
+    var max = Math.round(maxScroll());
+    var pad = parseFloat(getComputedStyle(rail).paddingLeft) || 0;
+    var out = [];
+    cards.forEach(function(card){
+      var x = Math.min(Math.round(card.offsetLeft - rail.offsetLeft - pad), max);
+      if (!out.length || x - out[out.length - 1] > 8) out.push(x);
+    });
+    return out.length ? out : [0];
+  }
+
+  function buildDots(){
+    stops = buildStops();
+    dots.textContent = '';
+    buttons = stops.map(function(x, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-label', 'Vue ' + (i + 1) + ' sur ' + stops.length);
+      // scrollIntoView recadrerait aussi la page en vertical : on ne bouge que le rail
+      b.addEventListener('click', function(){ rail.scrollTo({left: x, behavior: 'smooth'}); });
+      dots.appendChild(b);
+      return b;
+    });
+    sync();
+  }
+
+  /* recalculé à la demande depuis scrollLeft : ne dépend pas d'un état mis à jour
+     par requestAnimationFrame, qui peut être gelé dans un onglet en arrière-plan */
+  function currentIndex(){
+    var x = rail.scrollLeft, best = 0, bestD = Infinity;
+    stops.forEach(function(s, i){
+      var d = Math.abs(s - x);
+      if (d < bestD){ bestD = d; best = i; }
+    });
+    return best;
+  }
+
+  var ticking = false;
+  function sync(){
+    ticking = false;
+    var i = currentIndex(), x = rail.scrollLeft, max = maxScroll();
+    buttons.forEach(function(b, k){ b.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+    if (prev) prev.disabled = x <= 2;
+    if (next) next.disabled = x >= max - 2;
+  }
+  rail.addEventListener('scroll', function(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(sync);
+  }, {passive:true});
+
+  function go(step){
+    var i = Math.min(stops.length - 1, Math.max(0, currentIndex() + step));
+    rail.scrollTo({left: stops[i], behavior: 'smooth'});
+  }
+  if (prev) prev.addEventListener('click', function(){ go(-1); });
+  if (next) next.addEventListener('click', function(){ go(1); });
+
+  var rt;
+  window.addEventListener('resize', function(){
+    clearTimeout(rt);
+    rt = setTimeout(buildDots, 150);
+  }, {passive:true});
+
+  buildDots();
+})();
+
+/* section fonctionnalités — visionneuse : la capture est rognée dans la carte,
+   on l'ouvre en entier dans un <dialog> natif (focus, Échap et top layer offerts) */
+(function(){
+  var dlg = document.getElementById('fxZoom');
+  var img = document.getElementById('fxZoomImg');
+  var ttl = document.getElementById('fxZoomTitle');
+  var lead = document.getElementById('fxZoomLead');
+  var closeBtn = document.getElementById('fxZoomClose');
+  if (!dlg || !img || !dlg.showModal) return;
+
+  var opener = null;
+
+  function open(card){
+    var shot = card.querySelector('.fx-screen img');
+    if (!shot || !shot.getAttribute('src')) return;
+    img.src = shot.getAttribute('src');
+    img.alt = shot.alt || '';
+    var h3 = card.querySelector('h3');
+    var win = card.querySelector('.fx-win');
+    ttl.textContent = h3 ? h3.textContent.trim() : '';
+    lead.textContent = win ? win.textContent.trim() : '';
+    dlg.showModal();
+    document.documentElement.classList.add('fx-locked');
+  }
+
+  function close(){ if (dlg.open) dlg.close(); }
+
+  document.querySelectorAll('.t-feat .fx-open').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      opener = btn;
+      open(btn.closest('.fx-card'));
+    });
+  });
+
+  closeBtn.addEventListener('click', close);
+  // clic hors de la figure : la cible est le <dialog> lui-même, pas son contenu
+  dlg.addEventListener('click', function(e){ if (e.target === dlg) close(); });
+  dlg.addEventListener('close', function(){
+    // l'événement close est asynchrone : si on a déjà rouvert sur une autre carte
+    // entre-temps, ce nettoyage effacerait l'image qui vient d'être posée
+    if (dlg.open) return;
+    document.documentElement.classList.remove('fx-locked');
+    img.removeAttribute('src');
+    if (opener) { opener.focus(); opener = null; }
+  });
+})();
+
+/* FAQ — les deux pastilles basculent entre les listes de questions.
+   Pas de framework : deux panneaux, on masque l'autre. Les flèches gauche et
+   droite passent d'une pastille à l'autre, comme l'attend un lecteur d'écran
+   sur un rôle « tablist ». */
+(function () {
+  var tabs = [].slice.call(document.querySelectorAll('.b4-tabs .tab'));
+  if (!tabs.length) return;
+
+  function montrer(actif) {
+    tabs.forEach(function (t) {
+      var choisi = t === actif;
+      t.setAttribute('aria-selected', choisi ? 'true' : 'false');
+      var panneau = document.getElementById(t.getAttribute('aria-controls'));
+      if (!panneau) return;
+      panneau.hidden = !choisi;
+      /* on referme les questions du panneau qu'on quitte : rouvrir sur une
+         liste déjà dépliée donnait une hauteur incohérente */
+      if (!choisi) {
+        [].forEach.call(panneau.querySelectorAll('details[open]'), function (d) {
+          d.open = false;
+        });
+      }
+    });
+  }
+
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { montrer(t); });
+    t.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      var suivant = tabs[(i + d + tabs.length) % tabs.length];
+      suivant.focus();
+      montrer(suivant);
+    });
+  });
+})();
+
+</script>
+</body>
+</html>

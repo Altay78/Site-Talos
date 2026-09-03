@@ -1,0 +1,120 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAGE OFFRES — le hall d'entrée de l'équipe.
+   L'équipe elle-même est présentée par le carrousel (crew.py) ; il ne reste
+   ici que l'en-tête, le socle et les styles de carte, gardés pour les autres
+   usages de la page.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.t-asst .of{position:relative;overflow:hidden;padding:52px 0 110px}
+.t-asst .of::before{content:"";position:absolute;inset:-24% -14% auto auto;
+  width:56%;aspect-ratio:1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(var(--bronze-rgb),.18) 0%,transparent 62%)}
+html[data-theme="light"] .t-asst .of::before{background:radial-gradient(circle,rgba(var(--bronze-rgb),.11) 0%,transparent 62%)}
+
+.t-asst .of-head{position:relative;max-width:660px;margin:0 auto 56px;text-align:center}
+.t-asst .of h1{margin:0 0 18px;font-size:clamp(38px,4.4vw,62px);line-height:1.03;
+  letter-spacing:-2.2px;font-weight:800;color:var(--parch)}
+.t-asst .of-head p{margin:0 0 22px;font-size:17.5px;line-height:1.6;color:var(--lin)}
+/* ── le compteur d'équipe ────────────────────────────────────────────────
+   Trois chiffres, trois icônes, un seul bandeau : la pastille d'origine
+   alignait les trois valeurs dans une phrase en mono, sans hiérarchie. */
+.t-asst .of-stats{list-style:none;display:inline-flex;align-items:stretch;
+  margin:0;padding:6px;border-radius:22px;
+  background:var(--ink-2);border:1px solid var(--line-2);
+  box-shadow:0 18px 44px -26px rgba(0,0,0,.8)}
+html[data-theme="light"] .t-asst .of-stats{box-shadow:0 18px 44px -30px rgba(40,25,16,.34)}
+.t-asst .of-stats li{position:relative;display:flex;align-items:center;gap:13px;
+  padding:13px 24px;text-align:left}
+.t-asst .of-stats li + li::before{content:"";position:absolute;left:0;top:14%;
+  width:1px;height:72%;background:var(--line-2)}
+.t-asst .of-ic{flex:0 0 auto;display:grid;place-items:center;width:38px;height:38px;
+  border-radius:13px;color:var(--bronze);
+  background:linear-gradient(140deg,rgba(var(--bronze-rgb),.24),rgba(var(--bronze-rgb),.08));
+  border:1px solid rgba(var(--bronze-rgb),.30)}
+.t-asst .of-ic svg{width:19px;height:19px}
+.t-asst .of-stats b{display:block;font-size:25px;line-height:1;letter-spacing:-1px;
+  font-weight:800;font-variant-numeric:tabular-nums;
+  background:linear-gradient(100deg,#FFE7D4 0%,var(--bronze-2) 46%,var(--bronze) 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent}
+html[data-theme="light"] .t-asst .of-stats b{
+  background:linear-gradient(100deg,#8E3208 0%,var(--bronze) 52%,var(--bronze-2) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.t-asst .of-stats small{display:block;margin-top:5px;font-family:var(--mono);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lin)}
+
+@media (max-width:620px){
+  .t-asst .of-stats{flex-direction:column;width:100%;border-radius:20px}
+  .t-asst .of-stats li{padding:12px 18px}
+  .t-asst .of-stats li + li::before{left:18px;right:18px;top:0;
+    width:auto;height:1px}
+}
+
+/* le mot d'impact du titre : dégradé plus franc en thème clair, sinon les
+   deux extrémités se ressemblent trop et l'effet ne se voit pas */
+html[data-theme="light"] .t-asst .of h1 em{
+  background:linear-gradient(100deg,#8E3208 0%,var(--bronze) 46%,#F0873F 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent}
+
+.t-asst .of-grid{position:relative;display:grid;gap:22px;
+  grid-template-columns:repeat(3,minmax(0,1fr))}
+
+.t-asst .of-c{display:flex;flex-direction:column;position:relative;
+  padding:28px 26px 26px;border-radius:24px;text-decoration:none;
+  background:var(--ink-2);border:1px solid var(--line);
+  transition:transform .28s var(--e),border-color .28s var(--e),box-shadow .28s var(--e)}
+.t-asst a.of-c:hover{transform:translateY(-4px);border-color:rgba(var(--bronze-rgb),.45);
+  box-shadow:0 26px 60px -28px rgba(0,0,0,.65)}
+html[data-theme="light"] .t-asst a.of-c:hover{box-shadow:0 26px 60px -28px rgba(40,25,16,.3)}
+.t-asst .of-c:focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
+
+/* le personnage est cadré en buste dans une vignette : en pied, à 190 px de
+   haut, il n'était plus qu'une silhouette. Le bas se fond dans la carte. */
+.t-asst .of-c>picture{display:block;position:relative;height:190px;margin:0 0 18px;
+  overflow:hidden;border-radius:18px;
+  background:radial-gradient(120% 84% at 50% 6%,rgba(var(--bronze-rgb),.15) 0%,transparent 68%)}
+.t-asst .of-perso{position:absolute;left:50%;top:8px;transform:translateX(-50%);
+  height:480px;width:auto;max-width:none;margin:0;
+  -webkit-mask-image:linear-gradient(180deg,#000 74%,transparent 97%);
+          mask-image:linear-gradient(180deg,#000 74%,transparent 97%)}
+/* le commercial est rendu avec une tête plus petite que les deux autres :
+   on le rapproche pour que les trois bustes soient à la même échelle */
+.t-asst .of-perso[src*="commercial"]{height:565px;top:2px}
+.t-asst .of-vide{align-self:center;display:flex;align-items:center;justify-content:center;
+  height:190px;width:120px;margin:0 0 18px;border-radius:18px;color:var(--lin);
+  border:1px dashed var(--line-2);
+  background:repeating-linear-gradient(45deg,rgba(var(--parch-rgb),.03) 0 10px,transparent 10px 20px)}
+.t-asst .of-vide svg{width:30px;height:30px;opacity:.5}
+
+.t-asst .of-role{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--bronze);margin:0 0 8px}
+.t-asst .of-c h2{margin:0 0 10px;font-size:22px;line-height:1.15;letter-spacing:-.7px;
+  font-weight:800;color:var(--parch)}
+.t-asst .of-c p{margin:0 0 18px;font-size:15px;line-height:1.55;color:var(--lin);flex:1}
+.t-asst .of-pied{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding-top:16px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--lin)}
+.t-asst .of-go{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--bronze);
+  font-family:var(--sans);font-size:14px;letter-spacing:-.2px}
+.t-asst .of-go svg{width:15px;height:15px}
+.t-asst .of-bientot{padding:5px 12px;border-radius:100px;
+  background:rgba(var(--bronze-rgb),.1);border:1px solid rgba(var(--bronze-rgb),.3);
+  color:var(--bronze);font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:0}
+
+/* ── le socle inclus ──────────────────────────────────────────────────── */
+.t-asst .of-socle{position:relative;margin:34px 0 0;padding:30px 32px;border-radius:24px;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;
+  background:linear-gradient(150deg,var(--ink-3),var(--ink-2));border:1px solid var(--line-2)}
+.t-asst .of-socle b{display:block;font-size:19px;font-weight:800;letter-spacing:-.5px;
+  color:var(--parch);margin:0 0 6px}
+.t-asst .of-socle span{display:block;max-width:62ch;font-size:15px;line-height:1.55;color:var(--lin)}
+
+@media (max-width:1020px){ .t-asst .of-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:680px){
+  .t-asst .of{padding:32px 0 76px}
+  .t-asst .of-grid{grid-template-columns:1fr}
+  .t-asst .of-socle{flex-direction:column;align-items:stretch;text-align:left}
+  .t-asst .of-socle .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){ .t-asst .of-c{transition:none} }

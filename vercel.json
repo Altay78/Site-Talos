@@ -1,6 +1,18 @@
 {
   "trailingSlash": false,
   "cleanUrls": false,
+  "redirects": [
+    {
+      "source": "/espace-client.html",
+      "destination": "https://app.talos-ai.tech",
+      "permanent": false
+    },
+    {
+      "source": "/espace-client",
+      "destination": "https://app.talos-ai.tech",
+      "permanent": false
+    }
+  ],
   "headers": [
     {
       "source": "/(.*).(css|js|svg|png|jpg|jpeg|webp|woff2)",

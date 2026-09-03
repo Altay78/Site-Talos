@@ -1,0 +1,132 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAGE ASSISTANT — construite bloc par bloc, sur le gabarit Limova.
+
+   BLOC 1 · PRÉSENTATION
+   Deux colonnes sur ordinateur (visuel à gauche, discours à droite),
+   empilées sur téléphone avec le visuel en premier, à fond perdu.
+
+   Aucune classe Tailwind : la feuille compilée du site ignore silencieusement
+   les classes arbitraires. Toutes les couleurs viennent des tokens posés par
+   shell.css sur .t-asst, donc le bloc suit le thème clair/sombre sans une
+   seule valeur en dur.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.t-asst{background:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.t-asst .shell{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+/* ── le bloc et sa lueur de braise ─────────────────────────────────────── */
+.t-asst .b1{position:relative;overflow:hidden;padding:36px 0 92px}
+.t-asst .b1::before{content:"";position:absolute;inset:auto auto 0 -16%;
+  width:74%;aspect-ratio:1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(var(--bronze-rgb),.20) 0%,transparent 64%);
+  transform:translateY(18%)}
+html[data-theme="light"] .t-asst .b1::before{background:radial-gradient(circle,rgba(var(--bronze-rgb),.12) 0%,transparent 64%)}
+/* le voile du bas : au lieu d'une coupe nette, le personnage s'efface dans le
+   fond. Peint après le personnage, mais sous le texte (qui monte en z-index). */
+.t-asst .b1::after{content:"";position:absolute;left:0;right:0;bottom:0;height:44%;
+  pointer-events:none;
+  background:linear-gradient(180deg,
+    color-mix(in srgb,var(--ink),transparent 100%) 0%,
+    color-mix(in srgb,var(--ink),transparent 58%) 34%,
+    color-mix(in srgb,var(--ink),transparent 16%) 64%,
+    var(--ink) 88%)}
+.t-asst .b1-grid{position:relative;display:grid;grid-template-columns:.78fr 1.22fr;
+  gap:48px;align-items:center;min-height:clamp(520px,46vw,640px)}
+
+/* ── le personnage ────────────────────────────────────────────────────────
+   Gabarit Limova : il n'est pas « posé » dans une colonne, il fait partie du
+   décor. Il sort du bord gauche de la fenêtre, il est coupé par le bas du
+   bloc, et rien ne l'encadre — ni cadre, ni ombre de contact. La colonne de
+   gauche de la grille ne sert plus qu'à lui réserver la place. */
+.t-asst .b1-media{grid-column:1;position:relative;align-self:stretch;pointer-events:none;user-select:none}
+.t-asst .b1-txt{grid-column:2;position:relative;z-index:3}
+/* il est calé sur le bord droit de sa colonne — donc toujours à la même
+   distance du discours, quelle que soit la largeur de l'écran — et il déborde
+   vers la gauche, jusqu'à sortir du cadre. */
+.t-asst .perso{position:absolute;right:-16px;top:34px;
+  width:min(46vw,560px);height:auto;max-width:none;display:block}
+
+/* ── la pastille de rôle ──────────────────────────────────────────────── */
+.t-asst .role{display:inline-flex;align-items:center;margin:0 0 20px;
+  padding:9px 19px;border-radius:100px;
+  background:var(--ink-3);border:1px solid var(--line-2);
+  font-size:14px;font-weight:600;letter-spacing:-.1px;color:var(--parch)}
+
+/* ── le titre ─────────────────────────────────────────────────────────── */
+.t-asst .b1 h1{margin:0 0 20px;font-size:clamp(36px,4vw,56px);line-height:1.04;
+  letter-spacing:-1.9px;font-weight:800;color:var(--parch)}
+
+/* ── la barre de confiance ────────────────────────────────────────────── */
+.t-asst .proof{display:inline-flex;align-items:center;flex-wrap:wrap;gap:10px 14px;
+  margin:0 0 26px;padding:10px 18px;border-radius:12px;
+  background:var(--ink-2);border:1px solid var(--line-2);
+  font-size:14.5px;color:var(--lin)}
+.t-asst .proof b{color:var(--parch);font-weight:700}
+.t-asst .proof-i{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.t-asst .proof-i svg{width:16px;height:16px;color:var(--bronze);flex:0 0 auto}
+.t-asst .proof-sep{width:1px;height:16px;background:var(--line-2)}
+
+/* ── le paragraphe ────────────────────────────────────────────────────── */
+.t-asst .b1 .pitch{margin:0 0 30px;font-size:17.5px;line-height:1.62;
+  color:var(--lin);max-width:42ch}
+
+/* ── la liste de capacités : deux colonnes sur large, une sur étroit ──── */
+.t-asst .caps{list-style:none;margin:0 0 34px;padding:0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 30px}
+.t-asst .caps li{display:flex;align-items:center;gap:11px;
+  font-size:15.5px;font-weight:600;line-height:1.35;letter-spacing:-.2px;color:var(--parch)}
+/* pastille d'icône : même idiome que les cartes de fonctionnalités du site */
+.t-asst .caps i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:50%;
+  border:1px solid rgba(var(--bronze-rgb),.42);background:rgba(var(--bronze-rgb),.10);
+  color:var(--bronze)}
+.t-asst .caps svg{width:15px;height:15px}
+
+/* ── les deux appels à l'action ───────────────────────────────────────── */
+.t-asst .actions{display:flex;flex-wrap:wrap;gap:12px}
+.t-asst .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:52px;padding:15px 28px;border-radius:100px;
+  font-size:15.5px;font-weight:700;letter-spacing:-.2px;text-decoration:none;
+  border:1px solid transparent;cursor:pointer;
+  transition:transform .25s var(--e),box-shadow .25s var(--e),
+             background .25s var(--e),border-color .25s var(--e)}
+.t-asst .btn svg{width:16px;height:16px;flex:0 0 auto}
+.t-asst .btn-1{color:#fff;
+  background:linear-gradient(100deg,var(--bronze-2),var(--bronze));
+  box-shadow:0 10px 30px -10px rgba(var(--bronze-rgb),.75)}
+.t-asst .btn-1:hover{transform:translateY(-2px);
+  box-shadow:0 16px 38px -10px rgba(var(--bronze-rgb),.85)}
+.t-asst .btn-2{background:var(--ink-3);color:var(--parch);border-color:var(--line-2)}
+.t-asst .btn-2:hover{transform:translateY(-2px);border-color:rgba(var(--bronze-rgb),.5)}
+.t-asst .btn:focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
+
+/* ═══ RESPONSIVE ═════════════════════════════════════════════════════════ */
+@media (max-width:960px){
+  /* le visuel passe au-dessus, à fond perdu, comme sur la maquette */
+  .t-asst .b1{padding:0 0 72px}
+  .t-asst .b1-grid{grid-template-columns:1fr;gap:30px;min-height:0}
+  .t-asst .b1-media{grid-column:1;order:-1;position:relative;
+    height:clamp(250px,50vw,330px);overflow:hidden;
+    -webkit-mask-image:linear-gradient(180deg,#000 74%,transparent 99%);
+            mask-image:linear-gradient(180deg,#000 74%,transparent 99%)}
+  .t-asst .b1-txt{grid-column:1}
+  .t-asst .perso{left:50%;top:14px;transform:translateX(-50%);
+    width:min(58vw,300px)}
+  .t-asst .phone{width:min(268px,68%)}
+  .t-asst .b1 h1{letter-spacing:-1.6px}
+  .t-asst .caps{grid-template-columns:1fr;gap:14px}
+}
+@media (max-width:560px){
+  .t-asst .shell{padding:0 18px}
+  .t-asst .b1-media{margin:0 -18px}
+  /* empilée sur deux lignes, la barre laissait traîner un séparateur en
+     bout de ligne : on l'enlève et on passe en colonne */
+  .t-asst .proof{width:100%;flex-direction:column;align-items:flex-start;gap:8px}
+  .t-asst .proof-sep{display:none}
+  .t-asst .actions{flex-direction:column}
+  .t-asst .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .t-asst .btn{transition:none}
+  .t-asst .btn-1:hover,.t-asst .btn-2:hover{transform:none}
+}

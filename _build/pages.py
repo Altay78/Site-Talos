@@ -75,14 +75,21 @@ SIM_CSS = part('sim-page.css') + u'\n' + GAINS_CSS + u'\n' + part('roi.css') + u
 SIM_BODY = part('sim-hero.html') + u'\n' + GAINS_HTML + u'\n' + part('roi.html') + u'\n' + part('sim-cta.html')
 SIM_JS = GAINS_JS + u'\n' + part('roi.js')
 
-page('simulateur.html',
+# ⚠️  simulateur.html a DIVERGÉ de ses parts : la page en ligne contient un
+#     panneau « ROI express » (roiQuick*, gPresets, gTotC/gTotT) et ~16 Ko de
+#     CSS/JS qui ne sont dans aucun fichier de _build/parts/. Régénérer la page
+#     les efface — c'est arrivé le 02/09/2026. Tant que les parts n'ont pas été
+#     remises à niveau, la génération est volontairement désactivée.
+#     Pour la réactiver une fois les parts à jour : REBUILD_SIM=1 python3 _build/pages.py
+if os.environ.get('REBUILD_SIM'):
+    page('simulateur.html',
      u"Simulateur — Talos | Ce que votre administratif vous coûte vraiment",
-     u"Calculez en 30 secondes le temps et l'argent que vous perdez chaque mois "
-     u"sur vos devis, relances et factures — et ce que Talos vous rend.",
-     SIM_CSS, SIM_BODY, SIM_JS,
-     og_title=u"Combien vous coûte votre paperasse ? — Simulateur Talos",
-     og_desc=u"Vos chiffres, pas les nôtres. Deux simulateurs : le coût réel de "
-             u"votre administratif, et le chiffre d'affaires que vos devis laissent filer.")
+         u"Calculez en 30 secondes le temps et l'argent que vous perdez chaque mois "
+         u"sur vos devis, relances et factures — et ce que Talos vous rend.",
+         SIM_CSS, SIM_BODY, SIM_JS,
+         og_title=u"Combien vous coûte votre paperasse ? — Simulateur Talos",
+         og_desc=u"Vos chiffres, pas les nôtres. Deux simulateurs : le coût réel de "
+                 u"votre administratif, et le chiffre d'affaires que vos devis laissent filer.")
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -141,9 +148,36 @@ page('404.html',
 
 
 # ═══════════════════════════════════════════════════════════════════════════
+#  4 · LES PAGES ASSISTANT — une par « collègue », toutes sur le même gabarit.
+#      Les contenus vivent dans _build/assistants.py ; la mise en forme est
+#      commune (asst.css = bloc 1, b2/b3/b4.css = les suivants).
+# ═══════════════════════════════════════════════════════════════════════════
+
+import assistants
+
+ASSIST_CSS = (part('asst.css') + u'\n' + part('b2.css') + u'\n'
+              + part('b3.css') + u'\n' + part('b4.css'))
+ASSIST_JS = part('b2.js') + u'\n' + part('b4.js')
+
+page('offres.html',
+     u"Offres — Talos | Votre équipe de cinq assistants IA",
+     u"Cinq assistants spécialisés qui gèrent devis, facturation, trésorerie, relation client "
+     u"et administratif pendant que vous êtes sur le chantier. Mise en place incluse.",
+     part('asst.css') + u'\n' + part('offres.css'), assistants.hub(), u'',
+     og_title=u"Votre équipe Talos — cinq assistants qui travaillent pour vous",
+     og_desc=u"Devis, facturation, trésorerie, relation client, administratif : chaque assistant "
+             u"a ses missions. Vous prenez ceux dont vous avez besoin.")
+
+
+for _a in assistants.ASSISTANTS:
+    page('assistant-%s.html' % _a['slug'], _a['titre'], _a['desc'],
+         ASSIST_CSS, assistants.corps(_a), ASSIST_JS)
+
+
+# ═══════════════════════════════════════════════════════════════════════════
 #  4 · les menus de tout le site sont réalignés dans la foulée : sans ça les
 #      pages qu'on vient d'écrire n'auraient pas leur aria-current="page"
 # ═══════════════════════════════════════════════════════════════════════════
 import nav_sync
-for _p in nav_sync.PAGES:
+for _p in nav_sync.PAGES + ['assistant-%s.html' % a['slug'] for a in assistants.ASSISTANTS]:
     print(u'%-24s %s' % nav_sync.sync(_p))

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="253 302 472 550" width="472" height="550">
+  <mask id="cut-mark-mono-orange" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550">
+    <rect x="253" y="302" width="472" height="550" fill="#fff"/>
+    <path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#000" stroke="#000" stroke-width="32" stroke-linejoin="round"/>
+  </mask>
+  <g mask="url(#cut-mark-mono-orange)"><path d="M 494 536 L 642 536 L 399 852 L 459 684 Z" fill="#C75C24"/></g>
+  <path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#C75C24"/>
+</svg>

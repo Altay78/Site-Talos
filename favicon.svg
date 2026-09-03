@@ -1,8 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-13 15 88 90">
-  <!-- fond sombre, coins légèrement arrondis -->
-  <rect x="-13" y="15" width="88" height="90" rx="10" fill="#0A0908"/>
-  <!-- barre horizontale du T — copie exacte du logo nav -->
-  <rect x="0" y="18" width="62" height="14" fill="#F5EDDC"/>
-  <!-- éclair / tige du T — copie exacte du logo nav -->
-  <path d="M 24 32 L 14 60 L 27 60 L 19 104 L 50 58 L 37 58 L 44 32 Z" fill="#F5EDDC"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="174 262 630 630" width="630" height="630">
+  <!-- marque marteau seule, sans fond : noir en mode jour, parchemin en mode nuit -->
+  <style>
+    .mark { fill: #161316; }
+    @media (prefers-color-scheme: dark) { .mark { fill: #F6EEE7; } }
+  </style>
+  <mask id="cut-favicon" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550">
+    <rect x="253" y="302" width="472" height="550" fill="#fff"/>
+    <path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#000" stroke="#000" stroke-width="32" stroke-linejoin="round"/>
+  </mask>
+  <g mask="url(#cut-favicon)"><path class="mark" d="M 494 536 L 642 536 L 399 852 L 459 684 Z"/></g>
+  <path class="mark" d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z"/>
 </svg>

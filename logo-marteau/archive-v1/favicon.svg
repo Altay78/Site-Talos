@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="12" fill="#161316"/>
+  <g transform="translate(11.55,8.16) scale(0.05800) translate(-150,-58)">
+    <mask id="cut-fav" maskUnits="userSpaceOnUse" x="150" y="58" width="700" height="826">
+      <rect x="150" y="58" width="700" height="826" fill="#fff"/>
+      <path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#000" stroke="#000" stroke-width="140" stroke-linejoin="round"/>
+    </mask>
+    <g mask="url(#cut-fav)">
+      <path d="M 174 350 L 500 84 L 826 350" fill="none" stroke="#C75C24" stroke-width="31"/>
+      <path d="M 494 536 L 642 536 L 399 852 L 459 684 Z" fill="#C75C24"/>
+    </g>
+    <path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#F6EEE7"/>
+  </g>
+</svg>
