@@ -112,7 +112,7 @@ def _b1(a):
 
 def _b2(a):
     cartes = []
-    for i, (titre, ico, accroche, detail, ph) in enumerate(a['parcours'], 1):
+    for i, (titre, ico, accroche, detail, ph, ecran) in enumerate(a['parcours'], 1):
         cartes.append(u'''      <article class="fx-card">
         <div class="fx-txt">
           <h3>%s</h3>
@@ -136,7 +136,8 @@ def _b2(a):
             <div class="fx-bezel">
               <div class="fx-screen">
                 <div class="fx-ph"><b>Écran %02d</b><span>%s</span><i>780 × 1688 px · PNG</i></div>
-                <img width="780" height="1688" loading="lazy" decoding="async" alt="%s">
+                <img src="shots/%s.webp" width="780" height="1688" loading="lazy"
+                     decoding="async" alt="%s">
               </div>
             </div>
             <div class="fx-glare"></div>
@@ -145,7 +146,7 @@ def _b2(a):
             <span class="fx-mag" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8.5v5M8.5 11h5"/></svg></span>
           </button>
         </div>
-      </article>''' % (titre, _svg(ico), accroche, detail, i, ph, ph))
+      </article>''' % (titre, _svg(ico), accroche, detail, i, ph, ecran, ph))
 
     return u'''
   <!-- ═══ BLOC 2 · LE PARCOURS ════════════════════════════════════════════ -->
@@ -316,16 +317,16 @@ COMMERCIAL = dict(
  parcours=[
   (u"Demande", 'inbox', u"Ne laissez plus passer une demande.",
    u"Un client écrit à 22 h : votre assistant répond, pose les bonnes questions et remonte une "
-   u"demande complète — chantier, adresse, délai, budget évoqué.", u"La demande client qui arrive"),
+   u"demande complète — chantier, adresse, délai, budget évoqué.", u"La demande client qui arrive", u"ec-tri_inbox"),
   (u"Devis", 'doc', u"Vos devis en quelques minutes.",
    u"Depuis ce mail, une note vocale ou une photo prise sur place, le devis est chiffré sur votre "
-   u"grille tarifaire, avec ses variantes et ses conditions de paiement.", u"Le devis chiffré, prêt à relire"),
+   u"grille tarifaire, avec ses variantes et ses conditions de paiement.", u"Le devis chiffré, prêt à relire", u"ec-devis_auto"),
   (u"Signature", 'stylo', u"Signé et encaissé sans courir.",
    u"Le client signe depuis son téléphone et règle l'acompte dans la foulée. Vous démarrez le "
-   u"chantier avec de la trésorerie.", u"La signature et l'acompte"),
+   u"chantier avec de la trésorerie.", u"La signature et l'acompte", u"ec-home"),
   (u"Relance", 'boucle', u"Plus de devis signés, moins d'oublis.",
    u"Sans réponse, le devis est relancé à J+3, J+7 puis J+14. Dès que le client répond ou signe, "
-   u"tout s'arrête.", u"Le suivi des devis en attente"),
+   u"tout s'arrête.", u"Le suivi des devis en attente", u"ec-relance_devis"),
  ],
  douleur=u"Faire vos devis le soir n'est plus votre problème.",
  demandees=u"le devis dicté depuis le chantier, la signature en ligne avec acompte, et la relance "
@@ -397,16 +398,16 @@ TRESORERIE = dict(
  parcours=[
   (u"Retard", 'horloge', u"Vous savez qui doit, et depuis quand.",
    u"Dès qu'une échéance est dépassée, la facture bascule dans les impayés avec son ancienneté "
-   u"et le montant en jeu. Plus besoin d'éplucher vos relevés.", u"Les factures en retard"),
+   u"et le montant en jeu. Plus besoin d'éplucher vos relevés.", u"Les factures en retard", u"ec-relance_impayes"),
   (u"Relance", 'boucle', u"Un rappel courtois, puis ferme.",
    u"J+7 un rappel poli, J+15 plus direct, J+30 la dernière chance avant mise en demeure. Chaque "
-   u"niveau est écrit, vous validez.", u"La relance graduée"),
+   u"niveau est écrit, vous validez.", u"La relance graduée", u"ec-relance_devis"),
   (u"Recouvrement", 'balance', u"Les mots qui font payer.",
    u"Pénalités de retard, indemnité forfaitaire de 40 €, mise en demeure, proposition "
-   u"d'échéancier : le vocabulaire légal que vous n'osez pas sortir.", u"La mise en demeure"),
+   u"d'échéancier : le vocabulaire légal que vous n'osez pas sortir.", u"La mise en demeure", u"ec-facturation_facturx"),
   (u"Prévision", 'graph', u"Vous savez ce qui rentre.",
    u"Projection des encaissements à venir et alerte hebdomadaire si le solde passe sous votre "
-   u"seuil. Vous voyez le trou arriver avant d'y tomber.", u"La prévision de trésorerie"),
+   u"seuil. Vous voyez le trou arriver avant d'y tomber.", u"La prévision de trésorerie", u"ec-dashboard_treso"),
  ],
  douleur=u"Courir après vos clients n'est plus votre problème.",
  demandees=u"la relance graduée qui s'arrête au paiement, le calcul automatique des pénalités, "
@@ -465,16 +466,16 @@ CLIENT = dict(
  parcours=[
   (u"Réponse", 'bulle', u"Un client sans réponse, c'est un client perdu.",
    u"Hors horaires, votre assistante répond depuis votre base de connaissances : vos prestations, "
-   u"votre zone, vos délais. Jamais un prix ferme sans votre validation.", u"La réponse hors horaires"),
+   u"votre zone, vos délais. Jamais un prix ferme sans votre validation.", u"La réponse hors horaires", u"ec-reponse_247"),
   (u"Qualification", 'carte', u"La bonne demande, avec les bonnes infos.",
    u"Nature des travaux, adresse, urgence, budget évoqué : elle pose les questions qui manquent "
-   u"et vérifie que le chantier est dans votre zone d'intervention.", u"La demande qualifiée"),
+   u"et vérifie que le chantier est dans votre zone d'intervention.", u"La demande qualifiée", u"ec-tri_inbox"),
   (u"Rendez-vous", 'agenda', u"Votre agenda se remplit tout seul.",
    u"Elle propose des créneaux compatibles avec vos déplacements, tient compte du temps de trajet, "
-   u"crée la fiche client et pose l'événement dans votre agenda.", u"La prise de rendez-vous"),
+   u"crée la fiche client et pose l'événement dans votre agenda.", u"La prise de rendez-vous", u"ec-rdv_auto"),
   (u"Rappels", 'cloche', u"Moins de rendez-vous manqués.",
    u"Un rappel la veille, un autre deux heures avant, par SMS et par e-mail. Le client confirme, "
-   u"ou replanifie sans vous appeler.", u"Le rappel avant l'intervention"),
+   u"ou replanifie sans vous appeler.", u"Le rappel avant l'intervention", u"ec-rappels_rdv"),
  ],
  douleur=u"Rappeler vos clients le soir n'est plus votre problème.",
  demandees=u"la réponse automatique hors horaires, le créneau proposé en tenant compte du trajet, "
@@ -539,16 +540,16 @@ FACTURATION = dict(
  parcours=[
   (u"Signature", 'stylo', u"La facture démarre toute seule.",
    u"Dès que le devis est signé, la facture d'acompte est générée avec le bon montant et les "
-   u"bonnes mentions. Vous n'avez rien à ressaisir.", u"Le devis signé qui bascule en facture"),
+   u"bonnes mentions. Vous n'avez rien à ressaisir.", u"Le devis signé qui bascule en facture", u"ec-devis_auto"),
   (u"Avancement", 'euro', u"Chaque situation à son moment.",
    u"Sur un chantier long, les situations de travaux suivent l'avancement que vous déclarez. "
-   u"Le reste à facturer est toujours juste.", u"La situation de travaux"),
+   u"Le reste à facturer est toujours juste.", u"La situation de travaux", u"ec-relance_devis"),
   (u"Conformité", 'balance', u"Conforme, sans y penser.",
    u"Numérotation continue, TVA au bon taux, mentions obligatoires et format électronique "
-   u"attendu en 2026 : la facture est carrée avant de partir.", u"La facture au format 2026"),
+   u"attendu en 2026 : la facture est carrée avant de partir.", u"La facture au format 2026", u"ec-facturation_facturx"),
   (u"Archivage", 'doc', u"Tout est rangé, tout est retrouvable.",
    u"Chaque facture est archivée avec son devis et son chantier, et exportée pour votre "
-   u"comptable. Fini le classeur du mois de janvier.", u"L'archive et l'export comptable"),
+   u"comptable. Fini le classeur du mois de janvier.", u"L'archive et l'export comptable", u"ec-suivi_chantier"),
  ],
  douleur=u"Refaire vos factures le dimanche n'est plus votre problème.",
  demandees=u"la facture d'acompte qui part le jour de la signature, les situations de travaux "
@@ -604,16 +605,16 @@ ADMINISTRATIF = dict(
  parcours=[
   (u"Tri", 'inbox', u"Six catégories, plus une boîte fourre-tout.",
    u"Demande client, facture fournisseur, administratif, chantier, publicité, sans suite : "
-   u"chaque mail est rangé dès son arrivée, avec ce qu'il contient.", u"La boîte triée du matin"),
+   u"chaque mail est rangé dès son arrivée, avec ce qu'il contient.", u"La boîte triée du matin", u"ec-tri_inbox"),
   (u"Résumé", 'bulle', u"Vingt échanges tiennent en trois lignes.",
    u"Un fil qui traîne depuis dix jours est résumé : ce qui a été décidé, ce qui bloque, et ce "
-   u"qu'on attend de vous.", u"Le résumé d'un long fil"),
+   u"qu'on attend de vous.", u"Le résumé d'un long fil", u"ec-reponse_247"),
   (u"Urgences", 'alerte', u"Ce qui ne peut pas attendre remonte.",
    u"Un chantier bloqué, une relance de l'assurance, une échéance qui tombe : ces mails-là "
-   u"passent devant, avec le motif de l'alerte.", u"L'alerte remontée en haut de pile"),
+   u"passent devant, avec le motif de l'alerte.", u"L'alerte remontée en haut de pile", u"ec-home"),
   (u"Classement", 'doc', u"Chaque pièce à son chantier.",
    u"Facture fournisseur, PV de réception, attestation : le document est détaché, nommé et "
-   u"rangé dans le dossier du bon chantier.", u"La pièce classée au bon dossier"),
+   u"rangé dans le dossier du bon chantier.", u"La pièce classée au bon dossier", u"ec-suivi_chantier"),
  ],
  douleur=u"Passer vos soirées dans votre boîte mail n'est plus votre problème.",
  demandees=u"le tri automatique dès la réception, le résumé des fils qui s'éternisent, et le "
